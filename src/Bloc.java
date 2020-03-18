@@ -7,11 +7,26 @@
  * cependant un chemin devra etre possible pour la circulation du personnage
  */
 public abstract class Bloc {
+	public final static int SO = 0;
+	public final static int NORD = 1;
+	public final static int SOUTH = 2;
+	public final static int EAST = 3;
+	public final static int WEST = 4;
+	private int posX;
+	private int posY;
+	private boolean dort = true; // Etat dort (ne bouge pas); Etat !dort (interaction avec le joueur);
+	private int orientation = SO; // Orientation;
 	
-	private int etat;
-	private int orientation;
 	
-	public void deplacementBloc() {
+	public Bloc(int X,int Y)
+	{
+		posX = X;
+		posY = Y;
+	}
+	
+	public void deplacementBloc(int O) {
+		orientation = O;
 		
 	}
+	
 }
