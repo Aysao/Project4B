@@ -7,5 +7,11 @@
  * cependant un chemin devra etre possible pour la circulation du personnage
  */
 public abstract class Bloc {
-
+	
+	private int etat;
+	private int orientation;
+	
+	public void deplacementBloc() {
+		
+	}
 }
