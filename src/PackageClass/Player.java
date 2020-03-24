@@ -1,3 +1,4 @@
+package PackageClass;
 
 /*
  * toute les fonction du joueur

@@ -1,3 +1,4 @@
+package PackageClass;
 
 /*
  * un Bloc Normal sans fonction particuliere 

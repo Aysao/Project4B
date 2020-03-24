@@ -1,3 +1,4 @@
+package PackageClass;
 
 /*
  * bloc abstract qui permet de donné les caractèristique similaire au bloc Spéciaux et Normal
