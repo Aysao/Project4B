@@ -25,10 +25,6 @@ public abstract class Bloc {
 		posY = Y;
 	}
 	
-	public void deplacementBloc(int O) {
-		orientation = O;
-		
-	}
 	public int getPosX() {
 		return posX;
 	}
