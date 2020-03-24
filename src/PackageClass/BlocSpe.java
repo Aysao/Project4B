@@ -1,7 +1,7 @@
 package PackageClass;
 
 /*
- * un bloc special qui fait gagné le joueur si les trois bloc sont aligné
+ * un bloc special qui fait gagnï¿½ le joueur si les trois bloc sont alignï¿½
  * 
  */
 public class BlocSpe extends Bloc {
