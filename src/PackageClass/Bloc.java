@@ -49,7 +49,26 @@ public abstract class Bloc {
 	public int getOrientation() {
 		return orientation;
 	}
-	
+	public void Deplacement() {
+		switch (orientation) {
+			case 0: {
+				
+			}
+			case 3: {
+				posX -= 1;
+			}
+			case 4: {
+				posX += 1;
+			}
+			case 1: {
+				posY -= 1;
+			}
+			case 2: {
+				posY += 1;
+			}
+			
+		}
+	}
 	
 	
 	

@@ -7,5 +7,10 @@ package PackageClass;
  * la bordure ce génèrera sur le bord d'un tableau 2D(tableau de jeu)
  */
 public class Bordure {
-
+	
+	private boolean activate = false;
+	public Bordure()
+	{
+		
+	}
 }
