@@ -5,8 +5,7 @@ import PackageClass.*;
  */
 public class Main {
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		Bloc b = new BlocN(5,7);
 	}
 
 }
