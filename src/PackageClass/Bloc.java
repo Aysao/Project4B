@@ -8,11 +8,11 @@ package PackageClass;
  * cependant un chemin devra etre possible pour la circulation du personnage
  */
 public abstract class Bloc {
-	public final static int SO = 0;
-	public final static int NORD = 1;
-	public final static int SOUTH = 2;
-	public final static int EAST = 3;
-	public final static int WEST = 4;
+	public final int SO = 0;
+	public final int NORD = 1;
+	public final int SOUTH = 2;
+	public final int EAST = 3;
+	public final int WEST = 4;
 	private int posX;
 	private int posY;
 	private boolean dort = true; // Etat dort (ne bouge pas); Etat !dort (interaction avec le joueur);
@@ -29,6 +29,31 @@ public abstract class Bloc {
 		orientation = O;
 		
 	}
+	public int getPosX() {
+		return posX;
+	}
+	public void setPosX(int posX) {
+		this.posX = posX;
+	}
+	public void setPosY(int posY) {
+		this.posY = posY;
+	}
+	public void setOrientation(int orientation) {
+		this.orientation = orientation;
+	}
+	public void setDort(boolean dort) {
+		this.dort = dort;
+	}
+	public boolean isDort() {
+		return dort;
+	}
+	public int getPosY() {
+		return posY;
+	}
+	public int getOrientation() {
+		return orientation;
+	}
+	
 	
 	
 	
