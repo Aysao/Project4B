@@ -1,3 +1,4 @@
+package PackageClass;
 /*
  * un Thread qui gerera un ennemie
  * ces ennemie seront autonome et auront une IA plus ou moins forte (rajout de difficulté ?)

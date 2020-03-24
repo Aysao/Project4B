@@ -1,3 +1,4 @@
+package PackageClass;
 
 /*
  * cette classe permettra de géré les mouvement possible des joueur et ennemie

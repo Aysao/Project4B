@@ -1,3 +1,4 @@
+package PackageClass;
 
 /*
  * un bloc special qui fait gagné le joueur si les trois bloc sont aligné
