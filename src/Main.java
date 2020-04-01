@@ -8,7 +8,7 @@ import PackageClass.*;
 
 public class Main {
 	public static void main(String[] args) {
-		Bloc b = new BlocN(5,7);
+		
 	}
 
 }

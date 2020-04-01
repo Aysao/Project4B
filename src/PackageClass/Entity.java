@@ -5,11 +5,11 @@ package PackageClass;
  * en gros les actions similaire entre le joueur et l'ennemie
  */
 public abstract class Entity {
-	public final int SO = 0;
-	public final int NORD = 1;
-	public final int SOUTH = 2;
-	public final int EAST = 3;
-	public final int WEST = 4;
+	public final static int SO = 0;
+	public final static int NORD = 1;
+	public final static int SOUTH = 2;
+	public final static int EAST = 3;
+	public final static int WEST = 4;
 	
 	private Boolean Mort = false;
 	private int posX;
