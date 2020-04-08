@@ -46,23 +46,45 @@ public abstract class Entity {
 		return Mort;
 	}
 	public void Deplacement() {
-		switch (orientation) {
-			case 0: {
+		if((!(posX == 1 && orientation == WEST) || !(posX == 13 && orientation == EAST) ||
+				!(posY == 1 && orientation == NORD) || !(posY == 15 && orientation == SOUTH)))
+		{
+			
+			switch (orientation) {
+				case 0: {
+					
+				}
+				case 3: {
+					if(Plateau.plateau[posX-1][posY] != null)
+					{
+						Plateau.refreshEntity(this);
+						posX -= 1;
+					}
+				}
+				case 4: {
+					if(Plateau.plateau[posX+1][posY] != null)
+					{
+						Plateau.refreshEntity(this);
+						posX += 1;
+					}
+				}
+				case 1: {
+					if(Plateau.plateau[posX][posY-1] != null)
+					{
+						Plateau.refreshEntity(this);
+						posY -= 1;
+					}
+				}
+				case 2: {
+					if(Plateau.plateau[posX][posY+1] != null)
+					{
+						Plateau.refreshEntity(this);
+						posY += 1;
+					}
+				}
 				
 			}
-			case 3: {
-				posX -= 1;
-			}
-			case 4: {
-				posX += 1;
-			}
-			case 1: {
-				posY -= 1;
-			}
-			case 2: {
-				posY += 1;
-			}
-			
+			Plateau.refreshEntity(this);
 		}
 	}
 	

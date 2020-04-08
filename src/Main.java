@@ -1,5 +1,5 @@
 import PackageClass.*;
-
+import PackageThreads.*;
 /*
  * tableau de jeu
  * 15 / 17 le tableau  
