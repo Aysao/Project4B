@@ -11,7 +11,7 @@ public class Render extends JFrame{
 	public Render(int L,int H)
 	{
 		Largeur = L;
-		Hauteur = H+37;
+		Hauteur = H+37-100;
 		this.setSize(Largeur, Hauteur);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);

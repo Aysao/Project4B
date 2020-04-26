@@ -36,7 +36,7 @@ public class GameFrame extends JPanel {
 				{
 					if(Plateau.plateau[i][j].getClass() == BlocN.class)
 					{
-						g.setColor(Color.BLUE);
+						g.setColor(Color.CYAN);
 					}
 					if(Plateau.plateau[i][j].getClass() == Player.class)
 					{
@@ -48,7 +48,7 @@ public class GameFrame extends JPanel {
 					}
 					if(Plateau.plateau[i][j].getClass() == BlocSpe.class) 
 					{
-						g.setColor(Color.CYAN);
+						g.setColor(Color.blue);
 					}
 					if(Plateau.plateau[i][j].getClass() == Bordure.class)
 					{
@@ -60,6 +60,8 @@ public class GameFrame extends JPanel {
 					g.setColor(Color.black);
 				}
 				g.fillRect(BlockL*i,BlockH*j,BlockL*(i+1),BlockH*(j+1));
+				g.setColor(Color.black);
+				g.drawRect(BlockL*i,BlockH*j,BlockL*(i+1),BlockH*(j+1));
 			}
 		}
 	}

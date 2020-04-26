@@ -27,7 +27,12 @@ public class Plateau {
 		}
 		plateau[1][1] = new Player(0,0);
 		plateau[1][2] = null;
-		plateau[2][1] = new Ennemie(1,0);
+		plateau[1][3] = null;
+		plateau[1][4] = null;
+		plateau[2][4] = null;
+		plateau[1][5] = null;
+		plateau[1][6] = null;
+		plateau[2][1] = null;
 	}
 	public static void refreshEntity(Entity e)
 	{
