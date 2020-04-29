@@ -6,7 +6,6 @@ public class Plateau {
 	public static Object[][] plateau;
 	private static int largeur = 15; //13 de plateau + 2 de bordure
 	private static int hauteur = 17; // 15 de plateau + 2 de bordure
-	private Position pos ;
 	public boolean bloque = false;
 	public Plateau()
 	{
@@ -83,9 +82,9 @@ public class Plateau {
 	public void pathInit(int x, int y)
 	{						
 		
-		for(int i = 15;i>1;i=i-2)//on incrémente de 2
+		for(int i = hauteur-2;i>=1;i=i-2)//on incrï¿½mente de 2
 		{		
-			for(int j = 1;j<13;j=j+2)//on incrémente de 2
+			for(int j = 1;j<largeur-2;j=j+2)//on incrï¿½mente de 2
 			{	
 				//on ce place a la premier colonne dernier ligne
 					if(plateau[i][j]!=null)
@@ -99,7 +98,7 @@ public class Plateau {
 									pathGeneration(i,j);	
 								}
 							}
-							if(i+2<17&&plateau[i+2][j]!=null)// le sud
+							if(i+2<hauteur&&plateau[i+2][j]!=null)// le sud
 							{
 								if(plateau[i+2][j].getClass()==BlocN.class) //on verif le nord
 								{
@@ -114,7 +113,7 @@ public class Plateau {
 									pathGeneration(i,j);
 								}
 							}
-							if(j+2>15&&plateau[i][j+2]!=null)//l'est
+							if(j+2>largeur&&plateau[i][j+2]!=null)//l'est
 							{
 								if(plateau[i][j+2].getClass()==BlocN.class) //on verif le nord
 								{
@@ -162,7 +161,7 @@ public class Plateau {
 					}break;
 					case 1://test sud
 					{
-						if(x+2<17&&plateau[x+2][y]!=null)
+						if(x+2<hauteur&&plateau[x+2][y]!=null)
 						{
 							if(plateau[x+2][y].getClass()==BlocN.class)
 							{
@@ -192,7 +191,7 @@ public class Plateau {
 					}break;
 					case 3://test est
 					{
-						if(y+2<15&&plateau[x][y+2]!=null)
+						if(y+2<largeur&&plateau[x][y+2]!=null)
 						{
 							if(plateau[x][y+2].getClass()==BlocN.class)
 							{
@@ -220,7 +219,7 @@ public class Plateau {
 				return;
 			}	
 		}
-		if(x+2<17&&plateau[x+2][y]!=null)
+		if(x+2<hauteur&&plateau[x+2][y]!=null)
 		{
 			if(plateau[x+2][y].getClass()==BlocN.class)
 			{
@@ -236,7 +235,7 @@ public class Plateau {
 				return;
 			}
 		}
-		if(y+2<15&&plateau[x][y+2]!=null)
+		if(y+2<largeur&&plateau[x][y+2]!=null)
 		{
 			if(plateau[x][y+2].getClass()==BlocN.class)
 			{
@@ -247,7 +246,7 @@ public class Plateau {
 		//si on peut pas on cherche in nouveau chemin
 		else
 		{
-			pathInit(15,1);
+			pathInit(17,1);
 		}
 	}
 	public static void refreshEntity(Entity e)

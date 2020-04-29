@@ -15,11 +15,8 @@ public class Main {
 		Render r = new Render(600,800);
 		Score s = new Score();
 		s.mstKill();		
-		
-		
 		s.setScore();
-		
-		
+		r.repaint();
 	}
 		
 }

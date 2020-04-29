@@ -1,28 +1,37 @@
 package PackageRender;
 import PackageClass.*;
-
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 import javax.swing.*;
 
-public class GameFrame extends JPanel {
+public class GameFrame extends JPanel 
+{
 	
-	private int Largeur = 800;
+	private int Largeur = 800-5;
 	private int Hauteur = 600;
 	private int BlockL = Largeur/Plateau.getLargeur();
 	private int BlockH = Hauteur/Plateau.getHauteur();
+	private Image iceblock;
+	private ImageIcon ii;
 	
 	public GameFrame(int L,int H)
 	{
-		Largeur = L;
-		Hauteur = H-37;
+		initImage();
+		Largeur = L-5;
+		Hauteur = H-2*(H/15)-37;
 		BlockH = Hauteur/Plateau.getHauteur();
 		BlockL = Largeur/Plateau.getLargeur();
+		
 	}
 	public GameFrame()
 	{
 		
+	}
+	
+	private void initImage() 
+	{
+	
 	}
 	
 	public void paintComponent(Graphics g)
@@ -37,32 +46,87 @@ public class GameFrame extends JPanel {
 					if(Plateau.plateau[i][j].getClass() == BlocN.class)
 					{
 						g.setColor(Color.CYAN);
+						g.fillRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
+					}
+					if(Plateau.plateau[i][j].getClass() == BlocSpe.class)
+					{
+						g.setColor(Color.BLUE);
+						g.fillRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
 					}
 					if(Plateau.plateau[i][j].getClass() == Player.class)
 					{
-						g.setColor(Color.yellow);
+						g.setColor(Color.YELLOW);
+						g.fillRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
 					}
 					if(Plateau.plateau[i][j].getClass() == Ennemie.class)
 					{
-						g.setColor(Color.red);
-					}
-					if(Plateau.plateau[i][j].getClass() == BlocSpe.class) 
-					{
-						g.setColor(Color.blue);
+						g.setColor(Color.RED);
+						g.fillRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
 					}
 					if(Plateau.plateau[i][j].getClass() == Bordure.class)
 					{
 						g.setColor(Color.GRAY);
+						g.fillRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
 					}
+					if(Plateau.plateau[i][j].getClass() == String.class)
+					{
+						g.setColor(Color.BLACK);
+						g.fillRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
+					}
+					
 				}
-				else
-				{
-					g.setColor(Color.black);
-				}
-				g.fillRect(BlockL*i,BlockH*j,BlockL*(i+1),BlockH*(j+1));
 				g.setColor(Color.black);
-				g.drawRect(BlockL*i,BlockH*j,BlockL*(i+1),BlockH*(j+1));
+				g.drawRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
 			}
 		}
 	}
 }
+	
+	/*
+	 * for(int i = 0;i<Plateau.getHauteur();i++)
+		{
+			for(int j = 0;j<Plateau.getLargeur();j++)
+			{
+				if(Plateau.plateau[j][i] != null)
+				{
+					if(Plateau.plateau[j][i].getClass() == BlocN.class)
+					{
+						g.setColor(Color.CYAN);
+						g.fillRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
+						//g.drawImage(iceblock,BlockL*i,BlockH*j,BlockL*(i+1),BlockH*(j+1), null);
+					}
+					if(Plateau.plateau[j][i].getClass() == Player.class)
+					{
+						g.setColor(Color.yellow);
+						g.fillRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
+					}
+					if(Plateau.plateau[j][i].getClass() == Ennemie.class)
+					{
+						g.setColor(Color.red);
+						g.fillRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
+					}
+					if(Plateau.plateau[j][i].getClass() == BlocSpe.class) 
+					{
+						g.setColor(Color.blue);
+						g.fillRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
+					}
+					if(Plateau.plateau[j][i].getClass() == Bordure.class)
+					{
+						g.setColor(Color.GRAY);
+						g.fillRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
+					}
+					if(Plateau.plateau[j][i].getClass() == String.class)
+					{
+						g.setColor(Color.black);
+						g.fillRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
+					}
+				}
+				
+			
+				g.setColor(Color.black);
+				g.drawRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
+			}
+		}
+		*/
+
+
