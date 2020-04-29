@@ -28,9 +28,9 @@ public class GameFrame extends JPanel {
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		for(int i = 0;i<Plateau.getLargeur();i++)
+		for(int i = 0;i<Plateau.getHauteur();i++)
 		{
-			for(int j = 0;j<Plateau.getHauteur();j++)
+			for(int j = 0;j<Plateau.getLargeur();j++)
 			{
 				if(Plateau.plateau[i][j] != null)
 				{

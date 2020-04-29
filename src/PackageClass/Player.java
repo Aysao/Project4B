@@ -8,6 +8,7 @@ package PackageClass;
 public class Player extends Entity {
 	
 	private int Vie = 3;
+	private String c ="+";//pour laffichage cmd
 	
 	public Player(int x, int y) {
 		super(x, y);
@@ -31,7 +32,8 @@ public class Player extends Entity {
 		{
 			return true;
 		}
-		else {
+		else 
+		{
 			return false;
 		}
 		

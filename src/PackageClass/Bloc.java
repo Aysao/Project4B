@@ -18,6 +18,8 @@ public abstract class Bloc {
 	private boolean dort = true; // Etat dort (ne bouge pas); Etat !dort (interaction avec le joueur);
 	private int orientation = SO; // Orientation;
 	
+	public String c ; // pour affichage console des bloc
+	
 	
 	public Bloc(int X,int Y)
 	{

@@ -13,4 +13,10 @@ public class Bordure {
 	{
 		
 	}
+	public boolean isActivate() {
+		return activate;
+	}
+	public void setActivate(boolean activate) {
+		this.activate = activate;
+	}
 }

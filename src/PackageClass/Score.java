@@ -21,7 +21,7 @@ public class Score {
 	{
 		
 	}
-	public Score(String name )
+	public Score(String name)
 	{
 		this.name = name;
 	}
@@ -34,8 +34,7 @@ public class Score {
 	public void setScore() throws IOException
 	{
 	    double[] tabDouble = new double[10];
-	    String[] tabString = new String[10];
-	    
+	    String[] tabString = new String[10];	    
 	    try
 	    { // on recupere les nom est score des joueur qu'on isole dans deux tableau;
 			InputStream flux=new FileInputStream("test.txt"); 

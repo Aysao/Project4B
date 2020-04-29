@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 import PackageClass.*;
 import PackageThreads.*;
 import PackageRender.*;
@@ -8,9 +10,16 @@ import PackageRender.*;
 
 
 public class Main {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		Plateau p = new Plateau();
 		Render r = new Render(600,800);
+		Score s = new Score();
+		s.mstKill();		
+		
+		
+		s.setScore();
+		
+		
 	}
-
+		
 }

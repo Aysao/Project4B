@@ -8,6 +8,7 @@ public class BlocSpe extends Bloc {
 
 	public BlocSpe(int X, int Y) {
 		super(X, Y);
+		this.c="*";
 		// TODO Auto-generated constructor stub
 	}
 
