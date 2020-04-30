@@ -16,7 +16,8 @@ public class Main {
 		Score s = new Score();
 		s.mstKill();		
 		s.setScore();
-		r.repaint();
+		Thread t = new Thread(r);
+		t.start();
 	}
 		
 }

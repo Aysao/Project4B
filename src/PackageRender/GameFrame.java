@@ -12,12 +12,12 @@ public class GameFrame extends JPanel
 	private int Hauteur = 600;
 	private int BlockL = Largeur/Plateau.getLargeur();
 	private int BlockH = Hauteur/Plateau.getHauteur();
-	private Image iceblock;
-	private ImageIcon ii;
+	//private Image iceblock;
+	//private ImageIcon ii = new ImageIcon("res/GlaceBlock.png");
 	
 	public GameFrame(int L,int H)
 	{
-		initImage();
+		
 		Largeur = L-5;
 		Hauteur = H-2*(H/15)-37;
 		BlockH = Hauteur/Plateau.getHauteur();
@@ -31,12 +31,14 @@ public class GameFrame extends JPanel
 	
 	private void initImage() 
 	{
-	
+		
 	}
 	
+
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
+		
 		for(int i = 0;i<Plateau.getHauteur();i++)
 		{
 			for(int j = 0;j<Plateau.getLargeur();j++)
@@ -47,6 +49,7 @@ public class GameFrame extends JPanel
 					{
 						g.setColor(Color.CYAN);
 						g.fillRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
+						//g.drawImage(iceblock,BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1), null);
 					}
 					if(Plateau.plateau[i][j].getClass() == BlocSpe.class)
 					{
@@ -77,8 +80,17 @@ public class GameFrame extends JPanel
 				}
 				g.setColor(Color.black);
 				g.drawRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
+				
 			}
 		}
+		
+		//g.drawImage(iceblock,0,0,Largeur-100,Hauteur-100, null);
+		g.dispose();
+		
+	}
+	private Image copyImage(ImageIcon i)
+	{
+		return i.getImage();
 	}
 }
 	
