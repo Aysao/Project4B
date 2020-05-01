@@ -15,7 +15,7 @@ public class Plateau {
 		plateau = new Object[hauteur][largeur];
 		initFullBloc(hauteur,largeur);
 		pathInit(17,1);
-		affichTab(hauteur,largeur);
+		affichTab(hauteur,largeur); 
 	}
 	private void affichTab(int x , int y) 
 	{
