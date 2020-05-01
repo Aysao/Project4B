@@ -34,7 +34,7 @@ public class ThreadPlayer extends Thread {
 				e1.printStackTrace();
 			}
 		}
-	}
+	} 
 	
 	KeyListener kl = new KeyListener() {
 
