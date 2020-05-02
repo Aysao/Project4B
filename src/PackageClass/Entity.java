@@ -73,7 +73,7 @@ public abstract class Entity {
 					}
 				}break;
 				case 1: {
-					System.out.println("Class : " + Plateau.plateau[posX][posY-1].getClass());
+					System.out.println("Class : " + Plateau.plateau[posX-1][posY].getClass());
 					if(Plateau.plateau[posX-1][posY].getClass() == String.class)
 					{
 						Plateau.refreshEntity(this);
