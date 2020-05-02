@@ -51,10 +51,10 @@ public abstract class Entity {
 		{
 			
 			switch (orientation) {
-				case 0: {
+				case SO: {
 					
 				}break;
-				case 3: {
+				case EAST: {
 					if(Plateau.plateau[posX][posY+1].getClass() == String.class)
 					{
 						System.out.println("orientation : "+ orientation );
@@ -63,17 +63,17 @@ public abstract class Entity {
 						Plateau.refreshEntity(this);
 					}
 				}break;
-				case 4: {
+				case WEST: {
 					if(Plateau.plateau[posX][posY-1].getClass() == String.class)
 					{
-						System.out.println("orientation : "+ orientation );
+						//System.out.println("orientation : "+ orientation );
 						Plateau.refreshEntity(this);
 						posY -= 1;
 						Plateau.refreshEntity(this);
 					}
 				}break;
-				case 1: {
-					System.out.println("Class : " + Plateau.plateau[posX-1][posY].getClass());
+				case NORD: {
+					//System.out.println("Class : " + Plateau.plateau[posX-1][posY].getClass());
 					if(Plateau.plateau[posX-1][posY].getClass() == String.class)
 					{
 						Plateau.refreshEntity(this);
@@ -81,7 +81,7 @@ public abstract class Entity {
 						Plateau.refreshEntity(this);
 					}
 				}break;
-				case 2: {						
+				case SOUTH: {						
 					if(Plateau.plateau[posX+1][posY].getClass() == String.class)
 					{
 						System.out.println("orientation : "+ orientation );

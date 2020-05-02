@@ -19,7 +19,7 @@ public class Main {
 		s.mstKill();		
 		s.setScore();
 		Thread t = new Thread(r);
-		t.start(); 
+		t.start();
 	}
 		
 }
