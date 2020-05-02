@@ -72,12 +72,26 @@ public abstract class Entity {
 						posY += 1;
 						Plateau.refreshEntity(this);
 					}
+					else if(Plateau.plateau[posX][posY+1].getClass() == BlocN.class&&Plateau.plateau[posX][posY+2].getClass()== String.class)
+					{
+						int i = 2;
+						while(Plateau.plateau[posX][posY+i].getClass()== String.class)
+						{
+							i++;
+						}
+						i-=2;
+						
+						Plateau.refreshEntity(this);
+						posY += 1;
+						Plateau.plateau[posX][posY+i]=new BlocN(posX,posY+i);					
+						Plateau.refreshEntity(this);
+						
+					}
 					
 				}break;
 
 				case WEST: {
 
-				
 					System.out.println("Class : " + Plateau.plateau[posX][posY-1].getClass());
 
 
@@ -93,6 +107,21 @@ public abstract class Entity {
 						Plateau.refreshEntity(this);
 						posY -= 1;
 						Plateau.refreshEntity(this);
+					}
+					else if(Plateau.plateau[posX][posY-1].getClass() == BlocN.class&&Plateau.plateau[posX][posY-2].getClass()== String.class)
+					{
+						int i = 2;
+						while(Plateau.plateau[posX][posY-i].getClass()== String.class)
+						{
+							i++;
+						}
+						i-=2;
+						
+						Plateau.refreshEntity(this);
+						posY -= 1;
+						Plateau.plateau[posX][posY-i]=new BlocN(posX,posY-i);					
+						Plateau.refreshEntity(this);
+						
 					}
 					
 				}break;
@@ -115,6 +144,21 @@ public abstract class Entity {
 						posX -= 1;
 						Plateau.refreshEntity(this);
 					}
+					else if(Plateau.plateau[posX-1][posY].getClass() == BlocN.class&&Plateau.plateau[posX-2][posY].getClass()== String.class)
+					{
+						int i = 2;
+						while(Plateau.plateau[posX-i][posY].getClass()== String.class)
+						{
+							i++;
+						}
+						i-=2;
+						
+						Plateau.refreshEntity(this);
+						posX -= 1;
+						Plateau.plateau[posX-i][posY]=new BlocN(posX-i,posY);					
+						Plateau.refreshEntity(this);
+						
+					}
 					
 				}break;
 
@@ -136,6 +180,21 @@ public abstract class Entity {
 						Plateau.refreshEntity(this);
 						posX += 1;
 						Plateau.refreshEntity(this);
+					}
+					else if(Plateau.plateau[posX+1][posY].getClass() == BlocN.class&&Plateau.plateau[posX+2][posY].getClass()== String.class)
+					{
+						int i = 2;
+						while(Plateau.plateau[posX+i][posY].getClass()== String.class)
+						{
+							i++;
+						}
+						i-=2;
+						
+						Plateau.refreshEntity(this);
+						posX += 1;
+						Plateau.plateau[posX+i][posY]=new BlocN(posX+i,posY);					
+						Plateau.refreshEntity(this);
+						
 					}
 					
 				}break;
