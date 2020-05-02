@@ -36,13 +36,30 @@ public class Render extends JFrame implements Runnable{
 			public void keyTyped(KeyEvent e) {
 				if(e.getKeyChar() == KeyEvent.VK_ESCAPE) {
 					stop();
-					System.exit(1);
+					//System.exit(1);
 				}
-				if(e.getKeyChar() == KeyEvent.VK_Q)
+				if(e.getKeyChar() == 'q')
 				{
 					Menu.p1.setOrientation(Player.WEST);
 					Menu.p1.Deplacement();
 				}
+				if(e.getKeyChar() == 'd')
+				{
+					Menu.p1.setOrientation(Player.EAST);
+					Menu.p1.Deplacement();
+				}
+				if(e.getKeyChar() == 's')
+				{
+					Menu.p1.setOrientation(Player.SOUTH);
+					Menu.p1.Deplacement();
+				}
+				if(e.getKeyChar() == 'z')
+				{
+					Menu.p1.setOrientation(Player.NORD);
+					Menu.p1.Deplacement();
+				}
+				System.out.println("Player pos x : "+ Menu.p1.getPosX());
+				System.out.println("Player pos y : "+ Menu.p1.getPosY());
 			}
 
 			@Override

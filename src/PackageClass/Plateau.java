@@ -257,7 +257,7 @@ public class Plateau {
 		}
 		else 
 		{
-			plateau[e.getPosX()][e.getPosY()] = null;
+			plateau[e.getPosX()][e.getPosY()] = "0";
 		}
 	}
 	public static int getLargeur() {

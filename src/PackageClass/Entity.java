@@ -53,38 +53,46 @@ public abstract class Entity {
 			switch (orientation) {
 				case 0: {
 					
-				}
+				}break;
 				case 3: {
-					if(Plateau.plateau[posX-1][posY] != null)
+					if(Plateau.plateau[posX][posY+1].getClass() == String.class)
+					{
+						System.out.println("orientation : "+ orientation );
+						Plateau.refreshEntity(this);
+						posY += 1;
+						Plateau.refreshEntity(this);
+					}
+				}break;
+				case 4: {
+					if(Plateau.plateau[posX][posY-1].getClass() == String.class)
+					{
+						System.out.println("orientation : "+ orientation );
+						Plateau.refreshEntity(this);
+						posY -= 1;
+						Plateau.refreshEntity(this);
+					}
+				}break;
+				case 1: {
+					System.out.println("Class : " + Plateau.plateau[posX][posY-1].getClass());
+					if(Plateau.plateau[posX-1][posY].getClass() == String.class)
 					{
 						Plateau.refreshEntity(this);
 						posX -= 1;
+						Plateau.refreshEntity(this);
 					}
-				}
-				case 4: {
-					if(Plateau.plateau[posX+1][posY] != null)
+				}break;
+				case 2: {						
+					if(Plateau.plateau[posX+1][posY].getClass() == String.class)
 					{
+						System.out.println("orientation : "+ orientation );
 						Plateau.refreshEntity(this);
 						posX += 1;
-					}
-				}
-				case 1: {
-					if(Plateau.plateau[posX][posY-1] != null)
-					{
 						Plateau.refreshEntity(this);
-						posY -= 1;
 					}
-				}
-				case 2: {
-					if(Plateau.plateau[posX][posY+1] != null)
-					{
-						Plateau.refreshEntity(this);
-						posY += 1;
-					}
-				}
+				}break;
 				
 			}
-			Plateau.refreshEntity(this);
+			
 		}
 	}
 	
