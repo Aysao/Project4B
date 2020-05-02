@@ -1,11 +1,15 @@
 package PackageRender;
 import javax.swing.*;
-import com.sun.tools.javac.Main;
+
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import PackageClass.*;
 import PackageClass.Menu;
+
+
+
 
 
 public class Render extends JFrame implements Runnable{
@@ -31,7 +35,6 @@ public class Render extends JFrame implements Runnable{
 		this.getContentPane().add(bottom,BorderLayout.SOUTH);
 		this.addKeyListener(new KeyListener() 
 		{
-
 			@Override
 			public void keyTyped(KeyEvent e) {
 				if(e.getKeyChar() == KeyEvent.VK_ESCAPE) {
@@ -98,6 +101,7 @@ public class Render extends JFrame implements Runnable{
 			lastTime = now;
 			if(delta >= 1)
 			{	
+				
 				this.repaint();
 				delta--;
 				tick++;

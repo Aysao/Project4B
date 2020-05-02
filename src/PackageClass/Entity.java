@@ -54,7 +54,11 @@ public abstract class Entity {
 				case SO: {
 					
 				}break;
+
 				case EAST: {
+
+				
+					System.out.println("Class : " + Plateau.plateau[posX][posY+1].getClass());
 					if(Plateau.plateau[posX][posY+1].getClass() == String.class)
 					{
 						System.out.println("orientation : "+ orientation );
@@ -62,8 +66,21 @@ public abstract class Entity {
 						posY += 1;
 						Plateau.refreshEntity(this);
 					}
+					else if(Plateau.plateau[posX][posY+1].getClass() == BlocN.class&&Plateau.plateau[posX][posY+2].getClass() == BlocN.class)
+					{
+						Plateau.refreshEntity(this);
+						posY += 1;
+						Plateau.refreshEntity(this);
+					}
+					
 				}break;
+
 				case WEST: {
+
+				
+					System.out.println("Class : " + Plateau.plateau[posX][posY-1].getClass());
+
+
 					if(Plateau.plateau[posX][posY-1].getClass() == String.class)
 					{
 						//System.out.println("orientation : "+ orientation );
@@ -71,17 +88,42 @@ public abstract class Entity {
 						posY -= 1;
 						Plateau.refreshEntity(this);
 					}
+					else if(Plateau.plateau[posX][posY-1].getClass() == BlocN.class&&Plateau.plateau[posX][posY-2].getClass() == BlocN.class)
+					{
+						Plateau.refreshEntity(this);
+						posY -= 1;
+						Plateau.refreshEntity(this);
+					}
+					
 				}break;
+
 				case NORD: {
 					//System.out.println("Class : " + Plateau.plateau[posX-1][posY].getClass());
+
+				
+					System.out.println("Class : " + Plateau.plateau[posX-1][posY].getClass());
+
 					if(Plateau.plateau[posX-1][posY].getClass() == String.class)
 					{
 						Plateau.refreshEntity(this);
 						posX -= 1;
 						Plateau.refreshEntity(this);
 					}
+					else if(Plateau.plateau[posX-1][posY].getClass() == BlocN.class&&Plateau.plateau[posX-2][posY].getClass() == BlocN.class)
+					{
+						Plateau.refreshEntity(this);
+						posX -= 1;
+						Plateau.refreshEntity(this);
+					}
+					
 				}break;
+
 				case SOUTH: {						
+
+					
+					System.out.println("Class : " + Plateau.plateau[posX+1][posY].getClass());
+
+
 					if(Plateau.plateau[posX+1][posY].getClass() == String.class)
 					{
 						System.out.println("orientation : "+ orientation );
@@ -89,6 +131,13 @@ public abstract class Entity {
 						posX += 1;
 						Plateau.refreshEntity(this);
 					}
+					else if(Plateau.plateau[posX+1][posY].getClass() == BlocN.class&&Plateau.plateau[posX+2][posY].getClass() == BlocN.class)
+					{
+						Plateau.refreshEntity(this);
+						posX += 1;
+						Plateau.refreshEntity(this);
+					}
+					
 				}break;
 				
 			}

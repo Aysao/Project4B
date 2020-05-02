@@ -11,7 +11,7 @@ public class Ennemie extends Entity {
 
 	public final int SCORE_BLOC = 400;
 	public final int SCORE_STUN = 100;
-	
+	public boolean dead = false;
 	public boolean stun = false;
 
 	

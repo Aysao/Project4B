@@ -1,5 +1,7 @@
 package PackageClass;
 
+
+
 /*
  * toute les fonction du joueur
  * interaction avec bloc et bordure interaction avec joueur ennemie
@@ -13,6 +15,7 @@ public class Player extends Entity {
 	public Player(int x, int y) {
 		super(x, y);
 		Plateau.plateau[x][y] = this;
+
 		// TODO Auto-generated constructor stub
 	}
 	public boolean nextToEdge()

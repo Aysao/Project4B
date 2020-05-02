@@ -9,8 +9,7 @@ public class BlocN extends Bloc {
 	
 	public BlocN(int X, int Y) {
 		super(X, Y);
-		this.c="#";
-		// TODO Auto-generated constructor stub
+		this.c="#";		
 	}
 	
 	public boolean isDetruit() {
