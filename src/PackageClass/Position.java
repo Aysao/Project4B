@@ -26,4 +26,4 @@ public class Position {
 	public void setCoY(int coY) {
 		this.coY = coY;
 	}
-}
+} 

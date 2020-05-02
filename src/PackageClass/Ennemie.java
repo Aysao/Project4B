@@ -13,6 +13,7 @@ public class Ennemie extends Entity {
 	public final int SCORE_STUN = 100;
 	
 	public boolean stun = false;
+
 	
 	public Ennemie(int x, int y) {
 		super(x, y);
@@ -35,4 +36,4 @@ public class Ennemie extends Entity {
 		
 	}
 
-}
+} 

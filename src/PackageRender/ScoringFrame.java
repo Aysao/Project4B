@@ -41,4 +41,4 @@ public class ScoringFrame extends JPanel {
 		highscore.setHorizontalAlignment(JLabel.CENTER);
 		scorep2.setHorizontalAlignment(JLabel.CENTER);
 	}
-}
+} 

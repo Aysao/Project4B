@@ -26,4 +26,4 @@ public class BlocSpe extends Bloc {
 			return false;
 		}
 	}
-}
+} 

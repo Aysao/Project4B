@@ -1,10 +1,12 @@
 package PackageRender;
 import javax.swing.*;
+import com.sun.tools.javac.Main;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
 import PackageClass.*;
+import PackageClass.Menu;
+
 
 public class Render extends JFrame implements Runnable{
 	public static int mode = 0; //mode 0 = IDE / mode 1 = jarfile
@@ -32,9 +34,14 @@ public class Render extends JFrame implements Runnable{
 
 			@Override
 			public void keyTyped(KeyEvent e) {
-				if(e.getKeyChar() == 'z') {
+				if(e.getKeyChar() == KeyEvent.VK_ESCAPE) {
 					stop();
 					System.exit(1);
+				}
+				if(e.getKeyChar() == KeyEvent.VK_Q)
+				{
+					Menu.p1.setOrientation(Player.WEST);
+					Menu.p1.Deplacement();
 				}
 			}
 
@@ -85,9 +92,9 @@ public class Render extends JFrame implements Runnable{
 				timer = 0;
 			}
 		}
-		stop();
+		//stop();
 		
-	}
+	} 
 	
 	public void stop()
 	{

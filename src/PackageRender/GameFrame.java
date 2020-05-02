@@ -92,7 +92,7 @@ public class GameFrame extends JPanel
 	{
 		return i.getImage();
 	}
-}
+} 
 	
 	/*
 	 * for(int i = 0;i<Plateau.getHauteur();i++)

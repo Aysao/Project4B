@@ -20,7 +20,7 @@ public abstract class Bloc {
 	
 	public String c ; // pour affichage console des bloc
 	
-	
+	 
 	public Bloc(int X,int Y)
 	{
 		setPosX(X);

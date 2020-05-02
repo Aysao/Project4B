@@ -267,4 +267,4 @@ public class Plateau {
 		return hauteur;
 	}
 
-}
+} 

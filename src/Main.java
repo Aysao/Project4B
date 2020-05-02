@@ -10,14 +10,16 @@ import PackageRender.*;
 
 
 public class Main {
+	
+	
 	public static void main(String[] args) throws IOException {
-		Plateau p = new Plateau();
+		Menu m = new Menu(1);
 		Render r = new Render(600,800);
 		Score s = new Score();
 		s.mstKill();		
 		s.setScore();
 		Thread t = new Thread(r);
-		t.start();
+		t.start(); 
 	}
 		
 }

@@ -19,5 +19,5 @@ public class BlocN extends Bloc {
 	public void setDetruit(boolean detruit) {
 		this.detruit = detruit;
 	}
-
+ 
 }
