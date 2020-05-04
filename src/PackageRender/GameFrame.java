@@ -47,13 +47,13 @@ public class GameFrame extends JPanel
 				{
 					if(Plateau.plateau[i][j].getClass() == BlocN.class)
 					{
-						g.setColor(Color.CYAN);
+						g.setColor(Color.BLUE);
 						g.fillRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
 						//g.drawImage(iceblock,BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1), null);
 					}
 					if(Plateau.plateau[i][j].getClass() == BlocSpe.class)
 					{
-						g.setColor(Color.BLUE);
+						g.setColor(Color.CYAN);
 						g.fillRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
 					}
 					if(Plateau.plateau[i][j].getClass() == Player.class)

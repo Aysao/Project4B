@@ -41,26 +41,32 @@ public class Render extends JFrame implements Runnable{
 					stop();
 					//System.exit(1);
 				}
-				if(e.getKeyChar() == 'q')
-				{
-					Menu.p1.setOrientation(Player.WEST);
-					Menu.p1.Deplacement();
-				}
-				if(e.getKeyChar() == 'd')
-				{
-					Menu.p1.setOrientation(Player.EAST);
-					Menu.p1.Deplacement();
-				}
-				if(e.getKeyChar() == 's')
-				{
-					Menu.p1.setOrientation(Player.SOUTH);
-					Menu.p1.Deplacement();
-				}
-				if(e.getKeyChar() == 'z')
+				if(e.getKeyChar() == 'z'||e.getKeyChar() == 'Z')
 				{
 					Menu.p1.setOrientation(Player.NORD);
 					Menu.p1.Deplacement();
+					Menu.v.testVictory();
 				}
+				if(e.getKeyChar() == 'q'||e.getKeyChar() == 'Q')
+				{
+					Menu.p1.setOrientation(Player.WEST);
+					Menu.p1.Deplacement();
+					Menu.v.testVictory();
+				}
+				if(e.getKeyChar() == 's'||e.getKeyChar() == 'S')
+				{
+					Menu.p1.setOrientation(Player.SOUTH);
+					Menu.p1.Deplacement();
+					Menu.v.testVictory();
+				}
+				if(e.getKeyChar() == 'd'||e.getKeyChar() == 'D')
+				{
+					Menu.p1.setOrientation(Player.EAST);
+					Menu.p1.Deplacement();
+					Menu.v.testVictory();
+				}
+				
+				
 				System.out.println("Player pos x : "+ Menu.p1.getPosX());
 				System.out.println("Player pos y : "+ Menu.p1.getPosY());
 			}

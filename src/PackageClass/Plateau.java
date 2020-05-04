@@ -14,8 +14,51 @@ public class Plateau {
 
 		plateau = new Object[hauteur][largeur];
 		initFullBloc(hauteur,largeur);
-		pathInit(17,1);
+		pathInit();
+		setDiams(hauteur,largeur);
 		affichTab(hauteur,largeur); 
+		
+	}
+	private void setDiams(int x , int y)
+	{
+		
+		int r ;
+		for(int k = 0;k<3;k++)
+		{
+			r= new Random().nextInt(85);
+			int cpt=0;
+			for(int i=0 ; i<x ; i++) // on compte pas la bordure
+			{
+				for(int j=0 ; j<y; j++)
+				{
+					
+					if(i==0||i==x-1)
+					{
+						
+					}
+					else if(j==0||j==y-1)
+					{
+						
+					}
+					else if(plateau[i][j].getClass()==BlocN.class)
+					{
+						cpt++;
+					}
+					if(cpt==r) 
+					{
+						plateau[i][j]=new BlocSpe(i,j);
+						break;
+					}
+					
+				}
+				if(cpt==r) 
+				{				
+					break;
+				}
+			}
+		}
+		
+		
 	}
 	private void affichTab(int x , int y) 
 	{
@@ -79,7 +122,7 @@ public class Plateau {
 	
 	
 	
-	public void pathInit(int x, int y)
+	public void pathInit()
 	{						
 		
 		for(int i = hauteur-2;i>=1;i=i-2)//on incr�mente de 2
@@ -113,7 +156,7 @@ public class Plateau {
 									pathGeneration(i,j);
 								}
 							}
-							if(j+2>largeur&&plateau[i][j+2]!=null)//l'est
+							if(j+2<largeur&&plateau[i][j+2]!=null)//l'est
 							{
 								if(plateau[i][j+2].getClass()==BlocN.class) //on verif le nord
 								{
@@ -139,10 +182,9 @@ public class Plateau {
 			
 			while(test)
 			{
-				r= new Random().nextInt(4);;
+				r= new Random().nextInt(4);
 				switch(r)
 				{
-				
 					case 0://test nord
 					{
 						if(x-2>0&&plateau[x-2][y]!=null)
@@ -153,11 +195,9 @@ public class Plateau {
 								plateau[x-2][y]="0";
 								affichTab(hauteur,largeur);
 								test=false;
-								pathContinue(x-2,y);
-								
+								pathContinue(x-2,y);								
 							}	
-						}
-						
+						}					
 					}break;
 					case 1://test sud
 					{
@@ -169,8 +209,7 @@ public class Plateau {
 								plateau[x+2][y]="0";
 								affichTab(hauteur,largeur);
 								test=false;
-								pathContinue(x+2,y);
-								
+								pathContinue(x+2,y);								
 							}	
 						}					
 					}break;
@@ -184,8 +223,7 @@ public class Plateau {
 								plateau[x][y-2]="0";
 								affichTab(hauteur,largeur);
 								test=false;
-								pathContinue(x,y-2);
-									
+								pathContinue(x,y-2);									
 							}
 						}					
 					}break;
@@ -199,19 +237,17 @@ public class Plateau {
 								plateau[x][y+2]="0";
 								affichTab(hauteur,largeur);
 								test=false;
-								pathContinue(x,y+2);
-								
+								pathContinue(x,y+2);								
 							}
 						}					
 					}
 				}
 			}
-				
 	}
 	public void pathContinue(int x ,int y)
 	{
 		// on regarde si on peux continuer a generer
-		if(x-2>0)
+		if(x-2>0&&plateau[x-2][y]!=null)
 		{
 			if(plateau[x-2][y].getClass()==BlocN.class)
 			{
@@ -246,7 +282,7 @@ public class Plateau {
 		//si on peut pas on cherche in nouveau chemin
 		else
 		{
-			pathInit(17,1);
+			pathInit();
 		}
 	}
 	public static void refreshEntity(Entity e)
