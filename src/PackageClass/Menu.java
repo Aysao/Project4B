@@ -13,7 +13,7 @@ public class Menu {
 		{
 			case 1: 
 			{
-				Plateau plateau = new Plateau();
+				new Plateau();
 				r = new Render(600,800);	
 				p1 = new Player(7,7);
 				

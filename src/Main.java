@@ -2,7 +2,7 @@
 import java.io.IOException;
 
 import PackageClass.*;
-import PackageRender.*;
+
 
 /*
  * tableau de jeu
@@ -14,7 +14,7 @@ public class Main {
 	
 	
 	public static void main(String[] args) throws IOException {
-		Menu m = new Menu(1);
+		new Menu(1);
 		
 				
 		Thread t = new Thread(Menu.r);

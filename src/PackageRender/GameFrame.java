@@ -1,7 +1,7 @@
 package PackageRender;
 import PackageClass.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
+
 
 import javax.swing.*;
 
@@ -88,10 +88,7 @@ public class GameFrame extends JPanel
 		g.dispose();
 		
 	}
-	private Image copyImage(ImageIcon i)
-	{
-		return i.getImage();
-	}
+
 } 
 	
 	/*

@@ -10,13 +10,18 @@ package PackageClass;
 public class Player extends Entity {
 	
 	private int Vie = 3;
-	private String c ="+";//pour laffichage cmd
-	
+	private String pseudo;
+	private Score scr = new Score();
 	public Player(int x, int y) {
 		super(x, y);
 		Plateau.plateau[x][y] = this;
-
-		// TODO Auto-generated constructor stub
+	}
+	public Player(int x, int y,String str) {
+		super(x, y);
+		Plateau.plateau[x][y] = this;
+		setPseudo(str);
+		scr.setName(str);
+		
 	}
 	public boolean nextToEdge()
 	{
@@ -48,6 +53,18 @@ public class Player extends Entity {
 	
 	public int getVie() {
 		return Vie;
+	}
+	public String getPseudo() {
+		return pseudo;
+	}
+	public void setPseudo(String pseudo) {
+		this.pseudo = pseudo;
+	}
+	public Score getScr() {
+		return scr;
+	}
+	public void setScr(Score scr) {
+		this.scr = scr;
 	}
 	
 	 

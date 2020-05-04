@@ -16,6 +16,7 @@ public class Score {
 	
 	private int point = 0;
 	private int mstKill = 0;
+	private int blocDestroy = 0;
 	private String name = null; 
 	public Score()
 	{
@@ -27,8 +28,14 @@ public class Score {
 	}
 	public void mstKill()
 	{
-		this.point=this.point+100;
+		this.point=this.point+160;
 		this.mstKill++;
+	}
+
+	public void BlocDestroy()
+	{
+		this.point=this.point+30;
+		this.blocDestroy++;
 	}
 	
 	public void setScore() throws IOException
@@ -120,6 +127,13 @@ public class Score {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getBlocDestroy() {
+		return blocDestroy;
+	}
+	public void setBlocDestroy(int blocDestroy) {
+		this.blocDestroy = blocDestroy;
 	}
 	
 	
