@@ -1,10 +1,12 @@
 package PackageClass;
 
 import PackageRender.Render;
+import PackageThreads.ThreadPlayer;
 
 
 public class Menu {
 	public static Player p1;
+	public static Entity p2;
 	public static Ennemie e1;
 	public static Render  r ;
 	public static Victory  v ;
@@ -15,11 +17,13 @@ public class Menu {
 			case 1: 
 			{
 				new Plateau();
-				r = new Render(600,800);	
 				p1 = new Player(7,7);
+				//ThreadPlayer runtp = new ThreadPlayer(p1);
+				//Thread tp = new Thread(runtp);
+				//tp.start();
+				r = new Render(600,800);	
 				v = new Victory();
 				
-				Plateau.plateau[7][7]=p1;
 			}
 			case 2:
 			{

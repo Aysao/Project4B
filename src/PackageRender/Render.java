@@ -18,6 +18,7 @@ public class Render extends JFrame implements Runnable{
 	private int Hauteur = 600+37;
 	private JPanel bottom;
 	private boolean running = true;
+	private ScoringFrame sc;
 	public Render(int L,int H)
 	{
 		Largeur = L;
@@ -25,48 +26,24 @@ public class Render extends JFrame implements Runnable{
 		bottom = new JPanel();
 		bottom.setPreferredSize(new Dimension(Largeur,Hauteur/15));
 		bottom.setBackground(Color.black);
+		sc = new ScoringFrame(Largeur,Hauteur);
 		this.setSize(Largeur, Hauteur);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
 		this.getContentPane().setLayout(new BorderLayout());
-		this.getContentPane().add(new ScoringFrame(Largeur,Hauteur),BorderLayout.NORTH);
+		this.getContentPane().add(sc,BorderLayout.NORTH);
 		this.getContentPane().add(new GameFrame(Largeur,Hauteur),BorderLayout.CENTER);
 		this.getContentPane().add(bottom,BorderLayout.SOUTH);
+		this.addKeyListener(Menu.p1.getKl());
 		this.addKeyListener(new KeyListener() 
 		{
 			@Override
 			public void keyTyped(KeyEvent e) {
 				if(e.getKeyChar() == KeyEvent.VK_ESCAPE) {
 					stop();
-					//System.exit(1);
+					System.exit(1);
 				}
-				if(e.getKeyChar() == 'z'||e.getKeyChar() == 'Z')
-				{
-					Menu.p1.setOrientation(Player.NORD);
-					Menu.p1.Deplacement();
-					Menu.v.testVictory();
-				}
-				if(e.getKeyChar() == 'q'||e.getKeyChar() == 'Q')
-				{
-					Menu.p1.setOrientation(Player.WEST);
-					Menu.p1.Deplacement();
-					Menu.v.testVictory();
-				}
-				if(e.getKeyChar() == 's'||e.getKeyChar() == 'S')
-				{
-					Menu.p1.setOrientation(Player.SOUTH);
-					Menu.p1.Deplacement();
-					Menu.v.testVictory();
-				}
-				if(e.getKeyChar() == 'd'||e.getKeyChar() == 'D')
-				{
-					Menu.p1.setOrientation(Player.EAST);
-					Menu.p1.Deplacement();
-					Menu.v.testVictory();
-				}
-				
-				
 				System.out.println("Player pos x : "+ Menu.p1.getPosX());
 				System.out.println("Player pos y : "+ Menu.p1.getPosY());
 			}
@@ -91,7 +68,7 @@ public class Render extends JFrame implements Runnable{
 	@Override
 	public void run() 
 	{
-		int fps = 60;
+		int fps = 30;
 		double timeTick = 1000000000 / fps;
 		double delta = 0;
 		long now;
@@ -107,7 +84,8 @@ public class Render extends JFrame implements Runnable{
 			lastTime = now;
 			if(delta >= 1)
 			{	
-				
+				sc.setScoreP1();
+				//sc.setScoreP2();
 				this.repaint();
 				delta--;
 				tick++;

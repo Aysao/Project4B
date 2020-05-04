@@ -15,13 +15,13 @@ public class Player extends Entity {
 	public Player(int x, int y) {
 		super(x, y);
 		Plateau.plateau[x][y] = this;
+		
 	}
 	public Player(int x, int y,String str) {
 		super(x, y);
 		Plateau.plateau[x][y] = this;
 		setPseudo(str);
 		scr.setName(str);
-		
 	}
 	public void Deplacement()
 	{		
@@ -38,7 +38,8 @@ public class Player extends Entity {
 
 						case EAST: {
 						
-							System.out.println("Class : " + Plateau.plateau[this.getPosX()][this.getPosY()+1].getClass());
+							//System.out.println("Class : " + Plateau.plateau[this.getPosX()][this.getPosY()+1].getClass());
+							
 							if(Plateau.plateau[this.getPosX()][this.getPosY()+1].getClass() == String.class)
 							{
 								System.out.println("this.getOrientation() : "+ this.getOrientation() );
@@ -137,11 +138,7 @@ public class Player extends Entity {
 						}break;
 
 						case NORD: {
-							//System.out.println("Class : " + Plateau.plateau[this.getPosX()-1][this.getPosY()].getClass());
-
-						
-							System.out.println("Class : " + Plateau.plateau[this.getPosX()-1][this.getPosY()].getClass());
-
+												
 							if(Plateau.plateau[this.getPosX()-1][this.getPosY()].getClass() == String.class)
 							{
 								Plateau.refreshEntity(this);
@@ -188,7 +185,6 @@ public class Player extends Entity {
 						}break;
 
 						case SOUTH: {													
-							System.out.println("Class : " + Plateau.plateau[this.getPosX()+1][this.getPosY()].getClass());
 							if(Plateau.plateau[this.getPosX()+1][this.getPosY()].getClass() == String.class)
 							{
 								System.out.println("this.getOrientation() : "+ this.getOrientation() );
@@ -272,11 +268,11 @@ public class Player extends Entity {
 	public void setPseudo(String pseudo) {
 		this.pseudo = pseudo;
 	}
-	public Score getScr() {
-		return scr;
-	}
 	public void setScr(Score scr) {
 		this.scr = scr;
+	}
+	public Score getScr() {
+		return scr;
 	}
 	
 	 
