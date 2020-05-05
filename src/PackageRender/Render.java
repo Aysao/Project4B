@@ -1,12 +1,11 @@
 package PackageRender;
 import javax.swing.*;
-
-
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import PackageClass.*;
 import PackageClass.Menu;
+import PackageThreads.*;
 
 
 
@@ -19,7 +18,7 @@ public class Render extends JFrame implements Runnable{
 	private JPanel bottom;
 	private boolean running = true;
 	private ScoringFrame sc;
-	public Render(int L,int H)
+	public Render(int L,int H,KeyListener kl)
 	{
 		Largeur = L;
 		Hauteur = H+50;
@@ -35,7 +34,7 @@ public class Render extends JFrame implements Runnable{
 		this.getContentPane().add(sc,BorderLayout.NORTH);
 		this.getContentPane().add(new GameFrame(Largeur,Hauteur),BorderLayout.CENTER);
 		this.getContentPane().add(bottom,BorderLayout.SOUTH);
-		this.addKeyListener(Menu.p1.getKl());
+		this.addKeyListener(kl);
 		this.addKeyListener(new KeyListener() 
 		{
 			@Override
@@ -75,7 +74,7 @@ public class Render extends JFrame implements Runnable{
 		long lastTime = System.nanoTime();
 		long timer = 0;
 		int tick = 0;
-		
+
 		while(running)
 		{
 			now = System.nanoTime();
@@ -97,7 +96,6 @@ public class Render extends JFrame implements Runnable{
 				timer = 0;
 			}
 		}
-		//stop();
 		
 	} 
 	

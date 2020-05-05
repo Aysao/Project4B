@@ -2,6 +2,7 @@
 import java.io.IOException;
 
 import PackageClass.*;
+import PackageThreads.*;
 
 
 /*
@@ -15,12 +16,8 @@ public class Main {
 	
 	public static void main(String[] args) throws IOException {
 		
-		new Menu(1);
 		
-				
-		Thread t = new Thread(Menu.r);
-		t.start(); 
-		
+		new Menu(1);		
 		
 	}
 		

@@ -23,7 +23,7 @@ public class Player extends Entity {
 		setPseudo(str);
 		scr.setName(str);
 	}
-	public void Deplacement()
+	public synchronized void Deplacement()
 	{		
 			if(this.getClass()==Player.class)
 			{
@@ -229,7 +229,7 @@ public class Player extends Entity {
 						}break;					
 					}				
 				}
-			}					
+			}	
 	}
 	public boolean nextToEdge()
 	{
