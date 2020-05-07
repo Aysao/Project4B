@@ -29,28 +29,27 @@ public class ThreadPlayer implements Runnable {
 					player.setOrientation(Entity.NORD);
 					player.setMouvement(true);
 					//Deplacement();
-					Menu.v.testVictory();
 				}
 				else if(e.getKeyChar() == 'q'||e.getKeyChar() == 'Q')
 				{
 					player.setOrientation(Entity.WEST);
 					player.setMouvement(true);
 					//Deplacement();
-					Menu.v.testVictory();
+					//Menu.v.testVictory();
 				}
 				else if(e.getKeyChar() == 's'||e.getKeyChar() == 'S')
 				{
 					player.setOrientation(Entity.SOUTH);
 					player.setMouvement(true);
 					//Deplacement();
-					Menu.v.testVictory();
+					//Menu.v.testVictory();
 				}
 				else if(e.getKeyChar() == 'd'||e.getKeyChar() == 'D')
 				{
 					player.setOrientation(Entity.EAST);
 					player.setMouvement(true);
 					//Deplacement();
-					Menu.v.testVictory();
+					//Menu.v.testVictory();
 				}
 			}
 		}
@@ -74,15 +73,29 @@ public class ThreadPlayer implements Runnable {
 	{
 		while(running == true)
 		{
-			if(player.isMouvement())
+			if(!Menu.v.isVictory() && player.getVie() > 0)
 			{
-				player.Deplacement();
+				if(player.isMouvement())
+				{
+					player.Deplacement();
+					Menu.v.testVictory();
+				}
+				try {
+					Thread.sleep(250);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			else if(player.getVie() == 0)
+			{
+				System.out.println("Perdu !");
+				stop();
+			}
+			else if(Menu.v.isVictory())
+			{
+				System.out.println("Gagné !");
+				stop();
 			}
 		}
 	}

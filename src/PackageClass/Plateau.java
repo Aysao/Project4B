@@ -25,7 +25,7 @@ public class Plateau {
 		int r ;
 		for(int k = 0;k<3;k++)
 		{
-			r= new Random().nextInt(85);
+			r= new Random().nextInt(84)+1;
 			int cpt=0;
 			for(int i=0 ; i<x ; i++) // on compte pas la bordure
 			{

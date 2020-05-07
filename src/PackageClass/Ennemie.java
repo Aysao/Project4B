@@ -17,7 +17,6 @@ public class Ennemie extends Entity {
 	
 	public Ennemie(int x, int y) {
 		super(x, y);
-		// TODO Auto-generated constructor stub
 	}
 	public void Deplacement()
 	{		

@@ -19,12 +19,12 @@ public class Player extends Entity {
 	}
 	public Player(int x, int y,String str) {
 		super(x, y);
-		Plateau.plateau[x][y] = this;
 		setPseudo(str);
 		scr.setName(str);
 	}
 	public synchronized void Deplacement()
 	{		
+		
 			if(this.getClass()==Player.class)
 			{
 				Player p = (Player)this;
@@ -83,6 +83,19 @@ public class Player extends Entity {
 								Plateau.plateau[this.getPosX()][this.getPosY()+i]=new BlocSpe(this.getPosX(),this.getPosY()+i);					
 								Plateau.refreshEntity(this);								
 							}
+							else if(Plateau.plateau[this.getPosX()][this.getPosY()+1].getClass() == Ennemie.class)
+							{
+								Plateau.refreshEntity(this);
+								if(Vie-1 >= 0)
+								{
+									Vie--;
+									this.setPosX(7);
+									this.setPosY(7);								
+								}
+								
+
+								Plateau.refreshEntity(this);								
+							}
 							
 						}break;
 
@@ -134,6 +147,18 @@ public class Player extends Entity {
 								Plateau.plateau[this.getPosX()][this.getPosY()-i]=new BlocSpe(this.getPosX(),this.getPosY()-i);					
 								Plateau.refreshEntity(this);						
 							}
+							else if(Plateau.plateau[this.getPosX()][this.getPosY()-1].getClass() == Ennemie.class)
+							{
+								Plateau.refreshEntity(this);
+								if(Vie-1 >= 0)
+								{
+									Vie--;
+									this.setPosX(7);
+									this.setPosY(7);								
+								}
+
+								Plateau.refreshEntity(this);								
+							}
 							
 						}break;
 
@@ -181,6 +206,18 @@ public class Player extends Entity {
 								Plateau.plateau[this.getPosX()-i][this.getPosY()]=new BlocSpe(this.getPosX()-i,this.getPosY());					
 								Plateau.refreshEntity(this);								
 							}
+							else if(Plateau.plateau[this.getPosX()-1][this.getPosY()].getClass() == Ennemie.class)
+							{
+								Plateau.refreshEntity(this);
+								if(Vie-1 >= 0)
+								{
+									Vie--;
+									this.setPosX(7);
+									this.setPosY(7);
+								}
+
+								Plateau.refreshEntity(this);								
+							}
 							
 						}break;
 
@@ -225,7 +262,18 @@ public class Player extends Entity {
 								this.setPosX(this.getPosX()+1) ;
 								Plateau.plateau[this.getPosX()+i][this.getPosY()]=new BlocSpe(this.getPosX()+i,this.getPosY());					
 								Plateau.refreshEntity(this);												
-							}	
+							}
+							else if(Plateau.plateau[this.getPosX()+1][this.getPosY()].getClass() == Ennemie.class)
+							{
+								Plateau.refreshEntity(this);
+								if(Vie-1 >= 0)
+								{
+									Vie--;
+									this.setPosX(7);
+									this.setPosY(7);	
+								}
+								Plateau.refreshEntity(this);								
+							}
 						}break;					
 					}				
 				}

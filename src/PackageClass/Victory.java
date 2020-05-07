@@ -45,7 +45,7 @@ public class Victory {
 		System.out.println("--------------------------------------");
 		System.out.println("Vous avez gagné avec : "+Menu.p1.getScr().getPoint()+" pts!");
 		System.out.println("-------------------------------------!");
-		victory = false;
+		victory = true;
 	}
 	public boolean isVictory() {
 		return victory;

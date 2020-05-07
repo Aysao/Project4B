@@ -24,6 +24,7 @@ public abstract class Entity {
 	{
 		posX = x;
 		posY = y;
+		Plateau.plateau[x][y] = this;
 	}
 	public void setPosX(int posX) {
 		this.posX = posX;

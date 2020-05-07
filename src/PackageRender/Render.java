@@ -40,11 +40,18 @@ public class Render extends JFrame implements Runnable{
 			@Override
 			public void keyTyped(KeyEvent e) {
 				if(e.getKeyChar() == KeyEvent.VK_ESCAPE) {
-					stop();
-					System.exit(1);
+					if(running == true)
+					{
+						stop();
+						System.exit(1);
+					}
+					if(running == false)
+					{
+						System.exit(1);
+					}
 				}
-				System.out.println("Player pos x : "+ Menu.p1.getPosX());
-				System.out.println("Player pos y : "+ Menu.p1.getPosY());
+				//System.out.println("Player pos x : "+ Menu.p1.getPosX());
+				//System.out.println("Player pos y : "+ Menu.p1.getPosY());
 			}
 
 			@Override
