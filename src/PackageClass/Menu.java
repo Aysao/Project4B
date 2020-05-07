@@ -15,7 +15,7 @@ public class Menu {
 	public static Ennemie e4;
 	public static Render  r ;
 	public static Victory  v ;
-	public static ThreadPlayer runtp;
+	private ThreadPlayer runtp;
 	public Menu(int i)
 	{
 		switch(i)
@@ -65,7 +65,7 @@ public class Menu {
 		}
 	}
 	
-	public static void fin()
+	public void fin()
 	{
 		r.stop();
 		runtp = null;

@@ -58,8 +58,12 @@ public class Player extends Entity {
 							else if(Plateau.plateau[this.getPosX()][this.getPosY()+1].getClass() == BlocN.class&&Plateau.plateau[this.getPosX()][this.getPosY()+2].getClass()== String.class)
 							{
 								int i = 2;
-								while(Plateau.plateau[this.getPosX()][this.getPosY()+i].getClass()== String.class)
+								while(Plateau.plateau[this.getPosX()][this.getPosY()+i].getClass()== String.class || Plateau.plateau[this.getPosX()][this.getPosY()+i].getClass() == Ennemie.class)
 								{
+									if(Plateau.plateau[this.getPosX()][this.getPosY()+i].getClass() == Ennemie.class)
+									{
+										Plateau.plateau[this.getPosX()][this.getPosY()+i] = "0";
+									}
 									i++;
 								}
 								i-=2;
@@ -72,8 +76,12 @@ public class Player extends Entity {
 							else if(Plateau.plateau[this.getPosX()][this.getPosY()+1].getClass() == BlocSpe.class&&Plateau.plateau[this.getPosX()][this.getPosY()+2].getClass()== String.class)
 							{
 								int i = 2;
-								while(Plateau.plateau[this.getPosX()][this.getPosY()+i].getClass()== String.class)
+								while(Plateau.plateau[this.getPosX()][this.getPosY()+i].getClass()== String.class || Plateau.plateau[this.getPosX()][this.getPosY()+i].getClass() == Ennemie.class)
 								{
+									if(Plateau.plateau[this.getPosX()][this.getPosY()+i].getClass() == Ennemie.class)
+									{
+										Plateau.plateau[this.getPosX()][this.getPosY()+i] = "0";
+									}
 									i++;
 								}
 								i-=2;
@@ -122,8 +130,12 @@ public class Player extends Entity {
 							else if(Plateau.plateau[this.getPosX()][this.getPosY()-1].getClass() == BlocN.class&&Plateau.plateau[this.getPosX()][this.getPosY()-2].getClass()== String.class)
 							{
 								int i = 2;
-								while(Plateau.plateau[this.getPosX()][this.getPosY()-i].getClass()== String.class)
+								while(Plateau.plateau[this.getPosX()][this.getPosY()-i].getClass()== String.class || Plateau.plateau[this.getPosX()][this.getPosY()-i].getClass() == Ennemie.class)
 								{
+									if(Plateau.plateau[this.getPosX()][this.getPosY()-i].getClass() == Ennemie.class)
+									{
+										Plateau.plateau[this.getPosX()][this.getPosY()-i] = "0";
+									}
 									i++;
 								}
 								i-=2;
@@ -136,8 +148,12 @@ public class Player extends Entity {
 							else if(Plateau.plateau[this.getPosX()][this.getPosY()-1].getClass() == BlocSpe.class&&Plateau.plateau[this.getPosX()][this.getPosY()-2].getClass()== String.class)
 							{
 								int i = 2;
-								while(Plateau.plateau[this.getPosX()][this.getPosY()-i].getClass()== String.class)
+								while(Plateau.plateau[this.getPosX()][this.getPosY()-i].getClass()== String.class || Plateau.plateau[this.getPosX()][this.getPosY()-i].getClass() == Ennemie.class)
 								{
+									if(Plateau.plateau[this.getPosX()][this.getPosY()-i].getClass() == Ennemie.class)
+									{
+										Plateau.plateau[this.getPosX()][this.getPosY()-i] = "0";
+									}
 									i++;
 								}
 								i-=2;
@@ -181,8 +197,12 @@ public class Player extends Entity {
 							else if(Plateau.plateau[this.getPosX()-1][this.getPosY()].getClass() == BlocN.class&&Plateau.plateau[this.getPosX()-2][this.getPosY()].getClass()== String.class)
 							{
 								int i = 2;
-								while(Plateau.plateau[this.getPosX()-i][this.getPosY()].getClass()== String.class)
+								while(Plateau.plateau[this.getPosX()-i][this.getPosY()].getClass()== String.class || Plateau.plateau[this.getPosX()-i][this.getPosY()].getClass() == Ennemie.class)
 								{
+									if(Plateau.plateau[this.getPosX()-i][this.getPosY()].getClass() == Ennemie.class)
+									{
+										Plateau.plateau[this.getPosX()-i][this.getPosY()] = "0";
+									}
 									i++;
 								}
 								i-=2;
@@ -195,8 +215,12 @@ public class Player extends Entity {
 							else if(Plateau.plateau[this.getPosX()-1][this.getPosY()].getClass() == BlocSpe.class&&Plateau.plateau[this.getPosX()-2][this.getPosY()].getClass()== String.class)
 							{
 								int i = 2;
-								while(Plateau.plateau[this.getPosX()-i][this.getPosY()].getClass()== String.class)
+								while(Plateau.plateau[this.getPosX()-i][this.getPosY()].getClass()== String.class || Plateau.plateau[this.getPosX()-i][this.getPosY()].getClass() == Ennemie.class)
 								{
+									if(Plateau.plateau[this.getPosX()-i][this.getPosY()].getClass() == Ennemie.class)
+									{
+										Plateau.plateau[this.getPosX()-i][this.getPosY()] = "0";
+									}
 									i++;
 								}
 								i-=2;
@@ -240,8 +264,12 @@ public class Player extends Entity {
 							else if(Plateau.plateau[this.getPosX()+1][this.getPosY()].getClass() == BlocN.class&&Plateau.plateau[this.getPosX()+2][this.getPosY()].getClass()== String.class)
 							{
 								int i = 2;
-								while(Plateau.plateau[this.getPosX()+i][this.getPosY()].getClass()== String.class)
+								while(Plateau.plateau[this.getPosX()+i][this.getPosY()].getClass()== String.class || Plateau.plateau[this.getPosX()+i][this.getPosY()].getClass() == Ennemie.class)
 								{
+									if(Plateau.plateau[this.getPosX()+i][this.getPosY()].getClass() == Ennemie.class)
+									{
+										Plateau.plateau[this.getPosX()+i][this.getPosY()] = "0";
+									}
 									i++;
 								}
 								i-=2;							
@@ -253,8 +281,12 @@ public class Player extends Entity {
 							else if(Plateau.plateau[this.getPosX()+1][this.getPosY()].getClass() == BlocSpe.class&&Plateau.plateau[this.getPosX()+2][this.getPosY()].getClass()== String.class)
 							{
 								int i = 2;
-								while(Plateau.plateau[this.getPosX()+i][this.getPosY()].getClass()== String.class)
+								while(Plateau.plateau[this.getPosX()+i][this.getPosY()].getClass()== String.class || Plateau.plateau[this.getPosX()+i][this.getPosY()].getClass() == Ennemie.class)
 								{
+									if(Plateau.plateau[this.getPosX()+i][this.getPosY()].getClass() == Ennemie.class)
+									{
+										Plateau.plateau[this.getPosX()+i][this.getPosY()] = "0";
+									}
 									i++;
 								}
 								i-=2;							
