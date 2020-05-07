@@ -55,7 +55,7 @@ public class Player extends Entity {
 								Plateau.refreshEntity(this);
 								p.getScr().BlocDestroy();// modifi le score du joueur
 							}
-							else if(Plateau.plateau[this.getPosX()][this.getPosY()+1].getClass() == BlocN.class&&Plateau.plateau[this.getPosX()][this.getPosY()+2].getClass()== String.class)
+							else if(Plateau.plateau[this.getPosX()][this.getPosY()+1].getClass() == BlocN.class&& (Plateau.plateau[this.getPosX()][this.getPosY()+2].getClass()== String.class || Plateau.plateau[this.getPosX()][this.getPosY()+2].getClass() == Ennemie.class))
 							{
 								int i = 2;
 								while(Plateau.plateau[this.getPosX()][this.getPosY()+i].getClass()== String.class || Plateau.plateau[this.getPosX()][this.getPosY()+i].getClass() == Ennemie.class)
@@ -73,7 +73,7 @@ public class Player extends Entity {
 								Plateau.plateau[this.getPosX()][this.getPosY()+i]=new BlocN(this.getPosX(),this.getPosY()+i);					
 								Plateau.refreshEntity(this);								
 							}
-							else if(Plateau.plateau[this.getPosX()][this.getPosY()+1].getClass() == BlocSpe.class&&Plateau.plateau[this.getPosX()][this.getPosY()+2].getClass()== String.class)
+							else if(Plateau.plateau[this.getPosX()][this.getPosY()+1].getClass() == BlocSpe.class&& (Plateau.plateau[this.getPosX()][this.getPosY()+2].getClass()== String.class || Plateau.plateau[this.getPosX()][this.getPosY()+2].getClass() == Ennemie.class))
 							{
 								int i = 2;
 								while(Plateau.plateau[this.getPosX()][this.getPosY()+i].getClass()== String.class || Plateau.plateau[this.getPosX()][this.getPosY()+i].getClass() == Ennemie.class)
@@ -127,7 +127,7 @@ public class Player extends Entity {
 								Plateau.refreshEntity(this);
 								p.getScr().BlocDestroy();
 							}
-							else if(Plateau.plateau[this.getPosX()][this.getPosY()-1].getClass() == BlocN.class&&Plateau.plateau[this.getPosX()][this.getPosY()-2].getClass()== String.class)
+							else if(Plateau.plateau[this.getPosX()][this.getPosY()-1].getClass() == BlocN.class&&(Plateau.plateau[this.getPosX()][this.getPosY()-2].getClass()== String.class|| Plateau.plateau[this.getPosX()][this.getPosY()-2].getClass() == Ennemie.class))
 							{
 								int i = 2;
 								while(Plateau.plateau[this.getPosX()][this.getPosY()-i].getClass()== String.class || Plateau.plateau[this.getPosX()][this.getPosY()-i].getClass() == Ennemie.class)
@@ -145,7 +145,7 @@ public class Player extends Entity {
 								Plateau.plateau[this.getPosX()][this.getPosY()-i]=new BlocN(this.getPosX(),this.getPosY()-i);					
 								Plateau.refreshEntity(this);						
 							}
-							else if(Plateau.plateau[this.getPosX()][this.getPosY()-1].getClass() == BlocSpe.class&&Plateau.plateau[this.getPosX()][this.getPosY()-2].getClass()== String.class)
+							else if(Plateau.plateau[this.getPosX()][this.getPosY()-1].getClass() == BlocSpe.class&& (Plateau.plateau[this.getPosX()][this.getPosY()-2].getClass()== String.class || Plateau.plateau[this.getPosX()][this.getPosY()-2].getClass() == Ennemie.class))
 							{
 								int i = 2;
 								while(Plateau.plateau[this.getPosX()][this.getPosY()-i].getClass()== String.class || Plateau.plateau[this.getPosX()][this.getPosY()-i].getClass() == Ennemie.class)
@@ -194,7 +194,7 @@ public class Player extends Entity {
 								Plateau.refreshEntity(this);
 								p.getScr().BlocDestroy();
 							}
-							else if(Plateau.plateau[this.getPosX()-1][this.getPosY()].getClass() == BlocN.class&&Plateau.plateau[this.getPosX()-2][this.getPosY()].getClass()== String.class)
+							else if(Plateau.plateau[this.getPosX()-1][this.getPosY()].getClass() == BlocN.class&& (Plateau.plateau[this.getPosX()-2][this.getPosY()].getClass()== String.class|| Plateau.plateau[this.getPosX()-2][this.getPosY()].getClass() == Ennemie.class))
 							{
 								int i = 2;
 								while(Plateau.plateau[this.getPosX()-i][this.getPosY()].getClass()== String.class || Plateau.plateau[this.getPosX()-i][this.getPosY()].getClass() == Ennemie.class)
@@ -212,7 +212,7 @@ public class Player extends Entity {
 								Plateau.plateau[this.getPosX()-i][this.getPosY()]=new BlocN(this.getPosX()-i,this.getPosY());					
 								Plateau.refreshEntity(this);								
 							}
-							else if(Plateau.plateau[this.getPosX()-1][this.getPosY()].getClass() == BlocSpe.class&&Plateau.plateau[this.getPosX()-2][this.getPosY()].getClass()== String.class)
+							else if(Plateau.plateau[this.getPosX()-1][this.getPosY()].getClass() == BlocSpe.class&& (Plateau.plateau[this.getPosX()-2][this.getPosY()].getClass()== String.class || Plateau.plateau[this.getPosX()-2][this.getPosY()].getClass() == Ennemie.class))
 							{
 								int i = 2;
 								while(Plateau.plateau[this.getPosX()-i][this.getPosY()].getClass()== String.class || Plateau.plateau[this.getPosX()-i][this.getPosY()].getClass() == Ennemie.class)
@@ -261,7 +261,7 @@ public class Player extends Entity {
 								Plateau.refreshEntity(this);
 								p.getScr().BlocDestroy();
 							}
-							else if(Plateau.plateau[this.getPosX()+1][this.getPosY()].getClass() == BlocN.class&&Plateau.plateau[this.getPosX()+2][this.getPosY()].getClass()== String.class)
+							else if(Plateau.plateau[this.getPosX()+1][this.getPosY()].getClass() == BlocN.class&& (Plateau.plateau[this.getPosX()+2][this.getPosY()].getClass()== String.class|| Plateau.plateau[this.getPosX()+2][this.getPosY()].getClass() == Ennemie.class))
 							{
 								int i = 2;
 								while(Plateau.plateau[this.getPosX()+i][this.getPosY()].getClass()== String.class || Plateau.plateau[this.getPosX()+i][this.getPosY()].getClass() == Ennemie.class)
@@ -278,7 +278,7 @@ public class Player extends Entity {
 								Plateau.plateau[this.getPosX()+i][this.getPosY()]=new BlocN(this.getPosX()+i,this.getPosY());					
 								Plateau.refreshEntity(this);												
 							}	
-							else if(Plateau.plateau[this.getPosX()+1][this.getPosY()].getClass() == BlocSpe.class&&Plateau.plateau[this.getPosX()+2][this.getPosY()].getClass()== String.class)
+							else if(Plateau.plateau[this.getPosX()+1][this.getPosY()].getClass() == BlocSpe.class&& (Plateau.plateau[this.getPosX()+2][this.getPosY()].getClass()== String.class || Plateau.plateau[this.getPosX()+2][this.getPosY()].getClass() == Ennemie.class))
 							{
 								int i = 2;
 								while(Plateau.plateau[this.getPosX()+i][this.getPosY()].getClass()== String.class || Plateau.plateau[this.getPosX()+i][this.getPosY()].getClass() == Ennemie.class)
