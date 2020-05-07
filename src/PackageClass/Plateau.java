@@ -30,8 +30,7 @@ public class Plateau {
 			for(int i=0 ; i<x ; i++) // on compte pas la bordure
 			{
 				for(int j=0 ; j<y; j++)
-				{
-					
+				{					
 					if(i==0||i==x-1)
 					{
 						
@@ -48,17 +47,14 @@ public class Plateau {
 					{
 						plateau[i][j]=new BlocSpe(i,j);
 						break;
-					}
-					
+					}			
 				}
 				if(cpt==r) 
 				{				
 					break;
 				}
 			}
-		}
-		
-		
+		}				
 	}
 	private void affichTab(int x , int y) 
 	{
@@ -89,8 +85,7 @@ public class Plateau {
 						}
 					}									
 				}			
-			}
-			
+			}			
 			System.out.println("");
 		}
 	}
@@ -101,19 +96,26 @@ public class Plateau {
 			for(int j=0 ; j<y; j++)
 			{
 				
-				if(i==0||i==x-1)
-				{
-					plateau[i][j]= new Bordure();
+				if(i==0)
+				{					
+					plateau[i][j]= new Bordure(Bordure.NORD);
 				}
-				if(j==0||j==y-1)
+				if(i==x-1)
 				{
-					plateau[i][j]= new Bordure();
+					plateau[i][j]= new Bordure(Bordure.SOUTH);
+				}
+				if(j==0)
+				{
+					plateau[i][j]= new Bordure(Bordure.WEST);
+				}
+				if(j==y-1)
+				{
+					plateau[i][j]= new Bordure(Bordure.EAST);
 				}
 				if(j!=0&&j!=y-1&&i!=0&&i!=x-1)
 				{
 					plateau[i][j]= new BlocN(i,j);	
-				}
-				
+				}				
 			}
 		}	
 		plateau[15][1] = "0";
@@ -123,8 +125,7 @@ public class Plateau {
 	
 	
 	public void pathInit()
-	{						
-		
+	{							
 		for(int i = hauteur-2;i>=1;i=i-2)//on incr�mente de 2
 		{		
 			for(int j = 1;j<largeur-2;j=j+2)//on incr�mente de 2
@@ -173,76 +174,73 @@ public class Plateau {
 
 	
 	public void pathGeneration(int x,int y)
-	{
-		
+	{		
 		// on genere 2 chemin au nord sud est ou west 
 		int r ;
-		boolean test = true;
-		
-			
-			while(test)
+		boolean test = true;			
+		while(test)
+		{
+			r= new Random().nextInt(4);
+			switch(r)
 			{
-				r= new Random().nextInt(4);
-				switch(r)
+				case 0://test nord
 				{
-					case 0://test nord
+					if(x-2>0&&plateau[x-2][y]!=null)
 					{
-						if(x-2>0&&plateau[x-2][y]!=null)
+						if(plateau[x-2][y].getClass()==BlocN.class)
 						{
-							if(plateau[x-2][y].getClass()==BlocN.class)
-							{
-								plateau[x-1][y]="0";
-								plateau[x-2][y]="0";
-								affichTab(hauteur,largeur);
-								test=false;
-								pathContinue(x-2,y);								
-							}	
-						}					
-					}break;
-					case 1://test sud
+							plateau[x-1][y]="0";
+							plateau[x-2][y]="0";
+							affichTab(hauteur,largeur);
+							test=false;
+							pathContinue(x-2,y);								
+						}	
+					}					
+				}break;
+				case 1://test sud
+				{
+					if(x+2<hauteur&&plateau[x+2][y]!=null)
 					{
-						if(x+2<hauteur&&plateau[x+2][y]!=null)
+						if(plateau[x+2][y].getClass()==BlocN.class)
 						{
-							if(plateau[x+2][y].getClass()==BlocN.class)
-							{
-								plateau[x+1][y]="0";
-								plateau[x+2][y]="0";
-								affichTab(hauteur,largeur);
-								test=false;
-								pathContinue(x+2,y);								
-							}	
-						}					
-					}break;
-					case 2://test west
+							plateau[x+1][y]="0";
+							plateau[x+2][y]="0";
+							affichTab(hauteur,largeur);
+							test=false;
+							pathContinue(x+2,y);								
+						}	
+					}					
+				}break;
+				case 2://test west
+				{
+					if(y-2>0&&plateau[x][y-2]!=null)
 					{
-						if(y-2>0&&plateau[x][y-2]!=null)
+						if(plateau[x][y-2].getClass()==BlocN.class)
 						{
-							if(plateau[x][y-2].getClass()==BlocN.class)
-							{
-								plateau[x][y-1]="0";
-								plateau[x][y-2]="0";
-								affichTab(hauteur,largeur);
-								test=false;
-								pathContinue(x,y-2);									
-							}
-						}					
-					}break;
-					case 3://test est
+							plateau[x][y-1]="0";
+							plateau[x][y-2]="0";
+							affichTab(hauteur,largeur);
+							test=false;
+							pathContinue(x,y-2);									
+						}
+					}					
+				}break;
+				case 3://test est
+				{
+					if(y+2<largeur&&plateau[x][y+2]!=null)
 					{
-						if(y+2<largeur&&plateau[x][y+2]!=null)
+						if(plateau[x][y+2].getClass()==BlocN.class)
 						{
-							if(plateau[x][y+2].getClass()==BlocN.class)
-							{
-								plateau[x][y+1]="0";
-								plateau[x][y+2]="0";
-								affichTab(hauteur,largeur);
-								test=false;
-								pathContinue(x,y+2);								
-							}
-						}					
-					}
+							plateau[x][y+1]="0";
+							plateau[x][y+2]="0";
+							affichTab(hauteur,largeur);
+							test=false;
+							pathContinue(x,y+2);								
+						}
+					}					
 				}
 			}
+		}
 	}
 	public void pathContinue(int x ,int y)
 	{
@@ -285,6 +283,84 @@ public class Plateau {
 			pathInit();
 		}
 	}
+	public static void SwitchBorder(Bordure b)
+	{
+		switch(b.getSide())
+		{
+			case 1 ://n
+			{
+				for(int i = 0;i<largeur;i++)
+				{
+					Bordure bo = (Bordure)plateau[0][i];
+					if(plateau[1][i].getClass()==Ennemi.class)
+					{
+						Ennemi en = (Ennemi)plateau[1][i];
+						en.stun=true;
+					}
+					bo.setActivate(true);				
+				}
+			}break;
+			case 2 ://s
+			{
+				for(int i = 0;i<largeur;i++)
+				{
+					Bordure bo = (Bordure)plateau[hauteur-1][i];
+					if(plateau[hauteur-2][i].getClass()==Ennemi.class)
+					{
+						Ennemi en = (Ennemi)plateau[hauteur-2][i];
+						en.stun=true;
+					}
+					bo.setActivate(true);
+				}
+			}break;
+			case 3 ://e
+			{
+				for(int i = 0;i<hauteur;i++)
+				{
+					Bordure bo = (Bordure)plateau[i][largeur-1];
+					if(plateau[i][largeur-2].getClass()==Ennemi.class)
+					{
+						Ennemi en = (Ennemi)plateau[i][largeur-2];
+						en.stun=true;
+					}
+					bo.setActivate(true);
+				}
+			}break;
+			case 4 ://w
+			{
+				for(int i = 0;i<hauteur;i++)
+				{
+					if(plateau[i][1].getClass()==Ennemi.class)
+					{
+						Ennemi en = (Ennemi)plateau[i][1];
+						en.stun=true;
+					}
+					Bordure bo = (Bordure)plateau[i][0];
+					bo.setActivate(true);
+				}
+			}break;
+		}
+	}
+	public static void stopBordure()
+	{
+		for(int i=0 ; i<hauteur ; i++) // on compte pas la bordure
+		{
+			for(int j=0 ; j<largeur; j++)
+			{					
+				if(i==0||i==hauteur-1)
+				{
+					Bordure b = (Bordure)plateau[i][j];
+					b.setActivate(false);
+				}
+				else if(j==0||j==largeur-1)
+				{
+					Bordure b = (Bordure)plateau[i][j];
+					b.setActivate(false);
+				}
+							
+			}
+		}
+	}
 	public static void refreshEntity(Entity e)
 	{
 		if(plateau[e.getPosX()][e.getPosY()] != e)
@@ -302,5 +378,4 @@ public class Plateau {
 	public static int getHauteur() {
 		return hauteur;
 	}
-
 } 

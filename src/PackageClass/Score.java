@@ -28,7 +28,7 @@ public class Score {
 	}
 	public void mstKill()
 	{
-		this.point=this.point+160;
+		this.point=this.point+40;
 		this.mstKill++;
 	}
 

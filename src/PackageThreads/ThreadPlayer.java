@@ -14,8 +14,7 @@ public class ThreadPlayer implements Runnable {
 	private KeyListener kl = new KeyListener() {
 
 		@Override
-		public void keyTyped(KeyEvent e) {
-			// TODO Auto-generated method stub
+		public void keyTyped(KeyEvent e) {		
 			
 		}
 
@@ -71,8 +70,9 @@ public class ThreadPlayer implements Runnable {
 	@Override
 	public void run()
 	{
-		while(running == true)
+		while(running)
 		{
+			
 			if(!Menu.v.isVictory() && player.getVie() > 0)
 			{
 				if(player.isMouvement())
@@ -81,7 +81,7 @@ public class ThreadPlayer implements Runnable {
 					Menu.v.testVictory();
 				}
 				try {
-					Thread.sleep(250);
+					Thread.sleep(100);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -94,7 +94,7 @@ public class ThreadPlayer implements Runnable {
 			}
 			else if(Menu.v.isVictory())
 			{
-				System.out.println("Gagné !");
+				System.out.println("Gagnï¿½ !");
 				stop();
 			}
 		}

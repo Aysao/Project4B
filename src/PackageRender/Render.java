@@ -39,6 +39,7 @@ public class Render extends JFrame implements Runnable{
 		{
 			@Override
 			public void keyTyped(KeyEvent e) {
+				
 				if(e.getKeyChar() == KeyEvent.VK_ESCAPE) {
 					if(running == true)
 					{

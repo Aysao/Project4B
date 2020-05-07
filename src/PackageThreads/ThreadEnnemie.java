@@ -1,72 +1,184 @@
 package PackageThreads;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.util.Random;
 
-import PackageClass.*;
+import javax.print.attribute.standard.OrientationRequested;
+
+import PackageClass.BlocN;
+import PackageClass.Bordure;
+import PackageClass.Ennemi;
 import PackageClass.Entity;
-import PackageClass.Menu;
+import PackageClass.Plateau;
+import PackageClass.Player;
+
 
 public class ThreadEnnemie implements Runnable{
-	
-	private Ennemie enemie;
-	private KeyListener kl = new KeyListener() {
-
-		@Override
-		public void keyTyped(KeyEvent e) {
-			// TODO Auto-generated method stub
+	private Ennemi en;
+	private int framDelay;
+	private boolean running = true;
+	public ThreadEnnemie(Ennemi e1) {
+		System.out.println("Ennemie set");
+		en=e1;
+		running = true;
+	}
+	@Override
+	public void run() 
+	{
+		
+		while(running )
+		{
 			
-		}
-
-		@Override
-		public void keyPressed(KeyEvent e) {
-			
-			if(enemie.isMouvement() == false)
+			int pX = en.pathX;	
+			int pY = en.pathY;	
+			int x= en.getPosX();
+			int y = en.getPosY();
+			if(en.stun)
 			{
-				if(e.getKeyChar() == 'z'||e.getKeyChar() == 'Z')
-				{
-					enemie.setOrientation(Entity.NORD);
-					enemie.setMouvement(true);
-					//Deplacement();
-					Menu.v.testVictory();
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-				else if(e.getKeyChar() == 'q'||e.getKeyChar() == 'Q')
+				
+				en.stun=false;				
+			}			
+			else 
+			{
+				if(pX==x && pY==y)
 				{
-					enemie.setOrientation(Entity.WEST);
-					enemie.setMouvement(true);
-					//Deplacement();
-					Menu.v.testVictory();
+					System.out.println("path FIND!!!");
+					en.newPoint();
 				}
-				else if(e.getKeyChar() == 's'||e.getKeyChar() == 'S')
+				else
 				{
-					enemie.setOrientation(Entity.SOUTH);
-					enemie.setMouvement(true);
-					//Deplacement();
-					Menu.v.testVictory();
-				}
-				else if(e.getKeyChar() == 'd'||e.getKeyChar() == 'D')
+					goNS();	
+				}	
+				if(en.isMouvement())
 				{
-					enemie.setOrientation(Entity.EAST);
-					enemie.setMouvement(true);
-					//Deplacement();
-					Menu.v.testVictory();
+					en.Deplacement();
+					en.setOrientation(Entity.SO);
+					en.setMouvement(false);
 				}
 			}
-		}
 
-		@Override
-		public void keyReleased(KeyEvent e) {
-			enemie.setMouvement(false);
-			enemie.setOrientation(Entity.SO);
+			try {
+				Thread.sleep(400);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}			
 		}
-		
-	};
-	
-	
-	@Override
-	public void run() {
-		//while()
 	}
-	
-	
+	private void goNS() {
+		int pX = en.pathX;		
+		int x= en.getPosX();
+		int y = en.getPosY();
+		
+		if((pX-x)<0)
+		{
+			
+			if(Plateau.plateau[x-1][y].getClass()==BlocN.class)
+			{
+				if((new Random()).nextInt(100)>70)
+				{
+					en.setOrientation(Entity.NORD);
+					en.setMouvement(true);	
+				}
+				else
+				{
+					goEW();	
+				}
+					
+			}
+			else if(Plateau.plateau[x-1][y].getClass()==String.class||Plateau.plateau[x-1][y].getClass()==Player.class)
+			{
+				en.setOrientation(Entity.NORD);
+				en.setMouvement(true);	
+			}
+			else
+			{
+				goEW();
+			}
+		}
+		else if(((pX-x)>0))
+		{
+			if(Plateau.plateau[x+1][y].getClass()==BlocN.class)
+			{
+				if((new Random()).nextInt(100)>70)
+				{
+					en.setOrientation(Entity.SOUTH);
+					en.setMouvement(true);					
+				}
+				else
+				{
+					goEW();
+				}
+				
+			}
+			else if(Plateau.plateau[x+1][y].getClass()==String.class||Plateau.plateau[x+1][y].getClass()==Player.class)
+			{
+				en.setOrientation(Entity.SOUTH);
+				en.setMouvement(true);					
+			}
+			else
+			{
+				goEW();
+			}
+		}
+		else if((pX-x)==0)
+		{
+			goEW();
+		}	
+		
+	}
+	private void goEW() {
+		int pY = en.pathY;
+		int x= en.getPosX();
+		int y = en.getPosY();		
+		if((pY-y)<0)
+		{
+			
+			if(Plateau.plateau[x][y-1].getClass()==BlocN.class)
+			{
+
+					en.setOrientation(Entity.WEST);
+					en.setMouvement(true);					
+				
+			}
+			else if(Plateau.plateau[x][y-1].getClass()==String.class||Plateau.plateau[x][y-1].getClass()==Player.class)
+			{
+				en.setOrientation(Entity.WEST);
+				en.setMouvement(true);					
+			}
+			else
+			{
+				en.setOrientation(Entity.SO);
+			}
+		}
+		else if(((pY-y)>0))
+		{
+			
+			if(Plateau.plateau[x][y+1].getClass()==BlocN.class)
+			{
+			
+					en.setOrientation(Entity.EAST);
+					en.setMouvement(true);									
+			}
+			else if(Plateau.plateau[x][y+1].getClass()==String.class||Plateau.plateau[x][y+1].getClass()==Player.class)
+			{
+				
+				en.setOrientation(Entity.EAST);
+				en.setMouvement(true);					
+			}
+			else
+			{
+				en.setOrientation(Entity.SO);
+			}
+		}					
+	}	
+	public void stop()
+	{
+		running = false;
+	}
 }

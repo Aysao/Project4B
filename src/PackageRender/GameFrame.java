@@ -61,14 +61,22 @@ public class GameFrame extends JPanel
 						g.setColor(Color.YELLOW);
 						g.fillRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
 					}
-					if(Plateau.plateau[i][j].getClass() == Ennemie.class)
+					if(Plateau.plateau[i][j].getClass() == Ennemi.class)
 					{
-						g.setColor(Color.RED);
+						Ennemi en = (Ennemi)Plateau.plateau[i][j]; 
+						if(en.stun)
+							g.setColor(Color.PINK);
+						else
+							g.setColor(Color.RED);
 						g.fillRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
 					}
 					if(Plateau.plateau[i][j].getClass() == Bordure.class)
 					{
-						g.setColor(Color.GRAY);
+						Bordure b = (Bordure)Plateau.plateau[i][j];
+						if(b.isActivate())					
+							g.setColor(Color.GREEN);
+						else	
+							g.setColor(Color.GRAY);						
 						g.fillRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
 					}
 					if(Plateau.plateau[i][j].getClass() == String.class)

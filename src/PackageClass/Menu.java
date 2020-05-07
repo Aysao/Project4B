@@ -3,16 +3,17 @@ package PackageClass;
 import javax.swing.JOptionPane;
 
 import PackageRender.Render;
+import PackageThreads.ThreadEnnemie;
 import PackageThreads.ThreadPlayer;
 
 
 public class Menu {
 	public static Player p1;
 	public static Entity p2;
-	public static Ennemie e1;
-	public static Ennemie e2;
-	public static Ennemie e3;
-	public static Ennemie e4;
+	public static Ennemi e1;
+	public static Ennemi e2;
+	public static Ennemi e3;
+	public static Ennemi e4;
 	public static Render  r ;
 	public static Victory  v ;
 	private ThreadPlayer runtp;
@@ -24,17 +25,18 @@ public class Menu {
 			{
 				new Plateau();
 				p1 = new Player(7,7);
-				e1 = new Ennemie(1,1);
-				e2 = new Ennemie(11,11);
-				e3 = new Ennemie(11,1);
-				e4 = new Ennemie(1,11);
-				ThreadPlayer runtp = new ThreadPlayer(p1);
+				runtp = new ThreadPlayer(p1);
+				e1 = new Ennemi(1,2);				
+				e2 = new Ennemi(11,3);				
+				e3 = new Ennemi(11,11);				
 				v = new Victory();
-				
 				Thread tp = new Thread(runtp);
-				tp.start();
+				e1.start();
+				e2.start();//les e ont un thread associï¿½ (pour pouvoir le stop grace a l'ennemi)
+				e3.start();				
+				tp.start();				
 				r = new Render(600,800,runtp.getKl());
-				Thread t = new Thread(Menu.r);
+				Thread t = new Thread(r);
 				t.start();
 				
 				while(!(v.isVictory()) && p1.getVie() > 0)
@@ -42,6 +44,7 @@ public class Menu {
 
 					try {
 						Thread.sleep(100);
+						Plateau.stopBordure();
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -54,7 +57,7 @@ public class Menu {
 				}
 				if(v.isVictory() == true)
 				{
-					JOptionPane.showMessageDialog(r, "Gagné !");
+					JOptionPane.showMessageDialog(r, "Gagnï¿½ !");
 				}
 				
 			}
