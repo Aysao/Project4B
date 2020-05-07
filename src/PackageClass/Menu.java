@@ -1,5 +1,7 @@
 package PackageClass;
 
+import javax.swing.JOptionPane;
+
 import PackageRender.Render;
 import PackageThreads.ThreadPlayer;
 
@@ -46,6 +48,14 @@ public class Menu {
 					}
 				}
 				fin();
+				if(v.isVictory() == false)
+				{
+					JOptionPane.showMessageDialog(r, "Perdu !");
+				}
+				if(v.isVictory() == true)
+				{
+					JOptionPane.showMessageDialog(r, "Gagné !");
+				}
 				
 			}
 			case 2:

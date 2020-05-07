@@ -28,7 +28,7 @@ public class Player extends Entity {
 			if(this.getClass()==Player.class)
 			{
 				Player p = (Player)this;
-				System.out.println(p.getScr().getPoint());
+				//System.out.println(p.getScr().getPoint());
 				if((!(this.getPosX() == 1 && this.getOrientation() == WEST) || !(this.getPosX() == 13 && this.getOrientation() == EAST) ||
 						!(this.getPosY() == 1 && this.getOrientation() == NORD) || !(this.getPosY() == 15 && this.getOrientation() == SOUTH)))
 				{			
@@ -42,7 +42,7 @@ public class Player extends Entity {
 							
 							if(Plateau.plateau[this.getPosX()][this.getPosY()+1].getClass() == String.class)
 							{
-								System.out.println("this.getOrientation() : "+ this.getOrientation() );
+								//System.out.println("this.getOrientation() : "+ this.getOrientation() );
 								Plateau.refreshEntity(this); 
 								this.setPosY(this.getPosY()+1) ;
 								Plateau.refreshEntity(this);
@@ -101,7 +101,7 @@ public class Player extends Entity {
 
 						case WEST: {
 
-							System.out.println("Class : " + Plateau.plateau[this.getPosX()][this.getPosY()-1].getClass());
+							//System.out.println("Class : " + Plateau.plateau[this.getPosX()][this.getPosY()-1].getClass());
 
 
 							if(Plateau.plateau[this.getPosX()][this.getPosY()-1].getClass() == String.class)
@@ -224,7 +224,7 @@ public class Player extends Entity {
 						case SOUTH: {													
 							if(Plateau.plateau[this.getPosX()+1][this.getPosY()].getClass() == String.class)
 							{
-								System.out.println("this.getOrientation() : "+ this.getOrientation() );
+								//System.out.println("this.getOrientation() : "+ this.getOrientation() );
 								Plateau.refreshEntity(this);
 								this.setPosX(this.getPosX()+1) ;
 								Plateau.refreshEntity(this);
