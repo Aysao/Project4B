@@ -75,7 +75,7 @@ public class Render extends JFrame implements Runnable{
 	@Override
 	public void run() 
 	{
-		int fps = 30;
+		int fps = 60;
 		double timeTick = 1000000000 / fps;
 		double delta = 0;
 		long now;

@@ -86,4 +86,24 @@ public class ScoringFrame extends JPanel {
 			scorep2.setText(s);
 		}
 	}
+	/*
+	public void setHighScore()
+	{
+		for(int j = 100000;j > 0;j = j/10)
+		{
+			if((p.getScr().getPoint()/j) >= 1 && (int)(p.getScr().getPoint()/j) < 10)
+			{
+				s += p.getScr().getPoint();
+				break;
+			}
+			else
+			{
+				s += "0";
+			}
+			
+		}
+		highscore.setText(s);
+	}
+	*/
+	
 } 
