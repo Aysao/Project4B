@@ -60,7 +60,7 @@ public class GameFrame extends JPanel
 					if(Plateau.plateau[i][j].getClass() == Player.class)
 					{
 						Player p = (Player) Plateau.plateau[i][j];
-						g.setColor(Color.YELLOW);
+						g.setColor(Color.BLACK);
 						g.fillRect(BlockL*j,BlockH*i,BlockL,BlockH);
 						g.drawImage(pengou,BlockL*j,BlockH*i,BlockL,BlockH, null);
 						

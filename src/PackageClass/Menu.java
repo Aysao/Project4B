@@ -27,7 +27,7 @@ public class Menu {
 			case 1://nb de joueur 
 			{
 				new Plateau();
-				p1 = new Player(7,7);
+				p1 = new Player(7,7,"karvrak");
 				runtp = new ThreadPlayer(p1);
 				e1 = new Ennemi();				
 				e2 = new Ennemi();				
