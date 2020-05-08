@@ -10,7 +10,7 @@ import PackageRender.Render;
 import PackageThreads.ThreadPlayer;
 
 
-public class Menu {
+public class Menu implements Runnable {
 	public static Player p1;
 	public static Entity p2;
 	public static int ennemiVie=6;
@@ -21,17 +21,19 @@ public class Menu {
 	public static Render  r ;
 	public static Victory  v ;
 	private ThreadPlayer runtp;
-	public Menu(int i) 
+	private JFrame menuPrincipal;
+	public Menu(JFrame f,int i) 
 	{
+		menuPrincipal = f;
 		switch(i)
 		{
 			case 1://nb de joueur 
 			{
 				new Plateau();
-				p1 = new Player(7,7,"karvrak");
+				Menu.p1 = new Player(7,7,"karvrak");
 				runtp = new ThreadPlayer(p1);
-				e1 = new Ennemi();				
-				e2 = new Ennemi();				
+				Menu.e1 = new Ennemi();				
+				Menu.e2 = new Ennemi();				
 				e3 = new Ennemi();				
 				v = new Victory();
 				Thread tp = new Thread(runtp);
@@ -42,32 +44,14 @@ public class Menu {
 				r = new Render(600,800,runtp.getKl());
 				Thread t = new Thread(r);
 				t.start();
+				/*
 				
-				while(!(v.isVictory()) && p1.getVie() > 0)
-				{
-
-					try {
-						Thread.sleep(100);
-						Plateau.stopBordure();
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				fin();
-				if(v.isVictory() == false)
-				{
-					JOptionPane.showMessageDialog(r, "Perdu !");
-				}
-				if(v.isVictory() == true)
-				{
-					JOptionPane.showMessageDialog(r, "Gagné!");
-				}
+				*/
 				
 			}
 			case 2:
 			{
-				
+				v = new Victory();
 			}
 		}
 	}
@@ -96,6 +80,33 @@ public class Menu {
 			e.printStackTrace();
 		}
 		r.stop();
+		r.dispose();
+		menuPrincipal.setVisible(true);
 		runtp = null;
+	}
+	@Override
+	public void run() {
+		
+		while(!(v.isVictory()) && p1.getVie() > 0)
+		{
+
+			try {
+				Thread.sleep(100);
+				Plateau.stopBordure();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		fin();
+		if(v.isVictory() == false)
+		{
+			JOptionPane.showMessageDialog(r, "Perdu !");
+		}
+		if(v.isVictory() == true)
+		{
+			JOptionPane.showMessageDialog(r, "Gagné!");
+		}
+		
 	}
 }

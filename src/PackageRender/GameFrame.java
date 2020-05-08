@@ -1,5 +1,7 @@
 package PackageRender;
 import PackageClass.*;
+import PackageThreads.ThreadPlayer;
+
 import java.awt.*;
 
 
@@ -7,7 +9,6 @@ import javax.swing.*;
 
 public class GameFrame extends JPanel 
 {
-	
 	private int Largeur = 800-5;
 	private int Hauteur = 600;
 	private int BlockL = Largeur/Plateau.getLargeur();
@@ -15,13 +16,18 @@ public class GameFrame extends JPanel
 	private Image iceblock;
 	private ImageIcon ii = new ImageIcon("res/GlaceBlock.png");
 	private Image pengou;
-	
+	private Image diamond;
+	private Image angye;
+	private Image e;
 	
 	public GameFrame(int L,int H)
 	{
 		iceblock = ii.getImage();
 		ii = new ImageIcon("res/Penguin1.png");
 		pengou = ii.getImage();
+		diamond = new ImageIcon("res/Diamant.png").getImage();
+		angye = new ImageIcon("res/Angrycloud.png").getImage();
+		e = new ImageIcon("res/Cutecloud.png").getImage();
 		Largeur = L-5;
 		Hauteur = H-2*(H/15)-37;
 		BlockH = Hauteur/Plateau.getHauteur();
@@ -54,8 +60,9 @@ public class GameFrame extends JPanel
 					}
 					if(Plateau.plateau[i][j].getClass() == BlocSpe.class)
 					{
-						g.setColor(Color.CYAN);
+						g.setColor(Color.black);
 						g.fillRect(BlockL*j,BlockH*i,BlockL,BlockH);
+						g.drawImage(diamond,BlockL*j,BlockH*i,BlockL,BlockH, null);
 					}
 					if(Plateau.plateau[i][j].getClass() == Player.class)
 					{
@@ -88,11 +95,17 @@ public class GameFrame extends JPanel
 					if(Plateau.plateau[i][j].getClass() == Ennemi.class)
 					{
 						Ennemi en = (Ennemi)Plateau.plateau[i][j]; 
-						if(en.stun)
-							g.setColor(Color.PINK);
-						else
-							g.setColor(Color.RED);
+						g.setColor(Color.black);
 						g.fillRect(BlockL*j,BlockH*i,BlockL,BlockH);
+						if(en.stun)
+						{
+							g.drawImage(e,BlockL*j,BlockH*i,BlockL,BlockH, null);
+						}
+						else
+						{
+							g.drawImage(angye,BlockL*j,BlockH*i,BlockL,BlockH, null);
+						}
+
 						
 						switch(en.getOrientation())
 						{

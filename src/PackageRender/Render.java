@@ -21,21 +21,25 @@ public class Render extends JFrame implements Runnable{
 	public Render(int L,int H,KeyListener kl)
 	{
 		//super(f , b);
+		System.out.println("test");
 		Largeur = L;
 		Hauteur = H+50;
 		bottom = new JPanel();
 		bottom.setPreferredSize(new Dimension(Largeur,Hauteur/15));
 		bottom.setBackground(Color.black);
 		sc = new ScoringFrame(Largeur,Hauteur);
+		System.out.println("test");
 		this.setSize(Largeur, Hauteur);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
+		System.out.println("test");
 		this.getContentPane().setLayout(new BorderLayout());
 		this.getContentPane().add(sc,BorderLayout.NORTH);
 		this.getContentPane().add(new GameFrame(Largeur,Hauteur),BorderLayout.CENTER);
 		this.getContentPane().add(bottom,BorderLayout.SOUTH);
 		this.addKeyListener(kl);
+		System.out.println("test");
 		this.addKeyListener(new KeyListener() 
 		{
 			@Override
@@ -72,6 +76,7 @@ public class Render extends JFrame implements Runnable{
 			
 		
 		this.repaint();
+		this.revalidate();
 	}
 	@Override
 	public void run() 

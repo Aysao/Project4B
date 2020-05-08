@@ -2,24 +2,32 @@ package PackageRender;
 
 import javax.swing.*;
 
+import PackageClass.Ennemi;
+import PackageClass.Entity;
 import PackageClass.Menu;
+import PackageClass.Plateau;
+import PackageClass.Player;
+import PackageClass.Victory;
+import PackageThreads.ThreadPlayer;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class JMenuPrincipal extends JFrame {
+	private ThreadPlayer runtp;
 	private JPanel pprincipal;
 	private JPanel pbutton;
-	private JButton b1;
-	private JButton b2;
-	private JButton b3;
-	private JButton b4;
+	private MButton b1;
+	private MButton b2;
+	private MButton b3;
+	private MButton b4;
 	private int choix;
 	private JFrame f;
 	public JMenuPrincipal() {	
 		f = this;
-		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(800,600);
 		this.setTitle("Pengo !!");
 		initComposant();
@@ -35,10 +43,26 @@ public class JMenuPrincipal extends JFrame {
 		pprincipal.setLayout(null);
 		pbutton = new JPanel();
 		pbutton.setLayout(new GridLayout(2,2));
-		b1 = new JButton("Jouer solo");
-		b2 = new JButton("Jouer multi");
-		b3 = new JButton("Option");
-		b4 = new JButton("Quitter");
+		b1 = new MButton("res/GlaceBlock.png");
+		b2 = new MButton("res/GlaceBlock.png");
+		b3 = new MButton("res/GlaceBlock.png");
+		b4 = new MButton("res/GlaceBlock.png");
+		b1.setText("Partie Solo");
+		b2.setText("Partie Multi");
+		b3.setText("Option");
+		b4.setText("Quitter");
+		b1.setRollover("res/blurGlaceBlock.png");
+		b2.setRollover("res/blurGlaceBlock.png");
+		b3.setRollover("res/blurGlaceBlock.png");
+		b4.setRollover("res/blurGlaceBlock.png");
+		b1.setPressed("res/click.png");
+		b2.setPressed("res/click.png");
+		b3.setPressed("res/click.png");
+		b4.setPressed("res/click.png");
+		b1.setBorder(null);
+		b2.setBorder(null);
+		b3.setBorder(null);
+		b4.setBorder(null);
 		pbutton.add(b1);
 		pbutton.add(b2);
 		pbutton.add(b3);
@@ -58,8 +82,19 @@ public class JMenuPrincipal extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				choix = 1;
+				Menu m = new Menu(f,choix);
+				Thread t = new Thread(m);
+				t.start();
 				f.setVisible(false);
-				Menu m = new Menu(choix);
+			}
+			
+		});
+		b4.addActionListener(new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(1);
 			}
 			
 		});
@@ -69,5 +104,5 @@ public class JMenuPrincipal extends JFrame {
 	public int getChoix() {
 		return choix;
 	}
-
 }
+
