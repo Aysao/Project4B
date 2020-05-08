@@ -18,20 +18,23 @@ public class Score {
 	private int mstKill = 0;
 	private int blocDestroy = 0;
 	private double[] scores;
+	public static double highscore;
 	private String[] pseudo;
 	private String name = null; 
 	public Score()
 	{
-		
+		 getScore();
 	}
 	public Score(String name)
 	{
+		getScore();
 		this.name = name;
 	}
 	public void mstKill()
 	{
 		this.point=this.point+40;
 		this.mstKill++;
+		
 	}
 
 	public void BlocDestroy()
@@ -65,11 +68,12 @@ public class Score {
 	    {
 			System.out.println(e.toString());
 		}
+	    highscore = scores[0];
 	    
 	}
 	public void setScore() throws IOException
 	{
-	    getScore();
+	   
 	    for(int i = 0;i<10;i++) // on parcours le classement pour voir si le nouveau score y est 
 	    {
 	    	if(scores[i]<this.point) // si new score > un score 

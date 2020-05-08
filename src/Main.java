@@ -1,7 +1,11 @@
 
+
 import java.io.IOException;
 
+import javax.swing.JFrame;
+
 import PackageClass.*;
+import PackageRender.JMenuPrincipal;
 import PackageThreads.*;
 
 
@@ -13,11 +17,10 @@ import PackageThreads.*;
 
 public class Main {
 	
-	
 	public static void main(String[] args) throws IOException {
 		
-		
-		new Menu(1);		
+		JMenuPrincipal jmp = new JMenuPrincipal();
+				
 		
 	}
 		

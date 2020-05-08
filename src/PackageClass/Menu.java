@@ -2,6 +2,7 @@ package PackageClass;
 
 import java.io.IOException;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import PackageRender.Render;

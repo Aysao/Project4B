@@ -20,6 +20,7 @@ public class Render extends JFrame implements Runnable{
 	private ScoringFrame sc;
 	public Render(int L,int H,KeyListener kl)
 	{
+		//super(f , b);
 		Largeur = L;
 		Hauteur = H+50;
 		bottom = new JPanel();
@@ -92,6 +93,7 @@ public class Render extends JFrame implements Runnable{
 			if(delta >= 1)
 			{	
 				sc.setScoreP1();
+				sc.setHighScore();
 				//sc.setScoreP2();
 				this.repaint();
 				delta--;
