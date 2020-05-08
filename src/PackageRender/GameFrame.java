@@ -12,12 +12,16 @@ public class GameFrame extends JPanel
 	private int Hauteur = 600;
 	private int BlockL = Largeur/Plateau.getLargeur();
 	private int BlockH = Hauteur/Plateau.getHauteur();
-	//private Image iceblock;
-	//private ImageIcon ii = new ImageIcon("res/GlaceBlock.png");
+	private Image iceblock;
+	private ImageIcon ii = new ImageIcon("res/GlaceBlock.png");
+	private Image pengou;
+	
 	
 	public GameFrame(int L,int H)
 	{
-		
+		iceblock = ii.getImage();
+		ii = new ImageIcon("res/Penguin1.png");
+		pengou = ii.getImage();
 		Largeur = L-5;
 		Hauteur = H-2*(H/15)-37;
 		BlockH = Hauteur/Plateau.getHauteur();
@@ -48,18 +52,41 @@ public class GameFrame extends JPanel
 					if(Plateau.plateau[i][j].getClass() == BlocN.class)
 					{
 						g.setColor(Color.BLUE);
-						g.fillRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
-						//g.drawImage(iceblock,BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1), null);
+						g.fillRect(BlockL*j,BlockH*i,BlockL,BlockH);
+						g.drawImage(iceblock,BlockL*j,BlockH*i,BlockL,BlockH, null);
 					}
 					if(Plateau.plateau[i][j].getClass() == BlocSpe.class)
 					{
 						g.setColor(Color.CYAN);
-						g.fillRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
+						g.fillRect(BlockL*j,BlockH*i,BlockL,BlockH);
 					}
 					if(Plateau.plateau[i][j].getClass() == Player.class)
 					{
+						Player p = (Player) Plateau.plateau[i][j];
 						g.setColor(Color.YELLOW);
-						g.fillRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
+						g.fillRect(BlockL*j,BlockH*i,BlockL,BlockH);
+						g.drawImage(pengou,BlockL*j,BlockH*i,BlockL,BlockH, null);
+						
+						switch(p.getOrientation())
+						{
+							case Player.NORD:{
+								g.setColor(Color.BLACK);
+								g.fillRect((BlockL*j+(int)(BlockL/2)-5),BlockH*i+5,11,10);
+							}break;
+							case Player.EAST:{
+								g.setColor(Color.BLACK);
+								g.fillRect(BlockL*(j+1)-5,BlockH*i+(int)(BlockH/2)-5,-10,11);
+							}break;
+							case Player.WEST:{
+								g.setColor(Color.BLACK);
+								g.fillRect(BlockL*(j)+5,BlockH*i+(int)(BlockH/2)-5,10,11);
+							}break;
+							case Player.SOUTH:{
+								g.setColor(Color.BLACK);
+								g.fillRect((BlockL*j+(int)(BlockL/2)-5),BlockH*(i+1)-5,11,-10);
+							}break;
+						}
+						
 					}
 					if(Plateau.plateau[i][j].getClass() == Ennemi.class)
 					{
@@ -68,7 +95,27 @@ public class GameFrame extends JPanel
 							g.setColor(Color.PINK);
 						else
 							g.setColor(Color.RED);
-						g.fillRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
+						g.fillRect(BlockL*j,BlockH*i,BlockL,BlockH);
+						
+						switch(en.getOrientation())
+						{
+							case Player.NORD:{
+								g.setColor(Color.BLACK);
+								g.fillRect((BlockL*j+(int)(BlockL/2)-5),BlockH*i+5,11,10);
+							}break;
+							case Player.EAST:{
+								g.setColor(Color.BLACK);
+								g.fillRect(BlockL*(j+1)-5,BlockH*i+(int)(BlockH/2)-5,-10,11);
+							}break;
+							case Player.WEST:{
+								g.setColor(Color.BLACK);
+								g.fillRect(BlockL*(j)+5,BlockH*i+(int)(BlockH/2)-5,10,11);
+							}break;
+							case Player.SOUTH:{
+								g.setColor(Color.BLACK);
+								g.fillRect((BlockL*j+(int)(BlockL/2)-5),BlockH*(i+1)-5,11,-10);
+							}break;
+						}
 					}
 					if(Plateau.plateau[i][j].getClass() == Bordure.class)
 					{
@@ -77,17 +124,17 @@ public class GameFrame extends JPanel
 							g.setColor(Color.GREEN);
 						else	
 							g.setColor(Color.GRAY);						
-						g.fillRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
+						g.fillRect(BlockL*j,BlockH*i,BlockL,BlockH);
 					}
 					if(Plateau.plateau[i][j].getClass() == String.class)
 					{
 						g.setColor(Color.BLACK);
-						g.fillRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
+						g.fillRect(BlockL*j,BlockH*i,BlockL,BlockH);
 					}
 					
 				}
 				g.setColor(Color.black);
-				g.drawRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
+				g.drawRect(BlockL*j,BlockH*i,BlockL,BlockH);
 				
 			}
 		}

@@ -56,7 +56,7 @@ public class ThreadPlayer implements Runnable {
 		@Override
 		public void keyReleased(KeyEvent e) {
 			player.setMouvement(false);
-			player.setOrientation(Entity.SO);
+			//player.setOrientation(Entity.SO);
 		}
 		
 	};

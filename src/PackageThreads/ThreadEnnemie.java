@@ -57,7 +57,7 @@ public class ThreadEnnemie implements Runnable{
 				if(en.isMouvement())
 				{
 					en.Deplacement();
-					en.setOrientation(Entity.SO);
+					//en.setOrientation(Entity.SO);
 					en.setMouvement(false);
 				}
 			}
