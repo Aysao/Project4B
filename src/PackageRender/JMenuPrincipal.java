@@ -30,6 +30,7 @@ public class JMenuPrincipal extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(800,600);
 		this.setTitle("Pengo !!");
+		this.setBackground(Color.black);	
 		initComposant();
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
@@ -38,10 +39,12 @@ public class JMenuPrincipal extends JFrame {
 	
 	private void initComposant()
 	{
-		pprincipal = new JPanel();
+		pprincipal = new ImagePanel("res/PengoTitle.png");
 		pprincipal.setBackground(Color.black);
+		//pprincipal.setOpaque(false);
 		pprincipal.setLayout(null);
 		pbutton = new JPanel();
+		pbutton.setOpaque(false);
 		pbutton.setLayout(new GridLayout(2,2));
 		b1 = new MButton("res/GlaceBlock.png");
 		b2 = new MButton("res/GlaceBlock.png");
@@ -69,7 +72,7 @@ public class JMenuPrincipal extends JFrame {
 		pbutton.add(b4);
 		pprincipal.add(pbutton);
 		//pbutton.setBounds(new Rectangle((f.getWidth()/4),f.getHeight()/4,(f.getWidth()/4)*2,(f.getHeight()/4)*2));
-		pbutton.setBounds((this.getWidth()/4),this.getHeight()/4,(this.getWidth()/4)*2,(this.getHeight()/4)*2);
+		pbutton.setBounds((this.getWidth()/4),(this.getHeight()/4)*2,(this.getWidth()/4)*2,(this.getHeight()/4)*1);
 		
 		this.add(pprincipal);
 		
@@ -104,5 +107,7 @@ public class JMenuPrincipal extends JFrame {
 	public int getChoix() {
 		return choix;
 	}
+	
+	
 }
 
