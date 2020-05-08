@@ -12,8 +12,6 @@ public class Victory {
 	{
 		int x = Plateau.getHauteur();
 		int y = Plateau.getLargeur();
-	
-		
 		for(int i=0 ; i<x ; i++) // on compte pas la bordure
 		{
 			for(int j=0 ; j<y; j++)
@@ -31,8 +29,7 @@ public class Victory {
 						victory=true;
 					}
 				}				
-			}
-			
+			}			
 		}		
 		if(victory)
 		{

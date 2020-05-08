@@ -1,15 +1,18 @@
 package PackageClass;
 
+import java.io.IOException;
+
 import javax.swing.JOptionPane;
 
 import PackageRender.Render;
-import PackageThreads.ThreadEnnemie;
+
 import PackageThreads.ThreadPlayer;
 
 
 public class Menu {
 	public static Player p1;
 	public static Entity p2;
+	public static int ennemiVie=6;
 	public static Ennemi e1;
 	public static Ennemi e2;
 	public static Ennemi e3;
@@ -17,18 +20,18 @@ public class Menu {
 	public static Render  r ;
 	public static Victory  v ;
 	private ThreadPlayer runtp;
-	public Menu(int i)
+	public Menu(int i) 
 	{
 		switch(i)
 		{
-			case 1: 
+			case 1://nb de joueur 
 			{
 				new Plateau();
 				p1 = new Player(7,7);
 				runtp = new ThreadPlayer(p1);
-				e1 = new Ennemi(1,2);				
-				e2 = new Ennemi(11,3);				
-				e3 = new Ennemi(11,11);				
+				e1 = new Ennemi();				
+				e2 = new Ennemi();				
+				e3 = new Ennemi();				
 				v = new Victory();
 				Thread tp = new Thread(runtp);
 				e1.start();
@@ -57,7 +60,7 @@ public class Menu {
 				}
 				if(v.isVictory() == true)
 				{
-					JOptionPane.showMessageDialog(r, "Gagnï¿½ !");
+					JOptionPane.showMessageDialog(r, "Gagné!");
 				}
 				
 			}
@@ -67,9 +70,30 @@ public class Menu {
 			}
 		}
 	}
-	
-	public void fin()
+	public static void newEnnemi()
 	{
+		ennemiVie--;
+		System.out.println("vie"+ennemiVie);
+		if(ennemiVie==0)
+		{
+			v.setVictory(true);
+			return;
+		}
+		else if(ennemiVie>=3)
+		{
+			Ennemi e=new Ennemi();
+			e.start();	
+		}
+		
+	}
+
+	public void fin() 
+	{
+		try {
+			p1.getScr().setScore();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		r.stop();
 		runtp = null;
 	}

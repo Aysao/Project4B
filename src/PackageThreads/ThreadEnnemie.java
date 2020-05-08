@@ -24,7 +24,12 @@ public class ThreadEnnemie implements Runnable{
 	@Override
 	public void run() 
 	{
-		
+		try {
+			Thread.sleep(700);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		while(running )
 		{
 			
@@ -63,7 +68,7 @@ public class ThreadEnnemie implements Runnable{
 			}
 
 			try {
-				Thread.sleep(400);
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -153,7 +158,7 @@ public class ThreadEnnemie implements Runnable{
 			}
 			else
 			{
-				en.setOrientation(Entity.SO);
+			//	en.setOrientation(Entity.SO);
 			}
 		}
 		else if(((pY-y)>0))
@@ -173,7 +178,7 @@ public class ThreadEnnemie implements Runnable{
 			}
 			else
 			{
-				en.setOrientation(Entity.SO);
+			//	en.setOrientation(Entity.SO);
 			}
 		}					
 	}	

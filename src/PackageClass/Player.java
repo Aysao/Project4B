@@ -71,6 +71,7 @@ public class Player extends Entity {
 										en.stop();
 										scr.mstKill();
 										Plateau.plateau[this.getPosX()][this.getPosY()+i] = "0";
+										Menu.newEnnemi();
 									}
 									i++;
 								}
@@ -92,6 +93,7 @@ public class Player extends Entity {
 										en.stop();
 										scr.mstKill();
 										Plateau.plateau[this.getPosX()][this.getPosY()+i] = "0";
+										Menu.newEnnemi();
 									}
 									i++;
 								}
@@ -112,8 +114,8 @@ public class Player extends Entity {
 									this.setPosY(this.getPosY()+1);
 									Plateau.refreshEntity(en);
 									Plateau.refreshEntity(this);
-									this.getScr().mstKill();
-									System.out.println("vous avez tu� un ennemi!");
+									this.getScr().mstKill();					
+									Menu.newEnnemi();
 								}
 								else
 								{
@@ -165,6 +167,7 @@ public class Player extends Entity {
 										en.stop();
 										scr.mstKill();
 										Plateau.plateau[this.getPosX()][this.getPosY()-i] = "0";
+										Menu.newEnnemi();
 									}
 									i++;
 								}
@@ -186,6 +189,7 @@ public class Player extends Entity {
 										en.stop();
 										scr.mstKill();
 										Plateau.plateau[this.getPosX()][this.getPosY()-i] = "0";
+										Menu.newEnnemi();
 									}
 									i++;
 								}
@@ -208,7 +212,7 @@ public class Player extends Entity {
 									Plateau.refreshEntity(en);
 									Plateau.refreshEntity(this);
 									this.getScr().mstKill();
-									System.out.println("vous avez tu� un ennemi!");
+									Menu.newEnnemi();
 								}
 								else
 								{
@@ -257,6 +261,7 @@ public class Player extends Entity {
 										en.stop();
 										scr.mstKill();
 										Plateau.plateau[this.getPosX()-i][this.getPosY()] = "0";
+										Menu.newEnnemi();
 									}
 									i++;
 								}
@@ -278,6 +283,7 @@ public class Player extends Entity {
 										en.stop();
 										scr.mstKill();
 										Plateau.plateau[this.getPosX()-i][this.getPosY()] = "0";
+										Menu.newEnnemi();
 									}
 									i++;
 								}
@@ -300,7 +306,7 @@ public class Player extends Entity {
 									Plateau.refreshEntity(en);
 									Plateau.refreshEntity(this);
 									this.getScr().mstKill();
-									System.out.println("vous avez tu� un ennemi!");
+									Menu.newEnnemi();
 								}
 								else
 								{
@@ -349,6 +355,7 @@ public class Player extends Entity {
 										en.stop();
 										scr.mstKill();
 										Plateau.plateau[this.getPosX()+i][this.getPosY()] = "0";
+										Menu.newEnnemi();
 									}
 									i++;
 								}
@@ -369,6 +376,7 @@ public class Player extends Entity {
 										en.stop();
 										scr.mstKill();
 										Plateau.plateau[this.getPosX()+i][this.getPosY()] = "0";
+										Menu.newEnnemi();
 									}
 									i++;
 								}
@@ -391,7 +399,7 @@ public class Player extends Entity {
 									Plateau.refreshEntity(en);
 									Plateau.refreshEntity(this);
 									this.getScr().mstKill();
-									System.out.println("vous avez tu� un ennemi!");
+									Menu.newEnnemi();
 								}
 								else
 								{
@@ -403,8 +411,7 @@ public class Player extends Entity {
 										this.setPosY(7);	
 									}
 									Plateau.refreshEntity(this);
-								}
-																
+								}																
 							}
 						}break;					
 					}				

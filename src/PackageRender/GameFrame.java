@@ -33,10 +33,7 @@ public class GameFrame extends JPanel
 		
 	}
 	
-	private void initImage() 
-	{
-		
-	}
+
 	
 
 	public void paintComponent(Graphics g)
@@ -69,22 +66,22 @@ public class GameFrame extends JPanel
 						
 						switch(p.getOrientation())
 						{
-							case Player.NORD:{
-								g.setColor(Color.BLACK);
-								g.fillRect((BlockL*j+(int)(BlockL/2)-5),BlockH*i+5,11,10);
-							}break;
-							case Player.EAST:{
-								g.setColor(Color.BLACK);
-								g.fillRect(BlockL*(j+1)-5,BlockH*i+(int)(BlockH/2)-5,-10,11);
-							}break;
-							case Player.WEST:{
-								g.setColor(Color.BLACK);
-								g.fillRect(BlockL*(j)+5,BlockH*i+(int)(BlockH/2)-5,10,11);
-							}break;
-							case Player.SOUTH:{
-								g.setColor(Color.BLACK);
-								g.fillRect((BlockL*j+(int)(BlockL/2)-5),BlockH*(i+1)-5,11,-10);
-							}break;
+						case Entity.NORD:{
+                            g.setColor(Color.BLACK);
+                            g.fillRect((BlockL*j+(int)(BlockL/2)-5),BlockH*i+5,11,10);
+                        }break;
+                        case Entity.EAST:{
+                            g.setColor(Color.BLACK);
+                            g.fillRect(BlockL*(j+1)-5,BlockH*i+(int)(BlockH/2)-5,-10,11);
+                        }break;
+                        case Entity.WEST:{
+                            g.setColor(Color.BLACK);
+                            g.fillRect(BlockL*(j)+5,BlockH*i+(int)(BlockH/2)-5,10,11);
+                        }break;
+                        case Entity.SOUTH:{
+                            g.setColor(Color.BLACK);
+                            g.fillRect((BlockL*j+(int)(BlockL/2)-5),BlockH*(i+1)-5,11,-10);
+                        }break;
 						}
 						
 					}
@@ -99,22 +96,22 @@ public class GameFrame extends JPanel
 						
 						switch(en.getOrientation())
 						{
-							case Player.NORD:{
-								g.setColor(Color.BLACK);
-								g.fillRect((BlockL*j+(int)(BlockL/2)-5),BlockH*i+5,11,10);
-							}break;
-							case Player.EAST:{
-								g.setColor(Color.BLACK);
-								g.fillRect(BlockL*(j+1)-5,BlockH*i+(int)(BlockH/2)-5,-10,11);
-							}break;
-							case Player.WEST:{
-								g.setColor(Color.BLACK);
-								g.fillRect(BlockL*(j)+5,BlockH*i+(int)(BlockH/2)-5,10,11);
-							}break;
-							case Player.SOUTH:{
-								g.setColor(Color.BLACK);
-								g.fillRect((BlockL*j+(int)(BlockL/2)-5),BlockH*(i+1)-5,11,-10);
-							}break;
+						case Entity.NORD:{
+                            g.setColor(Color.BLACK);
+                            g.fillRect((BlockL*j+(int)(BlockL/2)-5),BlockH*i+5,11,10);
+                        }break;
+                        case Entity.EAST:{
+                            g.setColor(Color.BLACK);
+                            g.fillRect(BlockL*(j+1)-5,BlockH*i+(int)(BlockH/2)-5,-10,11);
+                        }break;
+                        case Entity.WEST:{
+                            g.setColor(Color.BLACK);
+                            g.fillRect(BlockL*(j)+5,BlockH*i+(int)(BlockH/2)-5,10,11);
+                        }break;
+                        case Entity.SOUTH:{
+                            g.setColor(Color.BLACK);
+                            g.fillRect((BlockL*j+(int)(BlockL/2)-5),BlockH*(i+1)-5,11,-10);
+                        }break;
 						}
 					}
 					if(Plateau.plateau[i][j].getClass() == Bordure.class)
@@ -133,7 +130,7 @@ public class GameFrame extends JPanel
 					}
 					
 				}
-				g.setColor(Color.black);
+				g.setColor(Color.BLACK);
 				g.drawRect(BlockL*j,BlockH*i,BlockL,BlockH);
 				
 			}

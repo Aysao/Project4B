@@ -8,7 +8,6 @@ import PackageClass.*;
 public class ThreadPlayer implements Runnable {
 	
 	private Player player;
-	private int framDelay;
 	private boolean running = true;
 	
 	private KeyListener kl = new KeyListener() {
@@ -27,28 +26,24 @@ public class ThreadPlayer implements Runnable {
 				{
 					player.setOrientation(Entity.NORD);
 					player.setMouvement(true);
-					//Deplacement();
 				}
 				else if(e.getKeyChar() == 'q'||e.getKeyChar() == 'Q')
 				{
 					player.setOrientation(Entity.WEST);
 					player.setMouvement(true);
-					//Deplacement();
-					//Menu.v.testVictory();
+					
 				}
 				else if(e.getKeyChar() == 's'||e.getKeyChar() == 'S')
 				{
 					player.setOrientation(Entity.SOUTH);
 					player.setMouvement(true);
-					//Deplacement();
-					//Menu.v.testVictory();
+					
 				}
 				else if(e.getKeyChar() == 'd'||e.getKeyChar() == 'D')
 				{
 					player.setOrientation(Entity.EAST);
 					player.setMouvement(true);
-					//Deplacement();
-					//Menu.v.testVictory();
+				
 				}
 			}
 		}
@@ -94,7 +89,7 @@ public class ThreadPlayer implements Runnable {
 			}
 			else if(Menu.v.isVictory())
 			{
-				System.out.println("Gagnï¿½ !");
+				System.out.println("Gagné!");
 				stop();
 			}
 		}

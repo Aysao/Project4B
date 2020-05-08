@@ -25,8 +25,11 @@ public class Ennemi extends Entity {
 	private ThreadEnnemie runte;
 	private Thread te;
 	public Ennemi(int x, int y) {
-		super(x, y);
-		Plateau.plateau[x][y]=this;				
+		super(x, y);				
+		newPoint();
+	}
+	public Ennemi() {
+		super();		
 		newPoint();
 	}
 	public void start()
@@ -149,7 +152,6 @@ public class Ennemi extends Entity {
 		}while(test);	    
 	    this.pathX=x;
 	    this.pathY=y;
-	    System.out.println("nouveau path : "+x+" "+y);
 	}
 	public boolean nextToEdge()
 	{
