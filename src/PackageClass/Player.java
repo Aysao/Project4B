@@ -15,7 +15,6 @@ public class Player extends Entity {
 	public Player(int x, int y) {
 		super(x, y);
 		Plateau.plateau[x][y] = this;
-		
 	}
 	public Player(int x, int y,String str) {
 		super(x, y);
@@ -452,8 +451,9 @@ public class Player extends Entity {
 	public String getPseudo() {
 		return pseudo;
 	}
-	public void setPseudo(String pseudo) {
-		this.pseudo = pseudo;
+	public void setPseudo(String ps) {
+		this.pseudo = ps;
+		scr.setName(ps);
 	}
 	public void setScr(Score scr) {
 		this.scr = scr;

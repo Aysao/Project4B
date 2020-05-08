@@ -30,7 +30,8 @@ public class Menu implements Runnable {
 			case 1://nb de joueur 
 			{
 				new Plateau();
-				Menu.p1 = new Player(7,7,"karvrak");
+				p1 = new Player(7,7);
+				p1.setPseudo(JOptionPane.showInputDialog("Entrer votre pseudo :"));
 				runtp = new ThreadPlayer(p1);
 				Menu.e1 = new Ennemi();				
 				Menu.e2 = new Ennemi();				
