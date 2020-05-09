@@ -15,7 +15,10 @@ public class GameFrame extends JPanel
 	private int BlockH = Hauteur/Plateau.getHauteur();
 	private Image iceblock;
 	private ImageIcon ii = new ImageIcon("res/GlaceBlock.png");
-	private Image pengou;
+	private Image fpengo;
+	private Image bpengo;
+	private Image rpengo;
+	private Image lpengo;
 	private Image diamond;
 	private Image angye;
 	private Image e;
@@ -24,10 +27,14 @@ public class GameFrame extends JPanel
 	{
 		iceblock = ii.getImage();
 		ii = new ImageIcon("res/Penguin1.png");
-		pengou = ii.getImage();
+		
+		fpengo = ii.getImage();
 		diamond = new ImageIcon("res/Diamant.png").getImage();
 		angye = new ImageIcon("res/Angrycloud.png").getImage();
 		e = new ImageIcon("res/Cutecloud.png").getImage();
+		bpengo = new ImageIcon("res/PenguinDos.png").getImage();
+		lpengo = new ImageIcon("res/PenguinVersGauche.png").getImage();
+		rpengo = new ImageIcon("res/PenguinVersDroite.png").getImage();
 		Largeur = L-5;
 		Hauteur = H-2*(H/15)-37;
 		BlockH = Hauteur/Plateau.getHauteur();
@@ -69,26 +76,29 @@ public class GameFrame extends JPanel
 						Player p = (Player) Plateau.plateau[i][j];
 						g.setColor(Color.BLACK);
 						g.fillRect(BlockL*j,BlockH*i,BlockL,BlockH);
-						g.drawImage(pengou,BlockL*j,BlockH*i,BlockL,BlockH, null);
 						
 						switch(p.getOrientation())
 						{
 						case Entity.NORD:{
                             g.setColor(Color.BLACK);
-                            g.fillRect((BlockL*j+(int)(BlockL/2)-5),BlockH*i+5,11,10);
+                            g.drawImage(bpengo,BlockL*j,BlockH*i,BlockL,BlockH, null);
                         }break;
                         case Entity.EAST:{
                             g.setColor(Color.BLACK);
-                            g.fillRect(BlockL*(j+1)-5,BlockH*i+(int)(BlockH/2)-5,-10,11);
+                            g.drawImage(rpengo,BlockL*j,BlockH*i,BlockL,BlockH, null);
                         }break;
                         case Entity.WEST:{
                             g.setColor(Color.BLACK);
-                            g.fillRect(BlockL*(j)+5,BlockH*i+(int)(BlockH/2)-5,10,11);
+                            g.drawImage(lpengo,BlockL*j,BlockH*i,BlockL,BlockH, null);
                         }break;
                         case Entity.SOUTH:{
                             g.setColor(Color.BLACK);
-                            g.fillRect((BlockL*j+(int)(BlockL/2)-5),BlockH*(i+1)-5,11,-10);
+                            g.drawImage(fpengo,BlockL*j,BlockH*i,BlockL,BlockH, null);
                         }break;
+                        case Entity.SO:
+						{
+							g.drawImage(fpengo,BlockL*j,BlockH*i,BlockL,BlockH, null);
+						}break;
 						}
 						
 					}
