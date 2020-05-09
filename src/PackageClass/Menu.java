@@ -1,14 +1,9 @@
 package PackageClass;
-
 import java.io.IOException;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
 import PackageRender.Render;
-
 import PackageThreads.ThreadPlayer;
-
 
 public class Menu implements Runnable {
 	public static Player p1;

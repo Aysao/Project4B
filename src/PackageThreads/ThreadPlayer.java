@@ -74,9 +74,15 @@ public class ThreadPlayer implements Runnable {
 				{
 					player.Deplacement();
 					Menu.v.testVictory();
+					try {
+						Thread.sleep(180);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 				try {
-					Thread.sleep(100);
+					Thread.sleep(1);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -84,12 +90,12 @@ public class ThreadPlayer implements Runnable {
 			}
 			else if(player.getVie() == 0)
 			{
-				System.out.println("Perdu !");
+				//System.out.println("Perdu !");
 				stop();
 			}
 			else if(Menu.v.isVictory())
 			{
-				System.out.println("Gagné!");
+				//System.out.println("Gagné!");
 				stop();
 			}
 		}
