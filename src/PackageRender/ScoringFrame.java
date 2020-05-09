@@ -89,7 +89,7 @@ public class ScoringFrame extends JPanel {
 	
 	public void setHighScore()
 	{
-		String s = "";
+		String s = "HighS : ";
 		for(int j = 100000;j > 0;j = j/10)
 		{
 			if((int)Score.highscore/j >= 1 && (int)(Score.highscore/j) < 10)

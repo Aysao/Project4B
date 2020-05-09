@@ -20,10 +20,10 @@ public class Menu implements Runnable {
 	public static Ennemi e4;
 	public static Render  r ;
 	public static Victory  v ;
-	public static char avancer='z';//touche de deplacement
-	public static char reculer='s';
-	public static char droite='d';
-	public static char gauche='q';
+	public static char avancer='Z';//touche de deplacement
+	public static char reculer='S';
+	public static char droite='D';
+	public static char gauche='Q';
 	private ThreadPlayer runtp;
 	private JFrame menuPrincipal;
 	public Menu(JFrame f,int i) 
@@ -37,8 +37,8 @@ public class Menu implements Runnable {
 				p1 = new Player(7,7);
 				p1.setPseudo(JOptionPane.showInputDialog("Entrer votre pseudo :"));
 				runtp = new ThreadPlayer(p1);
-				Menu.e1 = new Ennemi();				
-				Menu.e2 = new Ennemi();				
+				e1 = new Ennemi();				
+				e2 = new Ennemi();				
 				e3 = new Ennemi();				
 				v = new Victory();
 				Thread tp = new Thread(runtp);
@@ -103,6 +103,7 @@ public class Menu implements Runnable {
 				e.printStackTrace();
 			}
 		}
+		ennemiVie = 6;
 		fin();
 		if(v.isVictory() == false)
 		{

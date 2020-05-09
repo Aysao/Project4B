@@ -92,6 +92,20 @@ public class JMenuPrincipal extends JFrame {
 			}
 			
 		});
+		b3.addActionListener(new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				JOption jp = new JOption(f);
+
+				jp.setVisible(true);
+				f.setVisible(false);
+				
+			}
+			
+		});
 		b4.addActionListener(new ActionListener()
 		{
 

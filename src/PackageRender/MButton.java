@@ -20,6 +20,10 @@ public class MButton extends JButton {
 		text = s;
 		this.setFont(new Font(Font.DIALOG,Font.BOLD,18));
 	}
+	public String getText()
+	{
+		return text;
+	}
 	public void setPressed(String s)
 	{
 		blockpressed = new ImageIcon(s).getImage();
@@ -52,6 +56,7 @@ public class MButton extends JButton {
             int y = ((this.getHeight()-fm.getHeight())/2)+fm.getAscent();
             g.drawString(text, x, y);    
         }
+		this.repaint();
 	}
 	
 
