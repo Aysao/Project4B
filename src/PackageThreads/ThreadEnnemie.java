@@ -2,17 +2,16 @@ package PackageThreads;
 
 import java.util.Random;
 
-import javax.print.attribute.standard.OrientationRequested;
 
 import PackageClass.BlocN;
-import PackageClass.Bordure;
+
 import PackageClass.Ennemi;
 import PackageClass.Entity;
 import PackageClass.Plateau;
 import PackageClass.Player;
 
 
-public class ThreadEnnemie implements Runnable{
+public class ThreadEnnemie implements Runnable {
 	private Ennemi en;
 	private int framDelay;
 	private boolean running = true;
@@ -25,7 +24,8 @@ public class ThreadEnnemie implements Runnable{
 	public void run() 
 	{
 		try {
-			Thread.sleep(700);
+			
+			Thread.sleep((new Random()).nextInt(500)+500);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

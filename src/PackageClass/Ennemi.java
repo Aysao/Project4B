@@ -42,7 +42,7 @@ public class Ennemi extends Entity {
 	{
 		runte.stop();		
 	}
-	public void Deplacement()
+	public synchronized void Deplacement()
 	{		
 		
 		if(this.getClass()==Ennemi.class)

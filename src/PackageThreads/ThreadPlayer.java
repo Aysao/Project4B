@@ -22,24 +22,24 @@ public class ThreadPlayer implements Runnable {
 			
 			if(player.isMouvement() == false)
 			{
-				if(e.getKeyChar() == 'z'||e.getKeyChar() == 'Z')
+				if(e.getKeyChar() == Menu.avancer||e.getKeyChar() == (Menu.avancer-'a'+'A'))
 				{
 					player.setOrientation(Entity.NORD);
 					player.setMouvement(true);
 				}
-				else if(e.getKeyChar() == 'q'||e.getKeyChar() == 'Q')
+				else if(e.getKeyChar() == Menu.gauche||e.getKeyChar() == (Menu.gauche-'a'+'A'))
 				{
 					player.setOrientation(Entity.WEST);
 					player.setMouvement(true);
 					
 				}
-				else if(e.getKeyChar() == 's'||e.getKeyChar() == 'S')
+				else if(e.getKeyChar() ==Menu.reculer||e.getKeyChar() == (Menu.reculer-'a'+'A'))
 				{
 					player.setOrientation(Entity.SOUTH);
 					player.setMouvement(true);
 					
 				}
-				else if(e.getKeyChar() == 'd'||e.getKeyChar() == 'D')
+				else if(e.getKeyChar() == Menu.droite||e.getKeyChar() == (Menu.droite-'a'+'A'))
 				{
 					player.setOrientation(Entity.EAST);
 					player.setMouvement(true);

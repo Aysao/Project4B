@@ -17,11 +17,13 @@ import PackageThreads.*;
 
 public class Main {
 	
+	public static JMenuPrincipal  jmp;
 	public static void main(String[] args) throws IOException {
 		
-		JMenuPrincipal jmp = new JMenuPrincipal();
+		jmp = new JMenuPrincipal();
 				
 		
 	}
+
 		
 }

@@ -20,6 +20,10 @@ public class Menu implements Runnable {
 	public static Ennemi e4;
 	public static Render  r ;
 	public static Victory  v ;
+	public static char avancer='z';//touche de deplacement
+	public static char reculer='s';
+	public static char droite='d';
+	public static char gauche='q';
 	private ThreadPlayer runtp;
 	private JFrame menuPrincipal;
 	public Menu(JFrame f,int i) 
