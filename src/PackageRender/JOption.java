@@ -169,6 +169,8 @@ public class JOption extends JFrame{
 					enable(true);
 					if(e.getKeyChar() >= 'a' && e.getKeyChar() <= 'z')
 						touche.setText(""+(char)(e.getKeyChar()-'a'+'A'));
+					else
+						touche.setText(""+(e.getKeyChar()));
 					touche = null;
 				}
 				
