@@ -4,7 +4,6 @@ import java.util.Random;
 
 
 import PackageClass.BlocN;
-
 import PackageClass.Ennemi;
 import PackageClass.Entity;
 import PackageClass.Plateau;

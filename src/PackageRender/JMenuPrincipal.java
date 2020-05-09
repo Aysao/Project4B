@@ -101,16 +101,7 @@ public class JMenuPrincipal extends JFrame {
 			}
 			
 		});
-		b3.addActionListener(new ActionListener()
-		{
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				f.setVisible(false);
-				new JOptionPanel();
-			}
 			
-		});			
 		
 	}
 	public int getChoix() {

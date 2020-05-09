@@ -22,6 +22,9 @@ public class GameFrame extends JPanel
 	private Image diamond;
 	private Image angye;
 	private Image e;
+	private Image floor;
+	private Image bordure1;
+	private Image bordure2;
 	
 	public GameFrame(int L,int H)
 	{
@@ -35,6 +38,9 @@ public class GameFrame extends JPanel
 		bpengo = new ImageIcon("res/PenguinDos.png").getImage();
 		lpengo = new ImageIcon("res/PenguinVersGauche.png").getImage();
 		rpengo = new ImageIcon("res/PenguinVersDroite.png").getImage();
+		floor = new ImageIcon("res/floor.png").getImage();
+		bordure1 = new ImageIcon("res/bordureClassic.png").getImage();
+		bordure2 = new ImageIcon("res/bordureActivate.png").getImage();
 		Largeur = L-5;
 		Hauteur = H-2*(H/15)-37;
 		BlockH = Hauteur/Plateau.getHauteur();
@@ -61,42 +67,39 @@ public class GameFrame extends JPanel
 				{
 					if(Plateau.plateau[i][j].getClass() == BlocN.class)
 					{
-						g.setColor(Color.BLUE);
-						g.fillRect(BlockL*j,BlockH*i,BlockL,BlockH);
 						g.drawImage(iceblock,BlockL*j,BlockH*i,BlockL,BlockH, null);
 					}
 					if(Plateau.plateau[i][j].getClass() == BlocSpe.class)
 					{
-						g.setColor(Color.black);
-						g.fillRect(BlockL*j,BlockH*i,BlockL,BlockH);
+                    	g.drawImage(floor,BlockL*j,BlockH*i,BlockL,BlockH, null);
 						g.drawImage(diamond,BlockL*j,BlockH*i,BlockL,BlockH, null);
 					}
 					if(Plateau.plateau[i][j].getClass() == Player.class)
 					{
 						Player p = (Player) Plateau.plateau[i][j];
-						g.setColor(Color.BLACK);
-						g.fillRect(BlockL*j,BlockH*i,BlockL,BlockH);
 						
+												
 						switch(p.getOrientation())
 						{
-						case Entity.NORD:{
-                            g.setColor(Color.BLACK);
+						case Entity.NORD:{          
+							g.drawImage(floor,BlockL*j,BlockH*i,BlockL,BlockH, null);
                             g.drawImage(bpengo,BlockL*j,BlockH*i,BlockL,BlockH, null);
                         }break;
                         case Entity.EAST:{
-                            g.setColor(Color.BLACK);
+                        	g.drawImage(floor,BlockL*j,BlockH*i,BlockL,BlockH, null);
                             g.drawImage(rpengo,BlockL*j,BlockH*i,BlockL,BlockH, null);
                         }break;
                         case Entity.WEST:{
-                            g.setColor(Color.BLACK);
+                        	g.drawImage(floor,BlockL*j,BlockH*i,BlockL,BlockH, null);
                             g.drawImage(lpengo,BlockL*j,BlockH*i,BlockL,BlockH, null);
                         }break;
                         case Entity.SOUTH:{
-                            g.setColor(Color.BLACK);
+                        	g.drawImage(floor,BlockL*j,BlockH*i,BlockL,BlockH, null);
                             g.drawImage(fpengo,BlockL*j,BlockH*i,BlockL,BlockH, null);
                         }break;
                         case Entity.SO:
 						{
+							g.drawImage(floor,BlockL*j,BlockH*i,BlockL,BlockH, null);
 							g.drawImage(fpengo,BlockL*j,BlockH*i,BlockL,BlockH, null);
 						}break;
 						}
@@ -109,10 +112,12 @@ public class GameFrame extends JPanel
 						g.fillRect(BlockL*j,BlockH*i,BlockL,BlockH);
 						if(en.stun)
 						{
+                        	g.drawImage(floor,BlockL*j,BlockH*i,BlockL,BlockH, null);
 							g.drawImage(e,BlockL*j,BlockH*i,BlockL,BlockH, null);
 						}
 						else
 						{
+                        	g.drawImage(floor,BlockL*j,BlockH*i,BlockL,BlockH, null);
 							g.drawImage(angye,BlockL*j,BlockH*i,BlockL,BlockH, null);
 						}
 
@@ -140,16 +145,22 @@ public class GameFrame extends JPanel
 					if(Plateau.plateau[i][j].getClass() == Bordure.class)
 					{
 						Bordure b = (Bordure)Plateau.plateau[i][j];
-						if(b.isActivate())					
-							g.setColor(Color.GREEN);
-						else	
-							g.setColor(Color.GRAY);						
-						g.fillRect(BlockL*j,BlockH*i,BlockL,BlockH);
+						if(b.isActivate())	
+						{						
+							g.drawImage(bordure2,BlockL*j,BlockH*i,BlockL,BlockH, null);
+						}							
+						else
+						{
+							g.drawImage(bordure1,BlockL*j,BlockH*i,BlockL,BlockH, null);							
+						}
+
 					}
 					if(Plateau.plateau[i][j].getClass() == String.class)
 					{
-						g.setColor(Color.BLACK);
+						
+						
 						g.fillRect(BlockL*j,BlockH*i,BlockL,BlockH);
+						g.drawImage(floor,BlockL*j,BlockH*i,BlockL,BlockH, null);
 					}
 					
 				}
