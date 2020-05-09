@@ -25,6 +25,8 @@ public class GameFrame extends JPanel
 	private Image floor;
 	private Image bordure1;
 	private Image bordure2;
+	private Image ennemi;
+	private Image ennemiStun;
 	
 	public GameFrame(int L,int H)
 	{
@@ -41,6 +43,8 @@ public class GameFrame extends JPanel
 		floor = new ImageIcon("res/floor.png").getImage();
 		bordure1 = new ImageIcon("res/bordureClassic.png").getImage();
 		bordure2 = new ImageIcon("res/bordureActivate.png").getImage();
+		ennemi = new ImageIcon("res/ghost.png").getImage();
+		ennemiStun = new ImageIcon("res/ghoststun.png").getImage();
 		Largeur = L-5;
 		Hauteur = H-2*(H/15)-37;
 		BlockH = Hauteur/Plateau.getHauteur();
@@ -113,12 +117,12 @@ public class GameFrame extends JPanel
 						if(en.stun)
 						{
                         	g.drawImage(floor,BlockL*j,BlockH*i,BlockL,BlockH, null);
-							g.drawImage(e,BlockL*j,BlockH*i,BlockL,BlockH, null);
+							g.drawImage(ennemiStun,BlockL*j,BlockH*i,BlockL,BlockH, null);
 						}
 						else
 						{
                         	g.drawImage(floor,BlockL*j,BlockH*i,BlockL,BlockH, null);
-							g.drawImage(angye,BlockL*j,BlockH*i,BlockL,BlockH, null);
+							g.drawImage(ennemi,BlockL*j,BlockH*i,BlockL,BlockH, null);
 						}
 
 						
