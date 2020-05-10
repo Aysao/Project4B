@@ -6,6 +6,7 @@ import PackageRender.Render;
 import PackageThreads.ThreadPlayer;
 
 public class Menu implements Runnable {
+
 	public static Player p1;
 	public static Entity p2;
 	public static int ennemiVie=6;

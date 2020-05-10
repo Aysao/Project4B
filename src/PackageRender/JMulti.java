@@ -7,6 +7,10 @@ import javax.swing.*;
 
 public class JMulti extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private MButton heberger;
 	private MButton rejoindre;
 	private MButton retour;
@@ -25,15 +29,15 @@ public class JMulti extends JFrame {
 	
 	public void initcomponent(JFrame f)
 	{
-		heberger = new MButton("res/GlaceBlock.png");
-		rejoindre = new MButton("res/GlaceBlock.png");
-		retour = new MButton("res/GlaceBlock.png");
-		heberger.setPressed("res/click.png");
-		rejoindre.setPressed("res/click.png");
-		retour.setPressed("res/click.png");
-		heberger.setRollover("res/blurGlaceBlock.png");
-		rejoindre.setRollover("res/blurGlaceBlock.png");
-		retour.setRollover("res/blurGlaceBlock.png");
+		heberger = new MButton("Image/GlaceBlock.png");
+		rejoindre = new MButton("Image/GlaceBlock.png");
+		retour = new MButton("Image/GlaceBlock.png");
+		heberger.setPressed("Image/click.png");
+		rejoindre.setPressed("Image/click.png");
+		retour.setPressed("Image/click.png");
+		heberger.setRollover("Image/blurGlaceBlock.png");
+		rejoindre.setRollover("Image/blurGlaceBlock.png");
+		retour.setRollover("Image/blurGlaceBlock.png");
 		heberger.setText("Heberger");
 		rejoindre.setText("Rejoindre");
 		retour.setText("Retour");

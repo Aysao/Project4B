@@ -1,19 +1,26 @@
 package PackageRender;
 
 import java.awt.*;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import Main.Main;
 
 public class MButton extends JButton {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Image block;
 	private Image blockpressed;
 	private Image blockrollover;
 	private String text;
 	public MButton(String im)
 	{
-		block = new ImageIcon(im).getImage();
+		if(Main.mode == 0)
+			block = new ImageIcon(im).getImage();
+		else
+			block = new ImageIcon(this.getClass().getResource("/"+getPath(im))).getImage();
 	}
 	public void setText(String s)
 	{
@@ -26,11 +33,21 @@ public class MButton extends JButton {
 	}
 	public void setPressed(String s)
 	{
-		blockpressed = new ImageIcon(s).getImage();
+		if(Main.mode == 0)
+			blockpressed = new ImageIcon(s).getImage();
+		else
+		{
+			blockpressed = new ImageIcon(this.getClass().getResource("/"+getPath(s))).getImage();
+		}
 	}
 	public void setRollover(String s)
 	{
-		blockrollover = new ImageIcon(s).getImage();
+		if(Main.mode == 0)
+			blockrollover = new ImageIcon(s).getImage();
+		else
+		{
+			blockrollover = new ImageIcon(this.getClass().getResource("/"+getPath(s))).getImage();
+		}
 	}
 	
 	
@@ -57,6 +74,18 @@ public class MButton extends JButton {
             g.drawString(text, x, y);    
         }
 		this.repaint();
+	}
+	public String getPath(String s)
+	{
+		String res = "";
+		int l = s.length();
+		int i = l-1;
+		do
+		{
+			res = s.charAt(i)+res;
+			i--;
+		}while(i>0 && s.charAt(i) != '/');
+		return res;
 	}
 	
 

@@ -1,27 +1,28 @@
 package PackageRender;
 import PackageClass.*;
-import PackageThreads.ThreadPlayer;
-
 import java.awt.*;
-
-
+import Main.Main;
 import javax.swing.*;
+
+
+
 
 public class GameFrame extends JPanel 
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int Largeur = 800-5;
 	private int Hauteur = 600;
 	private int BlockL = Largeur/Plateau.getLargeur();
 	private int BlockH = Hauteur/Plateau.getHauteur();
 	private Image iceblock;
-	private ImageIcon ii = new ImageIcon("res/GlaceBlock.png");
 	private Image fpengo;
 	private Image bpengo;
 	private Image rpengo;
 	private Image lpengo;
 	private Image diamond;
-	private Image angye;
-	private Image e;
 	private Image floor;
 	private Image bordure1;
 	private Image bordure2;
@@ -30,21 +31,35 @@ public class GameFrame extends JPanel
 	
 	public GameFrame(int L,int H)
 	{
-		iceblock = ii.getImage();
-		ii = new ImageIcon("res/Penguin1.png");
 		
-		fpengo = ii.getImage();
-		diamond = new ImageIcon("res/Diamant.png").getImage();
-		angye = new ImageIcon("res/Angrycloud.png").getImage();
-		e = new ImageIcon("res/Cutecloud.png").getImage();
-		bpengo = new ImageIcon("res/PenguinDos.png").getImage();
-		lpengo = new ImageIcon("res/PenguinVersGauche.png").getImage();
-		rpengo = new ImageIcon("res/PenguinVersDroite.png").getImage();
-		floor = new ImageIcon("res/floor.png").getImage();
-		bordure1 = new ImageIcon("res/bordureClassic.png").getImage();
-		bordure2 = new ImageIcon("res/bordureActivate.png").getImage();
-		ennemi = new ImageIcon("res/ghost.png").getImage();
-		ennemiStun = new ImageIcon("res/ghoststun.png").getImage();
+		if(Main.mode == 0)
+		{
+			iceblock = new ImageIcon("Image/GlaceBlock.png").getImage();
+			fpengo = new ImageIcon("Image/Penguin1.png").getImage();
+			diamond = new ImageIcon("Image/Diamant.png").getImage();
+			bpengo = new ImageIcon("Image/PenguinDos.png").getImage();
+			lpengo = new ImageIcon("Image/PenguinVersGauche.png").getImage();
+			rpengo = new ImageIcon("Image/PenguinVersDroite.png").getImage();
+			floor = new ImageIcon("Image/floor.png").getImage();
+			bordure1 = new ImageIcon("Image/bordureClassic.png").getImage();
+			bordure2 = new ImageIcon("Image/bordureActivate.png").getImage();
+			ennemi = new ImageIcon("Image/ghost.png").getImage();
+			ennemiStun = new ImageIcon("Image/ghoststun.png").getImage();
+		}
+		else
+		{
+			iceblock = new ImageIcon(this.getClass().getResource("/GlaceBlock.png")).getImage();
+			fpengo = new ImageIcon(this.getClass().getResource("/Penguin1.png")).getImage();
+			diamond = new ImageIcon(this.getClass().getResource("/Diamant.png")).getImage();
+			bpengo = new ImageIcon(this.getClass().getResource("/PenguinDos.png")).getImage();
+			lpengo = new ImageIcon(this.getClass().getResource("/PenguinVersGauche.png")).getImage();
+			rpengo = new ImageIcon(this.getClass().getResource("/PenguinVersDroite.png")).getImage();
+			floor = new ImageIcon(this.getClass().getResource("/floor.png")).getImage();
+			bordure1 = new ImageIcon(this.getClass().getResource("/bordureClassic.png")).getImage();
+			bordure2 = new ImageIcon(this.getClass().getResource("/bordureActivate.png")).getImage();
+			ennemi = new ImageIcon(this.getClass().getResource("/ghost.png")).getImage();
+			ennemiStun = new ImageIcon(this.getClass().getResource("/ghoststun.png")).getImage();
+		}
 		Largeur = L-5;
 		Hauteur = H-2*(H/15)-37;
 		BlockH = Hauteur/Plateau.getHauteur();

@@ -15,6 +15,10 @@ import PackageClass.Menu;
 
 public class JOption extends JFrame{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel lforward;
 	private MButton forward;
 	private JLabel lback;
@@ -48,31 +52,31 @@ public class JOption extends JFrame{
 		lback = new JLabel("Reculer : ",JLabel.CENTER);
 		lright = new JLabel("Droite : ",JLabel.CENTER);
 		lleft = new JLabel("Gauche : ",JLabel.CENTER);
-		forward = new MButton("res/GlaceBlock.png");
-		back = new MButton("res/GlaceBlock.png");
-		right = new MButton("res/GlaceBlock.png");
-		left = new MButton("res/GlaceBlock.png");
-		valider = new MButton("res/GlaceBlock.png");
+		forward = new MButton("Image/GlaceBlock.png");
+		back = new MButton("Image/GlaceBlock.png");
+		right = new MButton("Image/GlaceBlock.png");
+		left = new MButton("Image/GlaceBlock.png");
+		valider = new MButton("Image/GlaceBlock.png");
 		forward.setMnemonic('A');
 		lforward.setFont(new Font(Font.DIALOG,Font.BOLD,18));
 		lback.setFont(new Font(Font.DIALOG,Font.BOLD,18));
 		lleft.setFont(new Font(Font.DIALOG,Font.BOLD,18));
 		lright.setFont(new Font(Font.DIALOG,Font.BOLD,18));
 		forward.setText(""+Menu.avancer);
-		forward.setPressed("res/click.png");
-		forward.setRollover("res/blurGlaceBlock.png");
+		forward.setPressed("Image/click.png");
+		forward.setRollover("Image/blurGlaceBlock.png");
 		back.setText(""+Menu.reculer);
-		back.setPressed("res/click.png");
-		back.setRollover("res/blurGlaceBlock.png");
+		back.setPressed("Image/click.png");
+		back.setRollover("Image/blurGlaceBlock.png");
 		right.setText(""+Menu.droite);
-		right.setPressed("res/click.png");
-		right.setRollover("res/blurGlaceBlock.png");
+		right.setPressed("Image/click.png");
+		right.setRollover("Image/blurGlaceBlock.png");
 		left.setText(""+Menu.gauche);
-		left.setPressed("res/click.png");
-		left.setRollover("res/blurGlaceBlock.png");
+		left.setPressed("Image/click.png");
+		left.setRollover("Image/blurGlaceBlock.png");
 		valider.setText("Valider");
-		valider.setPressed("res/click.png");
-		valider.setRollover("res/blurGlaceBlock.png");
+		valider.setPressed("Image/click.png");
+		valider.setRollover("Image/blurGlaceBlock.png");
 		pbutton.add(lforward);
 		pbutton.add(forward);
 		pbutton.add(lback);

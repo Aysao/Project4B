@@ -1,22 +1,15 @@
 package PackageRender;
-
 import javax.swing.*;
-
-import PackageClass.Ennemi;
-import PackageClass.Entity;
 import PackageClass.Menu;
-import PackageClass.Plateau;
-import PackageClass.Player;
-import PackageClass.Victory;
-import PackageThreads.ThreadPlayer;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 public class JMenuPrincipal extends JFrame {
-	private ThreadPlayer runtp;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel pprincipal;
 	private JPanel pbutton;
 	private MButton b1;
@@ -25,12 +18,12 @@ public class JMenuPrincipal extends JFrame {
 	private MButton b4;
 	private int choix;
 	private JFrame f;
-	public JMenuPrincipal() {	
+	public JMenuPrincipal() {
 		f = this;
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(800,600);
 		this.setTitle("Pengo !!");
-		this.setBackground(Color.black);	
+		this.setBackground(Color.black);
 		initComposant();
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
@@ -39,29 +32,29 @@ public class JMenuPrincipal extends JFrame {
 	
 	private void initComposant()
 	{
-		pprincipal = new ImagePanel("res/PengoTitle.png");
+		
+		pprincipal = new ImagePanel("Image/PengoTitle.png");
 		pprincipal.setBackground(Color.black);
-		//pprincipal.setOpaque(false);
 		pprincipal.setLayout(null);
 		pbutton = new JPanel();
 		pbutton.setOpaque(false);
 		pbutton.setLayout(new GridLayout(2,2));
-		b1 = new MButton("res/GlaceBlock.png");
-		b2 = new MButton("res/GlaceBlock.png");
-		b3 = new MButton("res/GlaceBlock.png");
-		b4 = new MButton("res/GlaceBlock.png");
+		b1 = new MButton("Image/GlaceBlock.png");
+		b2 = new MButton("Image/GlaceBlock.png");
+		b3 = new MButton("Image/GlaceBlock.png");
+		b4 = new MButton("Image/GlaceBlock.png");
 		b1.setText("Partie Solo");
 		b2.setText("Partie Multi");
 		b3.setText("Option");
 		b4.setText("Quitter");
-		b1.setRollover("res/blurGlaceBlock.png");
-		b2.setRollover("res/blurGlaceBlock.png");
-		b3.setRollover("res/blurGlaceBlock.png");
-		b4.setRollover("res/blurGlaceBlock.png");
-		b1.setPressed("res/click.png");
-		b2.setPressed("res/click.png");
-		b3.setPressed("res/click.png");
-		b4.setPressed("res/click.png");
+		b1.setRollover("Image/blurGlaceBlock.png");
+		b2.setRollover("Image/blurGlaceBlock.png");
+		b3.setRollover("Image/blurGlaceBlock.png");
+		b4.setRollover("Image/blurGlaceBlock.png");
+		b1.setPressed("Image/click.png");
+		b2.setPressed("Image/click.png");
+		b3.setPressed("Image/click.png");
+		b4.setPressed("Image/click.png");
 		b1.setBorder(null);
 		b2.setBorder(null);
 		b3.setBorder(null);

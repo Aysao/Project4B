@@ -7,6 +7,10 @@ import PackageClass.*;
 import PackageClass.Menu;
 
 public class ScoringFrame extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel scorep1;
 	private JLabel highscore;
 	private JLabel scorep2;

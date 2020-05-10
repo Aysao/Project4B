@@ -1,9 +1,6 @@
 package PackageClass;
 
 import java.util.Random;
-
-import javax.print.attribute.standard.ReferenceUriSchemesSupported;
-
 import PackageThreads.ThreadEnnemie;
 
 /*

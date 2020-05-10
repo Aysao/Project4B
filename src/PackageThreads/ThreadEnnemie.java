@@ -12,7 +12,6 @@ import PackageClass.Player;
 
 public class ThreadEnnemie implements Runnable {
 	private Ennemi en;
-	private int framDelay;
 	private boolean running = true;
 	public ThreadEnnemie(Ennemi e1) {
 		System.out.println("Ennemie set");
