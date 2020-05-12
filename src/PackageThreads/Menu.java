@@ -21,7 +21,6 @@ public class Menu implements Runnable {
 	private Ennemi e1;
 	private Ennemi e2;
 	private Ennemi e3;
-	private Ennemi e4;
 	public static Render  r ;	
 	public static Victory  v ;
 	public static char avancer='Z';//touche de deplacement
@@ -49,7 +48,6 @@ public class Menu implements Runnable {
 			{
 				new Plateau();
 				p1 = new Player(7,7);
-				
 				p1.setPseudo(JOptionPane.showInputDialog("Entrer votre pseudo :"));	
 				e1 = new Ennemi();				
 				e2 = new Ennemi();				

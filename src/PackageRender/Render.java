@@ -26,26 +26,22 @@ public class Render extends JFrame implements Runnable{
 	private boolean running = true;
 	private ScoringFrame sc;
 	public Render(int L,int H,KeyListener kl)
-	{
-		//super(f , b);		
+	{	
 		Largeur = L;
 		Hauteur = H+50;
 		bottom = new JPanel();
 		bottom.setPreferredSize(new Dimension(Largeur,Hauteur/15));
 		bottom.setBackground(Color.black);
 		sc = new ScoringFrame(Largeur,Hauteur);
-		//System.out.println("test");
 		this.setSize(Largeur, Hauteur);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
-		//System.out.println("test");
 		this.getContentPane().setLayout(new BorderLayout());
 		this.getContentPane().add(sc,BorderLayout.NORTH);
 		this.getContentPane().add(new GameFrame(Largeur,Hauteur),BorderLayout.CENTER);
 		this.getContentPane().add(bottom,BorderLayout.SOUTH);
 		this.addKeyListener(kl);
-		//System.out.println("test");
 		this.addKeyListener(new KeyListener() 
 		{
 			@Override
@@ -62,8 +58,6 @@ public class Render extends JFrame implements Runnable{
 						System.exit(1);
 					}
 				}
-				//System.out.println("Player pos x : "+ Menu.p1.getPosX());
-				//System.out.println("Player pos y : "+ Menu.p1.getPosY());
 			}
 
 			@Override

@@ -73,7 +73,6 @@ public class MButton extends JButton {
             int y = ((this.getHeight()-fm.getHeight())/2)+fm.getAscent();
             g.drawString(text, x, y);    
         }
-		this.repaint();
 	}
 	public String getPath(String s)
 	{
