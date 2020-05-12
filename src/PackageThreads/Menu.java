@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import PackageClass.Ennemi;
+import PackageClass.Entity;
 import PackageClass.Plateau;
 import PackageClass.Player;
 import PackageClass.Victory;
@@ -14,13 +15,13 @@ import PackageRender.Render;
 
 public class Menu implements Runnable {
 
-	public static Player p1;
-	public static Ennemi p2;
+	private Player p1;
+	private Ennemi p2;
 	public static int ennemiVie=5;
-	public static Ennemi e1;
-	public static Ennemi e2;
-	public static Ennemi e3;
-	public static Ennemi e4;
+	private Ennemi e1;
+	private Ennemi e2;
+	private Ennemi e3;
+	private Ennemi e4;
 	public static Render  r ;	
 	public static Victory  v ;
 	public static char avancer='Z';//touche de deplacement
@@ -104,7 +105,7 @@ public class Menu implements Runnable {
 	public static void newEnnemi()
 	{
 		ennemiVie--;
-		System.out.println("vie"+ennemiVie);
+		//System.out.println("vie"+ennemiVie);
 		if(ennemiVie==0)
 		{
 			v.setVictory(true);
@@ -150,7 +151,6 @@ public class Menu implements Runnable {
 			try {
 				Thread.sleep(100);
 				Plateau.stopBordure();
-				System.out.println("test");
 				if(host &&mode==2)
 				{
 					s.sendLine("bordure");

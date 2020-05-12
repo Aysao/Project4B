@@ -36,6 +36,22 @@ public class Plateau {
 		}
 		return res;
 	}
+	
+	public static ArrayList<Ennemi> getEnnemi()
+	{
+		ArrayList<Ennemi> res = new ArrayList<Ennemi>();
+		for(int i = 1;i<hauteur-1;i++)
+		{
+			for(int j = 1;j<largeur-1;j++)
+			{
+				if(plateau[i][j].getClass() == Ennemi.class)
+				{
+					res.add((Ennemi)plateau[i][j]);
+				}
+			}
+		}
+		return res;
+	}
 	private void setDiams(int x , int y)
 	{
 		

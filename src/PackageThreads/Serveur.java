@@ -25,6 +25,7 @@ public class Serveur implements Runnable{
 	@Override
 	public void run(){
 		
+		Ennemi e = (Ennemi)Plateau.getEnnemi().get(0);
 		try {
 			setPlayer();
 		} catch (Exception e1) {			
@@ -35,21 +36,10 @@ public class Serveur implements Runnable{
 			String str="";
 			try {
 				str = sisr.readLine();// lecture du message
-			} catch (IOException e) {
-				e.printStackTrace();
+			} catch (IOException e2) {
+				e2.printStackTrace();
 			}
-			if(str.equals("update"))
-			{
-				if(!Menu.p1.isMouvement())
-				{
-					sisw.println("SO");
-				}
-				else
-				{
-					sisw.println(Menu.p1.getOrientation());	
-				}
-				
-			}
+			
 			if(str.equals("start"))
 			{
 				sisw.println(Plateau.PlateauToString());
@@ -63,36 +53,36 @@ public class Serveur implements Runnable{
 			{
 			case "1":
 			{
-				Menu.p2.setOrientation(Entity.NORD);
-				Menu.p2.setMouvement(true);
-				Menu.p2.Deplacement();
+				e.setOrientation(Entity.NORD);
+				e.setMouvement(true);
+				e.Deplacement();
 			}break;
 			
 			case "2":
 			{
-				Menu.p2.setOrientation(Entity.SOUTH);
-				Menu.p2.setMouvement(true);
-				Menu.p2.Deplacement();
+				e.setOrientation(Entity.SOUTH);
+				e.setMouvement(true);
+				e.Deplacement();
 			}break;
 			case "3":
 			{
-				Menu.p2.setOrientation(Entity.EAST);
-				Menu.p2.setMouvement(true);
-				Menu.p2.Deplacement();
+				e.setOrientation(Entity.EAST);
+				e.setMouvement(true);
+				e.Deplacement();
 			}break;
 			case "4":
 			{
-				Menu.p2.setOrientation(Entity.WEST);
-				Menu.p2.setMouvement(true);
-				Menu.p2.Deplacement();
+				e.setOrientation(Entity.WEST);
+				e.setMouvement(true);
+				e.Deplacement();
 			}break;
 			case "SO":
 			{
-				Menu.p2.setMouvement(false);
+				e.setMouvement(false);
 			}break;
 			case"stunoff":
 			{
-				Menu.p2.stun=false;
+				e.stun=false;
 			}
 			}			
 			System.out.println("ECHO = " + str);   // trace locale			

@@ -10,6 +10,7 @@ import java.net.Socket;
 
 import PackageClass.Entity;
 import PackageClass.Plateau;
+import PackageClass.Player;
 
 public class Client implements Runnable{
 	private boolean running= true;
@@ -47,13 +48,14 @@ public class Client implements Runnable{
 	}
 	@Override
 	public void run() {
-
+		Player p1 = (Player)Plateau.getPlayer().get(0);
 		while(running)
 		{
+			
 			String str="";
 			try {
 				str = sisr.readLine();// lecture du message
-				System.out.println(str);
+				//System.out.println(str);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -62,32 +64,32 @@ public class Client implements Runnable{
 			{
 			case "1":
 			{
-				Menu.p1.setOrientation(Entity.NORD);
-				Menu.p1.setMouvement(true);
-				Menu.p1.Deplacement();
+				p1.setOrientation(Entity.NORD);
+				p1.setMouvement(true);
+				p1.Deplacement();
 			}break;
 			
 			case "2":
 			{
-				Menu.p1.setOrientation(Entity.SOUTH);
-				Menu.p1.setMouvement(true);
-				Menu.p1.Deplacement();
+				p1.setOrientation(Entity.SOUTH);
+				p1.setMouvement(true);
+				p1.Deplacement();
 			}break;
 			case "3":
 			{
-				Menu.p1.setOrientation(Entity.EAST);
-				Menu.p1.setMouvement(true);
-				Menu.p1.Deplacement();
+				p1.setOrientation(Entity.EAST);
+				p1.setMouvement(true);
+				p1.Deplacement();
 			}break;
 			case "4":
 			{
-				Menu.p1.setOrientation(Entity.WEST);
-				Menu.p1.setMouvement(true);
-				Menu.p1.Deplacement();
+				p1.setOrientation(Entity.WEST);
+				p1.setMouvement(true);
+				p1.Deplacement();
 			}break;
 			case "SO":
 			{
-				Menu.p1.setMouvement(false);
+				p1.setMouvement(false);
 			}break;
 			case "bordure":
 			{
