@@ -21,9 +21,9 @@ public class Menu implements Runnable {
 	private Ennemi e1;
 	private Ennemi e2;
 	private Ennemi e3;
-	public static Render  r ;	
-	public static Victory  v ;
-	public static char avancer='Z';//touche de deplacement
+	private Render r ;	
+	public static Victory v ;
+	public static char avancer='Z';		//touche de deplacement une option pour qu'on puisse changer les touches
 	public static char reculer='S';
 	public static char droite='D';
 	public static char gauche='Q';
@@ -35,7 +35,7 @@ public class Menu implements Runnable {
 	public static boolean gamestart=true;
 	
 	
-	
+
 	
 	
 	public Menu(JFrame f,int i) 

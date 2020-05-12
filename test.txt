@@ -1,23 +1,10 @@
-<<<<<<< Updated upstream
-1290.0 
+800.0 
+0.0 null
+0.0 null
+0.0 null
+0.0 Updated
+1290.0 upstream
 0.0 null
 0.0 null
 0.0 null
 0.0 null
-0.0 null
-0.0 null
-0.0 null
-0.0 null
-0.0 null
-=======
-2410.0 Aysao
-1140.0 null
-1080.0 m
-1070.0 yolo
-900.0 null
-810.0 e
-590.0 joueur6
-560.0 f
-520.0 null
-330.0 null
->>>>>>> Stashed changes

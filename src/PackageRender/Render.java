@@ -73,60 +73,76 @@ public class Render extends JFrame implements Runnable{
 			}
 			
 		});
-			
-		
-		this.repaint();
-		this.revalidate();
 	}
+//	@Override
+//	public void run() 
+//	{
+//		int fps = 10;
+//		double timeTick = 1000000000 / fps;
+//		double delta = 0;
+//		long now;
+//		long lastTime = System.nanoTime();
+//		long timer = 0;
+//		int tick = 0;
+//
+//		while(running)
+//		{
+//			now = System.nanoTime();
+//			delta += (now - lastTime) / timeTick;
+//			timer += now - lastTime;
+//			lastTime = now;
+//			
+//			if(delta >= 1 && Menu.host)
+//			{					
+//				sc.setScoreP1();
+//				sc.setHighScore();
+//				//sc.setScoreP2();
+//				this.repaint();
+//				delta--;
+//				tick++;
+//			}
+//			else if (delta >= 1)
+//			{
+//				sc.setScoreP1();
+//				sc.setHighScore();	
+//				//sc.setScoreP2();
+//				this.repaint();
+//				delta--;
+//				tick++;	
+//			}
+//			else if(delta >= 1)
+//			{
+//				delta--;
+//				tick++;
+//			}
+//			if(timer >= 1000000000)
+//			{
+//				System.out.println("fps : "+tick);
+//				tick = 0;
+//				timer = 0;
+//			}
+//		}
+//		
+//	} 
+	
 	@Override
 	public void run() 
 	{
-		int fps = 10;
-		double timeTick = 1000000000 / fps;
-		double delta = 0;
-		long now;
-		long lastTime = System.nanoTime();
-		long timer = 0;
-		int tick = 0;
-
+		sc.setHighScore();
+		
 		while(running)
 		{
-			now = System.nanoTime();
-			delta += (now - lastTime) / timeTick;
-			timer += now - lastTime;
-			lastTime = now;
-			if(delta >= 1 && Menu.host)
-			{					
-				sc.setScoreP1();
-				sc.setHighScore();
-				//sc.setScoreP2();
-				this.repaint();
-				delta--;
-				tick++;
-			}
-			else if (delta >= 1)
-			{
-				sc.setScoreP1();
-				sc.setHighScore();	
-				//sc.setScoreP2();
-				this.repaint();
-				delta--;
-				tick++;	
-			}
-			else if(delta >= 1)
-			{
-				delta--;
-				tick++;
-			}
-			if(timer >= 1000000000)
-			{
-				System.out.println("fps : "+tick);
-				tick = 0;
-				timer = 0;
+			sc.setScoreP1();
+			this.repaint();
+			try {
+				Thread.sleep(1000/60l);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
-		
-	} 
+	}
+	
 	
 	public void stop()
 	{
