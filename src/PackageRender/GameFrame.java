@@ -24,11 +24,14 @@ public class GameFrame extends JPanel
 	private Image bpengo;
 	private Image rpengo;
 	private Image lpengo;
+	private Image fhunter;
+	private Image bhunter;
+	private Image rhunter;
+	private Image lhunter;
 	private Image diamond;
 	private Image floor;
 	private Image bordure1;
 	private Image bordure2;
-	private Image ennemi;
 	private Image ennemiStun;
 	
 	public GameFrame(int L,int H)
@@ -45,8 +48,10 @@ public class GameFrame extends JPanel
 			floor = new ImageIcon("Image/floor.png").getImage();
 			bordure1 = new ImageIcon("Image/bordureClassic.png").getImage();
 			bordure2 = new ImageIcon("Image/bordureActivate.png").getImage();
-			ennemi = new ImageIcon("Image/ghost.png").getImage();
-			ennemiStun = new ImageIcon("Image/ghoststun.png").getImage();
+			fhunter = new ImageIcon("Image/Hunterface.png").getImage();
+			bhunter = new ImageIcon("Image/Hunterdos.png").getImage();
+			rhunter = new ImageIcon("Image/Hunterdroite.png").getImage();
+			lhunter = new ImageIcon("Image/Huntergauche.png").getImage();
 		}
 		else
 		{
@@ -59,8 +64,11 @@ public class GameFrame extends JPanel
 			floor = new ImageIcon(this.getClass().getResource("/floor.png")).getImage();
 			bordure1 = new ImageIcon(this.getClass().getResource("/bordureClassic.png")).getImage();
 			bordure2 = new ImageIcon(this.getClass().getResource("/bordureActivate.png")).getImage();
-			ennemi = new ImageIcon(this.getClass().getResource("/ghost.png")).getImage();
-			ennemiStun = new ImageIcon(this.getClass().getResource("/ghoststun.png")).getImage();
+			ennemiStun = new ImageIcon(this.getClass().getResource("/Hunterface.png")).getImage();
+			fhunter = new ImageIcon(this.getClass().getResource("/Hunterface.png")).getImage();
+			bhunter = new ImageIcon(this.getClass().getResource("/Hunterdos.png")).getImage();
+			rhunter = new ImageIcon(this.getClass().getResource("/Hunterdroite.png")).getImage();
+			lhunter = new ImageIcon(this.getClass().getResource("/Huntergauche.png")).getImage();
 		}
 		Largeur = L-5;
 		Hauteur = H-2*(H/15)-37;
@@ -129,37 +137,25 @@ public class GameFrame extends JPanel
 					if(Plateau.plateau[i][j].getClass() == Ennemi.class)
 					{
 						Ennemi en = (Ennemi)Plateau.plateau[i][j]; 
-						g.setColor(Color.black);
-						g.fillRect(BlockL*j,BlockH*i,BlockL,BlockH);
+						g.drawImage(floor,BlockL*j,BlockH*i,BlockL,BlockH, null);
 						if(en.stun)
 						{
-                        	g.drawImage(floor,BlockL*j,BlockH*i,BlockL,BlockH, null);
 							g.drawImage(ennemiStun,BlockL*j,BlockH*i,BlockL,BlockH, null);
 						}
-						else
-						{
-                        	g.drawImage(floor,BlockL*j,BlockH*i,BlockL,BlockH, null);
-							g.drawImage(ennemi,BlockL*j,BlockH*i,BlockL,BlockH, null);
-						}
 
-						
 						switch(en.getOrientation())
 						{
 						case Entity.NORD:{
-                            g.setColor(Color.BLACK);
-                            g.fillRect((BlockL*j+(int)(BlockL/2)-5),BlockH*i+5,11,10);
+                            g.drawImage(bhunter,BlockL*j,BlockH*i,BlockL,BlockH, null);
                         }break;
                         case Entity.EAST:{
-                            g.setColor(Color.BLACK);
-                            g.fillRect(BlockL*(j+1)-5,BlockH*i+(int)(BlockH/2)-5,-10,11);
+                            g.drawImage(rhunter,BlockL*j,BlockH*i,BlockL,BlockH, null);
                         }break;
                         case Entity.WEST:{
-                            g.setColor(Color.BLACK);
-                            g.fillRect(BlockL*(j)+5,BlockH*i+(int)(BlockH/2)-5,10,11);
+                            g.drawImage(lhunter,BlockL*j,BlockH*i,BlockL,BlockH, null);
                         }break;
                         case Entity.SOUTH:{
-                            g.setColor(Color.BLACK);
-                            g.fillRect((BlockL*j+(int)(BlockL/2)-5),BlockH*(i+1)-5,11,-10);
+                            g.drawImage(fhunter,BlockL*j,BlockH*i,BlockL,BlockH, null);
                         }break;
 						}
 					}
