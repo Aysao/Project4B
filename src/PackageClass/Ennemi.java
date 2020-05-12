@@ -56,14 +56,15 @@ public class Ennemi extends Entity {
 					{	
 						if(Plateau.plateau[this.getPosX()][this.getPosY()+1].getClass() == Player.class)
 						{
-							Plateau.refreshEntity(Menu.p1);	
-							if(Menu.p1.getVie()-1 >= 0)							{
+							Player p1 = (Player) Plateau.plateau[this.getPosX()][this.getPosY()+1];
+							Plateau.refreshEntity(p1);	
+							if(p1.getVie()-1 >= 0)							{
 								
-								Menu.p1.setVie(Menu.p1.getVie()-1);
-								Menu.p1.setPosX(7);
-								Menu.p1.setPosY(7);	
+								p1.setVie(p1.getVie()-1);
+								p1.setPosX(7);
+								p1.setPosY(7);	
 							}	
-							Plateau.refreshEntity(Menu.p1);									
+							Plateau.refreshEntity(p1);									
 						}
 						
 								Plateau.refreshEntity(this);
@@ -76,14 +77,15 @@ public class Ennemi extends Entity {
 					{	
 						if(Plateau.plateau[this.getPosX()][this.getPosY()-1].getClass() == Player.class)
 						{
-							Plateau.refreshEntity(Menu.p1);
-							if(Menu.p1.getVie()-1 >= 0)
+							Player p1 = (Player) Plateau.plateau[this.getPosX()][this.getPosY()-1];
+							Plateau.refreshEntity(p1);
+							if(p1.getVie()-1 >= 0)
 							{
-								Menu.p1.setVie(Menu.p1.getVie()-1);
-								Menu.p1.setPosX(7);
-								Menu.p1.setPosY(7);								
+								p1.setVie(p1.getVie()-1);
+								p1.setPosX(7);
+								p1.setPosY(7);								
 							}	
-							Plateau.refreshEntity(Menu.p1);								
+							Plateau.refreshEntity(p1);								
 						}
 								Plateau.refreshEntity(this);
 								this.setPosY(this.getPosY()-1) ;
@@ -96,14 +98,15 @@ public class Ennemi extends Entity {
 					{			
 						if(Plateau.plateau[this.getPosX()-1][this.getPosY()].getClass() == Player.class)
 						{
-							Plateau.refreshEntity(Menu.p1);	
-							if(Menu.p1.getVie()-1 >= 0)
+							Player p1 = (Player) Plateau.plateau[this.getPosX()-1][this.getPosY()];
+							Plateau.refreshEntity(p1);	
+							if(p1.getVie()-1 >= 0)
 							{
-								Menu.p1.setVie(Menu.p1.getVie()-1);
-								Menu.p1.setPosX(7);
-								Menu.p1.setPosY(7);	
+								p1.setVie(p1.getVie()-1);
+								p1.setPosX(7);
+								p1.setPosY(7);	
 							}	
-							Plateau.refreshEntity(Menu.p1);	
+							Plateau.refreshEntity(p1);	
 						}
 								Plateau.refreshEntity(this);
 								this.setPosX(this.getPosX()-1) ;
@@ -116,14 +119,15 @@ public class Ennemi extends Entity {
 					{																				
 						if(Plateau.plateau[this.getPosX()+1][this.getPosY()].getClass() == Player.class)
 						{
-							Plateau.refreshEntity(Menu.p1);	
-							if(Menu.p1.getVie()-1 >= 0)
+							Player p1 = (Player) Plateau.plateau[this.getPosX()+1][this.getPosY()];
+							Plateau.refreshEntity(p1);	
+							if(p1.getVie()-1 >= 0)
 							{
-								Menu.p1.setVie(Menu.p1.getVie()-1);
-								Menu.p1.setPosX(7);
-								Menu.p1.setPosY(7);								
+								p1.setVie(p1.getVie()-1);
+								p1.setPosX(7);
+								p1.setPosY(7);								
 							}
-							Plateau.refreshEntity(Menu.p1);	
+							Plateau.refreshEntity(p1);	
 						}
 								Plateau.refreshEntity(this);
 								this.setPosX(this.getPosX()+1) ;

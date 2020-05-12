@@ -1,12 +1,14 @@
 package PackageClass;
 
+import java.util.ArrayList;
 
 public class Victory {
 
 	private boolean victory = false;
+	private ArrayList<Player> players;
 	public Victory()
 	{
-		
+		players = Plateau.getPlayer();
 	}
 	public void testVictory()
 	{
@@ -20,29 +22,22 @@ public class Victory {
 				{
 					if(Plateau.plateau[i][j+1].getClass()==BlocSpe.class&&Plateau.plateau[i][j+2].getClass()==BlocSpe.class)
 					{
-						Menu.p1.getScr().setPoint(Menu.p1.getScr().getPoint()+500);
+						players.get(0).getScr().setPoint(players.get(0).getScr().getPoint()+500);
 						victory=true;
 					}
 					else if(Plateau.plateau[i+1][j].getClass()==BlocSpe.class&&Plateau.plateau[i+2][j].getClass()==BlocSpe.class)
 					{
-						Menu.p1.getScr().setPoint(Menu.p1.getScr().getPoint()+500);
+						players.get(0).getScr().setPoint(players.get(0).getScr().getPoint()+500);
 						victory=true;
 					}
 				}				
 			}			
 		}		
-		if(victory)
-		{
-			Winning();
-		}
 	}
 	
 	private void  Winning()
 	{
-		System.out.println("--------------------------------------");
-		System.out.println("Vous avez gagné avec : "+Menu.p1.getScr().getPoint()+" pts!");
-		System.out.println("-------------------------------------!");
-		victory = true;
+		
 	}
 	public boolean isVictory() {
 		return victory;

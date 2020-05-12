@@ -1,6 +1,7 @@
 package PackageRender;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import PackageClass.*;
@@ -14,6 +15,7 @@ public class ScoringFrame extends JPanel {
 	private JLabel scorep1;
 	private JLabel highscore;
 	private JLabel scorep2;
+	private ArrayList<Player> players;
 	public ScoringFrame(int x,int y)
 	{
 		initScore();
@@ -45,13 +47,14 @@ public class ScoringFrame extends JPanel {
 		scorep1.setHorizontalAlignment(JLabel.CENTER);
 		highscore.setHorizontalAlignment(JLabel.CENTER);
 		scorep2.setHorizontalAlignment(JLabel.CENTER);
+		players = Plateau.getPlayer();
 	}
 	
 	public void setScoreP1()
 	{
-		if(Menu.p1.getClass() == Player.class)
+		if(players.size() >= 1)
 		{
-			Player p = (Player)Menu.p1;
+			Player p = players.get(0);
 			String s = "P1 :";
 			for(int j = 100000;j > 0;j = j/10)
 			{
@@ -67,30 +70,26 @@ public class ScoringFrame extends JPanel {
 				
 			}
 			scorep1.setText(s);
-		}
-	}
-	public void setScoreP2()
-	{
-		if(Menu.p2.getClass() == Player.class)
-		{
-			Player p = (Player)Menu.p2;
-			String s = "P2 :";
-			for(int j = 100000;j > 0;j = j/10)
+			if(players.size() > 1)
 			{
-				if((p.getScr().getPoint()/j) >= 1)
+				p = (Player) players.get(1);
+				s = "P2 :";
+				for(int j = 100000;j > 0;j = j/10)
 				{
-					s += p.getScr().getPoint();
+					if((p.getScr().getPoint()/j) >= 1)
+					{
+						s += p.getScr().getPoint();
+					}
+					else
+					{
+						s += "0";
+					}
+					
 				}
-				else
-				{
-					s += "0";
-				}
-				
+				scorep2.setText(s);
 			}
-			scorep2.setText(s);
 		}
 	}
-	
 	public void setHighScore()
 	{
 		String s = "HighS : ";
