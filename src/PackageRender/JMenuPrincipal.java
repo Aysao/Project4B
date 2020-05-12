@@ -1,9 +1,14 @@
 package PackageRender;
 import javax.swing.*;
-import PackageClass.Menu;
+
+
+import PackageThreads.Menu;
+import PackageThreads.ThreadPlayer;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 
 public class JMenuPrincipal extends JFrame {
 	/**
@@ -29,6 +34,7 @@ public class JMenuPrincipal extends JFrame {
 		this.setLocationRelativeTo(null);
 		actionButton();
 		}
+	
 	
 	private void initComposant()
 	{

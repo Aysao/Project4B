@@ -1,7 +1,11 @@
 package PackageClass;
 
 import java.util.Random;
+
+
+import PackageThreads.Menu;
 import PackageThreads.ThreadEnnemie;
+
 
 /*
  * un Thread qui gerera un ennemie
@@ -13,14 +17,13 @@ import PackageThreads.ThreadEnnemie;
  */
 public class Ennemi extends Entity {
 
-	public final int SCORE_BLOC = 400;
-	public final int SCORE_STUN = 100;
 	public boolean dead = false;
 	public boolean stun =false;
 	public int pathX ;
 	public int pathY ;
 	private ThreadEnnemie runte;
 	private Thread te;
+	private boolean played = false;
 	public Ennemi(int x, int y) {
 		super(x, y);				
 		newPoint();
@@ -28,6 +31,10 @@ public class Ennemi extends Entity {
 	public Ennemi() {
 		super();		
 		newPoint();
+	}
+	public ThreadEnnemie getpT()
+	{
+		return this.runte;
 	}
 	public void start()
 	{
@@ -39,6 +46,7 @@ public class Ennemi extends Entity {
 	{
 		runte.stop();		
 	}
+	
 	public synchronized void Deplacement()
 	{		
 		
@@ -66,10 +74,13 @@ public class Ennemi extends Entity {
 							}	
 							Plateau.refreshEntity(p1);									
 						}
-						
-								Plateau.refreshEntity(this);
-								this.setPosY(this.getPosY()+1) ;
-								Plateau.refreshEntity(this);
+						if(Plateau.plateau[this.getPosX()][this.getPosY()+1].getClass() == BlocN.class||Plateau.plateau[this.getPosX()][this.getPosY()+1].getClass() == String.class)
+						{
+							Plateau.refreshEntity(this);
+							this.setPosY(this.getPosY()+1) ;
+							Plateau.refreshEntity(this);								
+						}
+								
 									
 					}break;
 
@@ -87,9 +98,12 @@ public class Ennemi extends Entity {
 							}	
 							Plateau.refreshEntity(p1);								
 						}
-								Plateau.refreshEntity(this);
-								this.setPosY(this.getPosY()-1) ;
-								Plateau.refreshEntity(this);
+						if(Plateau.plateau[this.getPosX()][this.getPosY()-1].getClass() == BlocN.class||Plateau.plateau[this.getPosX()][this.getPosY()-1].getClass() == String.class)
+						{
+							Plateau.refreshEntity(this);
+							this.setPosY(this.getPosY()-1) ;
+							Plateau.refreshEntity(this);								
+						}
 										
 					}break;
 						
@@ -108,9 +122,12 @@ public class Ennemi extends Entity {
 							}	
 							Plateau.refreshEntity(p1);	
 						}
-								Plateau.refreshEntity(this);
-								this.setPosX(this.getPosX()-1) ;
-								Plateau.refreshEntity(this);
+						if(Plateau.plateau[this.getPosX()-1][this.getPosY()].getClass() == BlocN.class||Plateau.plateau[this.getPosX()-1][this.getPosY()].getClass() == String.class)
+						{
+							Plateau.refreshEntity(this);
+							this.setPosX(this.getPosX()-1) ;
+							Plateau.refreshEntity(this);								
+						}
 								
 																																		
 					}break;
@@ -129,9 +146,12 @@ public class Ennemi extends Entity {
 							}
 							Plateau.refreshEntity(p1);	
 						}
-								Plateau.refreshEntity(this);
-								this.setPosX(this.getPosX()+1) ;
-								Plateau.refreshEntity(this);																	
+						if(Plateau.plateau[this.getPosX()+1][this.getPosY()].getClass() == BlocN.class||Plateau.plateau[this.getPosX()+1][this.getPosY()].getClass() == String.class)
+						{
+							Plateau.refreshEntity(this);
+							this.setPosX(this.getPosX()+1) ;
+							Plateau.refreshEntity(this);								
+						}																	
 					}break;					
 				}				
 			}
@@ -168,6 +188,16 @@ public class Ennemi extends Entity {
 			return false;
 		}
 		
+	}
+	public ThreadEnnemie getEnnemiT()
+	{
+		return this.runte;
+	}
+	public boolean isPlayed() {
+		return played;
+	}
+	public void setPlayed(boolean played) {
+		this.played = played;
 	}
 
 } 

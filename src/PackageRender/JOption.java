@@ -1,5 +1,6 @@
 package PackageRender;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -11,7 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import PackageClass.Menu;
+import PackageThreads.Menu;
 
 public class JOption extends JFrame{
 	
@@ -42,6 +43,7 @@ public class JOption extends JFrame{
 		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		this.setLayout(null);
+		this.setBackground(Color.black);
 		initcomposant();
 	}
 	public void initcomposant()
@@ -85,6 +87,7 @@ public class JOption extends JFrame{
 		pbutton.add(left);
 		pbutton.add(lright);
 		pbutton.add(right);
+		
 		this.add(pbutton);
 		pbutton.setBounds(25,50,this.getWidth()-100,this.getHeight()/3);
 		this.add(valider);

@@ -1,8 +1,19 @@
 package PackageRender;
 import javax.swing.*;
+
+import PackageClass.Entity;
+import PackageClass.Plateau;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
+
+import PackageThreads.Menu;
+
+
+
+
 
 public class Render extends JFrame implements Runnable{
 	/**
@@ -16,8 +27,7 @@ public class Render extends JFrame implements Runnable{
 	private ScoringFrame sc;
 	public Render(int L,int H,KeyListener kl)
 	{
-		//super(f , b);
-		//System.out.println("test");
+		//super(f , b);		
 		Largeur = L;
 		Hauteur = H+50;
 		bottom = new JPanel();
@@ -91,12 +101,26 @@ public class Render extends JFrame implements Runnable{
 			delta += (now - lastTime) / timeTick;
 			timer += now - lastTime;
 			lastTime = now;
-			if(delta >= 1)
-			{	
+			if(delta >= 1 && Menu.host)
+			{					
 				sc.setScoreP1();
 				sc.setHighScore();
 				//sc.setScoreP2();
 				this.repaint();
+				delta--;
+				tick++;
+			}
+			else if (delta >= 1)
+			{
+				sc.setScoreP1();
+				sc.setHighScore();	
+				//sc.setScoreP2();
+				this.repaint();
+				delta--;
+				tick++;	
+			}
+			else if(delta >= 1)
+			{
 				delta--;
 				tick++;
 			}

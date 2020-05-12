@@ -1,6 +1,7 @@
 package PackageClass;
 
-
+import PackageThreads.Menu;
+import PackageThreads.ThreadPlayer;
 
 /*
  * toute les fonction du joueur
@@ -12,14 +13,33 @@ public class Player extends Entity {
 	private int Vie = 3;
 	private String pseudo;
 	private Score scr = new Score();
+	private ThreadPlayer runtp;
+
 	public Player(int x, int y) {
 		super(x, y);
 		Plateau.plateau[x][y] = this;
 	}
 	public Player(int x, int y,String str) {
 		super(x, y);
-		setPseudo(str);
-		scr.setName(str);
+		if(str.isEmpty()||str.isBlank())
+		{
+			
+		}
+		else
+		{
+			setPseudo(str);
+			scr.setName(str);
+		}	
+	}
+	public void start()
+	{
+		runtp = new ThreadPlayer(this);
+		Thread tp = new Thread(runtp);
+		tp.start();	
+	}
+	public ThreadPlayer getpT()
+	{
+		return this.runtp;
 	}
 	public synchronized void Deplacement()
 	{		

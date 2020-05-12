@@ -1,9 +1,13 @@
 package PackageRender;
 
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
+
+import PackageThreads.Menu;
+
 
 public class JMulti extends JFrame {
 
@@ -24,6 +28,7 @@ public class JMulti extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setLayout(null);
 		this.setResizable(false);
+	
 		initcomponent(f);
 	}
 	
@@ -59,6 +64,33 @@ public class JMulti extends JFrame {
 				jf.dispose();
 				f.setVisible(true);
 				
+			}
+			
+		});
+		heberger.addActionListener(new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				Menu.host=true;
+				Menu m = new Menu(f,2);		
+				Thread t = new Thread(m);
+				t.start();
+				f.setVisible(false);			
+			}
+			
+		});
+		rejoindre.addActionListener(new ActionListener()
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent e) {				
+				Menu.host=false;
+				Menu m = new Menu(f,2);				
+				Thread t = new Thread(m);
+				//t.start();
+				f.setVisible(false);								
 			}
 			
 		});

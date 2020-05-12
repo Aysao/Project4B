@@ -75,29 +75,33 @@ public class Plateau {
 	}
 	private void affichTab(int x , int y) 
 	{
-		
+		String st="";
 		for(int i=0 ; i<x ; i++) 
 		{
 			for(int j=0 ; j<y ; j++)
 			{
 				if(plateau[i][j].getClass()==String.class)
 				{
+					st+="0";
 					System.out.print("0");//si chemin
 				}
 				else 
 				{					
 					if(plateau[i][j].getClass()==Bordure.class)
 					{
+						st+="/";
 						System.out.print("/"); //si mur
 					}
 					else
 					{
 						if(plateau[i][j].getClass()==BlocN.class)
 						{
+							st+="#";
 							System.out.print("#");//si bloc classiqe
 						}
 						if(plateau[i][j].getClass()==BlocSpe.class)
 						{
+							st+="*";
 							System.out.print("*");//si diamant
 						}
 					}									
@@ -105,6 +109,113 @@ public class Plateau {
 			}			
 			System.out.println("");
 		}
+		System.out.println(st);
+	}
+	public static String PlateauToString()
+	{
+		String st="";
+		for(int i=0 ; i<Plateau.hauteur ; i++) 
+		{
+			for(int j=0 ; j<Plateau.largeur ; j++)
+			{
+				if(plateau[i][j].getClass()==String.class)
+				{
+					st+="0";
+				}
+				else 
+				{					
+					if(plateau[i][j].getClass()==Bordure.class)
+					{
+						Bordure be = (Bordure)plateau[i][j];
+						if(be.isActivate())
+							st+="|";
+						else
+							st+="/";										
+					}					
+					if(plateau[i][j].getClass()==BlocN.class)
+					{
+						st+="#";						
+					}
+					if(plateau[i][j].getClass()==BlocSpe.class)
+					{
+						st+="*";						
+					}
+					if(plateau[i][j].getClass()==Player.class)
+					{
+						st+="P";						
+					}
+					if(plateau[i][j].getClass()==Ennemi.class)
+					{
+						Ennemi en = (Ennemi)plateau[i][j];
+						if(en.stun)
+						st+="e";
+						else
+						st+="E";
+					}														
+				}			
+			}						
+		}
+		System.out.println(st);
+		return st;
+	}
+	public static void StringToPlateau(String str)
+	{
+		plateau = new Object[hauteur][largeur];
+		for(int i=0 ; i<Plateau.hauteur ; i++) 
+		{
+			for(int j=0 ; j<Plateau.largeur ; j++)
+			{
+				
+				if((i*Plateau.largeur)+j==255)
+				{	
+					break;
+				}
+				if(str.charAt((i*Plateau.largeur)+j)=='0')
+				{
+					plateau[i][j]="0";				
+				}
+				else 
+				{					
+					if(str.charAt((i*Plateau.largeur)+j)=='/')
+					{
+						if(i==0)
+						{					
+							plateau[i][j]= new Bordure(Bordure.NORD);
+						}
+						if(i==Plateau.hauteur-1)
+						{
+							plateau[i][j]= new Bordure(Bordure.SOUTH);
+						}
+						if(j==0)
+						{
+							plateau[i][j]= new Bordure(Bordure.WEST);
+						}
+						if(j==Plateau.largeur-1)
+						{
+							plateau[i][j]= new Bordure(Bordure.EAST);
+						}										
+					}
+					if(str.charAt((i*Plateau.largeur)+j)=='#')
+					{
+						plateau[i][j]=new BlocN(i,j);							
+					}
+					if(str.charAt((i*Plateau.largeur)+j)=='*')
+					{
+						plateau[i][j]=new BlocSpe(i,j);						
+					}
+					if(str.charAt((i*Plateau.largeur)+j)=='P')
+					{
+						plateau[i][j]=new Player(i,j);						
+					}	
+					if(str.charAt((i*Plateau.largeur)+j)=='E')
+					{
+						Ennemi en = (Ennemi)plateau[i][j];
+						plateau[i][j]=en;
+					}	
+				}			
+			}						
+		}
+		
 	}
 	private void initFullBloc(int x , int y) {
 		
@@ -394,5 +505,29 @@ public class Plateau {
 	}
 	public static int getHauteur() {
 		return hauteur;
+	}
+	public static void clearEntity() {
+		for(int i=0 ; i<hauteur ; i++) // on compte pas la bordure
+		{
+			for(int j=0 ; j<largeur; j++)
+			{					
+				
+				if(plateau[i][j].getClass()==Ennemi.class)
+				{
+					Ennemi en = (Ennemi)plateau[i][j];
+					en.getEnnemiT().stop();
+					System.out.println("ennemi clear!");
+				}
+				else if (plateau[i][j].getClass()==Player.class)
+				{
+					Player p = (Player)plateau[i][j];
+					p.getpT().stop();
+					
+					System.out.println("player clear!");
+				}
+				
+			}
+		}
+		
 	}
 } 
