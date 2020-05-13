@@ -3,10 +3,13 @@ package PackageRender;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -30,6 +33,7 @@ public class JOption extends JFrame{
 	private MButton left;
 	private MButton valider;
 	private JPanel pbutton;
+	private JPanel jp;
 	private JFrame jf;
 	private JFrame framep;
 	private MButton touche;
@@ -40,15 +44,18 @@ public class JOption extends JFrame{
 		framep = f;
 		this.setTitle("Raccourci clavier");
 		this.setSize(800,600);
-		this.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setLocationRelativeTo(null);
-		this.setLayout(null);
-		this.setBackground(Color.black);
+		
 		initcomposant();
 	}
 	public void initcomposant()
 	{
+		jp = new JPanel();
+		jp.setLayout(null);
+		jp.setBackground(Color.black);
 		pbutton = new JPanel();
+		pbutton.setBackground(Color.black);
 		pbutton.setLayout(new GridLayout(2,4));
 		lforward = new JLabel("Avancer : ",JLabel.CENTER);
 		lback = new JLabel("Reculer : ",JLabel.CENTER);
@@ -59,11 +66,14 @@ public class JOption extends JFrame{
 		right = new MButton("Image/GlaceBlock.png");
 		left = new MButton("Image/GlaceBlock.png");
 		valider = new MButton("Image/GlaceBlock.png");
-		forward.setMnemonic('A');
 		lforward.setFont(new Font(Font.DIALOG,Font.BOLD,18));
 		lback.setFont(new Font(Font.DIALOG,Font.BOLD,18));
 		lleft.setFont(new Font(Font.DIALOG,Font.BOLD,18));
 		lright.setFont(new Font(Font.DIALOG,Font.BOLD,18));
+		lforward.setForeground(Color.WHITE);
+		lback.setForeground(Color.WHITE);
+		lleft.setForeground(Color.WHITE);
+		lright.setForeground(Color.WHITE);
 		forward.setText(""+Menu.avancer);
 		forward.setPressed("Image/click.png");
 		forward.setRollover("Image/blurGlaceBlock.png");
@@ -88,12 +98,14 @@ public class JOption extends JFrame{
 		pbutton.add(lright);
 		pbutton.add(right);
 		
-		this.add(pbutton);
+		jp.add(pbutton);
 		pbutton.setBounds(25,50,this.getWidth()-100,this.getHeight()/3);
-		this.add(valider);
+		jp.add(valider);
 		valider.setBounds(this.getWidth()-pbutton.getWidth()/4-25,this.getHeight()-pbutton.getHeight()/2-50,pbutton.getWidth()/4,pbutton.getHeight()/2);
+		this.getContentPane().add(jp);
 		actionlistener();
 		keyl();
+		closeConfig();
 	}
 	public void actionlistener() {
 		valider.addActionListener(new ActionListener() {
@@ -102,7 +114,6 @@ public class JOption extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				jf.dispose();
 				framep.setVisible(true);
-				System.out.println(""+forward.getText());
 				Menu.avancer = forward.getText().charAt(0);
 				Menu.reculer = back.getText().charAt(0);
 				Menu.droite = right.getText().charAt(0);
@@ -196,6 +207,56 @@ public class JOption extends JFrame{
 			}
 				
 		});
+	}
+	
+	public void closeConfig()
+	{
+		this.addWindowListener(new WindowListener()
+			{
+
+				@Override
+				public void windowOpened(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void windowClosing(WindowEvent e) {
+					framep.setVisible(true);
+					
+				}
+
+				@Override
+				public void windowClosed(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void windowIconified(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void windowDeiconified(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void windowActivated(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void windowDeactivated(WindowEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+				
+			});
 	}
 	public void enable(boolean b)
 	{

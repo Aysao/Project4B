@@ -50,7 +50,12 @@ public class Menu implements Runnable {
 			{
 				new Plateau();
 				p1 = new Player(7,7);
-				p1.setPseudo(JOptionPane.showInputDialog("Entrer votre pseudo :"));	
+				p1.setPseudo(JOptionPane.showInputDialog("Entrer votre pseudo :"));
+				if(p1.getPseudo().equals(""))
+				{
+					p1.setPseudo("Player");
+				}
+				p1.getScr().setName(p1.getPseudo());
 				e1 = new Ennemi();				
 				e2 = new Ennemi();				
 				e3 = new Ennemi();				
@@ -78,7 +83,7 @@ public class Menu implements Runnable {
 					ThreadPlayer runtp = new ThreadPlayer(p1);
 					Thread tp = new Thread(runtp);
 					tp.start();																						
-					r = new Render(600,800,runtp.getKl());					
+					r = new Render(menuPrincipal,600,800,runtp.getKl());					
 					Thread t = new Thread(r);
 					t.start();	
 				}
@@ -94,7 +99,7 @@ public class Menu implements Runnable {
 					Thread te = new Thread(runte);
 					te.start();	
 					v = new Victory();																															
-					r = new Render(600,800,runte.getKl());					
+					r = new Render(menuPrincipal,600,800,runte.getKl());					
 					Thread t = new Thread(r);
 					t.start();					
 				}				
@@ -114,7 +119,7 @@ public class Menu implements Runnable {
 		ThreadEnnemie runte2 = new ThreadEnnemie(e3);
 		Thread te2 =new Thread(runte2);
 		te2.start();
-		r = new Render(600,800,runtp.getKl());
+		r = new Render(menuPrincipal,600,800,runtp.getKl());
 		Thread t = new Thread(r);
 		t.start();	
 		hmThreadP.put(p1, runtp);

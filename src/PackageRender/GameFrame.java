@@ -52,6 +52,7 @@ public class GameFrame extends JPanel
 			bhunter = new ImageIcon("Image/Hunterdos.png").getImage();
 			rhunter = new ImageIcon("Image/Hunterdroite.png").getImage();
 			lhunter = new ImageIcon("Image/Huntergauche.png").getImage();
+			ennemiStun = new ImageIcon("Image/Huntercroix.png").getImage();
 		}
 		else
 		{
@@ -64,7 +65,7 @@ public class GameFrame extends JPanel
 			floor = new ImageIcon(this.getClass().getResource("/floor.png")).getImage();
 			bordure1 = new ImageIcon(this.getClass().getResource("/bordureClassic.png")).getImage();
 			bordure2 = new ImageIcon(this.getClass().getResource("/bordureActivate.png")).getImage();
-			ennemiStun = new ImageIcon(this.getClass().getResource("/Hunterface.png")).getImage();
+			ennemiStun = new ImageIcon(this.getClass().getResource("/Huntercroix.png")).getImage();
 			fhunter = new ImageIcon(this.getClass().getResource("/Hunterface.png")).getImage();
 			bhunter = new ImageIcon(this.getClass().getResource("/Hunterdos.png")).getImage();
 			rhunter = new ImageIcon(this.getClass().getResource("/Hunterdroite.png")).getImage();
@@ -142,21 +143,23 @@ public class GameFrame extends JPanel
 						{
 							g.drawImage(ennemiStun,BlockL*j,BlockH*i,BlockL,BlockH, null);
 						}
-
-						switch(en.getOrientation())
-						{
-						case 1:{
-                            g.drawImage(bhunter,BlockL*j,BlockH*i,BlockL,BlockH, null);
-                        }break;
-                        case 3:{
-                            g.drawImage(rhunter,BlockL*j,BlockH*i,BlockL,BlockH, null);
-                        }break;
-                        case 4:{
-                            g.drawImage(lhunter,BlockL*j,BlockH*i,BlockL,BlockH, null);
-                        }break;
-                        case 2:{
-                            g.drawImage(fhunter,BlockL*j,BlockH*i,BlockL,BlockH, null);
-                        }break;
+						else {
+	
+							switch(en.getOrientation())
+							{
+							case 1:{
+	                            g.drawImage(bhunter,BlockL*j,BlockH*i,BlockL,BlockH, null);
+	                        }break;
+	                        case 3:{
+	                            g.drawImage(rhunter,BlockL*j,BlockH*i,BlockL,BlockH, null);
+	                        }break;
+	                        case 4:{
+	                            g.drawImage(lhunter,BlockL*j,BlockH*i,BlockL,BlockH, null);
+	                        }break;
+	                        case 2:{
+	                            g.drawImage(fhunter,BlockL*j,BlockH*i,BlockL,BlockH, null);
+	                        }break;
+							}
 						}
 					}
 					if(Plateau.plateau[i][j].getClass() == Bordure.class)

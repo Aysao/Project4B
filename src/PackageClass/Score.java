@@ -18,7 +18,7 @@ public class Score {
 	private int mstKill = 0;
 	private int blocDestroy = 0;
 	private double[] scores;
-	public static double highscore;
+	public static double highscore = 0;
 	private String[] pseudo;
 	private String name = null; 
 	public Score()

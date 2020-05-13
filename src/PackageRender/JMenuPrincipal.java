@@ -108,7 +108,6 @@ public class JMenuPrincipal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				JOption jp = new JOption(f);
-
 				jp.setVisible(true);
 				f.setVisible(false);
 				

@@ -29,18 +29,18 @@ public class ThreadPlayer implements Runnable {
 				}
 				else if(e.getKeyChar() == Menu.gauche||e.getKeyChar() == (Menu.gauche-'A'+'a'))
 				{
-					player.setOrientation(2);
+					player.setOrientation(4);
 					player.setMouvement(true);					
 					
 				}
 				else if(e.getKeyChar() == Menu.reculer||e.getKeyChar() == (Menu.reculer-'A'+'a'))
 				{
-					player.setOrientation(3);
+					player.setOrientation(2);
 					player.setMouvement(true);				
 				}
 				else if(e.getKeyChar() == Menu.droite||e.getKeyChar() == (Menu.droite-'A'+'a'))
 				{
-					player.setOrientation(4);
+					player.setOrientation(3);
 					player.setMouvement(true);							
 				}
 			}

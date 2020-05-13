@@ -22,7 +22,8 @@ public class Player extends Entity {
 		super(x, y);
 		if(str.isEmpty()||str.isBlank())
 		{
-			
+			setPseudo(str);
+			scr.setName(str);
 		}
 		else
 		{
