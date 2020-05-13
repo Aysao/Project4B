@@ -3,9 +3,6 @@ package PackageClass;
 import java.util.Random;
 
 
-import PackageThreads.Menu;
-import PackageThreads.ThreadEnnemie;
-
 
 /*
  * un Thread qui gerera un ennemie
@@ -21,8 +18,7 @@ public class Ennemi extends Entity {
 	public boolean stun =false;
 	public int pathX ;
 	public int pathY ;
-	private ThreadEnnemie runte;
-	private Thread te;
+	
 	private boolean played = false;
 	public Ennemi(int x, int y) {
 		super(x, y);				
@@ -32,20 +28,7 @@ public class Ennemi extends Entity {
 		super();		
 		newPoint();
 	}
-	public ThreadEnnemie getpT()
-	{
-		return this.runte;
-	}
-	public void start()
-	{
-		runte = new ThreadEnnemie(this);
-		te =new Thread(runte);
-		te.start();
-	}
-	public void stop()
-	{
-		runte.stop();		
-	}
+	
 	
 	public synchronized void Deplacement()
 	{		
@@ -189,10 +172,7 @@ public class Ennemi extends Entity {
 		}
 		
 	}
-	public ThreadEnnemie getEnnemiT()
-	{
-		return this.runte;
-	}
+	
 	public boolean isPlayed() {
 		return played;
 	}

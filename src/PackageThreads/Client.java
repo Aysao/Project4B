@@ -8,14 +8,13 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-import PackageClass.Entity;
 import PackageClass.Plateau;
 import PackageClass.Player;
 
 public class Client implements Runnable{
 	private boolean running= true;
 	private int port = 8080;
-	private  PrintWriter sisw;
+	private PrintWriter sisw;
 	private BufferedReader sisr;
 	private Socket socket;
 	public Client()
@@ -64,26 +63,26 @@ public class Client implements Runnable{
 			{
 			case "1":
 			{
-				p1.setOrientation(Entity.NORD);
+				p1.setOrientation(1);
 				p1.setMouvement(true);
 				p1.Deplacement();
 			}break;
 			
 			case "2":
 			{
-				p1.setOrientation(Entity.SOUTH);
+				p1.setOrientation(2);
 				p1.setMouvement(true);
 				p1.Deplacement();
 			}break;
 			case "3":
 			{
-				p1.setOrientation(Entity.EAST);
+				p1.setOrientation(3);
 				p1.setMouvement(true);
 				p1.Deplacement();
 			}break;
 			case "4":
 			{
-				p1.setOrientation(Entity.WEST);
+				p1.setOrientation(4);
 				p1.setMouvement(true);
 				p1.Deplacement();
 			}break;

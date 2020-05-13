@@ -81,7 +81,7 @@ public class GameFrame extends JPanel
 		
 	}
 	
-
+	
 	
 
 	public void paintComponent(Graphics g)
@@ -110,23 +110,23 @@ public class GameFrame extends JPanel
 												
 						switch(p.getOrientation())
 						{
-						case Entity.NORD:{          
+						case 1:{          
 							g.drawImage(floor,BlockL*j,BlockH*i,BlockL,BlockH, null);
                             g.drawImage(bpengo,BlockL*j,BlockH*i,BlockL,BlockH, null);
                         }break;
-                        case Entity.EAST:{
+                        case 3:{
                         	g.drawImage(floor,BlockL*j,BlockH*i,BlockL,BlockH, null);
                             g.drawImage(rpengo,BlockL*j,BlockH*i,BlockL,BlockH, null);
                         }break;
-                        case Entity.WEST:{
+                        case 4:{
                         	g.drawImage(floor,BlockL*j,BlockH*i,BlockL,BlockH, null);
                             g.drawImage(lpengo,BlockL*j,BlockH*i,BlockL,BlockH, null);
                         }break;
-                        case Entity.SOUTH:{
+                        case 2:{
                         	g.drawImage(floor,BlockL*j,BlockH*i,BlockL,BlockH, null);
                             g.drawImage(fpengo,BlockL*j,BlockH*i,BlockL,BlockH, null);
                         }break;
-                        case Entity.SO:
+                        case 0:
 						{
 							g.drawImage(floor,BlockL*j,BlockH*i,BlockL,BlockH, null);
 							g.drawImage(fpengo,BlockL*j,BlockH*i,BlockL,BlockH, null);
@@ -145,16 +145,16 @@ public class GameFrame extends JPanel
 
 						switch(en.getOrientation())
 						{
-						case Entity.NORD:{
+						case 1:{
                             g.drawImage(bhunter,BlockL*j,BlockH*i,BlockL,BlockH, null);
                         }break;
-                        case Entity.EAST:{
+                        case 3:{
                             g.drawImage(rhunter,BlockL*j,BlockH*i,BlockL,BlockH, null);
                         }break;
-                        case Entity.WEST:{
+                        case 4:{
                             g.drawImage(lhunter,BlockL*j,BlockH*i,BlockL,BlockH, null);
                         }break;
-                        case Entity.SOUTH:{
+                        case 2:{
                             g.drawImage(fhunter,BlockL*j,BlockH*i,BlockL,BlockH, null);
                         }break;
 						}

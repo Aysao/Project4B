@@ -1,12 +1,13 @@
 package PackageThreads;
 
 import java.io.IOException;
+import java.util.HashMap;
+
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import PackageClass.Ennemi;
-import PackageClass.Entity;
 import PackageClass.Plateau;
 import PackageClass.Player;
 import PackageClass.Victory;
@@ -33,7 +34,8 @@ public class Menu implements Runnable {
 	public static Serveur s;
 	public static int mode ;
 	public static boolean gamestart=true;
-	
+    public static HashMap<Ennemi, ThreadEnnemie> hmThreadE = new HashMap<Ennemi, ThreadEnnemie>();
+    public static HashMap<Player, ThreadPlayer> hmThreadP = new HashMap<Player, ThreadPlayer>();
 	
 
 	
@@ -52,14 +54,9 @@ public class Menu implements Runnable {
 				e1 = new Ennemi();				
 				e2 = new Ennemi();				
 				e3 = new Ennemi();				
-				v = new Victory();
-				p1.start();
-				e1.start();
-				e2.start();//les e ont un thread associï¿½ (pour pouvoir le stop grace a l'ennemi)
-				e3.start();									
-				r = new Render(600,800,p1.getpT().getKl());
-				Thread t = new Thread(r);
-				t.start();				
+				v = new Victory();						
+				startSolo();
+						
 			}break;
 			case 2:
 			{
@@ -78,8 +75,10 @@ public class Menu implements Runnable {
 					{
 						System.out.println("waiting...");
 					}
-					p1.start();																					
-					r = new Render(600,800,p1.getpT().getKl());					
+					ThreadPlayer runtp = new ThreadPlayer(p1);
+					Thread tp = new Thread(runtp);
+					tp.start();																						
+					r = new Render(600,800,runtp.getKl());					
 					Thread t = new Thread(r);
 					t.start();	
 				}
@@ -90,15 +89,39 @@ public class Menu implements Runnable {
 					tc.start();
 					p1 = new Player(7,7);
 					p2 = new Ennemi(8,8);
-					p2.setPlayed(true);
-					p2.start();
+					p2.setPlayed(true);					
+					ThreadEnnemie runte = new ThreadEnnemie(p2);
+					Thread te = new Thread(runte);
+					te.start();	
 					v = new Victory();																															
-					r = new Render(600,800,p2.getpT().getKl());					
+					r = new Render(600,800,runte.getKl());					
 					Thread t = new Thread(r);
 					t.start();					
 				}				
 			}
 		}
+	}
+	private void startSolo() {
+		ThreadPlayer runtp = new ThreadPlayer(p1);
+		Thread tp = new Thread(runtp);
+		tp.start();	
+		ThreadEnnemie runte = new ThreadEnnemie(e1);
+		Thread te =new Thread(runte);
+		te.start();
+		ThreadEnnemie runte1 = new ThreadEnnemie(e2);
+		Thread te1 =new Thread(runte1);
+		te1.start();
+		ThreadEnnemie runte2 = new ThreadEnnemie(e3);
+		Thread te2 =new Thread(runte2);
+		te2.start();
+		r = new Render(600,800,runtp.getKl());
+		Thread t = new Thread(r);
+		t.start();	
+		hmThreadP.put(p1, runtp);
+		hmThreadE.put(e1, runte);
+		hmThreadE.put(e2, runte1);		
+		hmThreadE.put(e3, runte2);
+		
 	}
 	public static void newEnnemi()
 	{
@@ -112,7 +135,10 @@ public class Menu implements Runnable {
 		else if(ennemiVie>=3)
 		{
 			Ennemi e=new Ennemi();
-			e.start();	
+			ThreadEnnemie runte = new ThreadEnnemie(e);
+			Thread te =new Thread(runte);
+			te.start();
+			hmThreadE.put(e, runte);
 		}		
 	}
 
@@ -130,7 +156,7 @@ public class Menu implements Runnable {
 		}
 		if(v.isVictory() == true)
 		{
-			JOptionPane.showMessageDialog(r,"Gagné!");
+			JOptionPane.showMessageDialog(r,"Gagnï¿½!");
 		}	
 		
 	}

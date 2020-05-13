@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 import PackageClass.*;
-import PackageThreads.Menu;
 
 public class ScoringFrame extends JPanel {
 	/**

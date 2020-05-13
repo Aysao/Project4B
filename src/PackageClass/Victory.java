@@ -34,11 +34,7 @@ public class Victory {
 			}			
 		}		
 	}
-	
-	private void  Winning()
-	{
-		
-	}
+
 	public boolean isVictory() {
 		return victory;
 	}

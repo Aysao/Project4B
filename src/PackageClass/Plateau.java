@@ -3,6 +3,8 @@ package PackageClass;
 import java.util.ArrayList;
 import java.util.Random;
 
+import PackageThreads.Menu;
+
 public class Plateau {
 	public static Object[][] plateau;
 	private static int largeur = 15; //13 de plateau + 2 de bordure
@@ -195,20 +197,28 @@ public class Plateau {
 					if(str.charAt((i*Plateau.largeur)+j)=='/')
 					{
 						if(i==0)
-						{					
-							plateau[i][j]= new Bordure(Bordure.NORD);
+						{	
+							Bordure b = new Bordure();
+							b.setSide(b.NORD);
+							plateau[i][j]= b ;
 						}
 						if(i==Plateau.hauteur-1)
 						{
-							plateau[i][j]= new Bordure(Bordure.SOUTH);
+							Bordure b = new Bordure();
+							b.setSide(b.SOUTH);
+							plateau[i][j]= b;
 						}
 						if(j==0)
 						{
-							plateau[i][j]= new Bordure(Bordure.WEST);
+							Bordure b = new Bordure();
+							b.setSide(b.WEST);
+							plateau[i][j]= b;
 						}
 						if(j==Plateau.largeur-1)
 						{
-							plateau[i][j]= new Bordure(Bordure.EAST);
+							Bordure b = new Bordure();
+							b.setSide(b.EAST);
+							plateau[i][j]= b;
 						}										
 					}
 					if(str.charAt((i*Plateau.largeur)+j)=='#')
@@ -242,19 +252,27 @@ public class Plateau {
 				
 				if(i==0)
 				{					
-					plateau[i][j]= new Bordure(Bordure.NORD);
+					Bordure b = new Bordure();
+					b.setSide(b.NORD);
+					plateau[i][j]= b ;
 				}
 				if(i==x-1)
 				{
-					plateau[i][j]= new Bordure(Bordure.SOUTH);
+					Bordure b = new Bordure();
+					b.setSide(b.SOUTH);
+					plateau[i][j]= b ;
 				}
 				if(j==0)
 				{
-					plateau[i][j]= new Bordure(Bordure.WEST);
+					Bordure b = new Bordure();
+					b.setSide(b.WEST);
+					plateau[i][j]= b ;
 				}
 				if(j==y-1)
 				{
-					plateau[i][j]= new Bordure(Bordure.EAST);
+					Bordure b = new Bordure();
+					b.setSide(b.EAST);
+					plateau[i][j]= b ;
 				}
 				if(j!=0&&j!=y-1&&i!=0&&i!=x-1)
 				{
@@ -531,14 +549,15 @@ public class Plateau {
 				if(plateau[i][j].getClass()==Ennemi.class)
 				{
 					Ennemi en = (Ennemi)plateau[i][j];
-					en.getEnnemiT().stop();
+					Menu.hmThreadE.get(en).stop();
+					Menu.hmThreadE.remove(en);
 					System.out.println("ennemi clear!");
 				}
 				else if (plateau[i][j].getClass()==Player.class)
 				{
 					Player p = (Player)plateau[i][j];
-					p.getpT().stop();
-					
+					Menu.hmThreadP.get(p).stop();
+					Menu.hmThreadP.remove(p);
 					System.out.println("player clear!");
 				}
 				

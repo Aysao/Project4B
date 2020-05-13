@@ -6,13 +6,12 @@ import PackageClass.BlocN;
 import PackageClass.BlocSpe;
 import PackageClass.Bordure;
 import PackageClass.Ennemi;
-import PackageClass.Entity;
 import PackageClass.Plateau;
 import PackageClass.Player;
 
 
 public class Serveur implements Runnable{
-	static final int port = 8080;
+	final int port = 8080;
 	private ServerSocket s;
 	private BufferedReader sisr;
 	private PrintWriter sisw;
@@ -53,26 +52,26 @@ public class Serveur implements Runnable{
 			{
 			case "1":
 			{
-				e.setOrientation(Entity.NORD);
+				e.setOrientation(1);
 				e.setMouvement(true);
 				e.Deplacement();
 			}break;
 			
 			case "2":
 			{
-				e.setOrientation(Entity.SOUTH);
+				e.setOrientation(2);
 				e.setMouvement(true);
 				e.Deplacement();
 			}break;
 			case "3":
 			{
-				e.setOrientation(Entity.EAST);
+				e.setOrientation(3);
 				e.setMouvement(true);
 				e.Deplacement();
 			}break;
 			case "4":
 			{
-				e.setOrientation(Entity.WEST);
+				e.setOrientation(4);
 				e.setMouvement(true);
 				e.Deplacement();
 			}break;

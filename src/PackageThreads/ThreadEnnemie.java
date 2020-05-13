@@ -2,20 +2,13 @@ package PackageThreads;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.net.UnknownHostException;
+
 import java.util.Random;
 
 
 import PackageClass.BlocN;
 import PackageClass.Ennemi;
-import PackageClass.Entity;
+
 import PackageClass.Plateau;
 import PackageClass.Player;
 
@@ -42,23 +35,23 @@ public class ThreadEnnemie implements Runnable {
 			{
 				if(e.getKeyChar() == Menu.avancer||e.getKeyChar() == (Menu.avancer-'A'+'a'))
 				{
-					en.setOrientation(Entity.NORD);
+					en.setOrientation(1);
 					en.setMouvement(true);									
 				}
 				else if(e.getKeyChar() == Menu.gauche||e.getKeyChar() == (Menu.gauche-'A'+'a'))
 				{
-					en.setOrientation(Entity.WEST);
+					en.setOrientation(4);
 					en.setMouvement(true);					
 					
 				}
 				else if(e.getKeyChar() == Menu.reculer||e.getKeyChar() == (Menu.reculer-'A'+'a'))
 				{
-					en.setOrientation(Entity.SOUTH);
+					en.setOrientation(2);
 					en.setMouvement(true);				
 				}
 				else if(e.getKeyChar() == Menu.droite||e.getKeyChar() == (Menu.droite-'A'+'a'))
 				{
-					en.setOrientation(Entity.EAST);
+					en.setOrientation(3);
 					en.setMouvement(true);							
 				}
 			}
@@ -199,12 +192,12 @@ public class ThreadEnnemie implements Runnable {
 			
 			if(Plateau.plateau[x-1][y].getClass()==BlocN.class)
 			{				
-					en.setOrientation(Entity.NORD);
+					en.setOrientation(1);
 					en.setMouvement(true);														
 			}
 			else if(Plateau.plateau[x-1][y].getClass()==String.class||Plateau.plateau[x-1][y].getClass()==Player.class)
 			{
-				en.setOrientation(Entity.NORD);
+				en.setOrientation(1);
 				en.setMouvement(true);	
 			}
 			else
@@ -216,12 +209,12 @@ public class ThreadEnnemie implements Runnable {
 		{
 			if(Plateau.plateau[x+1][y].getClass()==BlocN.class)
 			{				
-					en.setOrientation(Entity.SOUTH);
+					en.setOrientation(2);
 					en.setMouvement(true);												
 			}
 			else if(Plateau.plateau[x+1][y].getClass()==String.class||Plateau.plateau[x+1][y].getClass()==Player.class)
 			{
-				en.setOrientation(Entity.SOUTH);
+				en.setOrientation(2);
 				en.setMouvement(true);					
 			}
 			else
@@ -244,12 +237,12 @@ public class ThreadEnnemie implements Runnable {
 			
 			if(Plateau.plateau[x][y-1].getClass()==BlocN.class)
 			{
-					en.setOrientation(Entity.WEST);
+					en.setOrientation(4);
 					en.setMouvement(true);									
 			}
 			else if(Plateau.plateau[x][y-1].getClass()==String.class||Plateau.plateau[x][y-1].getClass()==Player.class)
 			{
-				en.setOrientation(Entity.WEST);
+				en.setOrientation(4);
 				en.setMouvement(true);					
 			}
 			else
@@ -262,13 +255,13 @@ public class ThreadEnnemie implements Runnable {
 			
 			if(Plateau.plateau[x][y+1].getClass()==BlocN.class)
 			{		
-					en.setOrientation(Entity.EAST);
+					en.setOrientation(3);
 					en.setMouvement(true);									
 			}
 			else if(Plateau.plateau[x][y+1].getClass()==String.class||Plateau.plateau[x][y+1].getClass()==Player.class)
 			{
 				
-				en.setOrientation(Entity.EAST);
+				en.setOrientation(3);
 				en.setMouvement(true);					
 			}
 			else

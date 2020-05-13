@@ -1,7 +1,6 @@
 package PackageClass;
 
 import PackageThreads.Menu;
-import PackageThreads.ThreadPlayer;
 
 /*
  * toute les fonction du joueur
@@ -13,7 +12,7 @@ public class Player extends Entity {
 	private int Vie = 3;
 	private String pseudo;
 	private Score scr = new Score();
-	private ThreadPlayer runtp;
+	
 
 	public Player(int x, int y) {
 		super(x, y);
@@ -31,16 +30,8 @@ public class Player extends Entity {
 			scr.setName(str);
 		}	
 	}
-	public void start()
-	{
-		runtp = new ThreadPlayer(this);
-		Thread tp = new Thread(runtp);
-		tp.start();	
-	}
-	public ThreadPlayer getpT()
-	{
-		return this.runtp;
-	}
+	
+	
 	public synchronized void Deplacement()
 	{		
 		
@@ -87,7 +78,8 @@ public class Player extends Entity {
 									if(Plateau.plateau[this.getPosX()][this.getPosY()+i].getClass() == Ennemi.class)
 									{
 										Ennemi en = (Ennemi)Plateau.plateau[this.getPosX()][this.getPosY()+i];
-										en.stop();
+										Menu.hmThreadE.get(en).stop();
+										Menu.hmThreadE.remove(en);
 										scr.mstKill();
 										Plateau.plateau[this.getPosX()][this.getPosY()+i] = "0";
 										Menu.newEnnemi();
@@ -109,7 +101,8 @@ public class Player extends Entity {
 									if(Plateau.plateau[this.getPosX()][this.getPosY()+i].getClass() == Ennemi.class)
 									{
 										Ennemi en = (Ennemi)Plateau.plateau[this.getPosX()][this.getPosY()+i];
-										en.stop();
+										Menu.hmThreadE.get(en).stop();
+										Menu.hmThreadE.remove(en);
 										scr.mstKill();
 										Plateau.plateau[this.getPosX()][this.getPosY()+i] = "0";
 										Menu.newEnnemi();
@@ -129,7 +122,8 @@ public class Player extends Entity {
 								{
 									Plateau.refreshEntity(this);
 									Plateau.refreshEntity(en);
-									en.stop();
+									Menu.hmThreadE.get(en).stop();
+									Menu.hmThreadE.remove(en);
 									this.setPosY(this.getPosY()+1);
 									Plateau.refreshEntity(en);
 									Plateau.refreshEntity(this);
@@ -183,7 +177,8 @@ public class Player extends Entity {
 									if(Plateau.plateau[this.getPosX()][this.getPosY()-i].getClass() == Ennemi.class)
 									{
 										Ennemi en = (Ennemi)Plateau.plateau[this.getPosX()][this.getPosY()-i];
-										en.stop();
+										Menu.hmThreadE.get(en).stop();
+										Menu.hmThreadE.remove(en);
 										scr.mstKill();
 										Plateau.plateau[this.getPosX()][this.getPosY()-i] = "0";
 										Menu.newEnnemi();
@@ -205,7 +200,8 @@ public class Player extends Entity {
 									if(Plateau.plateau[this.getPosX()][this.getPosY()-i].getClass() == Ennemi.class)
 									{
 										Ennemi en = (Ennemi)Plateau.plateau[this.getPosX()][this.getPosY()-i];
-										en.stop();
+										Menu.hmThreadE.get(en).stop();
+										Menu.hmThreadE.remove(en);
 										scr.mstKill();
 										Plateau.plateau[this.getPosX()][this.getPosY()-i] = "0";
 										Menu.newEnnemi();
@@ -226,7 +222,8 @@ public class Player extends Entity {
 								{
 									Plateau.refreshEntity(this);
 									Plateau.refreshEntity(en);
-									en.stop();
+									Menu.hmThreadE.get(en).stop();
+									Menu.hmThreadE.remove(en);
 									this.setPosY(this.getPosY()-1);
 									Plateau.refreshEntity(en);
 									Plateau.refreshEntity(this);
@@ -277,7 +274,8 @@ public class Player extends Entity {
 									if(Plateau.plateau[this.getPosX()-i][this.getPosY()].getClass() == Ennemi.class)
 									{
 										Ennemi en = (Ennemi)Plateau.plateau[this.getPosX()-i][this.getPosY()];
-										en.stop();
+										Menu.hmThreadE.get(en).stop();
+										Menu.hmThreadE.remove(en);
 										scr.mstKill();
 										Plateau.plateau[this.getPosX()-i][this.getPosY()] = "0";
 										Menu.newEnnemi();
@@ -299,7 +297,8 @@ public class Player extends Entity {
 									if(Plateau.plateau[this.getPosX()-i][this.getPosY()].getClass() == Ennemi.class)
 									{
 										Ennemi en = (Ennemi)Plateau.plateau[this.getPosX()-i][this.getPosY()];
-										en.stop();
+										Menu.hmThreadE.get(en).stop();
+										Menu.hmThreadE.remove(en);
 										scr.mstKill();
 										Plateau.plateau[this.getPosX()-i][this.getPosY()] = "0";
 										Menu.newEnnemi();
@@ -320,7 +319,8 @@ public class Player extends Entity {
 								{
 									Plateau.refreshEntity(this);
 									Plateau.refreshEntity(en);
-									en.stop();
+									Menu.hmThreadE.get(en).stop();
+									Menu.hmThreadE.remove(en);
 									this.setPosX(this.getPosX()-1);
 									Plateau.refreshEntity(en);
 									Plateau.refreshEntity(this);
@@ -371,7 +371,8 @@ public class Player extends Entity {
 									if(Plateau.plateau[this.getPosX()+i][this.getPosY()].getClass() == Ennemi.class)
 									{
 										Ennemi en = (Ennemi)Plateau.plateau[this.getPosX()+i][this.getPosY()];
-										en.stop();
+										Menu.hmThreadE.get(en).stop();
+										Menu.hmThreadE.remove(en);
 										scr.mstKill();
 										Plateau.plateau[this.getPosX()+i][this.getPosY()] = "0";
 										Menu.newEnnemi();
@@ -392,7 +393,8 @@ public class Player extends Entity {
 									if(Plateau.plateau[this.getPosX()+i][this.getPosY()].getClass() == Ennemi.class)
 									{
 										Ennemi en = (Ennemi)Plateau.plateau[this.getPosX()+i][this.getPosY()];
-										en.stop();
+										Menu.hmThreadE.get(en).stop();
+										Menu.hmThreadE.remove(en);
 										scr.mstKill();
 										Plateau.plateau[this.getPosX()+i][this.getPosY()] = "0";
 										Menu.newEnnemi();
@@ -413,7 +415,8 @@ public class Player extends Entity {
 								{				
 									Plateau.refreshEntity(this);
 									Plateau.refreshEntity(en);
-									en.stop();
+									Menu.hmThreadE.get(en).stop();
+									Menu.hmThreadE.remove(en);
 									this.setPosX(this.getPosX()+1);
 									Plateau.refreshEntity(en);
 									Plateau.refreshEntity(this);

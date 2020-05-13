@@ -88,8 +88,7 @@ public class JMulti extends JFrame {
 			public void actionPerformed(ActionEvent e) {				
 				Menu.host=false;
 				Menu m = new Menu(f,2);				
-				Thread t = new Thread(m);
-				//t.start();
+				new Thread(m);
 				f.setVisible(false);								
 			}
 			

@@ -1,15 +1,11 @@
 package PackageRender;
 import javax.swing.*;
 
-import PackageClass.Entity;
-import PackageClass.Plateau;
-
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.IOException;
 
-import PackageThreads.Menu;
+
 
 
 
@@ -128,6 +124,7 @@ public class Render extends JFrame implements Runnable{
 	@Override
 	public void run() 
 	{
+//		double delta = 0;
 		sc.setHighScore();
 		
 		while(running)
