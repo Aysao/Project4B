@@ -1,5 +1,6 @@
 package PackageClass;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 
@@ -156,6 +157,112 @@ public class Ennemi extends Entity {
 		}while(test);	    
 	    this.pathX=x;
 	    this.pathY=y;
+	}
+	
+	public void newPointNearBloc(int bX,int bY)
+	{
+		boolean test = true;
+		int x;
+		int y;
+		do
+		{
+			x = bX-3+(new Random()).nextInt(6)+1;
+		    y = bY-3+(new Random()).nextInt(6)+1;
+		    System.out.println("bX : "+bX);
+		    System.out.println("bY : "+bY);
+		    System.out.println("x : "+x);
+		    System.out.println("y : "+y);
+
+		    if(x < 15 && y <13 && x > 0 && y > 0)
+		    {
+			    if(Plateau.plateau[x][y].getClass()!=BlocSpe.class&&Plateau.plateau[x][y].getClass()!=Bordure.class)
+			    {
+			    	test = false;
+			    }
+		    }
+		}while(test);	    
+	    this.pathX=x;
+	    this.pathY=y;
+	}
+	
+	public void newPointNearPlayer(int bX,int bY)
+	{
+		boolean test = true;
+		int x;
+		int y;
+		do
+		{
+			x = bX;
+		    y = bY;
+
+		    if(Plateau.plateau[x][y].getClass()!=BlocSpe.class&&Plateau.plateau[x][y].getClass()!=Bordure.class)
+		    {
+		    	test = false;
+		    }
+		}while(test);	    
+	    this.pathX=x;
+	    this.pathY=y;
+	}
+	
+	public Player nearPlayer()
+	{
+		Player res = null;
+		int distx = 0;
+		int disty = 0;
+		ArrayList<Player> players = Plateau.getPlayer();
+		for(int i = 0;i<players.size();i++)
+		{
+			distx = Math.abs(players.get(i).getPosX()-posX);
+			disty = Math.abs(players.get(i).getPosY()-posY);
+			if(distx+disty <= 5)
+			{
+				res = players.get(i);
+			}
+		}
+		return res;
+		
+	}
+	
+	public boolean isNearPlayer()
+	{
+		boolean res = false;
+		int distx = 0;
+		int disty = 0;
+		ArrayList<Player> players = Plateau.getPlayer();
+		for(int i = 0;i<players.size();i++)
+		{
+			distx = Math.abs(players.get(i).getPosX()-posX);
+			disty = Math.abs(players.get(i).getPosY()-posY);
+			if(distx+disty <= 5)
+			{
+				res = true;
+			}
+		}
+		return res;
+		
+	}
+	
+	public BlocSpe nearBlocSpe()
+	{
+		BlocSpe res = null;
+		int distx = 0;
+		int disty = 0;
+		int mindistx = 20;
+		int mindisty = 20;
+		ArrayList<BlocSpe> diams = Plateau.getBlocSpe();
+		for(int i = 0;i<diams.size();i++)
+		{
+			distx = Math.abs(diams.get(i).getPosX()-posX);
+			disty = Math.abs(diams.get(i).getPosY()-posY);
+			if(distx+disty <= mindistx+mindisty)
+			{
+				mindistx = distx;
+				mindisty = disty;
+				res = diams.get(i);
+			}
+		}
+		return res;
+		
 	}
 	public boolean nextToEdge()
 	{

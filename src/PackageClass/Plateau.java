@@ -54,6 +54,23 @@ public class Plateau {
 		}
 		return res;
 	}
+	
+	public static ArrayList<BlocSpe> getBlocSpe()
+	{
+		ArrayList<BlocSpe> res = new ArrayList<BlocSpe>();
+		for(int i = 1;i<hauteur-1;i++)
+		{
+			for(int j = 1;j<largeur-1;j++)
+			{
+				if(plateau[i][j].getClass() == BlocSpe.class)
+				{
+					res.add((BlocSpe)plateau[i][j]);
+				}
+			}
+		}
+		return res;
+	}
+	
 	private void setDiams(int x , int y)
 	{
 		
@@ -549,16 +566,22 @@ public class Plateau {
 				if(plateau[i][j].getClass()==Ennemi.class)
 				{
 					Ennemi en = (Ennemi)plateau[i][j];
-					Menu.hmThreadE.get(en).stop();
-					Menu.hmThreadE.remove(en);
-					System.out.println("ennemi clear!");
+					if(Menu.hmThreadE.get(en).isRunning())
+					{
+						Menu.hmThreadE.get(en).stop();
+						Menu.hmThreadE.remove(en);
+						System.out.println("ennemi clear!");
+					}
 				}
 				else if (plateau[i][j].getClass()==Player.class)
 				{
 					Player p = (Player)plateau[i][j];
-					Menu.hmThreadP.get(p).stop();
-					Menu.hmThreadP.remove(p);
-					System.out.println("player clear!");
+					if(Menu.hmThreadP.get(p).isRunning())
+					{
+						Menu.hmThreadP.get(p).stop();
+						Menu.hmThreadP.remove(p);
+						System.out.println("player clear!");
+					}
 				}
 				
 			}

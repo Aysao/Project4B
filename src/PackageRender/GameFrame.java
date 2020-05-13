@@ -189,59 +189,11 @@ public class GameFrame extends JPanel
 				
 			}
 		}
-		
-		//g.drawImage(iceblock,0,0,Largeur-100,Hauteur-100, null);
 		g.dispose();
 		
 	}
 
 } 
 	
-	/*
-	 * for(int i = 0;i<Plateau.getHauteur();i++)
-		{
-			for(int j = 0;j<Plateau.getLargeur();j++)
-			{
-				if(Plateau.plateau[j][i] != null)
-				{
-					if(Plateau.plateau[j][i].getClass() == BlocN.class)
-					{
-						g.setColor(Color.CYAN);
-						g.fillRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
-						//g.drawImage(iceblock,BlockL*i,BlockH*j,BlockL*(i+1),BlockH*(j+1), null);
-					}
-					if(Plateau.plateau[j][i].getClass() == Player.class)
-					{
-						g.setColor(Color.yellow);
-						g.fillRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
-					}
-					if(Plateau.plateau[j][i].getClass() == Ennemie.class)
-					{
-						g.setColor(Color.red);
-						g.fillRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
-					}
-					if(Plateau.plateau[j][i].getClass() == BlocSpe.class) 
-					{
-						g.setColor(Color.blue);
-						g.fillRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
-					}
-					if(Plateau.plateau[j][i].getClass() == Bordure.class)
-					{
-						g.setColor(Color.GRAY);
-						g.fillRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
-					}
-					if(Plateau.plateau[j][i].getClass() == String.class)
-					{
-						g.setColor(Color.black);
-						g.fillRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
-					}
-				}
-				
-			
-				g.setColor(Color.black);
-				g.drawRect(BlockL*j,BlockH*i,BlockL*(j+1),BlockH*(i+1));
-			}
-		}
-		*/
 
 

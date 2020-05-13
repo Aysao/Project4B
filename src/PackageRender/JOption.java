@@ -3,7 +3,6 @@ package PackageRender;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -38,6 +37,7 @@ public class JOption extends JFrame{
 	private JFrame framep;
 	private MButton touche;
 	private boolean changetouche = false;
+	
 	public JOption(JFrame f)
 	{
 		jf = this;
@@ -49,6 +49,7 @@ public class JOption extends JFrame{
 		
 		initcomposant();
 	}
+	
 	public void initcomposant()
 	{
 		jp = new JPanel();
@@ -107,6 +108,7 @@ public class JOption extends JFrame{
 		keyl();
 		closeConfig();
 	}
+	
 	public void actionlistener() {
 		valider.addActionListener(new ActionListener() {
 
@@ -174,6 +176,7 @@ public class JOption extends JFrame{
 		});
 		
 	}
+	
 	public void keyl()
 	{
 		jf.addKeyListener(new KeyListener()
@@ -258,6 +261,7 @@ public class JOption extends JFrame{
 				
 			});
 	}
+	
 	public void enable(boolean b)
 	{
 		forward.setEnabled(b);

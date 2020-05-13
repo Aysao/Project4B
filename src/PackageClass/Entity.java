@@ -14,11 +14,11 @@ public abstract class Entity {
 	public final int EAST = 3;
 	public final int WEST = 4;
 	
-	private boolean mouvement = false;
-	private Boolean Mort = false;
-	private int posX;
-	private int posY;
-	private int orientation = SO;
+	protected boolean mouvement = false;
+	protected Boolean Mort = false;
+	protected int posX;
+	protected int posY;
+	protected int orientation = SO;
 	
 	public Entity(int x,int y)
 	{

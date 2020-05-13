@@ -7,6 +7,7 @@ import java.util.Random;
 
 
 import PackageClass.BlocN;
+import PackageClass.BlocSpe;
 import PackageClass.Ennemi;
 
 import PackageClass.Plateau;
@@ -16,8 +17,8 @@ import PackageClass.Player;
 public class ThreadEnnemie implements Runnable {
 	private Ennemi en;
 	private boolean running = true;
-	private int lastX;
-	private int lastY;
+	private int lastX = 0;
+	private int lastY = 0;
 	
 	
 	
@@ -130,10 +131,7 @@ public class ThreadEnnemie implements Runnable {
 				int pY = en.pathY;	
 				int x= en.getPosX();
 				int y = en.getPosY();
-//				System.out.println("x :"+x);
-//				System.out.println("y :"+y);
-//				System.out.println("lastX :"+lastX);
-//				System.out.println("lastY :"+lastY);
+
 				if(en.stun)
 				{
 					try {
@@ -147,15 +145,35 @@ public class ThreadEnnemie implements Runnable {
 				}			
 				else 
 				{
-					if(lastX==x&&lastY==y)
+
+					if(lastX==x && lastY==y && en.isNearPlayer())
+					{
+						System.out.println("trouver player");
+						Player sp = en.nearPlayer();
+						en.newPointNearPlayer(sp.getPosX(), sp.getPosY());
+					}
+					else if(lastX==x&&lastY==y)
 					{
 						System.out.println("looser");
-						en.newPoint();
+						BlocSpe sp = en.nearBlocSpe();
+						en.newPointNearBloc(sp.getPosX(), sp.getPosY());
 					}
-					if(pX==x && pY==y)
+//					if(pX==x && pY==y)
+//					{
+//						System.out.println("new pt!!!");
+//						en.newPoint();
+//					}
+					if(pX==x && pY==y && en.isNearPlayer())
 					{
-						System.out.println("new pt!!!");
-						en.newPoint();
+						System.out.println("trouver player");
+						Player sp = en.nearPlayer();
+						en.newPointNearPlayer(sp.getPosX(), sp.getPosY());
+					}
+					else if(pX==x && pY==y)
+					{
+						System.out.println("new point near diamond");
+						BlocSpe sp = en.nearBlocSpe();
+						en.newPointNearBloc(sp.getPosX(), sp.getPosY());
 					}
 					else
 					{
@@ -279,5 +297,12 @@ public class ThreadEnnemie implements Runnable {
 	
 	public KeyListener getKl() {
 		return kl;
+	}
+	
+	public boolean isRunning() {
+		return running;
+	}
+	public void setRunning(boolean running) {
+		this.running = running;
 	}
 }
