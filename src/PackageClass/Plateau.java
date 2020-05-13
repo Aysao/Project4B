@@ -216,25 +216,25 @@ public class Plateau {
 						if(i==0)
 						{	
 							Bordure b = new Bordure();
-							b.setSide(b.NORD);
+							b.setSide(Orientation.NORD);
 							plateau[i][j]= b ;
 						}
 						if(i==Plateau.hauteur-1)
 						{
 							Bordure b = new Bordure();
-							b.setSide(b.SOUTH);
+							b.setSide(Orientation.SOUTH);
 							plateau[i][j]= b;
 						}
 						if(j==0)
 						{
 							Bordure b = new Bordure();
-							b.setSide(b.WEST);
+							b.setSide(Orientation.WEST);
 							plateau[i][j]= b;
 						}
 						if(j==Plateau.largeur-1)
 						{
 							Bordure b = new Bordure();
-							b.setSide(b.EAST);
+							b.setSide(Orientation.EAST);
 							plateau[i][j]= b;
 						}										
 					}
@@ -270,25 +270,25 @@ public class Plateau {
 				if(i==0)
 				{					
 					Bordure b = new Bordure();
-					b.setSide(b.NORD);
+					b.setSide(Orientation.NORD);
 					plateau[i][j]= b ;
 				}
 				if(i==x-1)
 				{
 					Bordure b = new Bordure();
-					b.setSide(b.SOUTH);
+					b.setSide(Orientation.SOUTH);
 					plateau[i][j]= b ;
 				}
 				if(j==0)
 				{
 					Bordure b = new Bordure();
-					b.setSide(b.WEST);
+					b.setSide(Orientation.WEST);
 					plateau[i][j]= b ;
 				}
 				if(j==y-1)
 				{
 					Bordure b = new Bordure();
-					b.setSide(b.EAST);
+					b.setSide(Orientation.EAST);
 					plateau[i][j]= b ;
 				}
 				if(j!=0&&j!=y-1&&i!=0&&i!=x-1)
@@ -466,7 +466,7 @@ public class Plateau {
 	{
 		switch(b.getSide())
 		{
-			case 1 ://n
+			case NORD ://n
 			{
 				for(int i = 0;i<largeur;i++)
 				{
@@ -479,7 +479,7 @@ public class Plateau {
 					bo.setActivate(true);				
 				}
 			}break;
-			case 2 ://s
+			case SOUTH ://s
 			{
 				for(int i = 0;i<largeur;i++)
 				{
@@ -492,7 +492,7 @@ public class Plateau {
 					bo.setActivate(true);
 				}
 			}break;
-			case 3 ://e
+			case EAST ://e
 			{
 				for(int i = 0;i<hauteur;i++)
 				{
@@ -505,7 +505,7 @@ public class Plateau {
 					bo.setActivate(true);
 				}
 			}break;
-			case 4 ://w
+			case WEST ://w
 			{
 				for(int i = 0;i<hauteur;i++)
 				{
@@ -518,6 +518,10 @@ public class Plateau {
 					bo.setActivate(true);
 				}
 			}break;
+			case SO:
+			{
+				
+			}
 		}
 	}
 	public static void stopBordure()
@@ -558,6 +562,8 @@ public class Plateau {
 		return hauteur;
 	}
 	public static void clearEntity() {
+		
+	
 		for(int i=0 ; i<hauteur ; i++) // on compte pas la bordure
 		{
 			for(int j=0 ; j<largeur; j++)

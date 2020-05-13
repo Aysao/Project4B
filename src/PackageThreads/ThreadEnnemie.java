@@ -9,7 +9,7 @@ import java.util.Random;
 import PackageClass.BlocN;
 import PackageClass.BlocSpe;
 import PackageClass.Ennemi;
-
+import PackageClass.Orientation;
 import PackageClass.Plateau;
 import PackageClass.Player;
 
@@ -36,23 +36,23 @@ public class ThreadEnnemie implements Runnable {
 			{
 				if(e.getKeyChar() == Menu.avancer||e.getKeyChar() == (Menu.avancer-'A'+'a'))
 				{
-					en.setOrientation(1);
+					en.setOrientation(Orientation.NORD);
 					en.setMouvement(true);									
 				}
 				else if(e.getKeyChar() == Menu.gauche||e.getKeyChar() == (Menu.gauche-'A'+'a'))
 				{
-					en.setOrientation(4);
+					en.setOrientation(Orientation.WEST);
 					en.setMouvement(true);					
 					
 				}
 				else if(e.getKeyChar() == Menu.reculer||e.getKeyChar() == (Menu.reculer-'A'+'a'))
 				{
-					en.setOrientation(2);
+					en.setOrientation(Orientation.SOUTH);
 					en.setMouvement(true);				
 				}
 				else if(e.getKeyChar() == Menu.droite||e.getKeyChar() == (Menu.droite-'A'+'a'))
 				{
-					en.setOrientation(3);
+					en.setOrientation(Orientation.EAST);
 					en.setMouvement(true);							
 				}
 			}
@@ -87,7 +87,6 @@ public class ThreadEnnemie implements Runnable {
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					Menu.c.sendLine("stunoff");
@@ -96,12 +95,11 @@ public class ThreadEnnemie implements Runnable {
 				if(en.isMouvement())
 				{					
 					en.Deplacement();
-					Menu.c.sendLine(Integer.toString(en.getOrientation()));					
+					Menu.c.sendLine(en.getOrientation().toString());					
 					//en.setOrientation(Entity.SO);						
 					try {
 						Thread.sleep(180);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -109,7 +107,6 @@ public class ThreadEnnemie implements Runnable {
 				try {
 					Thread.sleep(1);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -127,8 +124,8 @@ public class ThreadEnnemie implements Runnable {
 			while(running )
 			{
 				
-				int pX = en.pathX;	
-				int pY = en.pathY;	
+				int pX = en.getPathX();	
+				int pY = en.getPathY();	
 				int x= en.getPosX();
 				int y = en.getPosY();
 
@@ -137,7 +134,6 @@ public class ThreadEnnemie implements Runnable {
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					
@@ -193,7 +189,6 @@ public class ThreadEnnemie implements Runnable {
 				try {
 					Thread.sleep(500);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}			
 			}
@@ -201,7 +196,7 @@ public class ThreadEnnemie implements Runnable {
 		
 	}
 	private void goNS() {
-		int pX = en.pathX;		
+		int pX = en.getPathX();		
 		int x= en.getPosX();
 		int y = en.getPosY();
 		
@@ -210,12 +205,12 @@ public class ThreadEnnemie implements Runnable {
 			
 			if(Plateau.plateau[x-1][y].getClass()==BlocN.class)
 			{				
-					en.setOrientation(1);
+					en.setOrientation(Orientation.NORD);
 					en.setMouvement(true);														
 			}
 			else if(Plateau.plateau[x-1][y].getClass()==String.class||Plateau.plateau[x-1][y].getClass()==Player.class)
 			{
-				en.setOrientation(1);
+				en.setOrientation(Orientation.NORD);
 				en.setMouvement(true);	
 			}
 			else
@@ -227,12 +222,12 @@ public class ThreadEnnemie implements Runnable {
 		{
 			if(Plateau.plateau[x+1][y].getClass()==BlocN.class)
 			{				
-					en.setOrientation(2);
+					en.setOrientation(Orientation.SOUTH);
 					en.setMouvement(true);												
 			}
 			else if(Plateau.plateau[x+1][y].getClass()==String.class||Plateau.plateau[x+1][y].getClass()==Player.class)
 			{
-				en.setOrientation(2);
+				en.setOrientation(Orientation.SOUTH);
 				en.setMouvement(true);					
 			}
 			else
@@ -247,7 +242,7 @@ public class ThreadEnnemie implements Runnable {
 		
 	}
 	private void goEW() {
-		int pY = en.pathY;
+		int pY = en.getPathY();
 		int x= en.getPosX();
 		int y = en.getPosY();		
 		if((pY-y)<0)
@@ -255,12 +250,12 @@ public class ThreadEnnemie implements Runnable {
 			
 			if(Plateau.plateau[x][y-1].getClass()==BlocN.class)
 			{
-					en.setOrientation(4);
+					en.setOrientation(Orientation.WEST);
 					en.setMouvement(true);									
 			}
 			else if(Plateau.plateau[x][y-1].getClass()==String.class||Plateau.plateau[x][y-1].getClass()==Player.class)
 			{
-				en.setOrientation(4);
+				en.setOrientation(Orientation.WEST);
 				en.setMouvement(true);					
 			}
 			else
@@ -273,13 +268,13 @@ public class ThreadEnnemie implements Runnable {
 			
 			if(Plateau.plateau[x][y+1].getClass()==BlocN.class)
 			{		
-					en.setOrientation(3);
+					en.setOrientation(Orientation.EAST);
 					en.setMouvement(true);									
 			}
 			else if(Plateau.plateau[x][y+1].getClass()==String.class||Plateau.plateau[x][y+1].getClass()==Player.class)
 			{
 				
-				en.setOrientation(3);
+				en.setOrientation(Orientation.EAST);
 				en.setMouvement(true);					
 			}
 			else

@@ -36,9 +36,7 @@ public class Menu implements Runnable {
 	public static boolean gamestart=true;
     public static HashMap<Ennemi, ThreadEnnemie> hmThreadE = new HashMap<Ennemi, ThreadEnnemie>();
     public static HashMap<Player, ThreadPlayer> hmThreadP = new HashMap<Player, ThreadPlayer>();
-	
 
-	
 	
 	public Menu(JFrame f,int i) 
 	{
@@ -50,12 +48,7 @@ public class Menu implements Runnable {
 			{
 				new Plateau();
 				p1 = new Player(7,7);
-				p1.setPseudo(JOptionPane.showInputDialog("Entrer votre pseudo :"));
-				if(p1.getPseudo().equals(""))
-				{
-					p1.setPseudo("Player");
-				}
-				p1.getScr().setName(p1.getPseudo());
+				p1.setPseudo(JOptionPane.showInputDialog("Entrer votre pseudo :"));	
 				e1 = new Ennemi();				
 				e2 = new Ennemi();				
 				e3 = new Ennemi();				
@@ -78,14 +71,14 @@ public class Menu implements Runnable {
 					gamestart=false;
 					while(!gamestart)
 					{
-						System.out.println("waiting...");
-					}
+					}					
 					ThreadPlayer runtp = new ThreadPlayer(p1);
 					Thread tp = new Thread(runtp);
 					tp.start();																						
 					r = new Render(menuPrincipal,600,800,runtp.getKl());					
 					Thread t = new Thread(r);
 					t.start();	
+					s.sendLine("getplayer");
 				}
 				else
 				{								
@@ -125,8 +118,7 @@ public class Menu implements Runnable {
 		hmThreadP.put(p1, runtp);
 		hmThreadE.put(e1, runte);
 		hmThreadE.put(e2, runte1);		
-		hmThreadE.put(e3, runte2);
-		
+		hmThreadE.put(e3, runte2);		
 	}
 	public static void newEnnemi()
 	{

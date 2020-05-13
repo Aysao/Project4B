@@ -15,10 +15,9 @@ import java.util.Random;
  */
 public class Ennemi extends Entity {
 
-	public boolean dead = false;
 	public boolean stun =false;
-	public int pathX ;
-	public int pathY ;
+	private int pathX ;
+	private int pathY ;
 	
 	private boolean played = false;
 	public Ennemi(int x, int y) {
@@ -32,63 +31,40 @@ public class Ennemi extends Entity {
 	
 	
 	public synchronized void Deplacement()
-	{		
-		
+	{				
 		if(this.getClass()==Ennemi.class)
 		{				
-			if((!(this.getPosX() == 1 && this.getOrientation() == WEST) || !(this.getPosX() == 13 && this.getOrientation() == EAST) ||
-					!(this.getPosY() == 1 && this.getOrientation() == NORD) || !(this.getPosY() == 15 && this.getOrientation() == SOUTH)))
+			if((!(this.getPosX() == 1 && this.getOrientation() == Orientation.WEST) || !(this.getPosX() == 13 && this.getOrientation() == Orientation.EAST) ||
+					!(this.getPosY() == 1 && this.getOrientation() == Orientation.NORD) || !(this.getPosY() == 15 && this.getOrientation() == Orientation.SOUTH)))
 			{			
 				switch (this.getOrientation()) 
 				{
-					case SO: {						
-					}break;
-
 					case EAST: 
 					{	
 						if(Plateau.plateau[this.getPosX()][this.getPosY()+1].getClass() == Player.class)
 						{
-							Player p1 = (Player) Plateau.plateau[this.getPosX()][this.getPosY()+1];
-							Plateau.refreshEntity(p1);	
-							if(p1.getVie()-1 >= 0)							{
-								
-								p1.setVie(p1.getVie()-1);
-								p1.setPosX(7);
-								p1.setPosY(7);	
-							}	
-							Plateau.refreshEntity(p1);									
+							killPlayer(this.getPosX()+1,this.getPosY());								
 						}
 						if(Plateau.plateau[this.getPosX()][this.getPosY()+1].getClass() == BlocN.class||Plateau.plateau[this.getPosX()][this.getPosY()+1].getClass() == String.class)
 						{
 							Plateau.refreshEntity(this);
 							this.setPosY(this.getPosY()+1) ;
 							Plateau.refreshEntity(this);								
-						}
-								
-									
+						}																	
 					}break;
 
 					case WEST: 
 					{	
 						if(Plateau.plateau[this.getPosX()][this.getPosY()-1].getClass() == Player.class)
 						{
-							Player p1 = (Player) Plateau.plateau[this.getPosX()][this.getPosY()-1];
-							Plateau.refreshEntity(p1);
-							if(p1.getVie()-1 >= 0)
-							{
-								p1.setVie(p1.getVie()-1);
-								p1.setPosX(7);
-								p1.setPosY(7);								
-							}	
-							Plateau.refreshEntity(p1);								
+							killPlayer(this.getPosX()+1,this.getPosY());							
 						}
 						if(Plateau.plateau[this.getPosX()][this.getPosY()-1].getClass() == BlocN.class||Plateau.plateau[this.getPosX()][this.getPosY()-1].getClass() == String.class)
 						{
 							Plateau.refreshEntity(this);
 							this.setPosY(this.getPosY()-1) ;
 							Plateau.refreshEntity(this);								
-						}
-										
+						}										
 					}break;
 						
 
@@ -96,39 +72,21 @@ public class Ennemi extends Entity {
 					{			
 						if(Plateau.plateau[this.getPosX()-1][this.getPosY()].getClass() == Player.class)
 						{
-							Player p1 = (Player) Plateau.plateau[this.getPosX()-1][this.getPosY()];
-							Plateau.refreshEntity(p1);	
-							if(p1.getVie()-1 >= 0)
-							{
-								p1.setVie(p1.getVie()-1);
-								p1.setPosX(7);
-								p1.setPosY(7);	
-							}	
-							Plateau.refreshEntity(p1);	
+							killPlayer(this.getPosX()+1,this.getPosY());
 						}
 						if(Plateau.plateau[this.getPosX()-1][this.getPosY()].getClass() == BlocN.class||Plateau.plateau[this.getPosX()-1][this.getPosY()].getClass() == String.class)
 						{
 							Plateau.refreshEntity(this);
 							this.setPosX(this.getPosX()-1) ;
 							Plateau.refreshEntity(this);								
-						}
-								
-																																		
+						}																																										
 					}break;
 
 					case SOUTH: 
 					{																				
 						if(Plateau.plateau[this.getPosX()+1][this.getPosY()].getClass() == Player.class)
 						{
-							Player p1 = (Player) Plateau.plateau[this.getPosX()+1][this.getPosY()];
-							Plateau.refreshEntity(p1);	
-							if(p1.getVie()-1 >= 0)
-							{
-								p1.setVie(p1.getVie()-1);
-								p1.setPosX(7);
-								p1.setPosY(7);								
-							}
-							Plateau.refreshEntity(p1);	
+							killPlayer(this.getPosX()+1,this.getPosY());
 						}
 						if(Plateau.plateau[this.getPosX()+1][this.getPosY()].getClass() == BlocN.class||Plateau.plateau[this.getPosX()+1][this.getPosY()].getClass() == String.class)
 						{
@@ -136,10 +94,27 @@ public class Ennemi extends Entity {
 							this.setPosX(this.getPosX()+1) ;
 							Plateau.refreshEntity(this);								
 						}																	
-					}break;					
+					}break;
+					case SO:
+					{
+						
+					}
 				}				
 			}
 		}					
+	}
+	public void killPlayer(int x,int y)
+	{
+		Player p1 = (Player) Plateau.plateau[x][y];
+
+		Plateau.refreshEntity(p1);	
+		if(p1.getVie()-1 >= 0)
+		{
+			p1.setVie(p1.getVie()-1);
+			p1.setPosX(7);
+			p1.setPosY(7);								
+		}
+		Plateau.refreshEntity(p1);	
 	}
 	public void newPoint()
 	{
@@ -155,8 +130,8 @@ public class Ennemi extends Entity {
 		    	test = false;
 		    }
 		}while(test);	    
-	    this.pathX=x;
-	    this.pathY=y;
+	    this.setPathX(x);
+	    this.setPathY(y);
 	}
 	
 	public void newPointNearBloc(int bX,int bY)
@@ -285,6 +260,18 @@ public class Ennemi extends Entity {
 	}
 	public void setPlayed(boolean played) {
 		this.played = played;
+	}
+	public int getPathX() {
+		return pathX;
+	}
+	public void setPathX(int pathX) {
+		this.pathX = pathX;
+	}
+	public int getPathY() {
+		return pathY;
+	}
+	public void setPathY(int pathY) {
+		this.pathY = pathY;
 	}
 
 } 

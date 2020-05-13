@@ -8,25 +8,17 @@ package PackageClass;
  * cependant un chemin devra etre possible pour la circulation du personnage
  */
 public abstract class Bloc {
-	public final int SO = 0;
-	public final int NORD = 1;
-	public final int SOUTH = 2;
-	public final int EAST = 3;
-	public final int WEST = 4;
+
 	private int posX;
 	private int posY;
-	private boolean dort = true; // Etat dort (ne bouge pas); Etat !dort (interaction avec le joueur);
-	private int orientation = SO; // Orientation;
-	
-	public String c ; // pour affichage console des bloc
-	
+	private Orientation or = Orientation.SO; // Orientation;
+
 	 
 	public Bloc(int X,int Y)
 	{
 		setPosX(X);
 		setPosY(Y);
-	}
-	
+	}	
 	public int getPosX() {
 		return posX;
 	}
@@ -36,42 +28,14 @@ public abstract class Bloc {
 	public void setPosY(int posY) {
 		this.posY = posY;
 	}
-	public void setOrientation(int orientation) {
-		this.orientation = orientation;
-	}
-	public void setDort(boolean dort) {
-		this.dort = dort;
-	}
-	public boolean isDort() {
-		return dort;
-	}
+	public void setOrientation(Orientation orientation) {
+		this.or = orientation;
+	}	
 	public int getPosY() {
 		return posY;
 	}
-	public int getOrientation() {
-		return orientation;
-	}
-	public void Deplacement() {
-		switch (orientation) {
-			case 0: {
-				
-			}
-			case 3: {
-				posX -= 1;
-			}
-			case 4: {
-				posX += 1;
-			}
-			case 1: {
-				posY -= 1;
-			}
-			case 2: {
-				posY += 1;
-			}
-			
-		}
-	}
-	
-	
-	
+	public Orientation getOrientation() {
+		return or;
+	}	
+
 }

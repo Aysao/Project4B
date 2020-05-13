@@ -6,6 +6,7 @@ import PackageClass.BlocN;
 import PackageClass.BlocSpe;
 import PackageClass.Bordure;
 import PackageClass.Ennemi;
+import PackageClass.Orientation;
 import PackageClass.Plateau;
 import PackageClass.Player;
 
@@ -50,28 +51,28 @@ public class Serveur implements Runnable{
 			}	
 			switch(str)
 			{
-			case "1":
+			case "NORD":
 			{
-				e.setOrientation(1);
+				e.setOrientation(Orientation.NORD);
 				e.setMouvement(true);
 				e.Deplacement();
 			}break;
 			
-			case "2":
+			case "SOUTH":
 			{
-				e.setOrientation(2);
+				e.setOrientation(Orientation.SOUTH);
 				e.setMouvement(true);
 				e.Deplacement();
 			}break;
-			case "3":
+			case "EAST":
 			{
-				e.setOrientation(3);
+				e.setOrientation(Orientation.EAST);
 				e.setMouvement(true);
 				e.Deplacement();
 			}break;
-			case "4":
+			case "WEST":
 			{
-				e.setOrientation(4);
+				e.setOrientation(Orientation.WEST);
 				e.setMouvement(true);
 				e.Deplacement();
 			}break;

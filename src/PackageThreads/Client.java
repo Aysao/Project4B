@@ -8,6 +8,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import PackageClass.Orientation;
 import PackageClass.Plateau;
 import PackageClass.Player;
 
@@ -47,7 +48,7 @@ public class Client implements Runnable{
 	}
 	@Override
 	public void run() {
-		Player p1 = (Player)Plateau.getPlayer().get(0);
+		Player p1 = null;
 		while(running)
 		{
 			
@@ -61,28 +62,28 @@ public class Client implements Runnable{
 			
 			switch(str)
 			{
-			case "1":
+			case "NORD":
 			{
-				p1.setOrientation(1);
+				p1.setOrientation(Orientation.NORD);
 				p1.setMouvement(true);
 				p1.Deplacement();
 			}break;
 			
-			case "2":
+			case "SOUTH":
 			{
-				p1.setOrientation(2);
+				p1.setOrientation(Orientation.SOUTH);
 				p1.setMouvement(true);
 				p1.Deplacement();
 			}break;
-			case "3":
+			case "EAST":
 			{
-				p1.setOrientation(3);
+				p1.setOrientation(Orientation.EAST);
 				p1.setMouvement(true);
 				p1.Deplacement();
 			}break;
-			case "4":
+			case "WEST":
 			{
-				p1.setOrientation(4);
+				p1.setOrientation(Orientation.WEST);
 				p1.setMouvement(true);
 				p1.Deplacement();
 			}break;
@@ -97,7 +98,10 @@ public class Client implements Runnable{
 			case"stop":
 			{
 				stop();
-				
+			}
+			case "getplayer":
+			{
+				p1 = (Player)Plateau.getPlayer().get(0);
 			}
 			}	
 		}

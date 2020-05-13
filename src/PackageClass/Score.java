@@ -15,8 +15,6 @@ public class Score {
 	
 	
 	private int point = 0;
-	private int mstKill = 0;
-	private int blocDestroy = 0;
 	private double[] scores;
 	public static double highscore = 0;
 	private String[] pseudo;
@@ -33,14 +31,12 @@ public class Score {
 	public void mstKill()
 	{
 		this.point=this.point+40;
-		this.mstKill++;
 		
 	}
 
 	public void BlocDestroy()
 	{
 		this.point=this.point+30;
-		this.blocDestroy++;
 	}
 	public void getScore()
 	{
@@ -106,11 +102,7 @@ public class Score {
 	    	catch (Exception e){
 	    	System.out.println(e.toString());
 	    	}
-	    
-	    
-	    
-	    
-	    
+  
 	}
 
 	public int getPoint() {
@@ -121,15 +113,6 @@ public class Score {
 		this.point = point;
 	}
 
-	public int getMstKill() {
-		return mstKill;
-	}
-	
-
-	public void setMstKill(int mstKill) {
-		this.mstKill = mstKill;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -137,14 +120,6 @@ public class Score {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public int getBlocDestroy() {
-		return blocDestroy;
-	}
-	public void setBlocDestroy(int blocDestroy) {
-		this.blocDestroy = blocDestroy;
-	}
-	
 	
 } 
 

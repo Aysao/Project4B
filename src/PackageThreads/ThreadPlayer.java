@@ -24,23 +24,23 @@ public class ThreadPlayer implements Runnable {
 			{
 				if(e.getKeyChar() == Menu.avancer||e.getKeyChar() == (Menu.avancer-'A'+'a'))
 				{
-					player.setOrientation(1);
+					player.setOrientation(Orientation.NORD);
 					player.setMouvement(true);									
 				}
 				else if(e.getKeyChar() == Menu.gauche||e.getKeyChar() == (Menu.gauche-'A'+'a'))
 				{
-					player.setOrientation(4);
+					player.setOrientation(Orientation.WEST);
 					player.setMouvement(true);					
 					
 				}
 				else if(e.getKeyChar() == Menu.reculer||e.getKeyChar() == (Menu.reculer-'A'+'a'))
 				{
-					player.setOrientation(2);
+					player.setOrientation(Orientation.SOUTH);
 					player.setMouvement(true);				
 				}
 				else if(e.getKeyChar() == Menu.droite||e.getKeyChar() == (Menu.droite-'A'+'a'))
 				{
-					player.setOrientation(3);
+					player.setOrientation(Orientation.EAST);
 					player.setMouvement(true);							
 				}
 			}
@@ -79,19 +79,17 @@ public class ThreadPlayer implements Runnable {
 					Menu.v.testVictory();
 					if(Menu.host&&Menu.mode==2)
 					{
-						Menu.s.sendLine(Integer.toString(player.getOrientation()));
+						Menu.s.sendLine(player.getOrientation().toString());
 					}
 					try {
 						Thread.sleep(180);
 					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
 				try {
 					Thread.sleep(1);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}			

@@ -20,18 +20,12 @@ public class Player extends Entity {
 	}
 	public Player(int x, int y,String str) {
 		super(x, y);
-		if(str.isEmpty()||str.isBlank())
+		if(!str.isEmpty()&&!str.isBlank())
 		{
 			setPseudo(str);
 			scr.setName(str);
-		}
-		else
-		{
-			setPseudo(str);
-			scr.setName(str);
-		}	
-	}
-	
+		}		
+	}	
 	
 	public synchronized void Deplacement()
 	{		
@@ -41,8 +35,8 @@ public class Player extends Entity {
 				Player p = (Player)this;
 				
 				//System.out.println(p.getScr().getPoint());
-				if((!(this.getPosX() == 1 && this.getOrientation() == WEST) || !(this.getPosX() == 13 && this.getOrientation() == EAST) ||
-						!(this.getPosY() == 1 && this.getOrientation() == NORD) || !(this.getPosY() == 15 && this.getOrientation() == SOUTH)))
+				if((!(this.getPosX() == 1 && this.getOrientation() == Orientation.WEST) || !(this.getPosX() == 13 && this.getOrientation() == Orientation.EAST) ||
+						!(this.getPosY() == 1 && this.getOrientation() == Orientation.NORD) || !(this.getPosY() == 15 && this.getOrientation() == Orientation.SOUTH)))
 				{			
 					switch (this.getOrientation()) {
 						case SO: {						
@@ -443,19 +437,19 @@ public class Player extends Entity {
 	}
 	public boolean nextToEdge()
 	{
-		if(this.getPosX() == 1 && this.getOrientation() == EAST)
+		if(this.getPosX() == 1 && this.getOrientation() == Orientation.EAST)
 		{
 			return true;
 		}
-		if(this.getPosX() == 13 && this.getOrientation() == WEST)
+		if(this.getPosX() == 13 && this.getOrientation() == Orientation.WEST)
 		{
 			return true;
 		}
-		if(this.getPosY() == 1 && this.getOrientation() == NORD)
+		if(this.getPosY() == 1 && this.getOrientation() == Orientation.NORD)
 		{
 			return true;
 		}
-		if(this.getPosY() == 15 && this.getOrientation() == SOUTH)
+		if(this.getPosY() == 15 && this.getOrientation() == Orientation.SOUTH)
 		{
 			return true;
 		}

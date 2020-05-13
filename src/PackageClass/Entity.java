@@ -8,17 +8,12 @@ import java.util.Random;
  * en gros les actions similaire entre le joueur et l'ennemie
  */
 public abstract class Entity {
-	public final int SO = 0;
-	public final int NORD = 1;
-	public final int SOUTH = 2;
-	public final int EAST = 3;
-	public final int WEST = 4;
+
 	
-	protected boolean mouvement = false;
-	protected Boolean Mort = false;
-	protected int posX;
-	protected int posY;
-	protected int orientation = SO;
+	private boolean mouvement = false;	
+	private int posX;
+	private int posY;
+	private Orientation or = Orientation.SO;
 	
 	public Entity(int x,int y)
 	{
@@ -29,21 +24,20 @@ public abstract class Entity {
 	
 	public Entity()
 	{		
-		int h = Plateau.getHauteur();
-		int l = Plateau.getLargeur();
-		int nbR = countBloc();
-		int r ;		
-		r= new Random().nextInt(nbR)+1;
+		int hauteur = Plateau.getHauteur();
+		int largeur = Plateau.getLargeur();
+		int nbBloc = countBloc();	
+		int r= new Random().nextInt(nbBloc)+1;
 		int cpt=0;
-		for(int i=0 ; i<h ; i++) // on compte pas la bordure
+		for(int i=0 ; i<hauteur ; i++) // on compte pas la bordure
 		{
-			for(int j=0 ; j<l; j++)
+			for(int j=0 ; j<largeur; j++)
 			{					
-				if(i==0||i==h-1)
+				if(i==0||i==hauteur-1)
 				{
 					
 				}
-				else if(j==0||j==l-1)
+				else if(j==0||j==largeur-1)
 				{
 					
 				}
@@ -90,8 +84,8 @@ public abstract class Entity {
 	public void setPosY(int posY) {
 		this.posY = posY;
 	}
-	public void setOrientation(int orientation) {
-		this.orientation = orientation;
+	public void setOrientation(Orientation orientation) {
+		this.or = orientation;
 	}
 	public int getPosY() {
 		return posY;
@@ -99,15 +93,10 @@ public abstract class Entity {
 	public int getPosX() {
 		return posX;
 	}
-	public int getOrientation() {
-		return orientation;
+	public Orientation getOrientation() {
+		return or;
 	}
-	public void setMort(Boolean mort) {
-		Mort = mort;
-	}
-	public Boolean getMort() {
-		return Mort;
-	}
+
 	public abstract void Deplacement();
 	
 

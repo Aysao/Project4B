@@ -8,22 +8,18 @@ public class BlocSpe extends Bloc {
 
 	public BlocSpe(int X, int Y) {
 		super(X, Y);
-		this.c="*";
-		// TODO Auto-generated constructor stub
 	}
 
-	public boolean alligne(BlocSpe[] bspe)
+	public boolean alligne()
 	{
-		if(bspe[0].getPosX() == bspe[1].getPosX() && bspe[1].getPosX() == bspe[2].getPosX())
+		if(Plateau.plateau[this.getPosX()+1][this.getPosY()].getClass()==BlocSpe.class&&Plateau.plateau[this.getPosX()+2][this.getPosY()].getClass()==BlocSpe.class)
 		{
 			return true;
 		}
-		if(bspe[0].getPosY() == bspe[1].getPosY() && bspe[1].getPosY() == bspe[2].getPosY())
+		else if(Plateau.plateau[this.getPosX()][this.getPosY()+1].getClass()==BlocSpe.class&&Plateau.plateau[this.getPosX()][this.getPosY()+2].getClass()==BlocSpe.class)
 		{
 			return true;
 		}
-		else {
-			return false;
-		}
+		return false;
 	}
 } 

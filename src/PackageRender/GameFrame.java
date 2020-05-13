@@ -111,23 +111,23 @@ public class GameFrame extends JPanel
 												
 						switch(p.getOrientation())
 						{
-						case 1:{          
+						case NORD:{
 							g.drawImage(floor,BlockL*j,BlockH*i,BlockL,BlockH, null);
                             g.drawImage(bpengo,BlockL*j,BlockH*i,BlockL,BlockH, null);
                         }break;
-                        case 3:{
+                        case EAST:{
                         	g.drawImage(floor,BlockL*j,BlockH*i,BlockL,BlockH, null);
                             g.drawImage(rpengo,BlockL*j,BlockH*i,BlockL,BlockH, null);
                         }break;
-                        case 4:{
+                        case WEST:{
                         	g.drawImage(floor,BlockL*j,BlockH*i,BlockL,BlockH, null);
                             g.drawImage(lpengo,BlockL*j,BlockH*i,BlockL,BlockH, null);
                         }break;
-                        case 2:{
+                        case SOUTH:{
                         	g.drawImage(floor,BlockL*j,BlockH*i,BlockL,BlockH, null);
                             g.drawImage(fpengo,BlockL*j,BlockH*i,BlockL,BlockH, null);
                         }break;
-                        case 0:
+                        case SO:
 						{
 							g.drawImage(floor,BlockL*j,BlockH*i,BlockL,BlockH, null);
 							g.drawImage(fpengo,BlockL*j,BlockH*i,BlockL,BlockH, null);
@@ -144,23 +144,26 @@ public class GameFrame extends JPanel
 							g.drawImage(ennemiStun,BlockL*j,BlockH*i,BlockL,BlockH, null);
 						}
 						else {
-	
 							switch(en.getOrientation())
 							{
-							case 1:{
+							case NORD:{
 	                            g.drawImage(bhunter,BlockL*j,BlockH*i,BlockL,BlockH, null);
 	                        }break;
-	                        case 3:{
+	                        case EAST:{
 	                            g.drawImage(rhunter,BlockL*j,BlockH*i,BlockL,BlockH, null);
 	                        }break;
-	                        case 4:{
+	                        case WEST:{
 	                            g.drawImage(lhunter,BlockL*j,BlockH*i,BlockL,BlockH, null);
 	                        }break;
-	                        case 2:{
+	                        case SOUTH:{
 	                            g.drawImage(fhunter,BlockL*j,BlockH*i,BlockL,BlockH, null);
+	                        }break;
+	                        case SO:{
+	                            g.drawImage(bhunter,BlockL*j,BlockH*i,BlockL,BlockH, null);
 	                        }break;
 							}
 						}
+						
 					}
 					if(Plateau.plateau[i][j].getClass() == Bordure.class)
 					{
