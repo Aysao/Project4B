@@ -72,24 +72,29 @@ public class JMulti extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Menu m = new Menu();
-				Menu.getInstance().setHost(true);	
-				m.MenuStart(f, 2);						
-				Thread t = new Thread(m);
-				t.start();
-				f.setVisible(false);			
+				String s = JOptionPane.showInputDialog("Entrer votre pseudo :");
+//				Menu m = new Menu();
+//				Menu.getInstance().setHost(true);	
+//				m.MenuStart(f, 2,s);						
+//				Thread t = new Thread(m);
+//				t.start();
+				JMenuMulti jmm = new JMenuMulti(jf,s,true);
+				jmm.setVisible(true);
+				jf.setVisible(false);
+						
 			}
 			
 		});
 		rejoindre.addActionListener(new ActionListener()
 		{
 			@Override
-			public void actionPerformed(ActionEvent e) {	
-				Menu m = new Menu();
-				Menu.getInstance().setHost(false);	
-				m.MenuStart(f, 2);									
-				new Thread(m);
-				f.setVisible(false);								
+			public void actionPerformed(ActionEvent e) {
+				String s = JOptionPane.showInputDialog("Entrer votre pseudo :");
+//				Menu m = new Menu();
+//				Menu.getInstance().setHost(false);	
+//				m.MenuStart(f, 2,s);									
+//				new Thread(m);
+				jf.setVisible(false);					
 			}
 			
 		});

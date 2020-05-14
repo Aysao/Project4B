@@ -82,9 +82,10 @@ public class JMenuPrincipal extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				String s = JOptionPane.showInputDialog("Entrer votre pseudo :");
 				choix = 1;
 				Menu m = new Menu();
-				m.MenuStart(f, choix);
+				m.MenuStart(f, choix,s);
 				Thread t = new Thread(m);
 				t.start();
 				f.setVisible(false);

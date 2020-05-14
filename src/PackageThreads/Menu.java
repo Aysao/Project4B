@@ -47,7 +47,7 @@ public class Menu implements Runnable {
 	{
 		instance = this;
 	}
-	public void MenuStart(JFrame f,int i) 
+	public void MenuStart(JFrame f,int i,String pseudo) 
 	{
 		
 		mode=i;
@@ -58,7 +58,7 @@ public class Menu implements Runnable {
 			{
 				new Plateau();
 				p1 = new Player(7,7);
-				p1.setPseudo(JOptionPane.showInputDialog("Entrer votre pseudo :"));	
+				p1.setPseudo(pseudo);	
 				e1 = new Ennemi();				
 				e2 = new Ennemi();				
 				e3 = new Ennemi();				
@@ -72,7 +72,7 @@ public class Menu implements Runnable {
 					new Plateau();
 					v = new Victory();	
 					p1 = new Player(7,7);
-					p1.setPseudo(JOptionPane.showInputDialog("Entrer votre pseudo :"));	
+					p1.setPseudo(pseudo);	
 					p2= new Ennemi(8,8);
 					s = new Serveur();
 					Thread th = new Thread(s);
@@ -202,7 +202,7 @@ public class Menu implements Runnable {
 		}
 		if(v.isVictory() == true)
 		{
-			JOptionPane.showMessageDialog(r,"Gagné!");
+			JOptionPane.showMessageDialog(r,"Gagnï¿½!");
 			if(mode==2 &&host)
 			{
 				s.sendLine("loose");
