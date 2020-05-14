@@ -1,6 +1,8 @@
 package PackageClass;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /*
@@ -24,57 +26,50 @@ public abstract class Entity {
 	
 	public Entity()
 	{		
-		int hauteur = Plateau.getHauteur();
-		int largeur = Plateau.getLargeur();
-		int nbBloc = countBloc();	
-		int r= new Random().nextInt(nbBloc)+1;
-		int cpt=0;
-		for(int i=0 ; i<hauteur ; i++) // on compte pas la bordure
+		List<BlocN> lst = Plateau.getBlocN();
+		for(int i = 0; i <lst.size();i++)
 		{
-			for(int j=0 ; j<largeur; j++)
-			{					
-				if(i==0||i==hauteur-1)
-				{
-					
-				}
-				else if(j==0||j==largeur-1)
-				{
-					
-				}
-				else if(Plateau.plateau[i][j].getClass()==BlocN.class)
-				{
-					cpt++;
-				}
-				if(cpt==r) 
-				{
-					posX = i;
-					posY = j;
-					Plateau.plateau[i][j]=this;
-					break;
-				}			
-			}
-			if(cpt==r) 
+			int x = lst.get(i).getPosX();
+			int y = lst.get(i).getPosY();
+			if((x>3&&x<14)||(y>3&&y<12))
 			{
-				break;
-			}
-		}						
-	}
-	private int countBloc()
-	{
-		int cpt = 0;
-	
-		for(int i=0 ; i<Plateau.getHauteur() ; i++) // on compte pas la bordure
-		{
-			for(int j=0 ; j<Plateau.getLargeur(); j++)
-			{					
-				
-				if(Plateau.plateau[i][j].getClass()==BlocN.class)
-				{
-					cpt++;
-				}						
+				lst.remove(i);
+				i--;
 			}
 		}
-		return cpt;
+		if(lst.size()>0)
+		{
+			int r= new Random().nextInt(lst.size());													
+			Plateau.plateau[lst.get(r).getPosX()][lst.get(r).getPosY()]=this;	
+			posX=lst.get(r).getPosX();
+			posY=lst.get(r).getPosY();
+		}
+		else
+		{		
+			List<Position> lsts = new ArrayList<Position>();
+			for(int i = 1;i<16;i++)
+			{
+				for(int j = 1;j<14;j++)
+				{
+					if(Plateau.plateau[i][j].getClass() == String.class)
+					{
+						if((i>3&&i<14)||(j>3&&j<12))
+						{
+							
+						}
+						else
+						{
+							lsts.add(new Position(i,j));
+						}
+					}
+				}
+			}
+			int r= new Random().nextInt(lsts.size());
+			Plateau.plateau[lsts.get(r).getCoX()][lsts.get(r).getCoY()]=this;
+			posX=lsts.get(r).getCoX();
+			posY=lsts.get(r).getCoY();
+		}
+		
 	}
 	
 

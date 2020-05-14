@@ -56,7 +56,7 @@ public class Render extends JFrame implements Runnable{
 
 			@Override
 			public void windowClosing(WindowEvent e) {
-				Plateau.clearEntity();
+				Plateau.clearEntity(true);
 				stop();
 				parent.setVisible(true);
 			}
@@ -100,13 +100,13 @@ public class Render extends JFrame implements Runnable{
 					if(running == true)
 					{
 						stop();
-						Plateau.clearEntity();
+						Plateau.clearEntity(true);
 						me.dispose();
 						parent.setVisible(true);
 					}
 					else if(running == false)
 					{
-						Plateau.clearEntity();
+						Plateau.clearEntity(true);
 						me.dispose();
 						parent.setVisible(true);
 					}

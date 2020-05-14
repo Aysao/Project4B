@@ -186,8 +186,7 @@ public class ThreadEnnemie implements Runnable {
 					lastX=x;
 					lastY=y;
 					if(en.isMouvement())
-					{
-						
+					{					
 						en.Deplacement();
 						//en.setOrientation(Entity.SO);
 						en.setMouvement(false);					

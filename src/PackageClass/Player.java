@@ -113,14 +113,7 @@ public class Player extends Entity {
 								}
 								else
 								{
-									Plateau.refreshEntity(this);
-									if(Vie-1 >= 0)
-									{
-										Vie--;
-										this.setPosX(7);
-										this.setPosY(7);	
-									}
-									Plateau.refreshEntity(this);
+									playerDeath();
 								}									
 							}
 							
@@ -199,14 +192,7 @@ public class Player extends Entity {
 								}
 								else
 								{
-									Plateau.refreshEntity(this);
-									if(Vie-1 >= 0)
-									{
-										Vie--;
-										this.setPosX(7);
-										this.setPosY(7);	
-									}
-									Plateau.refreshEntity(this);
+									playerDeath();
 								}								
 							}
 							
@@ -282,14 +268,7 @@ public class Player extends Entity {
 								}
 								else
 								{
-									Plateau.refreshEntity(this);
-									if(Vie-1 >= 0)
-									{
-										Vie--;
-										this.setPosX(7);
-										this.setPosY(7);	
-									}
-									Plateau.refreshEntity(this);
+									playerDeath();
 								}								
 							}
 							
@@ -363,14 +342,7 @@ public class Player extends Entity {
 								}
 								else
 								{
-									Plateau.refreshEntity(this);
-									if(Vie-1 >= 0)
-									{
-										Vie--;
-										this.setPosX(7);
-										this.setPosY(7);	
-									}
-									Plateau.refreshEntity(this);
+									playerDeath();
 								}																
 							}
 						}break;					
@@ -488,6 +460,18 @@ public class Player extends Entity {
 		}
 		
 		
+	}
+	public void playerDeath()
+	{
+		Plateau.refreshEntity(this);
+		if(Vie-1 >= 0)
+		{
+			Vie--;
+			this.setPosX(7);
+			this.setPosY(7);	
+			Menu.getInstance().newEntity();
+		}
+		Plateau.refreshEntity(this);
 	}
 	public boolean nextToEdge()
 	{

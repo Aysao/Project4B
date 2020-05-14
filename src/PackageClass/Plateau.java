@@ -577,7 +577,7 @@ public class Plateau {
 	public static int getHauteur() {
 		return hauteur;
 	}
-	public static void clearEntity() {
+	public static void clearEntity(boolean b) {
 		
 	
 		for(int i=0 ; i<hauteur ; i++) // on compte pas la bordure
@@ -592,16 +592,18 @@ public class Plateau {
 					{
 						Menu.getInstance().getHmThreadE().get(en).stop();
 						Menu.getInstance().getHmThreadE().remove(en);
+						plateau[i][j]="0";
 						System.out.println("ennemi clear!");
 					}
 				}
-				else if (plateau[i][j].getClass()==Player.class)
+				else if (plateau[i][j].getClass()==Player.class&&b)
 				{
 					Player p = (Player)plateau[i][j];
 					if(Menu.getInstance().getHmThreadP().get(p).isRunning())
 					{
 						Menu.getInstance().getHmThreadP().get(p).stop();
 						Menu.getInstance().getHmThreadP().remove(p);
+						plateau[i][j]="0";
 						System.out.println("player clear!");
 					}
 				}

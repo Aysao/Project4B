@@ -175,9 +175,12 @@ public class Menu implements Runnable {
 				te.start();
 				hmThreadE.put(e, runte);
 			}		
-		}		
-		
+		}				
 	}
+	
+			
+		
+	
 
 	public void fin() 
 	{	
@@ -213,10 +216,11 @@ public class Menu implements Runnable {
 		resetVar();
 		
 		//supprime thread player et ennemis restant
+		Plateau.clearEntity(true);
 		r.stop();//stop refresh fenetre
 		r.dispose();
 		menuPrincipal.setVisible(true);	
-		//Plateau.clearEntity();
+		
 	}
 	private void resetVar() {
 		ennemiVie = 6;
@@ -226,7 +230,19 @@ public class Menu implements Runnable {
 		c=null;
 		s=null;
 		mode =1;
-
+	}
+	public void newEntity()
+	{
+		System.out.println("test");
+		Plateau.clearEntity(false);
+		for(int i = 0 ;i<3;i++)
+		{
+			Ennemi e=new Ennemi();
+			ThreadEnnemie runte = new ThreadEnnemie(e);
+			Thread te =new Thread(runte);
+			te.start();
+			hmThreadE.put(e, runte);	
+		}	
 	}
 	@Override
 	public void run() {	

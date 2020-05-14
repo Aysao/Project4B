@@ -3,10 +3,11 @@ package PackageClass;
 import java.util.ArrayList;
 import java.util.Random;
 
+import PackageThreads.Menu;
+
 
 
 /*
- * un Thread qui gerera un ennemie
  * ces ennemie seront autonome et auront une IA plus ou moins forte (rajout de difficult� ?)
  * ils seront au nombre de 4 et auront pour objectif de tu� le joueur 
  * ils ont 2 etat actif inactif ... ils deviennent inactif lorsque la bordure coller a eux est activ�
@@ -41,59 +42,68 @@ public class Ennemi extends Entity {
 				{
 					case EAST: 
 					{	
+						
 						if(Plateau.plateau[this.getPosX()][this.getPosY()+1].getClass() == Player.class)
 						{
-							killPlayer(this.getPosX()+1,this.getPosY());								
+							
+							killPlayer(this.getPosX(),this.getPosY(),"Y",1);								
 						}
-						if(Plateau.plateau[this.getPosX()][this.getPosY()+1].getClass() == BlocN.class||Plateau.plateau[this.getPosX()][this.getPosY()+1].getClass() == String.class)
+						else if(Plateau.plateau[this.getPosX()][this.getPosY()+1].getClass() == BlocN.class||Plateau.plateau[this.getPosX()][this.getPosY()+1].getClass() == String.class)
 						{
 							Plateau.refreshEntity(this);
 							this.setPosY(this.getPosY()+1) ;
 							Plateau.refreshEntity(this);								
-						}																	
+						}
+																							
 					}break;
 
 					case WEST: 
 					{	
+							
 						if(Plateau.plateau[this.getPosX()][this.getPosY()-1].getClass() == Player.class)
 						{
-							killPlayer(this.getPosX()+1,this.getPosY());							
+							killPlayer(this.getPosX(),this.getPosY(),"Y",-1);							
 						}
-						if(Plateau.plateau[this.getPosX()][this.getPosY()-1].getClass() == BlocN.class||Plateau.plateau[this.getPosX()][this.getPosY()-1].getClass() == String.class)
+						else if(Plateau.plateau[this.getPosX()][this.getPosY()-1].getClass() == BlocN.class||Plateau.plateau[this.getPosX()][this.getPosY()-1].getClass() == String.class)
 						{
 							Plateau.refreshEntity(this);
 							this.setPosY(this.getPosY()-1) ;
 							Plateau.refreshEntity(this);								
-						}										
+						}
+															
 					}break;
 						
 
 					case NORD: 
-					{			
+					{	
+						
 						if(Plateau.plateau[this.getPosX()-1][this.getPosY()].getClass() == Player.class)
 						{
-							killPlayer(this.getPosX()+1,this.getPosY());
+							killPlayer(this.getPosX(),this.getPosY(),"X",-1);
 						}
-						if(Plateau.plateau[this.getPosX()-1][this.getPosY()].getClass() == BlocN.class||Plateau.plateau[this.getPosX()-1][this.getPosY()].getClass() == String.class)
+						else if(Plateau.plateau[this.getPosX()-1][this.getPosY()].getClass() == BlocN.class||Plateau.plateau[this.getPosX()-1][this.getPosY()].getClass() == String.class)
 						{
 							Plateau.refreshEntity(this);
 							this.setPosX(this.getPosX()-1) ;
 							Plateau.refreshEntity(this);								
-						}																																										
+						}
+																																																
 					}break;
 
 					case SOUTH: 
-					{																				
+					{		
+						
 						if(Plateau.plateau[this.getPosX()+1][this.getPosY()].getClass() == Player.class)
 						{
-							killPlayer(this.getPosX()+1,this.getPosY());
+							killPlayer(this.getPosX(),this.getPosY(),"X",1);
 						}
-						if(Plateau.plateau[this.getPosX()+1][this.getPosY()].getClass() == BlocN.class||Plateau.plateau[this.getPosX()+1][this.getPosY()].getClass() == String.class)
+						else if(Plateau.plateau[this.getPosX()+1][this.getPosY()].getClass() == BlocN.class||Plateau.plateau[this.getPosX()+1][this.getPosY()].getClass() == String.class)
 						{
 							Plateau.refreshEntity(this);
 							this.setPosX(this.getPosX()+1) ;
 							Plateau.refreshEntity(this);								
-						}																	
+						}		
+																					
 					}break;
 					case SO:
 					{
@@ -103,20 +113,50 @@ public class Ennemi extends Entity {
 			}
 		}					
 	}
-	public void killPlayer(int x,int y)
+	public void killPlayer(int x,int y,String str,int i)
 	{
-		if(Plateau.plateau[x][y].getClass()==Player.class)
+		switch(str)
 		{
-			Player p1 = (Player) Plateau.plateau[x][y];
-			Plateau.refreshEntity(p1);	
-			if(p1.getVie()-1 >= 0)
-			{
-				p1.setVie(p1.getVie()-1);
-				p1.setPosX(7);
-				p1.setPosY(7);								
-			}
-			Plateau.refreshEntity(p1);	
-		}					
+		case"X":
+		{
+									
+			if(Plateau.plateau[x+i][y].getClass()==Player.class)
+			{				
+				Player p1 = (Player) Plateau.plateau[x+i][y];
+				Plateau.refreshEntity(p1);
+				if(p1.getVie()-1 >= 0)
+				{
+					p1.setVie(p1.getVie()-1);
+					p1.setPosX(7);
+					p1.setPosY(7);
+					Menu.getInstance().newEntity();
+				}
+				Plateau.refreshEntity(p1);	
+											
+			}		
+		}break;
+		case"Y":
+		{
+									
+			if(Plateau.plateau[x][y+i].getClass()==Player.class)
+			{				
+				Player p1 = (Player) Plateau.plateau[x][y+i];
+				Plateau.refreshEntity(p1);
+				if(p1.getVie()-1 >= 0)
+				{
+					p1.setVie(p1.getVie()-1);
+					p1.setPosX(7);
+					p1.setPosY(7);
+					Menu.getInstance().newEntity();
+				}
+				Plateau.refreshEntity(p1);	
+			
+
+				
+			}		
+		}break;
+		}
+						
 	}
 	public void newPoint()
 	{

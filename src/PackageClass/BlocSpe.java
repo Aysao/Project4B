@@ -1,7 +1,7 @@
 package PackageClass;
 
 /*
- * un bloc special qui fait gagn� le joueur si les trois bloc sont align�
+ * un bloc special qui fait gagne le joueur si les trois bloc sont aligne
  * 
  */
 public class BlocSpe extends Bloc {
@@ -10,6 +10,7 @@ public class BlocSpe extends Bloc {
 		super(X, Y);
 	}
 
+	//verifie si les 3 bloc sont aligne verticalement ou horizontalement
 	public boolean alligne()
 	{
 		if(Plateau.plateau[this.getPosX()+1][this.getPosY()].getClass()==BlocSpe.class&&Plateau.plateau[this.getPosX()+2][this.getPosY()].getClass()==BlocSpe.class)
