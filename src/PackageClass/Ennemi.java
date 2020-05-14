@@ -185,10 +185,6 @@ public class Ennemi extends Entity {
 		{
 			x = bX-3+(new Random()).nextInt(6)+1;
 		    y = bY-3+(new Random()).nextInt(6)+1;
-		    System.out.println("bX : "+bX);
-		    System.out.println("bY : "+bY);
-		    System.out.println("x : "+x);
-		    System.out.println("y : "+y);
 
 		    if(x < 15 && y <13 && x > 0 && y > 0)
 		    {

@@ -16,6 +16,7 @@ public class CoClient implements Runnable{
 	 private PrintWriter sisw;
 	 private ArrayList<PrintWriter> lstpw ;
 	 private int id;
+	 private String pseudo;
 
 	 public CoClient( ArrayList<PrintWriter>pw,Socket s,int id)
 	 {
@@ -29,35 +30,104 @@ public class CoClient implements Runnable{
 		catch(IOException e)
 		{
 			e.printStackTrace();
-		}		    		
+		}		
+		try {
+			pseudo = sisr.readLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	 }
 	 
 	  public void run()
 	  {
 	     try
 	     {
-	     while (waiting) 
-	     {
-			String str = sisr.readLine();   
-			if(str.matches("stop"))//bouton quitter
-			{
-				for(int i=0; i<lstpw.size(); i++)
-				{				
-					lstpw.get(i).println(id+"stop");
-				}	
-				this.stop();
-			}
-			for(int i=0; i<lstpw.size(); i++)
-			{
-			
-			
-			}	
-	     }
-	        sisr.close();
-	        sisw.close();
-	        s.close();
-	    }catch(IOException e){e.printStackTrace();}
+	    	for(int i = 0;i<lstpw.size();i++)
+	 		{
+	 			if(i != id)
+	 			{
+	 				lstpw.get(i).println(pseudo+"/"+"rien");
+	 			}
+	 		}
+		     while (waiting) 
+		     {
+				String str = sisr.readLine(); 
+				
+				if(str.equals("Demarrer"))//bouton quitter
+				{
+					for(int i=0; i<lstpw.size(); i++)
+					{		
+						lstpw.get(i).println(str);
+					}
+					this.stop();
+				}
+				else if(str.equals("stop"))//bouton quitter
+				{
+					for(int i=0; i<lstpw.size(); i++)
+					{		
+						lstpw.get(i).println(str);
+					}	
+					this.stop();
+				}
+				else if(!isAction(str))
+				{
+					for(int i=0; i<lstpw.size(); i++)
+					{
+						if(i != id)
+						{
+							
+							lstpw.get(i).println(str);
+							
+						}
+					
+					}	
+				}
+				else
+				{
+					for(int i=0; i<lstpw.size(); i++)
+					{
+						if(i != id)
+						{
+							lstpw.get(i).println(pseudo+"/"+str);
+						}
+					
+					}	
+				}
+		     }
+		        sisr.close();
+		        sisw.close();
+		        s.close();
+		   }catch(IOException e){e.printStackTrace();}
 	  }
+
+	
+	public boolean isAction(String s)
+	{
+		boolean res = false;
+		for(int i = 0;i < s.length();i++)
+		{
+			if(s.equals("goennemi"))
+			{
+				res = true;
+			}
+			if(s.equals("goplayer"))
+			{
+				res = true;
+			}
+			if(s.equals("coop"))
+			{
+				res = true;
+			}
+			if(s.equals("equipe"))
+			{
+				res = true;
+			}
+				
+		}
+		return res;
+	}
 
 	public boolean isArret() {
 		return arret;

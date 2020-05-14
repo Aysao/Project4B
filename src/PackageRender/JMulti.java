@@ -6,7 +6,9 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import PackageThreads.Client;
 import PackageThreads.Serveur;
+import PackageThreads.ServeurMC;
 
 
 public class JMulti extends JFrame {
@@ -19,7 +21,8 @@ public class JMulti extends JFrame {
 	private MButton rejoindre;
 	private MButton retour;
 	private JFrame jf ;
-	private Serveur serv;
+	private ServeurMC serv;
+	private Client c;
 	public JMulti(JFrame f)
 	{
 		jf = this;
@@ -79,16 +82,26 @@ public class JMulti extends JFrame {
 //				m.MenuStart(f, 2,s);						
 //				Thread t = new Thread(m);
 //				t.start();
-				JMenuMulti jmm ;
+				
+				try {
+					serv = new ServeurMC();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				Thread t = new Thread(serv);
+				t.start();
+				
 				if(!s.isBlank()&&!s.isEmpty())			
 				{
-					jmm = new JMenuMulti(jf,s,true);	
+					c = new Client(s,true,jf);
 				}
 				else			
 				{
-					jmm = new JMenuMulti(jf,"met_un_pseudo_la_prochain",true);	
+					c = new Client(s,true,jf);	
 				}
-				jmm.setVisible(true);
+				Thread tc = new Thread(c);
+				tc.start();
 				jf.setVisible(false);									
 			}
 			
@@ -98,10 +111,16 @@ public class JMulti extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				String s = JOptionPane.showInputDialog("Entrer votre pseudo :");
-//				Menu m = new Menu();
-//				Menu.getInstance().setHost(false);	
-//				m.MenuStart(f, 2,s);									
-//				new Thread(m);
+				if(!s.isBlank()&&!s.isEmpty())			
+				{
+					c = new Client(s,false,jf);
+				}
+				else			
+				{
+					c = new Client(s,false,jf);	
+				}
+				Thread tc = new Thread(c);
+				tc.start();
 				jf.setVisible(false);					
 			}
 			

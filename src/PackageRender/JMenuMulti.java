@@ -38,21 +38,17 @@ public class JMenuMulti extends JFrame {
 	private String pseudohost = "";
 	private String mypseudo = "";
 	private boolean bequipe = true;
-	private boolean pingoin = true; // on est du coté des pinguoin
 	private ArrayList<String> playercollection;
 	private ArrayList<String> ennemicollection;
-	private Client c;
+	private Client cme;
 	private boolean host = false;
-	private Serveur serv;
-	public JMenuMulti(JFrame _parent,String s,boolean _host)
+	public JMenuMulti(JFrame _parent,String s,boolean _host,Client c)
 	{
-		serv = new Serveur();
 		playercollection = new ArrayList<String>();
 		ennemicollection = new ArrayList<String>();
+		cme = c;
 		initArray();
-		playercollection.set(0, s);
 		this.host = _host;
-		pseudohost = s;
 		mypseudo = s;
 		me = this;
 		parent = _parent;
@@ -60,24 +56,14 @@ public class JMenuMulti extends JFrame {
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		initComponent();
-		coop.setEnabled(true);
-		jouer.setEnabled(true);
-		c = new Client(s);
-	}
-	public JMenuMulti(JFrame _parent,String s)
-	{
-		playercollection = new ArrayList<String>();
-		ennemicollection = new ArrayList<String>();
-		initArray();
-		playercollection.set(0, s);
-		mypseudo = s;
-		me = this;
-		parent = _parent;
-		this.setSize(parent.getWidth(),parent.getHeight());
-		this.setLocationRelativeTo(null);
-		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		initComponent();		
-		c = new Client(s);
+		if(host)
+		{
+			setArray(playercollection,mypseudo);
+			coop.setEnabled(true);
+			jouer.setEnabled(true);
+			pseudohost = s;
+			refreshtable();
+		}
 	}
 	
 	private void initComponent()
@@ -95,6 +81,7 @@ public class JMenuMulti extends JFrame {
 		
 		tabpanel = new JPanel();
 		tabpanel.setLayout(new GridLayout(1,3));
+		
 		
 		bpanel = new JPanel();
 		bpanel.setLayout(new GridLayout(1,2));
@@ -167,7 +154,6 @@ public class JMenuMulti extends JFrame {
 		tabjoueur.setLayout(new BorderLayout());
 		tabennemi = new JPanel();
 		tabennemi.setLayout(new BorderLayout());
-		
 		String[][] players = new String[4][1];
 		String[][] enneminame = new String[4][1];
 		initTableValue(players,enneminame);
@@ -191,7 +177,7 @@ public class JMenuMulti extends JFrame {
 			sennemi[i][0] = ennemicollection.get(i);
 		}
 	}
-	private void refreshtable()
+	public void refreshtable()
 	{
 		for(int i = 0;i < playercollection.size();i++)
 		{
@@ -203,7 +189,7 @@ public class JMenuMulti extends JFrame {
 		}
 	}
 	
-	private void setArray(ArrayList<String> l,String s)
+	public void setArray(ArrayList<String> l,String s)
 	{
 		for(int i = 0;i < l.size();i++)
 		{
@@ -214,7 +200,8 @@ public class JMenuMulti extends JFrame {
 		}
 	}
 	
-	private void setGoPlayer()
+
+	public void setGoPlayer()
 	{
 		for(int i = 0;i < ennemicollection.size();i++)
 		{
@@ -222,7 +209,6 @@ public class JMenuMulti extends JFrame {
 			{
 				setArray(playercollection,mypseudo);
 				removeArray(ennemicollection,mypseudo);
-				pingoin = true;
 			}
 			else if(!ennemicollection.get(i).equals("----------")) {
 				setArray(playercollection,ennemicollection.get(i));
@@ -231,7 +217,7 @@ public class JMenuMulti extends JFrame {
 		}
 	}
 	
-	private void removeArray(ArrayList<String> l,String s)
+	public void removeArray(ArrayList<String> l,String s)
 	{
 		for(int i = 0;i < l.size();i++)
 		{
@@ -240,7 +226,7 @@ public class JMenuMulti extends JFrame {
 		}
 	}
 	
-	private boolean placeArray(ArrayList<String> l)
+	public boolean placeArray(ArrayList<String> l)
 	{
 		boolean res = false;
 		for(int i = 0;i < l.size();i++)
@@ -250,7 +236,19 @@ public class JMenuMulti extends JFrame {
 		}
 		return res;
 	}
-	private int nbArray(ArrayList<String> l)
+	public boolean isInArray(ArrayList<String> l,String pse)
+	{
+		boolean res = false;
+		for(int i = 0;i < l.size();i++)
+		{
+			if(l.get(i).equals(pse))
+				res = true;
+		}
+		return res;
+	}
+	
+	
+	public int nbArray(ArrayList<String> l)
 	{
 		int res = 0;
 		for(int i = 0;i < l.size();i++)
@@ -260,6 +258,29 @@ public class JMenuMulti extends JFrame {
 		}
 		return res;
 	}
+	
+	public void goennemi(String s)
+	{
+		if(!isInArray(ennemicollection,s) && placeArray(ennemicollection) && bequipe)
+		{
+			removeArray(playercollection,s);
+			setArray(ennemicollection,s);
+			refreshtable();		
+			
+		}
+	}
+	
+	public void goplayer(String s)
+	{
+		if(!isInArray(playercollection,s)&& placeArray(playercollection))
+		{
+			removeArray(ennemicollection,s);
+			setArray(playercollection,s);
+			refreshtable();
+			
+		}
+	}
+	
 	private void actionButton()
 	{
 		retour.addActionListener(new ActionListener() 
@@ -267,35 +288,39 @@ public class JMenuMulti extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				me.dispose();
-				parent.setVisible(true);
+				if(host)
+					cme.sendLine("stop");
+				close();
+				
 			}
 			
 		});
+		
+		jouer.addActionListener(new ActionListener() 
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(host)
+					cme.sendLine("Demarrer");
+			}
+			
+		});
+		
 		goennemi.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(pingoin && placeArray(ennemicollection) && bequipe)
-				{
-					removeArray(playercollection,mypseudo);
-					setArray(ennemicollection,mypseudo);
-					pingoin = false;
-					refreshtable();					
-				}
+				goennemi(mypseudo);
+				cme.sendLine("goennemi");
 			}
 		});
 		goplayer.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(!pingoin && placeArray(playercollection))
-				{
-					removeArray(ennemicollection,mypseudo);
-					setArray(playercollection,mypseudo);
-					pingoin = true;
-					refreshtable();
-				}
+				goplayer(mypseudo);
+				cme.sendLine("goplayer");
 			}
 		});
 		coop.addActionListener(new ActionListener()
@@ -309,6 +334,7 @@ public class JMenuMulti extends JFrame {
 					coop.setEnabled(false);
 					equipe.setEnabled(true);
 					refreshtable();
+					cme.sendLine("coop");
 				}
 			}
 		});
@@ -316,14 +342,212 @@ public class JMenuMulti extends JFrame {
 		{
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(!bequipe && nbArray(playercollection)+nbArray(ennemicollection) < 5)
+				if(!bequipe)
 				{
 					bequipe = true;
 					coop.setEnabled(true);
 					equipe.setEnabled(false);
-					//refreshtable();
+					cme.sendLine("equipe");
 				}
 			}
 		});
 	}
+	
+	public void close()
+	{
+		me.dispose();
+		parent.setVisible(true);
+	}
+	
+	public void setTabpanel(JPanel tabpanel) {
+		this.tabpanel = tabpanel;
+	}
+	public void setTabjoueur(JPanel tabjoueur) {
+		this.tabjoueur = tabjoueur;
+	}
+
+	public JFrame getParent() {
+		return parent;
+	}
+
+	public void setParent(JFrame parent) {
+		this.parent = parent;
+	}
+
+	public JFrame getMe() {
+		return me;
+	}
+
+	public void setMe(JFrame me) {
+		this.me = me;
+	}
+
+	public MButton getCoop() {
+		return coop;
+	}
+
+	public void setCoop(MButton coop) {
+		this.coop = coop;
+	}
+
+	public MButton getEquipe() {
+		return equipe;
+	}
+
+	public void setEquipe(MButton equipe) {
+		this.equipe = equipe;
+	}
+
+	public MButton getGoennemi() {
+		return goennemi;
+	}
+
+	public void setGoennemi(MButton goennemi) {
+		this.goennemi = goennemi;
+	}
+
+	public MButton getGoplayer() {
+		return goplayer;
+	}
+
+	public void setGoplayer(MButton goplayer) {
+		this.goplayer = goplayer;
+	}
+
+	public MButton getJouer() {
+		return jouer;
+	}
+
+	public void setJouer(MButton jouer) {
+		this.jouer = jouer;
+	}
+
+	public MButton getRetour() {
+		return retour;
+	}
+
+	public void setRetour(MButton retour) {
+		this.retour = retour;
+	}
+
+	public JPanel getPpanel() {
+		return ppanel;
+	}
+
+	public void setPpanel(JPanel ppanel) {
+		this.ppanel = ppanel;
+	}
+
+	public JPanel getPanelmode() {
+		return panelmode;
+	}
+
+	public void setPanelmode(JPanel panelmode) {
+		this.panelmode = panelmode;
+	}
+
+	public JPanel getBpanel() {
+		return bpanel;
+	}
+
+	public void setBpanel(JPanel bpanel) {
+		this.bpanel = bpanel;
+	}
+
+	public JPanel getTabennemi() {
+		return tabennemi;
+	}
+
+	public void setTabennemi(JPanel tabennemi) {
+		this.tabennemi = tabennemi;
+	}
+
+	public JTable getJoueur() {
+		return joueur;
+	}
+
+	public void setJoueur(JTable joueur) {
+		this.joueur = joueur;
+	}
+
+	public JTable getEnnemi() {
+		return ennemi;
+	}
+
+	public void setEnnemi(JTable ennemi) {
+		this.ennemi = ennemi;
+	}
+
+	public JPanel getSwitchentity() {
+		return switchentity;
+	}
+
+	public void setSwitchentity(JPanel switchentity) {
+		this.switchentity = switchentity;
+	}
+
+	public String getPseudohost() {
+		return pseudohost;
+	}
+
+	public void setPseudohost(String pseudohost) {
+		this.pseudohost = pseudohost;
+	}
+
+	public String getMypseudo() {
+		return mypseudo;
+	}
+
+	public void setMypseudo(String mypseudo) {
+		this.mypseudo = mypseudo;
+	}
+
+	public boolean isBequipe() {
+		return bequipe;
+	}
+
+	public void setBequipe(boolean bequipe) {
+		this.bequipe = bequipe;
+	}
+
+	public ArrayList<String> getPlayercollection() {
+		return playercollection;
+	}
+
+	public void setPlayercollection(ArrayList<String> playercollection) {
+		this.playercollection = playercollection;
+	}
+
+	public ArrayList<String> getEnnemicollection() {
+		return ennemicollection;
+	}
+
+	public void setEnnemicollection(ArrayList<String> ennemicollection) {
+		this.ennemicollection = ennemicollection;
+	}
+
+	public Client getCme() {
+		return cme;
+	}
+
+	public void setCme(Client cme) {
+		this.cme = cme;
+	}
+
+	public boolean isHost() {
+		return host;
+	}
+
+	public void setHost(boolean host) {
+		this.host = host;
+	}
+
+	public JPanel getTabpanel() {
+		return tabpanel;
+	}
+
+	public JPanel getTabjoueur() {
+		return tabjoueur;
+	}
+	
 }

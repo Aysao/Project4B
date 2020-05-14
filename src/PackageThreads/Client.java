@@ -7,11 +7,14 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
 
+import javax.swing.JFrame;
 
 import PackageClass.Orientation;
 import PackageClass.Plateau;
 import PackageClass.Player;
+import PackageRender.JMenuMulti;
 
 public class Client implements Runnable{
 
@@ -20,9 +23,16 @@ public class Client implements Runnable{
 	private BufferedReader sisr;
 	private Socket socket;
 	private String pseudo;
-	public Client(String s )
+	private JMenuMulti jmm;
+	private boolean host;
+	private boolean game = true;
+	private boolean flag = false;
+	
+	public Client(String s,boolean _host,JFrame j)
 	{		
 		pseudo = s;
+		this.host = _host;
+		
 		try {
 			socket = new Socket("127.0.0.1", port);
 		} catch (IOException e) {						
@@ -30,7 +40,7 @@ public class Client implements Runnable{
 		}
 		try {
 			sisr = new BufferedReader(
-			           new InputStreamReader(socket.getInputStream()));
+					new InputStreamReader(socket.getInputStream()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -42,7 +52,23 @@ public class Client implements Runnable{
 			e.printStackTrace();
 		}
 		
+		sisw.println(pseudo);
 		
+		if(host)
+		{
+			jmm = new JMenuMulti(j,pseudo,host,this);
+			jmm.setVisible(true);
+			flag = true;
+		}
+		else
+		{
+			jmm = new JMenuMulti(j,pseudo,false,this);
+			jmm.setVisible(true);
+		}
+		
+		
+			
+
 //		sisw.println("start");
 //		try {
 //			Plateau.StringToPlateau(sisr.readLine());
@@ -55,24 +81,158 @@ public class Client implements Runnable{
 	@Override
 	public void run() {
 		Player p1 = null;
-		while(true)
+		String str = "";
+		int slash = 0;
+		int point = 0;
+		String nbPlayer = "0";
+		String nbEnnemi = "0";
+		String sender = "";
+		String action = "";
+	
+		while(!str.equals("Demarrer") || str.equals("stop"))
 		{
 			
-			String str="";
+			try {
+				str = sisr.readLine();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			for(int i = 0;i<str.length();i++)
+			{
+				if(str.charAt(i) == '/')
+				{
+					slash = i;
+				}
+			}
+			for(int i = 0;i<str.length();i++)
+			{
+				if(str.charAt(i) == '.')
+				{
+					point = i;
+				}
+			}
+			if(slash != 0)
+				sender = str.substring(0,slash);
+			if(point == 0 && slash != 0)
+			{
+				action = str.substring(slash+1);
+			}
+			else {
+				action = str.substring(slash+1,point);
+			}
+			switch(action)
+			{
+				case "goennemi":
+				{
+					System.out.println("sender : "+sender);
+					System.out.println("action : "+action);
+					jmm.goennemi(sender);
+				}break;
+				case "goplayer":
+				{
+					jmm.goplayer(sender);
+				}break;
+				case "coop":
+				{
+					jmm.setGoPlayer();
+					jmm.setBequipe(false);
+					jmm.refreshtable();
+				}break;
+				case "equipe":
+				{
+					jmm.setBequipe(true);
+					jmm.refreshtable();
+				}break;
+				case "ennemi":
+				{
+					if(!jmm.isInArray(jmm.getPlayercollection(), sender) && !jmm.isInArray(jmm.getEnnemicollection(), sender))
+					{
+						jmm.setArray(jmm.getEnnemicollection(), sender);
+						jmm.refreshtable();
+						nbEnnemi = str.substring(point+1);
+					}
+					
+				}break;
+				case "player":
+				{
+					if(!jmm.isInArray(jmm.getPlayercollection(), sender) && !jmm.isInArray(jmm.getEnnemicollection(), sender))
+					{
+						jmm.setArray(jmm.getPlayercollection(), sender);
+						jmm.refreshtable();
+						nbPlayer = str.substring(point+1);
+					}
+					
+				}break;
+				case "rien":
+				{
+					if(!jmm.isInArray(jmm.getPlayercollection(), sender) && !jmm.isInArray(jmm.getEnnemicollection(), sender))
+					{
+						if(jmm.isInArray(jmm.getPlayercollection(), pseudo))
+						{
+							sisw.println(pseudo+"/"+"player."+jmm.nbArray(jmm.getPlayercollection()));
+						}
+						else
+						{
+							sisw.println(pseudo+"/"+"ennemi."+jmm.nbArray(jmm.getEnnemicollection()));
+						}
+						if(jmm.nbArray(jmm.getPlayercollection()) <= jmm.nbArray(jmm.getEnnemicollection()))
+						{
+							jmm.setArray(jmm.getPlayercollection(), sender);
+							jmm.refreshtable();
+						}
+						else
+						{
+							jmm.setArray(jmm.getEnnemicollection(), sender);
+							jmm.refreshtable();
+						}
+					
+						
+					}
+				}
+			}
+			slash = 0;
+			point = 0;
+			System.out.println("nbplayer : "+nbPlayer);
+			System.out.println("nbennemi : "+nbEnnemi);
+			System.out.println("nbplayer thread courant : "+jmm.nbArray(jmm.getPlayercollection()));
+			System.out.println("nbennemi thread courant : "+jmm.nbArray(jmm.getEnnemicollection()));
+			if(flag == false && nbPlayer.equals(""+jmm.nbArray(jmm.getPlayercollection())) && nbEnnemi.equals(""+jmm.nbArray(jmm.getEnnemicollection())))
+			{
+				System.out.println("je me crée dans ma liste");
+				if(jmm.nbArray(jmm.getPlayercollection()) <= jmm.nbArray(jmm.getEnnemicollection()))
+				{
+					jmm.setArray(jmm.getPlayercollection(), pseudo);
+					jmm.refreshtable();
+				}
+				else
+				{
+					jmm.setArray(jmm.getEnnemicollection(), pseudo);
+					jmm.refreshtable();
+				}
+				flag = true;
+			
+			}
+			if(str.equals("stop"))
+			{
+				game = false;
+				jmm.close();
+				this.close();
+			}
+		}
+		while(game)
+		{
+			
+			str = "";
 			try {
 				str = sisr.readLine();// lecture du message
-				
-				//System.out.println(str);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			
 			switch(str)
 			{
-			case "waiting":
-			{
-				str.replaceAll("waiting", "");
-				waiting(str);
-			}
 			case "NORD":
 			{
 				p1.setOrientation(Orientation.NORD);
@@ -162,22 +322,9 @@ public class Client implements Runnable{
 			}
 		}
 	}
-	private void waiting(String str) {
-
-		String strid = ""+str.charAt(0);
-		str=str.substring(1);
-		switch(str)
-		{
-		case"new":
-		{
-			
-		}
-		}
-		
-	}
-
+	
 	private void close() {
-		sisw.println("END");
+		sisw.println("stop");
 		try {
 			sisr.close();
 		} catch (IOException e) {

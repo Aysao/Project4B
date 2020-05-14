@@ -12,7 +12,7 @@ public class ServeurMC implements Runnable{
    private int port = 8080;
    private final int maxClients=8;
    private ArrayList<PrintWriter> pw = new ArrayList<PrintWriter>();
-   static int numClient=0;
+   private int numClient=0;
    public ServeurMC() throws Exception  
    {
 
