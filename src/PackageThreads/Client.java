@@ -8,12 +8,13 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+
 import PackageClass.Orientation;
 import PackageClass.Plateau;
 import PackageClass.Player;
 
 public class Client implements Runnable{
-	private boolean running= true;
+
 	private int port = 8080;
 	private PrintWriter sisw;
 	private BufferedReader sisr;
@@ -49,7 +50,7 @@ public class Client implements Runnable{
 	@Override
 	public void run() {
 		Player p1 = null;
-		while(running)
+		while(true)
 		{
 			
 			String str="";
@@ -97,12 +98,26 @@ public class Client implements Runnable{
 			}break;
 			case"stop":
 			{
-				stop();
+				break;
 			}
 			case "getplayer":
 			{
 				p1 = (Player)Plateau.getPlayer().get(0);
-			}
+			}break;
+			case "win":
+			{
+				Menu.getInstance().getV().setVictory(true);
+				Menu.getInstance().setEnnemiVie(6);
+				Plateau.clearEntity();//supprime thread player et ennemis restant
+				
+			}break;
+			case "loose":
+			{
+				Menu.getInstance().getV().setVictory(true);
+				Menu.getInstance().setEnnemiVie(6);
+				Plateau.clearEntity();//supprime thread player et ennemis restant
+				
+			}break;
 			}	
 		}
 	}
@@ -110,10 +125,7 @@ public class Client implements Runnable{
 	{
 		sisw.println(str);
 	} 
-	public void stop()
-	{
-		this.running=false;
-	}
+	
 
 	
 	

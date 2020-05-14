@@ -572,20 +572,20 @@ public class Plateau {
 				if(plateau[i][j].getClass()==Ennemi.class)
 				{
 					Ennemi en = (Ennemi)plateau[i][j];
-					if(Menu.hmThreadE.get(en).isRunning())
+					if(Menu.getInstance().getHmThreadE().get(en).isRunning())
 					{
-						Menu.hmThreadE.get(en).stop();
-						Menu.hmThreadE.remove(en);
+						Menu.getInstance().getHmThreadE().get(en).stop();
+						Menu.getInstance().getHmThreadE().remove(en);
 						System.out.println("ennemi clear!");
 					}
 				}
 				else if (plateau[i][j].getClass()==Player.class)
 				{
 					Player p = (Player)plateau[i][j];
-					if(Menu.hmThreadP.get(p).isRunning())
+					if(Menu.getInstance().getHmThreadP().get(p).isRunning())
 					{
-						Menu.hmThreadP.get(p).stop();
-						Menu.hmThreadP.remove(p);
+						Menu.getInstance().getHmThreadP().get(p).stop();
+						Menu.getInstance().getHmThreadP().remove(p);
 						System.out.println("player clear!");
 					}
 				}

@@ -26,7 +26,15 @@ public class Score {
 	public Score(String name)
 	{
 		getScore();
-		this.name = name;
+		if(name.isBlank()||name.isEmpty())
+		{
+			this.name=null;
+		}
+		else
+		{
+			this.name = name;
+		}
+		
 	}
 	public void mstKill()
 	{

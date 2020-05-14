@@ -32,7 +32,8 @@ public class Serveur implements Runnable{
 			e1.printStackTrace();
 		}
 		while (true) 
-		{			
+		{		
+			
 			String str="";
 			try {
 				str = sisr.readLine();// lecture du message
@@ -103,7 +104,7 @@ public class Serveur implements Runnable{
 		}		
 		System.out.println("en attente...");
         soc = s.accept();
-        Menu.gamestart=true;
+        Menu.getInstance().setGamestart(true);
         System.out.println("SOCKET "+s);
         System.out.println("SOCKET "+soc);       
         sisr = new BufferedReader(

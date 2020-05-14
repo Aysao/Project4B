@@ -75,16 +75,16 @@ public class JOption extends JFrame{
 		lback.setForeground(Color.WHITE);
 		lleft.setForeground(Color.WHITE);
 		lright.setForeground(Color.WHITE);
-		forward.setText(""+Menu.avancer);
+		forward.setText(""+Menu.getInstance().getAvancer());
 		forward.setPressed("Image/click.png");
 		forward.setRollover("Image/blurGlaceBlock.png");
-		back.setText(""+Menu.reculer);
+		back.setText(""+Menu.getInstance().getReculer());
 		back.setPressed("Image/click.png");
 		back.setRollover("Image/blurGlaceBlock.png");
-		right.setText(""+Menu.droite);
+		right.setText(""+Menu.getInstance().getDroite());
 		right.setPressed("Image/click.png");
 		right.setRollover("Image/blurGlaceBlock.png");
-		left.setText(""+Menu.gauche);
+		left.setText(""+Menu.getInstance().getGauche());
 		left.setPressed("Image/click.png");
 		left.setRollover("Image/blurGlaceBlock.png");
 		valider.setText("Valider");
@@ -116,10 +116,10 @@ public class JOption extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				jf.dispose();
 				framep.setVisible(true);
-				Menu.avancer = forward.getText().charAt(0);
-				Menu.reculer = back.getText().charAt(0);
-				Menu.droite = right.getText().charAt(0);
-				Menu.gauche = left.getText().charAt(0);
+				Menu.getInstance().setAvancer(forward.getText().charAt(0)); 
+				Menu.getInstance().setReculer(back.getText().charAt(0)); 
+				Menu.getInstance().setDroite(right.getText().charAt(0)); 
+				Menu.getInstance().setGauche(left.getText().charAt(0)) ;
 			}
 			
 		});

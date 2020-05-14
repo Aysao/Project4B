@@ -22,23 +22,23 @@ public class ThreadPlayer implements Runnable {
 			
 			if(player.isMouvement() == false)
 			{
-				if(e.getKeyChar() == Menu.avancer||e.getKeyChar() == (Menu.avancer-'A'+'a'))
+				if(e.getKeyChar() == Menu.getInstance().getAvancer()||e.getKeyChar() == (Menu.getInstance().getAvancer()-'A'+'a'))
 				{
 					player.setOrientation(Orientation.NORD);
 					player.setMouvement(true);									
 				}
-				else if(e.getKeyChar() == Menu.gauche||e.getKeyChar() == (Menu.gauche-'A'+'a'))
+				else if(e.getKeyChar() == Menu.getInstance().getGauche()||e.getKeyChar() == (Menu.getInstance().getGauche()-'A'+'a'))
 				{
 					player.setOrientation(Orientation.WEST);
 					player.setMouvement(true);					
 					
 				}
-				else if(e.getKeyChar() == Menu.reculer||e.getKeyChar() == (Menu.reculer-'A'+'a'))
+				else if(e.getKeyChar() == Menu.getInstance().getReculer()||e.getKeyChar() == (Menu.getInstance().getReculer()-'A'+'a'))
 				{
 					player.setOrientation(Orientation.SOUTH);
 					player.setMouvement(true);				
 				}
-				else if(e.getKeyChar() == Menu.droite||e.getKeyChar() == (Menu.droite-'A'+'a'))
+				else if(e.getKeyChar() == Menu.getInstance().getDroite()||e.getKeyChar() == (Menu.getInstance().getDroite()-'A'+'a'))
 				{
 					player.setOrientation(Orientation.EAST);
 					player.setMouvement(true);							
@@ -49,9 +49,9 @@ public class ThreadPlayer implements Runnable {
 		@Override
 		public void keyReleased(KeyEvent e) {
 			player.setMouvement(false);	
-			if(Menu.host&&Menu.mode==2)
+			if(Menu.getInstance().isHost()&&Menu.getInstance().getMode()==2)
 			{
-				Menu.s.sendLine("SO");
+				Menu.getInstance().getS().sendLine("SO");
 			}
 			//player.setOrientation(Entity.SO);
 		}
@@ -70,16 +70,16 @@ public class ThreadPlayer implements Runnable {
 		while(running)
 		{
 			
-			if(!Menu.v.isVictory() && player.getVie() > 0)
+			if(!Menu.getInstance().getV().isVictory() && player.getVie() > 0)
 			{
 				
 				if(player.isMouvement())
 				{				
 					player.Deplacement();
-					Menu.v.testVictory();
-					if(Menu.host&&Menu.mode==2)
+					Menu.getInstance().getV().testVictory();
+					if(Menu.getInstance().isHost()&&Menu.getInstance().getMode()==2)
 					{
-						Menu.s.sendLine(player.getOrientation().toString());
+						Menu.getInstance().getS().sendLine(player.getOrientation().toString());
 					}
 					try {
 						Thread.sleep(180);

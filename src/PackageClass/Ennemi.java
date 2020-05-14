@@ -187,8 +187,8 @@ public class Ennemi extends Entity {
 		ArrayList<Player> players = Plateau.getPlayer();
 		for(int i = 0;i<players.size();i++)
 		{
-			distx = Math.abs(players.get(i).getPosX()-posX);
-			disty = Math.abs(players.get(i).getPosY()-posY);
+			distx = Math.abs(players.get(i).getPosX()-this.getPosX());
+			disty = Math.abs(players.get(i).getPosY()-this.getPosY());
 			if(distx+disty <= 5)
 			{
 				res = players.get(i);
@@ -206,8 +206,8 @@ public class Ennemi extends Entity {
 		ArrayList<Player> players = Plateau.getPlayer();
 		for(int i = 0;i<players.size();i++)
 		{
-			distx = Math.abs(players.get(i).getPosX()-posX);
-			disty = Math.abs(players.get(i).getPosY()-posY);
+			distx = Math.abs(players.get(i).getPosX()-this.getPosX());
+			disty = Math.abs(players.get(i).getPosY()-this.getPosY());
 			if(distx+disty <= 5)
 			{
 				res = true;
@@ -227,8 +227,8 @@ public class Ennemi extends Entity {
 		ArrayList<BlocSpe> diams = Plateau.getBlocSpe();
 		for(int i = 0;i<diams.size();i++)
 		{
-			distx = Math.abs(diams.get(i).getPosX()-posX);
-			disty = Math.abs(diams.get(i).getPosY()-posY);
+			distx = Math.abs(diams.get(i).getPosX()-this.getPosX());
+			disty = Math.abs(diams.get(i).getPosY()-this.getPosY());
 			if(distx+disty <= mindistx+mindisty)
 			{
 				mindistx = distx;

@@ -34,23 +34,23 @@ public class ThreadEnnemie implements Runnable {
 			
 			if(en.isMouvement() == false)
 			{
-				if(e.getKeyChar() == Menu.avancer||e.getKeyChar() == (Menu.avancer-'A'+'a'))
+				if(e.getKeyChar() == Menu.getInstance().getAvancer()||e.getKeyChar() == (Menu.getInstance().getAvancer()-'A'+'a'))
 				{
 					en.setOrientation(Orientation.NORD);
 					en.setMouvement(true);									
 				}
-				else if(e.getKeyChar() == Menu.gauche||e.getKeyChar() == (Menu.gauche-'A'+'a'))
+				else if(e.getKeyChar() == Menu.getInstance().getGauche()||e.getKeyChar() == (Menu.getInstance().getGauche()-'A'+'a'))
 				{
 					en.setOrientation(Orientation.WEST);
 					en.setMouvement(true);					
 					
 				}
-				else if(e.getKeyChar() == Menu.reculer||e.getKeyChar() == (Menu.reculer-'A'+'a'))
+				else if(e.getKeyChar() == Menu.getInstance().getReculer()||e.getKeyChar() == (Menu.getInstance().getReculer()-'A'+'a'))
 				{
 					en.setOrientation(Orientation.SOUTH);
 					en.setMouvement(true);				
 				}
-				else if(e.getKeyChar() == Menu.droite||e.getKeyChar() == (Menu.droite-'A'+'a'))
+				else if(e.getKeyChar() == Menu.getInstance().getDroite()||e.getKeyChar() == (Menu.getInstance().getDroite()-'A'+'a'))
 				{
 					en.setOrientation(Orientation.EAST);
 					en.setMouvement(true);							
@@ -61,9 +61,9 @@ public class ThreadEnnemie implements Runnable {
 		@Override
 		public void keyReleased(KeyEvent e) {
 			en.setMouvement(false);
-			if(!Menu.host)
+			if(!Menu.getInstance().isHost())
 			{
-				Menu.c.sendLine("SO");
+				Menu.getInstance().getC().sendLine("SO");
 			}
 			//player.setOrientation(Entity.SO);
 		}		
@@ -78,7 +78,7 @@ public class ThreadEnnemie implements Runnable {
 	@Override
 	public void run() 
 	{
-		if(!Menu.host&&this.en.isPlayed()&&Menu.mode==2)//multi
+		if(!Menu.getInstance().isHost()&&this.en.isPlayed()&&Menu.getInstance().getMode()==2)//multi
 		{	
 			while(running)
 			{
@@ -89,13 +89,13 @@ public class ThreadEnnemie implements Runnable {
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-					Menu.c.sendLine("stunoff");
+					Menu.getInstance().getC().sendLine("stunoff");
 					en.stun=false;				
 				}	
 				if(en.isMouvement())
 				{					
 					en.Deplacement();
-					Menu.c.sendLine(en.getOrientation().toString());					
+					Menu.getInstance().getC().sendLine(en.getOrientation().toString());					
 					//en.setOrientation(Entity.SO);						
 					try {
 						Thread.sleep(180);

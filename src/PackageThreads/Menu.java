@@ -16,30 +16,34 @@ import PackageRender.Render;
 
 public class Menu implements Runnable {
 
+	
+	private static Menu instance ;
+	
 	private Player p1;
 	private Ennemi p2;
-	public static int ennemiVie=5;
+	private int ennemiVie=6;
 	private Ennemi e1;
 	private Ennemi e2;
 	private Ennemi e3;
 	private Render r ;	
-	public static Victory v ;
-	public static char avancer='Z';		//touche de deplacement une option pour qu'on puisse changer les touches
-	public static char reculer='S';
-	public static char droite='D';
-	public static char gauche='Q';
+	private Victory v ;
+	private char avancer='Z';		//touche de deplacement une option pour qu'on puisse changer les touches
+	private char reculer='S';
+	private char droite='D';
+	private char gauche='Q';
 	private JFrame menuPrincipal;
-	public static boolean host = true ;
-	public static Client c;
-	public static Serveur s;
-	public static int mode ;
-	public static boolean gamestart=true;
-    public static HashMap<Ennemi, ThreadEnnemie> hmThreadE = new HashMap<Ennemi, ThreadEnnemie>();
-    public static HashMap<Player, ThreadPlayer> hmThreadP = new HashMap<Player, ThreadPlayer>();
+	private boolean host = true ;
+	private Client c;
+	private Serveur s;
+	private int mode ;
+	private boolean gamestart=true;
+	private HashMap<Ennemi, ThreadEnnemie> hmThreadE = new HashMap<Ennemi, ThreadEnnemie>();
+	private HashMap<Player, ThreadPlayer> hmThreadP = new HashMap<Player, ThreadPlayer>();
 
 	
 	public Menu(JFrame f,int i) 
 	{
+		instance = this;
 		mode=i;
 		menuPrincipal = f;
 		switch(i)
@@ -120,7 +124,7 @@ public class Menu implements Runnable {
 		hmThreadE.put(e2, runte1);		
 		hmThreadE.put(e3, runte2);		
 	}
-	public static void newEnnemi()
+	public void newEnnemi()
 	{
 		ennemiVie--;
 		//System.out.println("vie"+ennemiVie);
@@ -139,8 +143,10 @@ public class Menu implements Runnable {
 		}		
 	}
 
-	public void fin() 
+	public void fin(int i) 
 	{	
+		int x = 1000-i*2;
+		p1.getScr().setPoint(p1.getScr().getPoint()+x);
 		try {
 			p1.getScr().setScore();
 		} catch (IOException e) {
@@ -150,10 +156,18 @@ public class Menu implements Runnable {
 		if(v.isVictory() == false)
 		{
 			JOptionPane.showMessageDialog(r,"Perdu !");
+			if(mode==2 &&host)
+			{
+				s.sendLine("win");
+			}
 		}
 		if(v.isVictory() == true)
 		{
-			JOptionPane.showMessageDialog(r,"Gagnï¿½!");
+			JOptionPane.showMessageDialog(r,"Gagné!");
+			if(mode==2 &&host)
+			{
+				s.sendLine("loose");
+			}
 		}	
 		
 	}
@@ -166,7 +180,8 @@ public class Menu implements Runnable {
 		menuPrincipal.setVisible(true);		
 	}
 	@Override
-	public void run() {		
+	public void run() {
+		int i = 0;
 		while(!(v.isVictory()) && p1.getVie() > 0)
 		{
 			try {
@@ -176,13 +191,139 @@ public class Menu implements Runnable {
 				{
 					s.sendLine("bordure");
 				}
+				i++;
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		fin();
+		fin(i);
 		
 	}
-	
+	public static Menu getInstance() {
+		return instance;
+	}
+	public static void setInstance(Menu instance) {
+		Menu.instance = instance;
+	}
+	public Player getP1() {
+		return p1;
+	}
+	public void setP1(Player p1) {
+		this.p1 = p1;
+	}
+	public Ennemi getP2() {
+		return p2;
+	}
+	public void setP2(Ennemi p2) {
+		this.p2 = p2;
+	}
+	public int getEnnemiVie() {
+		return ennemiVie;
+	}
+	public void setEnnemiVie(int ennemiVie) {
+		this.ennemiVie = ennemiVie;
+	}
+	public Ennemi getE1() {
+		return e1;
+	}
+	public void setE1(Ennemi e1) {
+		this.e1 = e1;
+	}
+	public Ennemi getE2() {
+		return e2;
+	}
+	public void setE2(Ennemi e2) {
+		this.e2 = e2;
+	}
+	public Ennemi getE3() {
+		return e3;
+	}
+	public void setE3(Ennemi e3) {
+		this.e3 = e3;
+	}
+	public Render getR() {
+		return r;
+	}
+	public void setR(Render r) {
+		this.r = r;
+	}
+	public Victory getV() {
+		return v;
+	}
+	public void setV(Victory v) {
+		this.v = v;
+	}
+	public char getAvancer() {
+		return avancer;
+	}
+	public void setAvancer(char avancer) {
+		this.avancer = avancer;
+	}
+	public char getReculer() {
+		return reculer;
+	}
+	public void setReculer(char reculer) {
+		this.reculer = reculer;
+	}
+	public char getDroite() {
+		return droite;
+	}
+	public void setDroite(char droite) {
+		this.droite = droite;
+	}
+	public char getGauche() {
+		return gauche;
+	}
+	public void setGauche(char gauche) {
+		this.gauche = gauche;
+	}
+	public JFrame getMenuPrincipal() {
+		return menuPrincipal;
+	}
+	public void setMenuPrincipal(JFrame menuPrincipal) {
+		this.menuPrincipal = menuPrincipal;
+	}
+	public boolean isHost() {
+		return host;
+	}
+	public void setHost(boolean host) {
+		this.host = host;
+	}
+	public Client getC() {
+		return c;
+	}
+	public void setC(Client c) {
+		this.c = c;
+	}
+	public Serveur getS() {
+		return s;
+	}
+	public void setS(Serveur s) {
+		this.s = s;
+	}
+	public int getMode() {
+		return mode;
+	}
+	public void setMode(int mode) {
+		this.mode = mode;
+	}
+	public boolean isGamestart() {
+		return gamestart;
+	}
+	public void setGamestart(boolean gamestart) {
+		this.gamestart = gamestart;
+	}
+	public HashMap<Ennemi, ThreadEnnemie> getHmThreadE() {
+		return hmThreadE;
+	}
+	public void setHmThreadE(HashMap<Ennemi, ThreadEnnemie> hmThreadE) {
+		this.hmThreadE = hmThreadE;
+	}
+	public HashMap<Player, ThreadPlayer> getHmThreadP() {
+		return hmThreadP;
+	}
+	public void setHmThreadP(HashMap<Player, ThreadPlayer> hmThreadP) {
+		this.hmThreadP = hmThreadP;
+	}
 }
