@@ -92,7 +92,7 @@ public class Menu implements Runnable {
 				}
 				else
 				{								
-					c= new Client();
+					
 					Thread tc = new Thread(c);
 					tc.start();
 					p1 = new Player(7,7);

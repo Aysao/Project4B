@@ -1,19 +1,21 @@
 package PackageRender;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.GridBagLayout;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import PackageThreads.Client;
+import PackageThreads.Serveur;
+
+@SuppressWarnings("serial")
 public class JMenuMulti extends JFrame {
 	
 	private JFrame parent;
@@ -39,11 +41,12 @@ public class JMenuMulti extends JFrame {
 	private boolean pingoin = true; // on est du coté des pinguoin
 	private ArrayList<String> playercollection;
 	private ArrayList<String> ennemicollection;
-	
+	private Client c;
 	private boolean host = false;
-	
+	private Serveur serv;
 	public JMenuMulti(JFrame _parent,String s,boolean _host)
 	{
+		serv = new Serveur();
 		playercollection = new ArrayList<String>();
 		ennemicollection = new ArrayList<String>();
 		initArray();
@@ -59,6 +62,22 @@ public class JMenuMulti extends JFrame {
 		initComponent();
 		coop.setEnabled(true);
 		jouer.setEnabled(true);
+		c = new Client(s);
+	}
+	public JMenuMulti(JFrame _parent,String s)
+	{
+		playercollection = new ArrayList<String>();
+		ennemicollection = new ArrayList<String>();
+		initArray();
+		playercollection.set(0, s);
+		mypseudo = s;
+		me = this;
+		parent = _parent;
+		this.setSize(parent.getWidth(),parent.getHeight());
+		this.setLocationRelativeTo(null);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		initComponent();		
+		c = new Client(s);
 	}
 	
 	private void initComponent()
@@ -262,7 +281,7 @@ public class JMenuMulti extends JFrame {
 					removeArray(playercollection,mypseudo);
 					setArray(ennemicollection,mypseudo);
 					pingoin = false;
-					refreshtable();
+					refreshtable();					
 				}
 			}
 		});

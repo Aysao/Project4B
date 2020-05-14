@@ -2,6 +2,7 @@ package PackageThreads;
 import java.io.*;
 import java.net.*;
 
+
 import PackageClass.BlocN;
 import PackageClass.BlocSpe;
 import PackageClass.Bordure;
@@ -17,21 +18,22 @@ public class Serveur implements Runnable{
 	private BufferedReader sisr;
 	private PrintWriter sisw;
 	private Socket soc;
-	
+
+	private boolean waiting =true;
 	public Serveur()
-	{		
-	
-	}
+	{	
+		
+	}  
+
+	       
+		
+	   
 	@Override
 	public void run(){
 		
-		Ennemi e = (Ennemi)Plateau.getEnnemi().get(0);
-		try {
-			setClient();
-		} catch (Exception e1) {			
-			e1.printStackTrace();
-		}
 		
+		Ennemi e = (Ennemi)Plateau.getEnnemi().get(0);
+
 		while (true) 
 		{		
 			
@@ -102,24 +104,16 @@ public class Serveur implements Runnable{
 	}
 	public void setClient()throws Exception
 	{		
-		try {
-			s = new ServerSocket(port);
-		} catch (IOException e) {
 			
-			e.printStackTrace();
-		}		
 		System.out.println("en attente...");		
-        soc = s.accept();      
-        Menu.getInstance().setGamestart(true);
-       
+        soc = s.accept();                     
         System.out.println("SOCKET "+s);
         System.out.println("SOCKET "+soc);       
         sisr = new BufferedReader(
                 new InputStreamReader(soc.getInputStream())
                );     
         sisw = new PrintWriter( new BufferedWriter(
-             new OutputStreamWriter(soc.getOutputStream())),true);
-        
+             new OutputStreamWriter(soc.getOutputStream())),true);      
 	}
 	public void close()
 	{
@@ -173,4 +167,12 @@ public class Serveur implements Runnable{
 			}						
 		}		
 	}
+	public boolean isWaiting() {
+		return waiting;
+	}
+	public void setWaiting(boolean waiting) {
+		this.waiting = waiting;
+	}
+
+	
 }

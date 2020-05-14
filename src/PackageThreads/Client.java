@@ -19,8 +19,10 @@ public class Client implements Runnable{
 	private PrintWriter sisw;
 	private BufferedReader sisr;
 	private Socket socket;
-	public Client()
-	{
+	private String pseudo;
+	public Client(String s )
+	{		
+		pseudo = s;
 		try {
 			socket = new Socket("127.0.0.1", port);
 		} catch (IOException e) {						
@@ -39,14 +41,17 @@ public class Client implements Runnable{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		sisw.println("start");
-		try {
-			Plateau.StringToPlateau(sisr.readLine());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		
+//		sisw.println("start");
+//		try {
+//			Plateau.StringToPlateau(sisr.readLine());
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
+	
 	@Override
 	public void run() {
 		Player p1 = null;
@@ -63,6 +68,11 @@ public class Client implements Runnable{
 			}
 			switch(str)
 			{
+			case "waiting":
+			{
+				str.replaceAll("waiting", "");
+				waiting(str);
+			}
 			case "NORD":
 			{
 				p1.setOrientation(Orientation.NORD);
@@ -152,6 +162,20 @@ public class Client implements Runnable{
 			}
 		}
 	}
+	private void waiting(String str) {
+
+		String strid = ""+str.charAt(0);
+		str=str.substring(1);
+		switch(str)
+		{
+		case"new":
+		{
+			
+		}
+		}
+		
+	}
+
 	private void close() {
 		sisw.println("END");
 		try {
@@ -172,7 +196,8 @@ public class Client implements Runnable{
 	public void sendLine(String str)
 	{
 		sisw.println(str);
-	} 
+	}
+
 	
 
 	

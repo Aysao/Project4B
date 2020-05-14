@@ -1,23 +1,10 @@
-<<<<<<< Updated upstream
-1420.0 test
-1140.0 Player
-990.0 Player
-650.0 Player
-590.0 Player
-150.0 Player
-0.0 matthieu
+1510.0 joueur0
+1060.0 joueur1
+1000.0 null
+1000.0 joueur0
+1000.0 joueur1
+1000.0 joueur2
+950.0 
 0.0 null
 0.0 null
 0.0 null
-=======
-320.0 
-0.0 null
-0.0 null
-0.0 null
-0.0 null
-1420.0 Updated
-1140.0 upstream
-650.0 test
-590.0 Player
-150.0 Player
->>>>>>> Stashed changes

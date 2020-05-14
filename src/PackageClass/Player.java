@@ -17,6 +17,8 @@ public class Player extends Entity {
 	public Player(int x, int y) {
 		super(x, y);
 		Plateau.plateau[x][y] = this;
+		setPseudo("met_un_pseudo_la_prochain");
+		scr.setName("met_un_pseudo_la_prochain");
 	}
 	public Player(int x, int y,String str) {
 		super(x, y);
@@ -24,7 +26,12 @@ public class Player extends Entity {
 		{
 			setPseudo(str);
 			scr.setName(str);
-		}		
+		}
+		else
+		{
+			setPseudo("met_un_pseudo_la_prochain");
+			scr.setName("met_un_pseudo_la_prochain");
+		}
 	}	
 	
 	public synchronized void Deplacement()

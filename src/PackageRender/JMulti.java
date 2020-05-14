@@ -6,11 +6,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-import PackageThreads.Menu;
+import PackageThreads.Serveur;
 
 
 public class JMulti extends JFrame {
-
+	
 	/**
 	 * 
 	 */
@@ -19,6 +19,7 @@ public class JMulti extends JFrame {
 	private MButton rejoindre;
 	private MButton retour;
 	private JFrame jf ;
+	private Serveur serv;
 	public JMulti(JFrame f)
 	{
 		jf = this;
@@ -78,10 +79,17 @@ public class JMulti extends JFrame {
 //				m.MenuStart(f, 2,s);						
 //				Thread t = new Thread(m);
 //				t.start();
-				JMenuMulti jmm = new JMenuMulti(jf,s,true);
+				JMenuMulti jmm ;
+				if(!s.isBlank()&&!s.isEmpty())			
+				{
+					jmm = new JMenuMulti(jf,s,true);	
+				}
+				else			
+				{
+					jmm = new JMenuMulti(jf,"met_un_pseudo_la_prochain",true);	
+				}
 				jmm.setVisible(true);
-				jf.setVisible(false);
-						
+				jf.setVisible(false);									
 			}
 			
 		});
