@@ -105,16 +105,18 @@ public class Ennemi extends Entity {
 	}
 	public void killPlayer(int x,int y)
 	{
-		Player p1 = (Player) Plateau.plateau[x][y];
-
-		Plateau.refreshEntity(p1);	
-		if(p1.getVie()-1 >= 0)
+		if(Plateau.plateau[x][y].getClass()==Player.class)
 		{
-			p1.setVie(p1.getVie()-1);
-			p1.setPosX(7);
-			p1.setPosY(7);								
-		}
-		Plateau.refreshEntity(p1);	
+			Player p1 = (Player) Plateau.plateau[x][y];
+			Plateau.refreshEntity(p1);	
+			if(p1.getVie()-1 >= 0)
+			{
+				p1.setVie(p1.getVie()-1);
+				p1.setPosX(7);
+				p1.setPosY(7);								
+			}
+			Plateau.refreshEntity(p1);	
+		}					
 	}
 	public void newPoint()
 	{

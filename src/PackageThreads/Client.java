@@ -56,11 +56,11 @@ public class Client implements Runnable{
 			String str="";
 			try {
 				str = sisr.readLine();// lecture du message
+				
 				//System.out.println(str);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
 			switch(str)
 			{
 			case "NORD":
@@ -95,31 +95,79 @@ public class Client implements Runnable{
 			case "bordure":
 			{
 				Plateau.stopBordure();
-			}break;
-			case"stop":
-			{
-				break;
-			}
+			}break;		
 			case "getplayer":
 			{
 				p1 = (Player)Plateau.getPlayer().get(0);
 			}break;
+			case "new location":
+			{			
+				boolean x =false;
+				boolean y = false;
+				while(!y)
+				{
+					String s="";
+					try {
+						s = sisr.readLine();// lecture du message
+						//System.out.println(str);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					if(!s.isEmpty()&&!s.isBlank())
+					{
+						if(!x)
+						{
+							System.out.println(s);
+							Menu.getInstance().getP2().setPosX(Integer.parseInt(s));
+							x=true;
+							
+						}
+						else
+						{
+							System.out.println(s);
+							Menu.getInstance().getP2().setPosY(Integer.parseInt(s));
+							y=true;
+						}						
+					}							
+				}
+				Plateau.refreshEntity(Menu.getInstance().getP2());
+							
+			}break;
 			case "win":
 			{
 				Menu.getInstance().getV().setVictory(true);
-				Menu.getInstance().setEnnemiVie(6);
-				Plateau.clearEntity();//supprime thread player et ennemis restant
-				
+				Menu.getInstance().fin();
+				close();				
 			}break;
 			case "loose":
 			{
-				Menu.getInstance().getV().setVictory(true);
-				Menu.getInstance().setEnnemiVie(6);
-				Plateau.clearEntity();//supprime thread player et ennemis restant
-				
+				Menu.getInstance().getV().setVictory(false);
+				Menu.getInstance().fin();
+				close();				
 			}break;
-			}	
+			}
+			if(str.matches("win") ||str.matches("loose"))
+			{
+				break;
+			}
 		}
+	}
+	private void close() {
+		sisw.println("END");
+		try {
+			sisr.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		sisw.close();
+		try {
+			socket.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	public void sendLine(String str)
 	{

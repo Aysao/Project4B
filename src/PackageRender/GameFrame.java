@@ -74,17 +74,13 @@ public class GameFrame extends JPanel
 		Largeur = L-5;
 		Hauteur = H-2*(H/15)-37;
 		BlockH = Hauteur/Plateau.getHauteur();
-		BlockL = Largeur/Plateau.getLargeur();
-		
+		BlockL = Largeur/Plateau.getLargeur();		
 	}
 	public GameFrame()
 	{
 		
-	}
+	}	
 	
-	
-	
-
 	public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
@@ -106,9 +102,7 @@ public class GameFrame extends JPanel
 					}
 					if(Plateau.plateau[i][j].getClass() == Player.class)
 					{
-						Player p = (Player) Plateau.plateau[i][j];
-						
-												
+						Player p = (Player) Plateau.plateau[i][j];																		
 						switch(p.getOrientation())
 						{
 						case NORD:{
@@ -132,8 +126,7 @@ public class GameFrame extends JPanel
 							g.drawImage(floor,BlockL*j,BlockH*i,BlockL,BlockH, null);
 							g.drawImage(fpengo,BlockL*j,BlockH*i,BlockL,BlockH, null);
 						}break;
-						}
-						
+						}						
 					}
 					if(Plateau.plateau[i][j].getClass() == Ennemi.class)
 					{
@@ -161,9 +154,8 @@ public class GameFrame extends JPanel
 	                        case SO:{
 	                            g.drawImage(bhunter,BlockL*j,BlockH*i,BlockL,BlockH, null);
 	                        }break;
-							}
-						}
-						
+							}						
+						}					
 					}
 					if(Plateau.plateau[i][j].getClass() == Bordure.class)
 					{
@@ -176,20 +168,15 @@ public class GameFrame extends JPanel
 						{
 							g.drawImage(bordure1,BlockL*j,BlockH*i,BlockL,BlockH, null);							
 						}
-
 					}
 					if(Plateau.plateau[i][j].getClass() == String.class)
-					{
-						
-						
+					{											
 						g.fillRect(BlockL*j,BlockH*i,BlockL,BlockH);
 						g.drawImage(floor,BlockL*j,BlockH*i,BlockL,BlockH, null);
-					}
-					
+					}					
 				}
 				g.setColor(Color.BLACK);
-				g.drawRect(BlockL*j,BlockH*i,BlockL,BlockH);
-				
+				g.drawRect(BlockL*j,BlockH*i,BlockL,BlockH);			
 			}
 		}
 		g.dispose();

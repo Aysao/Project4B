@@ -2,11 +2,13 @@ package PackageThreads;
 
 import java.io.IOException;
 import java.util.HashMap;
-
+import java.util.List;
+import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import PackageClass.BlocN;
 import PackageClass.Ennemi;
 import PackageClass.Plateau;
 import PackageClass.Player;
@@ -19,6 +21,7 @@ public class Menu implements Runnable {
 	
 	private static Menu instance ;
 	
+	private int scoreTimer=0;
 	private Player p1;
 	private Ennemi p2;
 	private int ennemiVie=6;
@@ -40,10 +43,13 @@ public class Menu implements Runnable {
 	private HashMap<Ennemi, ThreadEnnemie> hmThreadE = new HashMap<Ennemi, ThreadEnnemie>();
 	private HashMap<Player, ThreadPlayer> hmThreadP = new HashMap<Player, ThreadPlayer>();
 
-	
-	public Menu(JFrame f,int i) 
+	public Menu()
 	{
 		instance = this;
+	}
+	public void MenuStart(JFrame f,int i) 
+	{
+		
 		mode=i;
 		menuPrincipal = f;
 		switch(i)
@@ -57,8 +63,7 @@ public class Menu implements Runnable {
 				e2 = new Ennemi();				
 				e3 = new Ennemi();				
 				v = new Victory();						
-				startSolo();
-						
+				startSolo();						
 			}break;
 			case 2:
 			{
@@ -71,11 +76,12 @@ public class Menu implements Runnable {
 					p2= new Ennemi(8,8);
 					s = new Serveur();
 					Thread th = new Thread(s);
-					th.start();
-					gamestart=false;
+					th.start();				
+					gamestart=false;					
 					while(!gamestart)
 					{
-					}					
+					System.out.println("");
+					}						
 					ThreadPlayer runtp = new ThreadPlayer(p1);
 					Thread tp = new Thread(runtp);
 					tp.start();																						
@@ -124,35 +130,65 @@ public class Menu implements Runnable {
 		hmThreadE.put(e2, runte1);		
 		hmThreadE.put(e3, runte2);		
 	}
+	public void newEnnemiClient(Ennemi en) {
+		ennemiVie--;
+		if(host)
+		{
+			List<BlocN> lst = Plateau.getBlocN();
+			int i = new Random().nextInt(lst.size());
+			if(ennemiVie==0)
+			{
+				v.setVictory(true);
+				return;
+			}
+			else
+			{				
+				en.setPosX(lst.get(i).getPosX());
+				en.setPosY(lst.get(i).getPosY());
+				Plateau.refreshEntity(en);
+				s.sendLine("new location");
+				System.out.println(Integer.toString(lst.get(i).getPosX()));
+				s.sendLine(Integer.toString(lst.get(i).getPosX()));
+				System.out.println(Integer.toString(lst.get(i).getPosY()));
+				s.sendLine(Integer.toString(lst.get(i).getPosY()));
+			}			
+		}
+		
+		
+	}
 	public void newEnnemi()
 	{
-		ennemiVie--;
-		//System.out.println("vie"+ennemiVie);
-		if(ennemiVie==0)
+		if(mode==1)
 		{
-			v.setVictory(true);
-			return;
-		}
-		else if(ennemiVie>=3)
-		{
-			Ennemi e=new Ennemi();
-			ThreadEnnemie runte = new ThreadEnnemie(e);
-			Thread te =new Thread(runte);
-			te.start();
-			hmThreadE.put(e, runte);
+			ennemiVie--;
+			//System.out.println("vie"+ennemiVie);
+			if(ennemiVie==0)
+			{
+				v.setVictory(true);
+				return;
+			}
+			else if(ennemiVie>=3)
+			{
+				Ennemi e=new Ennemi();
+				ThreadEnnemie runte = new ThreadEnnemie(e);
+				Thread te =new Thread(runte);
+				te.start();
+				hmThreadE.put(e, runte);
+			}		
 		}		
+		
 	}
 
-	public void fin(int i) 
+	public void fin() 
 	{	
-		int x = 1000-i*2;
+		int x = 1000-scoreTimer*2;
+		scoreTimer=0;
 		p1.getScr().setPoint(p1.getScr().getPoint()+x);
 		try {
 			p1.getScr().setScore();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		clear();
+		}		
 		if(v.isVictory() == false)
 		{
 			JOptionPane.showMessageDialog(r,"Perdu !");
@@ -168,21 +204,33 @@ public class Menu implements Runnable {
 			{
 				s.sendLine("loose");
 			}
-		}	
+		}
+		clear();
 		
 	}
 	public void clear()
 	{
-		ennemiVie = 6;
-		Plateau.clearEntity();//supprime thread player et ennemis restant
+		resetVar();
+		
+		//supprime thread player et ennemis restant
 		r.stop();//stop refresh fenetre
 		r.dispose();
-		menuPrincipal.setVisible(true);		
+		menuPrincipal.setVisible(true);	
+		//Plateau.clearEntity();
+	}
+	private void resetVar() {
+		ennemiVie = 6;
+		host=true;
+		scoreTimer=0;		
+		v =new Victory();
+		c=null;
+		s=null;
+		mode =1;
+
 	}
 	@Override
-	public void run() {
-		int i = 0;
-		while(!(v.isVictory()) && p1.getVie() > 0)
+	public void run() {	
+		while(!v.isVictory() && p1.getVie() > 0)
 		{
 			try {
 				Thread.sleep(100);
@@ -191,13 +239,13 @@ public class Menu implements Runnable {
 				{
 					s.sendLine("bordure");
 				}
-				i++;
+				scoreTimer++;
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		fin(i);
+		fin();
 		
 	}
 	public static Menu getInstance() {
@@ -326,4 +374,5 @@ public class Menu implements Runnable {
 	public void setHmThreadP(HashMap<Player, ThreadPlayer> hmThreadP) {
 		this.hmThreadP = hmThreadP;
 	}
+	
 }

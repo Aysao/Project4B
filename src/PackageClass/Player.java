@@ -67,18 +67,14 @@ public class Player extends Entity {
 							}
 							else if(Plateau.plateau[this.getPosX()][this.getPosY()+1].getClass() == BlocN.class&& (Plateau.plateau[this.getPosX()][this.getPosY()+2].getClass()== String.class || Plateau.plateau[this.getPosX()][this.getPosY()+2].getClass() == Ennemi.class))
 							{
+								Plateau.plateau[this.getPosX()][this.getPosY()+1]="0";
 								int i = 2;
 								while(Plateau.plateau[this.getPosX()][this.getPosY()+i].getClass()== String.class || Plateau.plateau[this.getPosX()][this.getPosY()+i].getClass() == Ennemi.class)
 								{
 									if(Plateau.plateau[this.getPosX()][this.getPosY()+i].getClass() == Ennemi.class)
 									{
 										Ennemi en = (Ennemi)Plateau.plateau[this.getPosX()][this.getPosY()+i];
-										Menu.getInstance().getHmThreadE().get(en).stop();
-										Menu.getInstance().getHmThreadE().remove(en);
-										scr.mstKill();
-										Plateau.plateau[this.getPosX()][this.getPosY()+i] = "0";
-										Menu.getInstance().newEnnemi();
-										
+										ennemiKill("Y","bloc",i,en);										
 									}
 									i++;
 								}
@@ -91,17 +87,14 @@ public class Player extends Entity {
 							}
 							else if(Plateau.plateau[this.getPosX()][this.getPosY()+1].getClass() == BlocSpe.class&& (Plateau.plateau[this.getPosX()][this.getPosY()+2].getClass()== String.class || Plateau.plateau[this.getPosX()][this.getPosY()+2].getClass() == Ennemi.class))
 							{
+								Plateau.plateau[this.getPosX()][this.getPosY()+1]="0";
 								int i = 2;
 								while(Plateau.plateau[this.getPosX()][this.getPosY()+i].getClass()== String.class || Plateau.plateau[this.getPosX()][this.getPosY()+i].getClass() == Ennemi.class)
 								{
 									if(Plateau.plateau[this.getPosX()][this.getPosY()+i].getClass() == Ennemi.class)
 									{
 										Ennemi en = (Ennemi)Plateau.plateau[this.getPosX()][this.getPosY()+i];
-										Menu.getInstance().getHmThreadE().get(en).stop();
-										Menu.getInstance().getHmThreadE().remove(en);
-										scr.mstKill();
-										Plateau.plateau[this.getPosX()][this.getPosY()+i] = "0";
-										Menu.getInstance().newEnnemi();
+										ennemiKill("Y","bloc",i,en);	
 									}
 									i++;
 								}
@@ -116,15 +109,7 @@ public class Player extends Entity {
 								Ennemi en = (Ennemi)Plateau.plateau[this.getPosX()][this.getPosY()+1];
 								if(en.stun)
 								{
-									Plateau.refreshEntity(this);
-									Plateau.refreshEntity(en);
-									Menu.getInstance().getHmThreadE().get(en).stop();
-									Menu.getInstance().getHmThreadE().remove(en);
-									this.setPosY(this.getPosY()+1);
-									Plateau.refreshEntity(en);
-									Plateau.refreshEntity(this);
-									this.getScr().mstKill();					
-									Menu.getInstance().newEnnemi();
+									ennemiKill("Y","stun",1,en);	
 								}
 								else
 								{
@@ -167,17 +152,14 @@ public class Player extends Entity {
 							}
 							else if(Plateau.plateau[this.getPosX()][this.getPosY()-1].getClass() == BlocN.class&&(Plateau.plateau[this.getPosX()][this.getPosY()-2].getClass()== String.class|| Plateau.plateau[this.getPosX()][this.getPosY()-2].getClass() == Ennemi.class))
 							{
+								Plateau.plateau[this.getPosX()][this.getPosY()-1]="0";
 								int i = 2;
 								while(Plateau.plateau[this.getPosX()][this.getPosY()-i].getClass()== String.class || Plateau.plateau[this.getPosX()][this.getPosY()-i].getClass() == Ennemi.class)
 								{
 									if(Plateau.plateau[this.getPosX()][this.getPosY()-i].getClass() == Ennemi.class)
-									{
+									{			
 										Ennemi en = (Ennemi)Plateau.plateau[this.getPosX()][this.getPosY()-i];
-										Menu.getInstance().getHmThreadE().get(en).stop();
-										Menu.getInstance().getHmThreadE().remove(en);
-										scr.mstKill();
-										Plateau.plateau[this.getPosX()][this.getPosY()-i] = "0";
-										Menu.getInstance().newEnnemi();
+										ennemiKill("Y","bloc",-i,en);																													
 									}
 									i++;
 								}
@@ -190,17 +172,14 @@ public class Player extends Entity {
 							}
 							else if(Plateau.plateau[this.getPosX()][this.getPosY()-1].getClass() == BlocSpe.class&& (Plateau.plateau[this.getPosX()][this.getPosY()-2].getClass()== String.class || Plateau.plateau[this.getPosX()][this.getPosY()-2].getClass() == Ennemi.class))
 							{
+								Plateau.plateau[this.getPosX()][this.getPosY()-1]="0";
 								int i = 2;
 								while(Plateau.plateau[this.getPosX()][this.getPosY()-i].getClass()== String.class || Plateau.plateau[this.getPosX()][this.getPosY()-i].getClass() == Ennemi.class)
 								{
 									if(Plateau.plateau[this.getPosX()][this.getPosY()-i].getClass() == Ennemi.class)
 									{
 										Ennemi en = (Ennemi)Plateau.plateau[this.getPosX()][this.getPosY()-i];
-										Menu.getInstance().getHmThreadE().get(en).stop();
-										Menu.getInstance().getHmThreadE().remove(en);
-										scr.mstKill();
-										Plateau.plateau[this.getPosX()][this.getPosY()-i] = "0";
-										Menu.getInstance().newEnnemi();
+										ennemiKill("Y","bloc",-i,en);	
 									}
 									i++;
 								}
@@ -215,16 +194,8 @@ public class Player extends Entity {
 							{
 								Ennemi en = (Ennemi)Plateau.plateau[this.getPosX()][this.getPosY()-1];
 								if(en.stun)
-								{
-									Plateau.refreshEntity(this);
-									Plateau.refreshEntity(en);
-									Menu.getInstance().getHmThreadE().get(en).stop();
-									Menu.getInstance().getHmThreadE().remove(en);
-									this.setPosY(this.getPosY()-1);
-									Plateau.refreshEntity(en);
-									Plateau.refreshEntity(this);
-									this.getScr().mstKill();
-									Menu.getInstance().newEnnemi();
+								{		
+									ennemiKill("Y","stun",-1,en);									
 								}
 								else
 								{
@@ -264,17 +235,14 @@ public class Player extends Entity {
 							}
 							else if(Plateau.plateau[this.getPosX()-1][this.getPosY()].getClass() == BlocN.class&& (Plateau.plateau[this.getPosX()-2][this.getPosY()].getClass()== String.class|| Plateau.plateau[this.getPosX()-2][this.getPosY()].getClass() == Ennemi.class))
 							{
+								Plateau.plateau[this.getPosX()-1][this.getPosY()]="0";
 								int i = 2;
 								while(Plateau.plateau[this.getPosX()-i][this.getPosY()].getClass()== String.class || Plateau.plateau[this.getPosX()-i][this.getPosY()].getClass() == Ennemi.class)
 								{
 									if(Plateau.plateau[this.getPosX()-i][this.getPosY()].getClass() == Ennemi.class)
 									{
 										Ennemi en = (Ennemi)Plateau.plateau[this.getPosX()-i][this.getPosY()];
-										Menu.getInstance().getHmThreadE().get(en).stop();
-										Menu.getInstance().getHmThreadE().remove(en);
-										scr.mstKill();
-										Plateau.plateau[this.getPosX()-i][this.getPosY()] = "0";
-										Menu.getInstance().newEnnemi();
+										ennemiKill("X","bloc",-i,en);	
 									}
 									i++;
 								}
@@ -287,17 +255,14 @@ public class Player extends Entity {
 							}
 							else if(Plateau.plateau[this.getPosX()-1][this.getPosY()].getClass() == BlocSpe.class&& (Plateau.plateau[this.getPosX()-2][this.getPosY()].getClass()== String.class || Plateau.plateau[this.getPosX()-2][this.getPosY()].getClass() == Ennemi.class))
 							{
+								Plateau.plateau[this.getPosX()-1][this.getPosY()]="0";
 								int i = 2;
 								while(Plateau.plateau[this.getPosX()-i][this.getPosY()].getClass()== String.class || Plateau.plateau[this.getPosX()-i][this.getPosY()].getClass() == Ennemi.class)
 								{
 									if(Plateau.plateau[this.getPosX()-i][this.getPosY()].getClass() == Ennemi.class)
 									{
 										Ennemi en = (Ennemi)Plateau.plateau[this.getPosX()-i][this.getPosY()];
-										Menu.getInstance().getHmThreadE().get(en).stop();
-										Menu.getInstance().getHmThreadE().remove(en);
-										scr.mstKill();
-										Plateau.plateau[this.getPosX()-i][this.getPosY()] = "0";
-										Menu.getInstance().newEnnemi();
+										ennemiKill("X","bloc",-i,en);	
 									}
 									i++;
 								}
@@ -313,15 +278,7 @@ public class Player extends Entity {
 								Ennemi en = (Ennemi)Plateau.plateau[this.getPosX()-1][this.getPosY()];
 								if(en.stun)
 								{
-									Plateau.refreshEntity(this);
-									Plateau.refreshEntity(en);
-									Menu.getInstance().getHmThreadE().get(en).stop();
-									Menu.getInstance().getHmThreadE().remove(en);
-									this.setPosX(this.getPosX()-1);
-									Plateau.refreshEntity(en);
-									Plateau.refreshEntity(this);
-									this.getScr().mstKill();
-									Menu.getInstance().newEnnemi();
+									ennemiKill("X","stun",-1,en);	
 								}
 								else
 								{
@@ -361,17 +318,14 @@ public class Player extends Entity {
 							}
 							else if(Plateau.plateau[this.getPosX()+1][this.getPosY()].getClass() == BlocN.class&& (Plateau.plateau[this.getPosX()+2][this.getPosY()].getClass()== String.class|| Plateau.plateau[this.getPosX()+2][this.getPosY()].getClass() == Ennemi.class))
 							{
+								Plateau.plateau[this.getPosX()+1][this.getPosY()]="0";
 								int i = 2;
 								while(Plateau.plateau[this.getPosX()+i][this.getPosY()].getClass()== String.class || Plateau.plateau[this.getPosX()+i][this.getPosY()].getClass() == Ennemi.class)
 								{
 									if(Plateau.plateau[this.getPosX()+i][this.getPosY()].getClass() == Ennemi.class)
 									{
 										Ennemi en = (Ennemi)Plateau.plateau[this.getPosX()+i][this.getPosY()];
-										Menu.getInstance().getHmThreadE().get(en).stop();
-										Menu.getInstance().getHmThreadE().remove(en);
-										scr.mstKill();
-										Plateau.plateau[this.getPosX()+i][this.getPosY()] = "0";
-										Menu.getInstance().newEnnemi();
+										ennemiKill("X","bloc",+i,en);	
 									}
 									i++;
 								}
@@ -389,11 +343,7 @@ public class Player extends Entity {
 									if(Plateau.plateau[this.getPosX()+i][this.getPosY()].getClass() == Ennemi.class)
 									{
 										Ennemi en = (Ennemi)Plateau.plateau[this.getPosX()+i][this.getPosY()];
-										Menu.getInstance().getHmThreadE().get(en).stop();
-										Menu.getInstance().getHmThreadE().remove(en);
-										scr.mstKill();
-										Plateau.plateau[this.getPosX()+i][this.getPosY()] = "0";
-										Menu.getInstance().newEnnemi();
+										ennemiKill("X","bloc",+i,en);	
 									}
 									i++;
 								}
@@ -409,15 +359,7 @@ public class Player extends Entity {
 								Ennemi en = (Ennemi)Plateau.plateau[this.getPosX()+1][this.getPosY()];
 								if(en.stun)
 								{				
-									Plateau.refreshEntity(this);
-									Plateau.refreshEntity(en);
-									Menu.getInstance().getHmThreadE().get(en).stop();
-									Menu.getInstance().getHmThreadE().remove(en);
-									this.setPosX(this.getPosX()+1);
-									Plateau.refreshEntity(en);
-									Plateau.refreshEntity(this);
-									this.getScr().mstKill();
-									Menu.getInstance().newEnnemi();
+									ennemiKill("X","stun",1,en);	
 								}
 								else
 								{
@@ -435,6 +377,117 @@ public class Player extends Entity {
 					}				
 				}
 			}	
+	}
+	public void ennemiKill(String str ,String how, int i,Ennemi en)
+	{
+		switch(how)
+		{
+			case"stun":
+			{
+				switch(str)
+				{
+					case"X":
+					{
+						if(Menu.getInstance().getMode()==1)
+						{
+							Plateau.refreshEntity(this);
+							Plateau.refreshEntity(en);
+							Menu.getInstance().getHmThreadE().get(en).stop();
+							Menu.getInstance().getHmThreadE().remove(en);
+							this.setPosX(this.getPosX()+i);
+							Plateau.refreshEntity(en);
+							Plateau.refreshEntity(this);
+							this.getScr().mstKill();
+							Menu.getInstance().newEnnemi();
+						}
+						else if(Menu.getInstance().getMode()==2)
+						{
+							Plateau.refreshEntity(this);
+							Plateau.refreshEntity(en);
+							this.setPosX(this.getPosX()+i);
+							Plateau.refreshEntity(en);
+							Plateau.refreshEntity(this);
+							this.getScr().mstKill();
+							Menu.getInstance().newEnnemiClient(en);
+						}
+					}break;
+					
+					case"Y":
+					{
+						if(Menu.getInstance().getMode()==1)
+						{
+							Plateau.refreshEntity(this);
+							Plateau.refreshEntity(en);
+							Menu.getInstance().getHmThreadE().get(en).stop();
+							Menu.getInstance().getHmThreadE().remove(en);
+							this.setPosY(this.getPosY()+i);
+							Plateau.refreshEntity(en);
+							Plateau.refreshEntity(this);
+							this.getScr().mstKill();
+							Menu.getInstance().newEnnemi();
+						}
+						else if(Menu.getInstance().getMode()==2)
+						{
+							Plateau.refreshEntity(this);
+							Plateau.refreshEntity(en);
+							this.setPosY(this.getPosY()+i);
+							Plateau.refreshEntity(en);
+							Plateau.refreshEntity(this);
+							this.getScr().mstKill();
+							Menu.getInstance().newEnnemiClient(en);
+						}
+					}break;
+		
+				}
+			}break;
+			case "bloc":
+			{
+				switch(str)
+				{
+					case"X":
+					{				
+						if(Menu.getInstance().getMode()==1)
+						{
+							Menu.getInstance().getHmThreadE().get(en).stop();
+							Menu.getInstance().getHmThreadE().remove(en);
+							scr.mstKill();
+							Plateau.plateau[this.getPosX()+i][this.getPosY()] = "0";
+							Menu.getInstance().newEnnemi();
+							
+						}						
+						else if(Menu.getInstance().getMode()==2)
+						{
+							scr.mstKill();
+							Plateau.plateau[this.getPosX()+i][this.getPosY()] = "0";
+							Menu.getInstance().newEnnemiClient(en);
+						}
+						
+					}break;
+					case"Y":
+					{						
+						if(Menu.getInstance().getMode()==1)
+						{
+							Menu.getInstance().getHmThreadE().get(en).stop();
+							Menu.getInstance().getHmThreadE().remove(en);
+							scr.mstKill();
+							Plateau.plateau[this.getPosX()][this.getPosY()+i] = "0";
+							Menu.getInstance().newEnnemi();
+							
+						}						
+						else if(Menu.getInstance().getMode()==2)
+						{
+							scr.mstKill();
+							Plateau.plateau[this.getPosX()][this.getPosY()+i] = "0";
+							Menu.getInstance().newEnnemiClient(en);
+						}
+					}break;
+				}
+				
+				
+			}break;
+		}
+		
+		
 	}
 	public boolean nextToEdge()
 	{
@@ -457,8 +510,7 @@ public class Player extends Entity {
 		else 
 		{
 			return false;
-		}
-		
+		}		
 	}
 	public void setVie(int vie) {
 		Vie = vie;
@@ -480,7 +532,4 @@ public class Player extends Entity {
 	public Score getScr() {
 		return scr;
 	}
-	
-	 
-	
 } 

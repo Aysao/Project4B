@@ -27,10 +27,11 @@ public class Serveur implements Runnable{
 		
 		Ennemi e = (Ennemi)Plateau.getEnnemi().get(0);
 		try {
-			setPlayer();
+			setClient();
 		} catch (Exception e1) {			
 			e1.printStackTrace();
 		}
+		
 		while (true) 
 		{		
 			
@@ -84,9 +85,14 @@ public class Serveur implements Runnable{
 			case"stunoff":
 			{
 				e.stun=false;
+			}break;
+			case"END":
+			{
+				close();
+				break;				
 			}
 			}			
-			System.out.println("ECHO = " + str);   // trace locale			
+			System.out.println("ECHOlocal = " + str);   // trace locale			
 			sisw.println("ECHO = "+str);// renvoi d'un echo
 	    }
 	}
@@ -94,7 +100,7 @@ public class Serveur implements Runnable{
 	{
 		sisw.println(str);
 	}
-	public void setPlayer()throws Exception
+	public void setClient()throws Exception
 	{		
 		try {
 			s = new ServerSocket(port);
@@ -102,9 +108,10 @@ public class Serveur implements Runnable{
 			
 			e.printStackTrace();
 		}		
-		System.out.println("en attente...");
-        soc = s.accept();
+		System.out.println("en attente...");		
+        soc = s.accept();      
         Menu.getInstance().setGamestart(true);
+       
         System.out.println("SOCKET "+s);
         System.out.println("SOCKET "+soc);       
         sisr = new BufferedReader(
@@ -112,6 +119,7 @@ public class Serveur implements Runnable{
                );     
         sisw = new PrintWriter( new BufferedWriter(
              new OutputStreamWriter(soc.getOutputStream())),true);
+        
 	}
 	public void close()
 	{

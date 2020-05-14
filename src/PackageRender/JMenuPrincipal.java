@@ -83,7 +83,8 @@ public class JMenuPrincipal extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				choix = 1;
-				Menu m = new Menu(f,choix);
+				Menu m = new Menu();
+				m.MenuStart(f, choix);
 				Thread t = new Thread(m);
 				t.start();
 				f.setVisible(false);

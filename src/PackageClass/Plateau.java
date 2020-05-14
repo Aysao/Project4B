@@ -71,6 +71,22 @@ public class Plateau {
 		return res;
 	}
 	
+	public static ArrayList<BlocN> getBlocN()
+	{
+		ArrayList<BlocN> res = new ArrayList<BlocN>();
+		for(int i = 1;i<hauteur-1;i++)
+		{
+			for(int j = 1;j<largeur-1;j++)
+			{
+				if(plateau[i][j].getClass() == BlocN.class)
+				{
+					res.add((BlocN)plateau[i][j]);
+				}
+			}
+		}
+		return res;
+	}
+	
 	private void setDiams(int x , int y)
 	{
 		

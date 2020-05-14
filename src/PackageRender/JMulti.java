@@ -72,9 +72,9 @@ public class JMulti extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				Menu.getInstance().setHost(true);
-				Menu m = new Menu(f,2);		
+				Menu m = new Menu();
+				Menu.getInstance().setHost(true);	
+				m.MenuStart(f, 2);						
 				Thread t = new Thread(m);
 				t.start();
 				f.setVisible(false);			
@@ -83,11 +83,11 @@ public class JMulti extends JFrame {
 		});
 		rejoindre.addActionListener(new ActionListener()
 		{
-
 			@Override
-			public void actionPerformed(ActionEvent e) {				
-				Menu.getInstance().setHost(false);
-				Menu m = new Menu(f,2);				
+			public void actionPerformed(ActionEvent e) {	
+				Menu m = new Menu();
+				Menu.getInstance().setHost(false);	
+				m.MenuStart(f, 2);									
 				new Thread(m);
 				f.setVisible(false);								
 			}

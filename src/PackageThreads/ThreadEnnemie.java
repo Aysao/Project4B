@@ -75,6 +75,14 @@ public class ThreadEnnemie implements Runnable {
 		running = true;
 	}
 	
+	public Ennemi getEn() {
+		return en;
+	}
+
+	public void setEn(Ennemi en) {
+		this.en = en;
+	}
+
 	@Override
 	public void run() 
 	{
