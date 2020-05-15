@@ -65,11 +65,23 @@ public class CoClient implements Runnable{
 				}
 				else if(str.equals("stop"))//bouton quitter
 				{
-					for(int i=0; i<lstpw.size(); i++)
-					{		
-						lstpw.get(i).println(str);
-					}	
-					this.stop();
+					
+					if(id == 0)
+					{
+						for(int i = 0 ; i < lstpw.size();i++)
+						{
+							lstpw.get(i).println("host"+"/"+str);
+							lstpw.get(i).close();
+						}
+						this.stop();
+					}
+					else {
+						for(int i=0; i<lstpw.size(); i++)
+						{
+								lstpw.get(i).println(pseudo+"/"+str);
+						}	
+						
+					}
 				}
 				else if(!isAction(str))
 				{
@@ -97,7 +109,6 @@ public class CoClient implements Runnable{
 				}
 		     }
 		        sisr.close();
-		        sisw.close();
 		        s.close();
 		   }catch(IOException e){e.printStackTrace();}
 	  }

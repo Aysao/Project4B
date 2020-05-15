@@ -13,6 +13,7 @@ public class ServeurMC implements Runnable{
    private final int maxClients=8;
    private ArrayList<PrintWriter> pw = new ArrayList<PrintWriter>();
    private int numClient=0;
+   ServerSocket s = null;
    public ServeurMC() throws Exception  
    {
 
@@ -20,7 +21,7 @@ public class ServeurMC implements Runnable{
 	@Override
 	public void run() {
 		
-		ServerSocket s = null;
+		 
 		try {
 			s = new ServerSocket(port);
 		} catch (IOException e) {
@@ -54,6 +55,17 @@ public class ServeurMC implements Runnable{
 	}
 	public void setPw(ArrayList<PrintWriter> pw) {
 		this.pw = pw;
+	}
+	
+	public void close()
+	{
+		numClient = 10;
+		try {
+			s.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
    

@@ -20,7 +20,7 @@ public class JMulti extends JFrame {
 	private MButton heberger;
 	private MButton rejoindre;
 	private MButton retour;
-	private JFrame jf ;
+	private JMulti jf ;
 	private ServeurMC serv;
 	private Client c;
 	public JMulti(JFrame f)
@@ -125,5 +125,8 @@ public class JMulti extends JFrame {
 			}
 			
 		});
+	}
+	public ServeurMC getServ() {
+		return serv;
 	}
 }

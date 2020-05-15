@@ -15,6 +15,7 @@ import PackageClass.Orientation;
 import PackageClass.Plateau;
 import PackageClass.Player;
 import PackageRender.JMenuMulti;
+import PackageRender.JMulti;
 
 public class Client implements Runnable{
 
@@ -27,9 +28,11 @@ public class Client implements Runnable{
 	private boolean host;
 	private boolean game = true;
 	private boolean flag = false;
+	private JMulti parent;
 	
-	public Client(String s,boolean _host,JFrame j)
+	public Client(String s,boolean _host,JMulti j)
 	{		
+		parent = j;
 		pseudo = s;
 		this.host = _host;
 		
@@ -89,7 +92,7 @@ public class Client implements Runnable{
 		String sender = "";
 		String action = "";
 	
-		while(!str.equals("Demarrer") || str.equals("stop"))
+		while(!str.equals("Demarrer") || str.equals("stop") || action.equals("stop"))
 		{
 			
 			try {
@@ -191,6 +194,25 @@ public class Client implements Runnable{
 						
 					}
 				}
+				case "stop":
+				{
+					if(sender.equals("host"))
+					{
+						this.close();
+						game = false;
+					}
+					else
+					{
+						if(jmm.isInArray(jmm.getEnnemicollection(), sender))
+						{
+							jmm.removeArray(jmm.getEnnemicollection(), sender);
+						}
+						else if(jmm.isInArray(jmm.getPlayercollection(), sender))
+						{
+							jmm.removeArray(jmm.getPlayercollection(), sender);
+						}
+					}
+				}
 			}
 			slash = 0;
 			point = 0;
@@ -214,13 +236,14 @@ public class Client implements Runnable{
 				flag = true;
 			
 			}
-			if(str.equals("stop"))
+			if(action.equals("stop") && sender.equals(pseudo) && host)
 			{
-				game = false;
-				jmm.close();
-				this.close();
+				parent.getServ().close();
 			}
 		}
+		
+		
+		
 		while(game)
 		{
 			
@@ -324,7 +347,6 @@ public class Client implements Runnable{
 	}
 	
 	private void close() {
-		sisw.println("stop");
 		try {
 			sisr.close();
 		} catch (IOException e) {
@@ -338,6 +360,7 @@ public class Client implements Runnable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		
 	}
 	public void sendLine(String str)
