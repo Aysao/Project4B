@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
+import PackageClass.Ennemi;
 import PackageClass.Orientation;
 import PackageClass.Plateau;
 import PackageClass.Player;
@@ -29,6 +30,7 @@ public class Client implements Runnable{
 	private boolean game = true;
 	private boolean flag = false;
 	private JMulti parent;
+	private Menu m;
 	
 	public Client(String s,boolean _host,JMulti j)
 	{		
@@ -254,7 +256,7 @@ public class Client implements Runnable{
 		
 		if(game)
 		{
-			Menu m = new Menu();
+			m = new Menu();
 			if(host)
 			{
 				m.setHost(host);
@@ -264,55 +266,121 @@ public class Client implements Runnable{
 			{
 				m.startMultiClient(pseudo,this,jmm.getEnnemicollection(),jmm.getPlayercollection());
 			}
-			System.out.println("test 3");
+			Thread t = new Thread(m);
+			t.start();
 		}
-		
+
 		while(game)
 		{
 			
 			str = "";
+			sender = "";
+			action = "";
 			try {
 				str = sisr.readLine();// lecture du message
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			
-			switch(str)
+			if(str != null)
 			{
-			case "NORD":
+				for(int i = 0;i<str.length();i++)
+				{
+					if(str.charAt(i) == '/')
+					{
+						slash = i;
+					}
+				}
+			}
+			if(slash != 0)
+				sender = str.substring(0,slash);
+			if(slash != 0 && str.length()>=slash+1)
 			{
-				p1.setOrientation(Orientation.NORD);
-				p1.setMouvement(true);
-				p1.Deplacement();
+				action = str.substring(slash);
+			}
+			System.out.println("str "+str);
+			System.out.println("sender "+sender);
+			Ennemi en = m.researchEnnemiInArray(m.getLstEnnemi(), sender);
+			Player p = m.researchPlayerInArray(m.getLstPlayer(), sender);
+			switch(action)
+			{
+			case "/NORD":
+			{
+				if(p != null)
+				{
+					p.setOrientation(Orientation.NORD);
+					p.setMouvement(true);
+					p.Deplacement();
+				}
+				else
+				{
+					en.setOrientation(Orientation.NORD);
+					en.setMouvement(true);
+					en.Deplacement();
+				}
 			}break;
 			
-			case "SOUTH":
+			case "/SOUTH":
 			{
-				p1.setOrientation(Orientation.SOUTH);
-				p1.setMouvement(true);
-				p1.Deplacement();
+				if(p != null)
+				{
+					p.setOrientation(Orientation.SOUTH);
+					p.setMouvement(true);
+					p.Deplacement();
+				}
+				else
+				{
+					en.setOrientation(Orientation.SOUTH);
+					en.setMouvement(true);
+					en.Deplacement();
+				}
 			}break;
-			case "EAST":
+			case "/EAST":
 			{
-				p1.setOrientation(Orientation.EAST);
-				p1.setMouvement(true);
-				p1.Deplacement();
+				if(p != null)
+				{
+					p.setOrientation(Orientation.EAST);
+					p.setMouvement(true);
+					p.Deplacement();
+				}
+				else if(p == null)
+				{
+					en.setOrientation(Orientation.EAST);
+					en.setMouvement(true);
+					en.Deplacement();
+				}
 			}break;
-			case "WEST":
+			case "/WEST":
 			{
-				p1.setOrientation(Orientation.WEST);
-				p1.setMouvement(true);
-				p1.Deplacement();
+				if(p != null)
+				{
+					p.setOrientation(Orientation.WEST);
+					p.setMouvement(true);
+					p.Deplacement();
+				}
+				else if(p == null)
+				{
+					en.setOrientation(Orientation.WEST);
+					en.setMouvement(true);
+					en.Deplacement();
+				}
 			}break;
-			case "SO":
+			case "/SO":
 			{
-				p1.setMouvement(false);
+				if(p != null)
+				{
+					p.setMouvement(true);
+				}
+				else if(p == null)
+				{
+					en.setMouvement(true);
+				}
 			}break;
-			case "bordure":
+			case "/bordure":
 			{
 				Plateau.stopBordure();
 			}break;		
-			case "getplayer":
+			case "/getplayer":
 			{
 				p1 = (Player)Plateau.getPlayer().get(0);
 			}break;
@@ -326,8 +394,8 @@ public class Client implements Runnable{
 					try {
 						s = sisr.readLine();// lecture du message
 						//System.out.println(str);
-					} catch (IOException e) {
-						e.printStackTrace();
+					} catch (IOException e1) {
+						e1.printStackTrace();
 					}
 					if(!s.isEmpty()&&!s.isBlank())
 					{

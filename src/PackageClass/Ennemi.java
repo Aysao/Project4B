@@ -25,6 +25,11 @@ public class Ennemi extends Entity {
 		super(x, y);				
 		newPoint();
 	}
+	public Ennemi(int x, int y,String pse,boolean pl) {
+		super(x, y);
+		pseudo = pse;
+		played = pl;
+	}
 	public Ennemi() {
 		super(true);		
 		newPoint();

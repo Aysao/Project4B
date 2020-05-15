@@ -86,7 +86,7 @@ public class ThreadEnnemi implements Runnable {
 	@Override
 	public void run() 
 	{
-		if(this.en.isPlayed()&&Menu.getInstance().getMode()==2)//multi
+		if(this.en.isPlayed()&&Menu.getInstance().getMode()==2)
 		{	
 			while(running)
 			{
@@ -103,7 +103,7 @@ public class ThreadEnnemi implements Runnable {
 				if(en.isMouvement())
 				{					
 					en.Deplacement();
-					Menu.getInstance().getC().sendLine(en.getOrientation().toString());					
+					Menu.getInstance().getC().sendLine(en.getPseudo()+"/"+en.getOrientation().toString());					
 					//en.setOrientation(Entity.SO);						
 					try {
 						Thread.sleep(180);

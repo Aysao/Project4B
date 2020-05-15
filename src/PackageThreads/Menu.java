@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 
 import PackageClass.BlocN;
 import PackageClass.Ennemi;
+import PackageClass.Entity;
 import PackageClass.Plateau;
 import PackageClass.Player;
 import PackageClass.Victory;
@@ -74,6 +75,48 @@ public class Menu implements Runnable {
 
 				
 	}
+	
+	@Override
+	public void run() {	
+		if(mode == 2) {
+			int vieplayer = 0;
+			v = new Victory();
+			for(int i = 0;i<lstPlayer.size();i++)
+			{
+				vieplayer += lstPlayer.get(i).getVie();
+			}
+			while(!v.isVictory() && vieplayer > 0)
+			{
+				try {
+					Thread.sleep(100);
+					Plateau.stopBordure();
+					if(host &&mode==2)
+					{
+						//c.sendLine("bordure");
+					}
+					scoreTimer++;
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		else {
+			while(!v.isVictory() && p1.getVie() > 0)
+			{
+				try {
+					Thread.sleep(1000);
+					Plateau.stopBordure();
+					scoreTimer++;
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		fin();
+		
+	}
 
 
 	public void startMulti(String Pseudo,Client c,ArrayList<String> len,ArrayList<String> lpl)
@@ -119,13 +162,15 @@ public class Menu implements Runnable {
 				lstEnnemi.add(en);
 			}
 			c.sendLine(Plateau.PlateauToString());
-
 			for(int i = 0;i<len.size();i++)
 			{
+				System.out.println("ennemi : "+len.get(i));
 				if(!len.get(i).equals(Pseudo))
 				{
+					System.out.println("donc j'arrive la");
 					if(!len.get(i).equals("----------"))
 					{
+						System.out.println("je ne suis pas ----------");
 						lstEnnemi.add(new Ennemi());
 						lstEnnemi.get(i).setPseudo(len.get(i));
 						c.sendLine("("+lstEnnemi.get(i).getPosX()+","+lstEnnemi.get(i).getPosY()+")"+lstEnnemi.get(i).getPseudo());
@@ -143,6 +188,7 @@ public class Menu implements Runnable {
 			}
 			for(int i = 0;i<lpl.size();i++)
 			{
+				System.out.println("player : "+lpl.get(i));
 				if(!lpl.get(i).equals(Pseudo))
 				{
 					if(!lpl.get(i).equals("----------"))
@@ -160,18 +206,17 @@ public class Menu implements Runnable {
 						c.sendLine("("+lstPlayer.get(i).getPosX()+","+lstPlayer.get(i).getPosY()+")"+lstPlayer.get(i).getPseudo());
 					}
 				}
-
 			}
 			c.sendLine("personne");
-				
-			
-		}			
+		}	
+		
 	
 	}
 	
 	public void startMultiClient(String Pseudo,Client c,ArrayList<String> len,ArrayList<String> lpl)
 	{
 		mode = 2;
+		this.c = c;
 		System.out.println("recherche plateau ... ");
 		String plateau = "";
 		try {
@@ -183,7 +228,6 @@ public class Menu implements Runnable {
 		System.out.println("plateau trouve ... ");
 		Plateau.StringToPlateau(plateau);
 		System.out.println("plateau crée ... ");
-		c.sendLine("go");
 		System.out.println("recuperation des joueur et de leur emplacement ... ");
 		String joueur = "";
 		lstEnnemi = new ArrayList<Ennemi>();
@@ -196,91 +240,82 @@ public class Menu implements Runnable {
 			String pse = "";
 			int virgule = 0;
 			int parenthese = 0;
+			joueur = "";
 			try {
 				joueur = c.getSisr().readLine();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			if(joueur.charAt(0) == '(')
+			if(!joueur.equals("personne"))
 			{
-				for(int j = 1;j < joueur.length();j++)
+				if(joueur.charAt(0) == '(')
 				{
-					if(joueur.charAt(j) != ',')
+					for(int j = 1;j < joueur.length();j++)
 					{
-						x += ""+joueur.charAt(j);
+						if(joueur.charAt(j) == ',')
+						{
+							virgule = j;
+						}
+						
 					}
-					else if(joueur.charAt(j) == ',')
+					x = joueur.substring(1,virgule);
+					for(int j = virgule+1;j < joueur.length();j++)
 					{
-						virgule = j;
+						if(joueur.charAt(j) == ')')
+						{
+							parenthese = j;
+						}
 					}
-				}
-				for(int j = virgule+1;j < joueur.length();j++)
-				{
-					if(joueur.charAt(j) != ')')
-					{
-						y += ""+joueur.charAt(j);
-					}
-					else if(joueur.charAt(j) == ')')
-					{
-						parenthese = j;
-					}
-				}
-			}
-			
-			if(parenthese != 0)
-				pse = joueur.substring(parenthese+1);
-			if(isInArray(len,pse))
-			{
-				if(pse.equals(Pseudo))
-				{
-					lstEnnemi.add(new Ennemi());
-					lstEnnemi.get(i).setPseudo(pse);
-					lstEnnemi.get(i).setPosX(Integer.parseInt(x));
-					lstEnnemi.get(i).setPosY(Integer.parseInt(y));
-					lstEnnemi.get(i).setPlayed(true);
-					ThreadEnnemi runtp = new ThreadEnnemi(lstEnnemi.get(i));
-					Thread tp = new Thread(runtp);
-					tp.start();
-					r = new Render(menuPrincipal,600,800,runtp.getKl());					
-					Thread t = new Thread(r);
-					t.start();
-				}
-				else if(!pse.equals(""))
-				{
-					lstEnnemi.add(new Ennemi());
-					lstEnnemi.get(i).setPseudo(pse);
-					lstEnnemi.get(i).setPosX(Integer.parseInt(x));
-					lstEnnemi.get(i).setPosY(Integer.parseInt(y));
-				}
-				c.sendLine("go");
-			}
-			else
-			{
-				if(pse.equals(Pseudo))
-				{
-					lstPlayer.add(new Player());
-					lstPlayer.get(i).setPseudo(pse);
-					lstPlayer.get(i).setPosX(Integer.parseInt(x));
-					lstPlayer.get(i).setPosY(Integer.parseInt(y));
-					ThreadPlayer runtp = new ThreadPlayer(lstPlayer.get(i));
-					Thread tp = new Thread(runtp);
-					tp.start();
-					r = new Render(menuPrincipal,600,800,runtp.getKl());					
-					Thread t = new Thread(r);
-					t.start();
-				}
-				else if(!pse.equals(""))
-				{
-					lstPlayer.add(new Player());
-					lstPlayer.get(i).setPseudo(pse);
-					lstPlayer.get(i).setPosX(Integer.parseInt(x));
-					lstPlayer.get(i).setPosY(Integer.parseInt(y));
+					y = joueur.substring(virgule+1,parenthese);
 				}
 				
-				c.sendLine("go");
+				if(parenthese != 0)
+					pse = joueur.substring(parenthese+1);
+				
+				if(isInArray(len,pse))
+				{
+					if(pse.equals(Pseudo))
+					{
+						Ennemi e = new Ennemi(Integer.parseInt(x),Integer.parseInt(y),pse,true);
+						lstEnnemi.add(e);
+						ThreadEnnemi runtp = new ThreadEnnemi(e);
+	
+						Thread tp = new Thread(runtp);
+						tp.start();
+						hmThreadE.put(e, runtp);
+						r = new Render(menuPrincipal,600,800,runtp.getKl());					
+						Thread t = new Thread(r);
+						t.start();
+					}
+					else
+					{
+						Ennemi e = new Ennemi(Integer.parseInt(x),Integer.parseInt(y),pse,false);
+						lstEnnemi.add(e);
+					}
+				}
+				else
+				{
+					if(pse.equals(Pseudo))
+					{
+						lstPlayer.add(new Player(Integer.parseInt(x),Integer.parseInt(y),pse));
+						ThreadPlayer runtp = new ThreadPlayer(researchPlayerInArray(lstPlayer,pse));
+						Thread tp = new Thread(runtp);
+						tp.start();
+						r = new Render(menuPrincipal,600,800,runtp.getKl());					
+						Thread t = new Thread(r);
+						t.start();
+					}
+					else
+					{
+						lstPlayer.add(new Player(Integer.parseInt(x),Integer.parseInt(y),pse));
+					}
+					
+				}
 			}
-			i++;
+			virgule = 0;
+			parenthese = 0;
+			System.out.println(joueur);
 		}
 		
 	}
@@ -331,6 +366,31 @@ public class Menu implements Runnable {
 		}
 		
 		
+	}
+	
+	public Player researchPlayerInArray(ArrayList<Player> ls,String name)
+	{
+		Player p = null;
+		for(int i = 0;i<ls.size();i++)
+		{
+			if(ls.get(i).getPseudo().equals(name))
+			{
+				p = ls.get(i);
+			}
+		}
+		return p;
+	}
+	public Ennemi researchEnnemiInArray(ArrayList<Ennemi> ls,String name)
+	{
+		Ennemi p = null;
+		for(int i = 0;i<ls.size();i++)
+		{
+			if(ls.get(i).getPseudo().equals(name))
+			{
+				p = ls.get(i);
+			}
+		}
+		return p;
 	}
 	public void newEnnemi()
 	{
@@ -420,26 +480,7 @@ public class Menu implements Runnable {
 			hmThreadE.put(e, runte);	
 		}	
 	}
-	@Override
-	public void run() {	
-		while(!v.isVictory() && p1.getVie() > 0)
-		{
-			try {
-				Thread.sleep(100);
-				Plateau.stopBordure();
-				if(host &&mode==2)
-				{
-					c.sendLine("bordure");
-				}
-				scoreTimer++;
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		fin();
-		
-	}
+
 	
 	public boolean isInArray(ArrayList<String> l,String pse)
 	{
@@ -588,6 +629,18 @@ public class Menu implements Runnable {
 	}
 	public void setHmThreadP(HashMap<Player, ThreadPlayer> hmThreadP) {
 		this.hmThreadP = hmThreadP;
+	}
+	public void setLstEnnemi(ArrayList<Ennemi> lstEnnemi) {
+		this.lstEnnemi = lstEnnemi;
+	}
+	public void setLstPlayer(ArrayList<Player> lstPlayer) {
+		this.lstPlayer = lstPlayer;
+	}
+	public ArrayList<Ennemi> getLstEnnemi() {
+		return lstEnnemi;
+	}
+	public ArrayList<Player> getLstPlayer() {
+		return lstPlayer;
 	}
 	
 }

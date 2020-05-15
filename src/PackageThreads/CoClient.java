@@ -123,80 +123,114 @@ public class CoClient implements Runnable{
 			     {
 			    	 lstpw.get(i).println(plateau);
 			     }
-			     String go = sisr.readLine();
-			     lstpw.get(0).println(go);
-			     for(int i = 0;i<lstpw.size();i++)
+			     for(int i = 0;i<lstpw.size()+1;i++)
 			     {
 			    	 String str = sisr.readLine();
-			    	 System.out.println("test serveur");
+			    	 System.out.println(""+ str);
 			    	 for(int j = 1;j<lstpw.size();j++)
 			    	 {
-			    		 lstpw.get(i).println(str);
-			    		 go = sisr.readLine();
-					     lstpw.get(0).println(go);
+			    		 System.out.println(""+ str);
+			    		 lstpw.get(j).println(str);
 			    	 }
 			     }
 		     }
-//		     while(inGame)
-//		     {
-//		    	 Ennemi e;
-//		    	 String str="";
-//					try {
-//						str = sisr.readLine();// lecture du message
-//					} catch (IOException e2) {
-//						e2.printStackTrace();
-//					}
-//					
-//					if (str.equals("END")) 
-//					{
-//						close();
-//						break;	
-//					}	
-//					switch(str)
-//					{
-//					case "NORD":
-//					{
-//						e.setOrientation(Orientation.NORD);
-//						e.setMouvement(true);
-//						e.Deplacement();
-//					}break;
-//					
-//					case "SOUTH":
-//					{
-//						e.setOrientation(Orientation.SOUTH);
-//						e.setMouvement(true);
-//						e.Deplacement();
-//					}break;
-//					case "EAST":
-//					{
-//						e.setOrientation(Orientation.EAST);
-//						e.setMouvement(true);
-//						e.Deplacement();
-//					}break;
-//					case "WEST":
-//					{
-//						e.setOrientation(Orientation.WEST);
-//						e.setMouvement(true);
-//						e.Deplacement();
-//					}break;
-//					case "SO":
-//					{
-//						e.setMouvement(false);
-//					}break;
-//					case"stunoff":
-//					{
-//						e.stun=false;
-//					}break;
-//					case"END":
-//					{
-//						close();
-//						break;				
-//					}
-//					}			
-//					System.out.println("ECHOlocal = " + str);   // trace locale			
-//					sisw.println("ECHO = "+str);// renvoi d'un echo
-//		     }
-//		        close();
+		     while(inGame)
+		     {
+		    	 System.out.println("on rentre ingame");
+		    	 String str="";
+					try {
+						str = sisr.readLine();// lecture du message
+					} catch (IOException e2) {
+						e2.printStackTrace();
+					}
+					System.out.println("str coclien : "+str);
+					if (str.equals("END")) 
+					{
+						close();
+						break;	
+					}	
+					switch(str)
+					{
+					case "NORD":
+					{
+						for(int i = 0;i<lstpw.size();i++)
+						{
+							if(id != i)
+							{
+								lstpw.get(i).println(pseudo+"/"+str);
+							}
+						}
+					}break;
+					
+					case "SOUTH":
+					{
+						for(int i = 0;i<lstpw.size();i++)
+						{
+							if(id != i)
+							{
+								lstpw.get(i).println(pseudo+"/"+str);
+							}
+						}
+					}break;
+					case "EAST":
+					{
+						for(int i = 0;i<lstpw.size();i++)
+						{
+							if(id != i)
+							{
+								lstpw.get(i).println(pseudo+"/"+str);
+							}
+						}
+					}break;
+					case "WEST":
+					{
+						for(int i = 0;i<lstpw.size();i++)
+						{
+							if(id != i)
+							{
+								lstpw.get(i).println(pseudo+"/"+str);
+							}
+						}
+					}break;
+					case "SO":
+					{
+						for(int i = 0;i<lstpw.size();i++)
+						{
+							if(id != i)
+							{
+								lstpw.get(i).println(pseudo+"/"+str);
+							}
+						}
+					}break;
+					case"stunoff":
+					{
+						for(int i = 0;i<lstpw.size();i++)
+						{
+							if(id != i)
+							{
+								lstpw.get(i).println(pseudo+"/"+str);
+							}
+						}
+					}break;
+					case"bordure":
+					{
+						for(int i = 0;i<lstpw.size();i++)
+						{
+							if(id != i)
+							{
+								lstpw.get(i).println(pseudo+"/"+str);
+							}
+						}
+					}break;
+					case"END":
+					{
+						close();
+						break;				
+					}
+					}			
+					//System.out.println("ECHOlocal = " + str);
+		     }
+		        close();
 		   }catch(IOException e){e.printStackTrace();}
 	  }
 
