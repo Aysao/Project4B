@@ -34,6 +34,25 @@ public class Player extends Entity {
 		}
 	}	
 	
+	public Player() {
+		super(false);		
+		setPseudo("met_un_pseudo_la_prochain");
+		scr.setName("met_un_pseudo_la_prochain");
+	}
+	public Player(String str) {
+		super(false);
+		if(!str.isEmpty()&&!str.isBlank())
+		{
+			setPseudo(str);
+			scr.setName(str);
+		}
+		else
+		{
+			setPseudo("met_un_pseudo_la_prochain");
+			scr.setName("met_un_pseudo_la_prochain");
+		}
+	}	
+	
 	public synchronized void Deplacement()
 	{		
 		

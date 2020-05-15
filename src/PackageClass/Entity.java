@@ -24,28 +24,57 @@ public abstract class Entity {
 		Plateau.plateau[x][y] = this;
 	}
 	
-	public Entity()
+	public Entity(boolean ennemi)
 	{		
-		List<BlocN> lst = Plateau.getBlocN();
-		for(int i = 0; i <lst.size();i++)
+		if(ennemi)
 		{
-			int x = lst.get(i).getPosX();
-			int y = lst.get(i).getPosY();
-			if((x>3&&x<14)||(y>3&&y<12))
+			List<BlocN> lst = Plateau.getBlocN();
+			for(int i = 0; i <lst.size();i++)
 			{
-				lst.remove(i);
-				i--;
+				int x = lst.get(i).getPosX();
+				int y = lst.get(i).getPosY();
+				if((x>3&&x<14)||(y>3&&y<12))
+				{
+					lst.remove(i);
+					i--;
+				}
+			}
+			if(lst.size()>0)
+			{
+				int r= new Random().nextInt(lst.size());													
+				Plateau.plateau[lst.get(r).getPosX()][lst.get(r).getPosY()]=this;	
+				posX=lst.get(r).getPosX();
+				posY=lst.get(r).getPosY();
+			}
+			else
+			{		
+				List<Position> lsts = new ArrayList<Position>();
+				for(int i = 1;i<16;i++)
+				{
+					for(int j = 1;j<14;j++)
+					{
+						if(Plateau.plateau[i][j].getClass() == String.class)
+						{
+							if((i>3&&i<14)||(j>3&&j<12))
+							{
+								
+							}
+							else
+							{
+								lsts.add(new Position(i,j));
+							}
+						}
+					}
+				}
+				int r= new Random().nextInt(lsts.size());
+				Plateau.plateau[lsts.get(r).getCoX()][lsts.get(r).getCoY()]=this;
+				posX=lsts.get(r).getCoX();
+				posY=lsts.get(r).getCoY();
 			}
 		}
-		if(lst.size()>0)
-		{
-			int r= new Random().nextInt(lst.size());													
-			Plateau.plateau[lst.get(r).getPosX()][lst.get(r).getPosY()]=this;	
-			posX=lst.get(r).getPosX();
-			posY=lst.get(r).getPosY();
-		}
 		else
-		{		
+		{
+				
 			List<Position> lsts = new ArrayList<Position>();
 			for(int i = 1;i<16;i++)
 			{
@@ -55,12 +84,8 @@ public abstract class Entity {
 					{
 						if((i>3&&i<14)||(j>3&&j<12))
 						{
-							
-						}
-						else
-						{
-							lsts.add(new Position(i,j));
-						}
+							lsts.add(new Position(i,j));	
+						}						
 					}
 				}
 			}
@@ -68,8 +93,7 @@ public abstract class Entity {
 			Plateau.plateau[lsts.get(r).getCoX()][lsts.get(r).getCoY()]=this;
 			posX=lsts.get(r).getCoX();
 			posY=lsts.get(r).getCoY();
-		}
-		
+		}	
 	}
 	
 

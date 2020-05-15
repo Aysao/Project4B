@@ -26,7 +26,7 @@ public class Ennemi extends Entity {
 		newPoint();
 	}
 	public Ennemi() {
-		super();		
+		super(true);		
 		newPoint();
 	}
 	
