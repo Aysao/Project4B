@@ -14,6 +14,7 @@ public class Player extends Entity {
 	private Score scr = new Score();
 	
 
+
 	public Player(int x, int y) {
 		super(x, y);
 		Plateau.plateau[x][y] = this;

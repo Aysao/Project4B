@@ -1,6 +1,7 @@
 package PackageThreads;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -22,6 +23,9 @@ public class Menu implements Runnable {
 	private static Menu instance ;
 	
 	private int scoreTimer=0;
+	private ArrayList<Ennemi> lstEnnemi;
+	private ArrayList<Player> lstPlayer;
+	
 	private Player p1;
 	private Ennemi p2;
 	private int ennemiVie=6;
@@ -30,6 +34,7 @@ public class Menu implements Runnable {
 	private Ennemi e3;
 	private Render r ;	
 	private Victory v ;
+	private boolean wait;
 	private char avancer='Z';		//touche de deplacement une option pour qu'on puisse changer les touches
 	private char reculer='S';
 	private char droite='D';
@@ -40,7 +45,7 @@ public class Menu implements Runnable {
 	private Serveur s;
 	private int mode ;
 	private boolean gamestart=true;
-	private HashMap<Ennemi, ThreadEnnemie> hmThreadE = new HashMap<Ennemi, ThreadEnnemie>();
+	private HashMap<Ennemi, ThreadEnnemi> hmThreadE = new HashMap<Ennemi, ThreadEnnemi>();
 	private HashMap<Player, ThreadPlayer> hmThreadP = new HashMap<Player, ThreadPlayer>();
 
 	public Menu()
@@ -64,62 +69,233 @@ public class Menu implements Runnable {
 				e3 = new Ennemi();				
 				v = new Victory();						
 				startSolo();						
-			}break;
-			case 2:
-			{
-				if(host)
-				{
-					new Plateau();
-					v = new Victory();	
-					p1 = new Player(7,7);
-					p1.setPseudo(pseudo);	
-					p2= new Ennemi(8,8);
-					s = new Serveur();
-					Thread th = new Thread(s);
-					th.start();				
-					gamestart=false;					
-					while(!gamestart)
-					{
-					System.out.println("");
-					}						
-					ThreadPlayer runtp = new ThreadPlayer(p1);
-					Thread tp = new Thread(runtp);
-					tp.start();																						
-					r = new Render(menuPrincipal,600,800,runtp.getKl());					
-					Thread t = new Thread(r);
-					t.start();	
-					s.sendLine("getplayer");
-				}
-				else
-				{								
-					
-					Thread tc = new Thread(c);
-					tc.start();
-					p1 = new Player(7,7);
-					p2 = new Ennemi(8,8);
-					p2.setPlayed(true);					
-					ThreadEnnemie runte = new ThreadEnnemie(p2);
-					Thread te = new Thread(runte);
-					te.start();	
-					v = new Victory();																															
-					r = new Render(menuPrincipal,600,800,runte.getKl());					
-					Thread t = new Thread(r);
-					t.start();					
-				}				
 			}
 		}
+
+				
 	}
+
+
+	public void startMulti(String Pseudo,Client c,ArrayList<String> len,ArrayList<String> lpl)
+	{
+		mode = 2;
+		this.c = c;
+		if(host)
+		{
+			boolean ennemi = false;
+			new Plateau();
+			v = new Victory();	
+			if(isInArray(len,Pseudo))
+			{
+				ennemi = true;
+			}
+			lstEnnemi = new ArrayList<Ennemi>();
+			lstPlayer = new ArrayList<Player>();
+			if(!ennemi)
+			{
+				p1 = new Player(7,7);
+				p1.setPseudo(Pseudo);
+				ThreadPlayer runtp = new ThreadPlayer(p1);
+				Thread tp = new Thread(runtp);
+				tp.start();
+				r = new Render(menuPrincipal,600,800,runtp.getKl());					
+				Thread t = new Thread(r);
+				t.start();
+				hmThreadP.put(p1, runtp);
+				lstPlayer.add(p1);
+			}
+			else
+			{
+				Ennemi en = new Ennemi(7,7);
+				en.setPseudo(Pseudo);
+				en.setPlayed(true);
+				ThreadEnnemi runtp = new ThreadEnnemi(en);
+				Thread tp = new Thread(runtp);
+				tp.start();
+				r = new Render(menuPrincipal,600,800,runtp.getKl());					
+				Thread t = new Thread(r);
+				t.start();
+				hmThreadE.put(en, runtp);
+				lstEnnemi.add(en);
+			}
+			c.sendLine(Plateau.PlateauToString());
+
+			for(int i = 0;i<len.size();i++)
+			{
+				if(!len.get(i).equals(Pseudo))
+				{
+					if(!len.get(i).equals("----------"))
+					{
+						lstEnnemi.add(new Ennemi());
+						lstEnnemi.get(i).setPseudo(len.get(i));
+						c.sendLine("("+lstEnnemi.get(i).getPosX()+","+lstEnnemi.get(i).getPosY()+")"+lstEnnemi.get(i).getPseudo());
+					}
+				}
+				else
+				{
+					
+					if(len.get(i).equals(Pseudo))
+					{
+						c.sendLine("("+lstEnnemi.get(i).getPosX()+","+lstEnnemi.get(i).getPosY()+")"+lstEnnemi.get(i).getPseudo());
+					}
+				}
+
+			}
+			for(int i = 0;i<lpl.size();i++)
+			{
+				if(!lpl.get(i).equals(Pseudo))
+				{
+					if(!lpl.get(i).equals("----------"))
+					{
+						lstPlayer.add(new Player());
+						lstPlayer.get(i).setPseudo(lpl.get(i));
+						c.sendLine("("+lstPlayer.get(i).getPosX()+","+lstPlayer.get(i).getPosY()+")"+lstPlayer.get(i).getPseudo());
+					}
+				}
+				else
+				{
+					
+					if(lpl.get(i).equals(Pseudo))
+					{
+						c.sendLine("("+lstPlayer.get(i).getPosX()+","+lstPlayer.get(i).getPosY()+")"+lstPlayer.get(i).getPseudo());
+					}
+				}
+
+			}
+			c.sendLine("personne");
+				
+			
+		}			
+	
+	}
+	
+	public void startMultiClient(String Pseudo,Client c,ArrayList<String> len,ArrayList<String> lpl)
+	{
+		mode = 2;
+		System.out.println("recherche plateau ... ");
+		String plateau = "";
+		try {
+			plateau = c.getSisr().readLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("plateau trouve ... ");
+		Plateau.StringToPlateau(plateau);
+		System.out.println("plateau crée ... ");
+		c.sendLine("go");
+		System.out.println("recuperation des joueur et de leur emplacement ... ");
+		String joueur = "";
+		lstEnnemi = new ArrayList<Ennemi>();
+		lstPlayer = new ArrayList<Player>();
+		int i = 0;
+		while(!joueur.equals("personne"))
+		{
+			String x = "";
+			String y = "";
+			String pse = "";
+			int virgule = 0;
+			int parenthese = 0;
+			try {
+				joueur = c.getSisr().readLine();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(joueur.charAt(0) == '(')
+			{
+				for(int j = 1;j < joueur.length();j++)
+				{
+					if(joueur.charAt(j) != ',')
+					{
+						x += ""+joueur.charAt(j);
+					}
+					else if(joueur.charAt(j) == ',')
+					{
+						virgule = j;
+					}
+				}
+				for(int j = virgule+1;j < joueur.length();j++)
+				{
+					if(joueur.charAt(j) != ')')
+					{
+						y += ""+joueur.charAt(j);
+					}
+					else if(joueur.charAt(j) == ')')
+					{
+						parenthese = j;
+					}
+				}
+			}
+			
+			if(parenthese != 0)
+				pse = joueur.substring(parenthese+1);
+			if(isInArray(len,pse))
+			{
+				if(pse.equals(Pseudo))
+				{
+					lstEnnemi.add(new Ennemi());
+					lstEnnemi.get(i).setPseudo(pse);
+					lstEnnemi.get(i).setPosX(Integer.parseInt(x));
+					lstEnnemi.get(i).setPosY(Integer.parseInt(y));
+					lstEnnemi.get(i).setPlayed(true);
+					ThreadEnnemi runtp = new ThreadEnnemi(lstEnnemi.get(i));
+					Thread tp = new Thread(runtp);
+					tp.start();
+					r = new Render(menuPrincipal,600,800,runtp.getKl());					
+					Thread t = new Thread(r);
+					t.start();
+				}
+				else if(!pse.equals(""))
+				{
+					lstEnnemi.add(new Ennemi());
+					lstEnnemi.get(i).setPseudo(pse);
+					lstEnnemi.get(i).setPosX(Integer.parseInt(x));
+					lstEnnemi.get(i).setPosY(Integer.parseInt(y));
+				}
+				c.sendLine("go");
+			}
+			else
+			{
+				if(pse.equals(Pseudo))
+				{
+					lstPlayer.add(new Player());
+					lstPlayer.get(i).setPseudo(pse);
+					lstPlayer.get(i).setPosX(Integer.parseInt(x));
+					lstPlayer.get(i).setPosY(Integer.parseInt(y));
+					ThreadPlayer runtp = new ThreadPlayer(lstPlayer.get(i));
+					Thread tp = new Thread(runtp);
+					tp.start();
+					r = new Render(menuPrincipal,600,800,runtp.getKl());					
+					Thread t = new Thread(r);
+					t.start();
+				}
+				else if(!pse.equals(""))
+				{
+					lstPlayer.add(new Player());
+					lstPlayer.get(i).setPseudo(pse);
+					lstPlayer.get(i).setPosX(Integer.parseInt(x));
+					lstPlayer.get(i).setPosY(Integer.parseInt(y));
+				}
+				
+				c.sendLine("go");
+			}
+			i++;
+		}
+		
+	}
+	
 	private void startSolo() {
 		ThreadPlayer runtp = new ThreadPlayer(p1);
 		Thread tp = new Thread(runtp);
 		tp.start();	
-		ThreadEnnemie runte = new ThreadEnnemie(e1);
+		ThreadEnnemi runte = new ThreadEnnemi(e1);
 		Thread te =new Thread(runte);
 		te.start();
-		ThreadEnnemie runte1 = new ThreadEnnemie(e2);
+		ThreadEnnemi runte1 = new ThreadEnnemi(e2);
 		Thread te1 =new Thread(runte1);
 		te1.start();
-		ThreadEnnemie runte2 = new ThreadEnnemie(e3);
+		ThreadEnnemi runte2 = new ThreadEnnemi(e3);
 		Thread te2 =new Thread(runte2);
 		te2.start();
 		r = new Render(menuPrincipal,600,800,runtp.getKl());
@@ -146,11 +322,11 @@ public class Menu implements Runnable {
 				en.setPosX(lst.get(i).getPosX());
 				en.setPosY(lst.get(i).getPosY());
 				Plateau.refreshEntity(en);
-				s.sendLine("new location");
+				c.sendLine("new location");
 				System.out.println(Integer.toString(lst.get(i).getPosX()));
-				s.sendLine(Integer.toString(lst.get(i).getPosX()));
+				c.sendLine(Integer.toString(lst.get(i).getPosX()));
 				System.out.println(Integer.toString(lst.get(i).getPosY()));
-				s.sendLine(Integer.toString(lst.get(i).getPosY()));
+				c.sendLine(Integer.toString(lst.get(i).getPosY()));
 			}			
 		}
 		
@@ -170,7 +346,7 @@ public class Menu implements Runnable {
 			else if(ennemiVie>=3)
 			{
 				Ennemi e=new Ennemi();
-				ThreadEnnemie runte = new ThreadEnnemie(e);
+				ThreadEnnemi runte = new ThreadEnnemi(e);
 				Thread te =new Thread(runte);
 				te.start();
 				hmThreadE.put(e, runte);
@@ -197,7 +373,7 @@ public class Menu implements Runnable {
 			JOptionPane.showMessageDialog(r,"Perdu !");
 			if(mode==2 &&host)
 			{
-				s.sendLine("win");
+				c.sendLine("win");
 			}
 		}
 		if(v.isVictory() == true)
@@ -205,7 +381,7 @@ public class Menu implements Runnable {
 			JOptionPane.showMessageDialog(r,"Gagnï¿½!");
 			if(mode==2 &&host)
 			{
-				s.sendLine("loose");
+				c.sendLine("loose");
 			}
 		}
 		clear();
@@ -238,7 +414,7 @@ public class Menu implements Runnable {
 		for(int i = 0 ;i<3;i++)
 		{
 			Ennemi e=new Ennemi();
-			ThreadEnnemie runte = new ThreadEnnemie(e);
+			ThreadEnnemi runte = new ThreadEnnemi(e);
 			Thread te =new Thread(runte);
 			te.start();
 			hmThreadE.put(e, runte);	
@@ -253,7 +429,7 @@ public class Menu implements Runnable {
 				Plateau.stopBordure();
 				if(host &&mode==2)
 				{
-					s.sendLine("bordure");
+					c.sendLine("bordure");
 				}
 				scoreTimer++;
 			} catch (InterruptedException e) {
@@ -264,6 +440,29 @@ public class Menu implements Runnable {
 		fin();
 		
 	}
+	
+	public boolean isInArray(ArrayList<String> l,String pse)
+	{
+		boolean res = false;
+		for(int i = 0;i < l.size();i++)
+		{
+			if(l.get(i).equals(pse))
+				res = true;
+		}
+		return res;
+	}
+	
+	public int nbArray(ArrayList<String> l)
+	{
+		int res = 0;
+		for(int i = 0;i < l.size();i++)
+		{
+			if(!l.get(i).equals("----------"))
+				res++;
+		}
+		return res;
+	}
+	
 	public static Menu getInstance() {
 		return instance;
 	}
@@ -378,10 +577,10 @@ public class Menu implements Runnable {
 	public void setGamestart(boolean gamestart) {
 		this.gamestart = gamestart;
 	}
-	public HashMap<Ennemi, ThreadEnnemie> getHmThreadE() {
+	public HashMap<Ennemi, ThreadEnnemi> getHmThreadE() {
 		return hmThreadE;
 	}
-	public void setHmThreadE(HashMap<Ennemi, ThreadEnnemie> hmThreadE) {
+	public void setHmThreadE(HashMap<Ennemi, ThreadEnnemi> hmThreadE) {
 		this.hmThreadE = hmThreadE;
 	}
 	public HashMap<Player, ThreadPlayer> getHmThreadP() {

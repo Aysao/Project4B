@@ -51,7 +51,7 @@ public class ThreadPlayer implements Runnable {
 			player.setMouvement(false);	
 			if(Menu.getInstance().isHost()&&Menu.getInstance().getMode()==2)
 			{
-				Menu.getInstance().getS().sendLine("SO");
+				Menu.getInstance().getC().sendLine("SO");
 			}
 			//player.setOrientation(Entity.SO);
 		}
@@ -79,7 +79,7 @@ public class ThreadPlayer implements Runnable {
 					Menu.getInstance().getV().testVictory();
 					if(Menu.getInstance().isHost()&&Menu.getInstance().getMode()==2)
 					{
-						Menu.getInstance().getS().sendLine(player.getOrientation().toString());
+						Menu.getInstance().getC().sendLine(player.getOrientation().toString());
 					}
 					try {
 						Thread.sleep(180);

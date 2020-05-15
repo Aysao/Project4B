@@ -76,16 +76,13 @@ public abstract class Entity {
 		{
 				
 			List<Position> lsts = new ArrayList<Position>();
-			for(int i = 1;i<16;i++)
+			for(int i = 4;i<13;i++)
 			{
-				for(int j = 1;j<14;j++)
+				for(int j = 4;j<11;j++)
 				{
 					if(Plateau.plateau[i][j].getClass() == String.class)
 					{
-						if((i>3&&i<14)||(j>3&&j<12))
-						{
-							lsts.add(new Position(i,j));	
-						}						
+						lsts.add(new Position(i,j));						
 					}
 				}
 			}

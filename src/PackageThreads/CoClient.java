@@ -7,6 +7,9 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import PackageClass.Orientation;
+import PackageClass.Plateau;
+
 public class CoClient implements Runnable{
 
 	 private boolean waiting = true;
@@ -14,6 +17,7 @@ public class CoClient implements Runnable{
 	 private Socket s;
 	 private BufferedReader sisr;
 	 private PrintWriter sisw;
+	 private boolean inGame = true;
 	 private ArrayList<PrintWriter> lstpw ;
 	 private int id;
 	 private String pseudo;
@@ -61,19 +65,22 @@ public class CoClient implements Runnable{
 					{		
 						lstpw.get(i).println(str);
 					}
-					this.stop();
+					waiting = false;
+					//this.stop();
 				}
 				else if(str.equals("stop"))//bouton quitter
 				{
 					
 					if(id == 0)
 					{
-						for(int i = 0 ; i < lstpw.size();i++)
+						for(int i = 1 ; i < lstpw.size();i++)
 						{
 							lstpw.get(i).println("host"+"/"+str);
 							lstpw.get(i).close();
 						}
+						inGame = false;
 						this.stop();
+						
 					}
 					else {
 						for(int i=0; i<lstpw.size(); i++)
@@ -108,17 +115,108 @@ public class CoClient implements Runnable{
 					}	
 				}
 		     }
-		        sisr.close();
-		        s.close();
+		     
+		     if(id == 0) // c'est l'host (le premier connecter)
+		     {
+			     String plateau = sisr.readLine();
+			     for(int i = 1;i<lstpw.size();i++)
+			     {
+			    	 lstpw.get(i).println(plateau);
+			     }
+			     String go = sisr.readLine();
+			     lstpw.get(0).println(go);
+			     for(int i = 0;i<lstpw.size();i++)
+			     {
+			    	 String str = sisr.readLine();
+			    	 System.out.println("test serveur");
+			    	 for(int j = 1;j<lstpw.size();j++)
+			    	 {
+			    		 lstpw.get(i).println(str);
+			    		 go = sisr.readLine();
+					     lstpw.get(0).println(go);
+			    	 }
+			     }
+		     }
+//		     while(inGame)
+//		     {
+//		    	 Ennemi e;
+//		    	 String str="";
+//					try {
+//						str = sisr.readLine();// lecture du message
+//					} catch (IOException e2) {
+//						e2.printStackTrace();
+//					}
+//					
+//					if (str.equals("END")) 
+//					{
+//						close();
+//						break;	
+//					}	
+//					switch(str)
+//					{
+//					case "NORD":
+//					{
+//						e.setOrientation(Orientation.NORD);
+//						e.setMouvement(true);
+//						e.Deplacement();
+//					}break;
+//					
+//					case "SOUTH":
+//					{
+//						e.setOrientation(Orientation.SOUTH);
+//						e.setMouvement(true);
+//						e.Deplacement();
+//					}break;
+//					case "EAST":
+//					{
+//						e.setOrientation(Orientation.EAST);
+//						e.setMouvement(true);
+//						e.Deplacement();
+//					}break;
+//					case "WEST":
+//					{
+//						e.setOrientation(Orientation.WEST);
+//						e.setMouvement(true);
+//						e.Deplacement();
+//					}break;
+//					case "SO":
+//					{
+//						e.setMouvement(false);
+//					}break;
+//					case"stunoff":
+//					{
+//						e.stun=false;
+//					}break;
+//					case"END":
+//					{
+//						close();
+//						break;				
+//					}
+//					}			
+//					System.out.println("ECHOlocal = " + str);   // trace locale			
+//					sisw.println("ECHO = "+str);// renvoi d'un echo
+//		     }
+//		        close();
 		   }catch(IOException e){e.printStackTrace();}
 	  }
 
-	
+	public void close()
+	{
+		 try {
+			sisr.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	     sisw.close();
+	     try {
+			s.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	public boolean isAction(String s)
 	{
 		boolean res = false;
-		for(int i = 0;i < s.length();i++)
-		{
 			if(s.equals("goennemi"))
 			{
 				res = true;
@@ -135,11 +233,14 @@ public class CoClient implements Runnable{
 			{
 				res = true;
 			}
-				
-		}
 		return res;
 	}
 
+	public void sendLine(String str)
+	{
+		sisw.println(str);
+	}
+	
 	public boolean isArret() {
 		return arret;
 	}

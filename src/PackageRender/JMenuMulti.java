@@ -18,7 +18,7 @@ import PackageThreads.Serveur;
 @SuppressWarnings("serial")
 public class JMenuMulti extends JFrame {
 	
-	private JFrame parent;
+	private JMulti parent;
 	private JFrame me;
 	private MButton coop;
 	private MButton equipe;
@@ -42,7 +42,7 @@ public class JMenuMulti extends JFrame {
 	private ArrayList<String> ennemicollection;
 	private Client cme;
 	private boolean host = false;
-	public JMenuMulti(JFrame _parent,String s,boolean _host,Client c)
+	public JMenuMulti(JMulti _parent,String s,boolean _host,Client c)
 	{
 		playercollection = new ArrayList<String>();
 		ennemicollection = new ArrayList<String>();
@@ -289,7 +289,11 @@ public class JMenuMulti extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(host)
+				{
+					cme.setGame(false);
 					cme.sendLine("stop");
+					parent.getServ().close();
+				}
 				close();
 				
 			}
@@ -302,7 +306,9 @@ public class JMenuMulti extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(host)
+				{
 					cme.sendLine("Demarrer");
+				}
 			}
 			
 		});
@@ -370,7 +376,7 @@ public class JMenuMulti extends JFrame {
 		return parent;
 	}
 
-	public void setParent(JFrame parent) {
+	public void setParent(JMulti parent) {
 		this.parent = parent;
 	}
 

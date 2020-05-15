@@ -22,8 +22,10 @@ public class JMenuPrincipal extends JFrame {
 	private MButton b4;
 	private int choix;
 	private JFrame f;
+	private Menu m;
 	public JMenuPrincipal() {
 		f = this;
+		m = new Menu();
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(800,600);
 		this.setTitle("Pengo !!");

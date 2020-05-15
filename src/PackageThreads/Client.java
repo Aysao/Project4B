@@ -84,6 +84,7 @@ public class Client implements Runnable{
 	@Override
 	public void run() {
 		Player p1 = null;
+		boolean waiting = true;
 		String str = "";
 		int slash = 0;
 		int point = 0;
@@ -92,7 +93,7 @@ public class Client implements Runnable{
 		String sender = "";
 		String action = "";
 	
-		while(!str.equals("Demarrer") || str.equals("stop") || action.equals("stop"))
+		while(str != null && waiting)
 		{
 			
 			try {
@@ -100,20 +101,23 @@ public class Client implements Runnable{
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				action = "stop";
 			}
-			
-			for(int i = 0;i<str.length();i++)
+			if(str != null)
 			{
-				if(str.charAt(i) == '/')
+				for(int i = 0;i<str.length();i++)
 				{
-					slash = i;
+					if(str.charAt(i) == '/')
+					{
+						slash = i;
+					}
 				}
-			}
-			for(int i = 0;i<str.length();i++)
-			{
-				if(str.charAt(i) == '.')
+				for(int i = 0;i<str.length();i++)
 				{
-					point = i;
+					if(str.charAt(i) == '.')
+					{
+						point = i;
+					}
 				}
 			}
 			if(slash != 0)
@@ -122,7 +126,8 @@ public class Client implements Runnable{
 			{
 				action = str.substring(slash+1);
 			}
-			else {
+			if(point != 0 && slash != 0)
+			{
 				action = str.substring(slash+1,point);
 			}
 			switch(action)
@@ -239,10 +244,28 @@ public class Client implements Runnable{
 			if(action.equals("stop") && sender.equals(pseudo) && host)
 			{
 				parent.getServ().close();
+				waiting = false;
+			}
+			if(str.equals("Demarrer"))
+			{
+				waiting = false;
 			}
 		}
 		
-		
+		if(game)
+		{
+			Menu m = new Menu();
+			if(host)
+			{
+				m.setHost(host);
+				m.startMulti(pseudo,this,jmm.getEnnemicollection(),jmm.getPlayercollection());
+			}
+			else
+			{
+				m.startMultiClient(pseudo,this,jmm.getEnnemicollection(),jmm.getPlayercollection());
+			}
+			System.out.println("test 3");
+		}
 		
 		while(game)
 		{
@@ -367,6 +390,15 @@ public class Client implements Runnable{
 	{
 		sisw.println(str);
 	}
+	
+	public void setGame(boolean game) {
+		this.game = game;
+	}
+	
+	public BufferedReader getSisr() {
+		return sisr;
+	}
+	
 
 	
 

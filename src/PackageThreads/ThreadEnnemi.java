@@ -14,7 +14,7 @@ import PackageClass.Plateau;
 import PackageClass.Player;
 
 
-public class ThreadEnnemie implements Runnable {
+public class ThreadEnnemi implements Runnable {
 	private Ennemi en;
 	private boolean running = true;
 	private int lastX = 0;
@@ -69,7 +69,7 @@ public class ThreadEnnemie implements Runnable {
 		}		
 	};
 	
-	public ThreadEnnemie(Ennemi e1) {
+	public ThreadEnnemi(Ennemi e1) {
 		System.out.println("Ennemie set");
 		en=e1;
 		running = true;
@@ -86,7 +86,7 @@ public class ThreadEnnemie implements Runnable {
 	@Override
 	public void run() 
 	{
-		if(!Menu.getInstance().isHost()&&this.en.isPlayed()&&Menu.getInstance().getMode()==2)//multi
+		if(this.en.isPlayed()&&Menu.getInstance().getMode()==2)//multi
 		{	
 			while(running)
 			{

@@ -19,7 +19,7 @@ public class Ennemi extends Entity {
 	public boolean stun =false;
 	private int pathX ;
 	private int pathY ;
-	
+	private String pseudo;
 	private boolean played = false;
 	public Ennemi(int x, int y) {
 		super(x, y);				
@@ -292,6 +292,21 @@ public class Ennemi extends Entity {
 		}
 		
 	}
+	
+	public void setStun(boolean stun) {
+		this.stun = stun;
+	}
+	 
+	public boolean isStun() {
+		return stun;
+	}
+	public String getPseudo() {
+		return pseudo;
+	}
+	public void setPseudo(String pseudo) {
+		this.pseudo = pseudo;
+	}
+	
 	
 	public boolean isPlayed() {
 		return played;

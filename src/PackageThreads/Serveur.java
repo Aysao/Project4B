@@ -37,71 +37,10 @@ public class Serveur implements Runnable{
 		while (true) 
 		{		
 			
-			String str="";
-			try {
-				str = sisr.readLine();// lecture du message
-			} catch (IOException e2) {
-				e2.printStackTrace();
-			}
 			
-			if(str.equals("start"))
-			{
-				sisw.println(Plateau.PlateauToString());
-			}
-			if (str.equals("END")) 
-			{
-				close();
-				break;	
-			}	
-			switch(str)
-			{
-			case "NORD":
-			{
-				e.setOrientation(Orientation.NORD);
-				e.setMouvement(true);
-				e.Deplacement();
-			}break;
-			
-			case "SOUTH":
-			{
-				e.setOrientation(Orientation.SOUTH);
-				e.setMouvement(true);
-				e.Deplacement();
-			}break;
-			case "EAST":
-			{
-				e.setOrientation(Orientation.EAST);
-				e.setMouvement(true);
-				e.Deplacement();
-			}break;
-			case "WEST":
-			{
-				e.setOrientation(Orientation.WEST);
-				e.setMouvement(true);
-				e.Deplacement();
-			}break;
-			case "SO":
-			{
-				e.setMouvement(false);
-			}break;
-			case"stunoff":
-			{
-				e.stun=false;
-			}break;
-			case"END":
-			{
-				close();
-				break;				
-			}
-			}			
-			System.out.println("ECHOlocal = " + str);   // trace locale			
-			sisw.println("ECHO = "+str);// renvoi d'un echo
 	    }
 	}
-	public void sendLine(String str)
-	{
-		sisw.println(str);
-	}
+	
 	public void setClient()throws Exception
 	{		
 			
@@ -115,20 +54,7 @@ public class Serveur implements Runnable{
         sisw = new PrintWriter( new BufferedWriter(
              new OutputStreamWriter(soc.getOutputStream())),true);      
 	}
-	public void close()
-	{
-		 try {
-			sisr.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	     sisw.close();
-	     try {
-			soc.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+
 	public void sendUpdate()
 	{
 		sisw.println("Update");
